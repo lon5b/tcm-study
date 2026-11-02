@@ -762,6 +762,43 @@ body{
 .quiztop .bar i{background:linear-gradient(90deg,var(--qing),var(--zhu))}
 /* 外部转录徽章 */
 .cite.ext{color:#3a4a6b;border-color:rgba(58,74,107,.42);background:rgba(58,74,107,.09)}
+
+/* ── 穴位区块（古风） ── */
+.acu-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px;
+  background:rgba(253,248,236,.95);border:1px solid rgba(58,46,34,.24);border-radius:2px;padding:12px 16px}
+#acu-q{flex:1;min-width:220px;background:#fffdf7;border:1px solid rgba(58,46,34,.26);
+  border-radius:2px;padding:9px 14px;font-family:inherit;font-size:14px;color:var(--ink)}
+#acu-q:focus{outline:none;border-color:var(--zhu);box-shadow:0 0 0 3px rgba(156,58,47,.12)}
+#acu-hit{font-size:12.5px;color:var(--ink3);white-space:nowrap}
+.acu-group{margin-bottom:20px}
+.acu-gt{font-family:"Kaiti SC","STKaiti",serif;font-size:15px;color:var(--zhu);
+  letter-spacing:.16em;margin:0 0 10px;padding-left:2px}
+.mer{background:rgba(253,248,236,.95);border:1px solid rgba(58,46,34,.22);border-radius:2px;
+  margin-bottom:10px;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.7) inset}
+.mer[open]{border-color:rgba(58,46,34,.32)}
+.mer>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;
+  padding:13px 18px;font-size:15px}
+.mer>summary::-webkit-details-marker{display:none}
+.mer>summary::before{content:'▸';color:var(--zhu);font-size:12px;transition:.2s}
+.mer[open]>summary::before{transform:rotate(90deg)}
+.mer-n{font-family:"Kaiti SC","STKaiti",serif;font-weight:700;color:var(--ink);letter-spacing:.06em}
+.mer-py{font-size:12px;color:var(--ink3);font-family:ui-monospace,Menlo,monospace}
+.mer-c{margin-left:auto;font-size:12px;color:var(--zhu);border:1px solid rgba(156,58,47,.3);
+  border-radius:2px;padding:2px 9px;white-space:nowrap}
+.mer.hide{display:none}
+.pt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;
+  padding:4px 18px 18px;border-top:1px dashed rgba(58,46,34,.18);padding-top:14px}
+.pt{display:flex;align-items:baseline;gap:7px;padding:7px 10px;border:1px solid rgba(58,46,34,.14);
+  border-radius:2px;background:#fffdf7;font-size:14px;color:var(--ink)}
+.pt i{font-style:normal;font-size:10.5px;color:var(--ink3);min-width:16px;text-align:right;
+  font-family:ui-monospace,Menlo,monospace}
+.pt b{font-family:"Kaiti SC","STKaiti",serif;font-weight:700;letter-spacing:.04em}
+.pt em{font-style:normal;font-size:11px;color:var(--ink3);font-family:ui-monospace,Menlo,monospace;
+  margin-left:auto;white-space:nowrap}
+.pt.hide{display:none}
+.pt:hover{border-color:rgba(156,58,47,.4);background:rgba(156,58,47,.04)}
+@media(max-width:640px){.pt-grid{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));padding:12px}
+  .mer-py{display:none}}
 </style>
 </head>
 <body>
@@ -770,6 +807,7 @@ body{
   <a href="#route">学习路线</a>
   <a href="#lesson">第 1 课 · 阴阳</a>
   <a href="#quiz" id="nav-quiz">练习 · 18 题</a>
+  <a href="#acu">穴位 · 361</a>
   <a href="#src">出处</a>
   <a href="#log">更新日志</a>
 </div></div>
@@ -834,6 +872,26 @@ body{
     </div>
     <div id="qnote" style="font-size:12px;color:var(--mu);margin:-10px 0 18px"></div>
     <div id="quiz-root"></div>
+  </div>
+</section>
+
+
+<section id="acu" class="band">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="eyebrow">Acupoints</span>
+      <h2>十四经穴 · 361 个</h2>
+      <p>十二正经 + 任脉 + 督脉，按经脉循行顺序排列（首穴 → 末穴）。每个穴都带拼音；点经脉名可展开／收起，上面的搜索框支持穴名和拼音（<b>合谷</b>／<b>hegu</b>／<b>feng</b> 都行）。</p>
+    </div>
+    <div class="acu-bar">
+      <input id="acu-q" type="search" placeholder="搜穴名或拼音：合谷 / hegu / feng / zhōng" autocomplete="off" spellcheck="false" />
+      <span id="acu-hit"></span>
+      <button class="reset" id="acu-all">全部展开</button>
+    </div>
+    <div id="acu-root"></div>
+    <div class="warnbox" style="margin-top:20px"><b>边界</b>
+      这份表只用于<b>学习经脉走向与穴名</b>。针刺、艾灸、放血是操作技术，需要面授与现场判断——尤其胸部、颈部、背部深刺有气胸、伤及脏器的风险，别照着名字自己扎。要练手，找有资质的针灸师带。
+    </div>
   </div>
 </section>
 
@@ -930,6 +988,410 @@ route: {
     ['7', '针灸', '认穴自己练，下针找师傅', '09_zhenjiu_bencao.md（5308 行）'],
     ['8', '医案复盘', '1257 例只看思路，不看剂量', 'cases/00_merged_table.md']
   ]
+},
+
+acu: {
+  total: 361,
+  note: '十四经穴共 361 个。顺序按经脉循行（首穴→末穴），拼音按腧穴习惯读音标注（俞读 shù、郄读 xì、髎读 liáo 等）。',
+  src: '穴位顺序与名称依《针灸学》教材／国家标准经穴部位（本次抓取自 A+医学百科「××经穴」条目，逐经核对穴数：11·20·45·21·9·19·67·27·9·23·44·14·24·28）',
+  groups: [
+    {g:'手三阴经', items:['手太阴肺经','手厥阴心包经','手少阴心经']},
+    {g:'手三阳经', items:['手阳明大肠经','手少阳三焦经','手太阳小肠经']},
+    {g:'足三阳经', items:['足阳明胃经','足少阳胆经','足太阳膀胱经']},
+    {g:'足三阴经', items:['足太阴脾经','足厥阴肝经','足少阴肾经']},
+    {g:'奇经 · 任督', items:['任脉','督脉']},
+  ],
+  meridians: {
+    '手太阴肺经': {py:'shǒu tài yīn fèi jīng', count:11, points:[
+      {n:1,name:'中府',py:'zhōng fǔ'},
+      {n:2,name:'云门',py:'yún mén'},
+      {n:3,name:'天府',py:'tiān fǔ'},
+      {n:4,name:'侠白',py:'xiá bái'},
+      {n:5,name:'尺泽',py:'chǐ zé'},
+      {n:6,name:'孔最',py:'kǒng zuì'},
+      {n:7,name:'列缺',py:'liè quē'},
+      {n:8,name:'经渠',py:'jīng qú'},
+      {n:9,name:'太渊',py:'tài yuān'},
+      {n:10,name:'鱼际',py:'yú jì'},
+      {n:11,name:'少商',py:'shào shāng'}
+    ]},
+    '手厥阴心包经': {py:'shǒu jué yīn xīn bāo jīng', count:9, points:[
+      {n:1,name:'天池',py:'tiān chí'},
+      {n:2,name:'天泉',py:'tiān quán'},
+      {n:3,name:'曲泽',py:'qū zé'},
+      {n:4,name:'郄门',py:'xì mén'},
+      {n:5,name:'间使',py:'jiān shǐ'},
+      {n:6,name:'内关',py:'nèi guān'},
+      {n:7,name:'大陵',py:'dà líng'},
+      {n:8,name:'劳宫',py:'láo gōng'},
+      {n:9,name:'中冲',py:'zhōng chōng'}
+    ]},
+    '手少阴心经': {py:'shǒu shào yīn xīn jīng', count:9, points:[
+      {n:1,name:'极泉',py:'jí quán'},
+      {n:2,name:'青灵',py:'qīng líng'},
+      {n:3,name:'少海',py:'shǎo hǎi'},
+      {n:4,name:'灵道',py:'líng dào'},
+      {n:5,name:'通里',py:'tōng lǐ'},
+      {n:6,name:'阴郄',py:'yīn xì'},
+      {n:7,name:'神门',py:'shén mén'},
+      {n:8,name:'少府',py:'shào fǔ'},
+      {n:9,name:'少冲',py:'shǎo chōng'}
+    ]},
+    '手阳明大肠经': {py:'shǒu yáng míng dà cháng jīng', count:20, points:[
+      {n:1,name:'商阳',py:'shāng yáng'},
+      {n:2,name:'二间',py:'èr jiān'},
+      {n:3,name:'三间',py:'sān jiān'},
+      {n:4,name:'合谷',py:'hé gǔ'},
+      {n:5,name:'阳溪',py:'yáng xī'},
+      {n:6,name:'偏历',py:'piān lì'},
+      {n:7,name:'温溜',py:'wēn liū'},
+      {n:8,name:'下廉',py:'xià lián'},
+      {n:9,name:'上廉',py:'shàng lián'},
+      {n:10,name:'手三里',py:'shǒu sān lǐ'},
+      {n:11,name:'曲池',py:'qū chí'},
+      {n:12,name:'肘髎',py:'zhǒu liáo'},
+      {n:13,name:'手五里',py:'shǒu wǔ lǐ'},
+      {n:14,name:'臂臑',py:'bì nào'},
+      {n:15,name:'肩髃',py:'jiān yú'},
+      {n:16,name:'巨骨',py:'jù gǔ'},
+      {n:17,name:'天鼎',py:'tiān dǐng'},
+      {n:18,name:'扶突',py:'fú tū'},
+      {n:19,name:'口禾髎',py:'kǒu hé liáo'},
+      {n:20,name:'迎香',py:'yíng xiāng'}
+    ]},
+    '手少阳三焦经': {py:'shǒu shào yáng sān jiāo jīng', count:23, points:[
+      {n:1,name:'关冲',py:'guān chōng'},
+      {n:2,name:'液门',py:'yè mén'},
+      {n:3,name:'中渚',py:'zhōng zhǔ'},
+      {n:4,name:'阳池',py:'yáng chí'},
+      {n:5,name:'外关',py:'wài guān'},
+      {n:6,name:'支沟',py:'zhī gōu'},
+      {n:7,name:'会宗',py:'huì zōng'},
+      {n:8,name:'三阳络',py:'sān yáng luò'},
+      {n:9,name:'四渎',py:'sì dú'},
+      {n:10,name:'天井',py:'tiān jǐng'},
+      {n:11,name:'清冷渊',py:'qīng lěng yuān'},
+      {n:12,name:'消泺',py:'xiāo luò'},
+      {n:13,name:'臑会',py:'nào huì'},
+      {n:14,name:'肩髎',py:'jiān liáo'},
+      {n:15,name:'天髎',py:'tiān liáo'},
+      {n:16,name:'天牖',py:'tiān yǒu'},
+      {n:17,name:'翳风',py:'yì fēng'},
+      {n:18,name:'瘈脉',py:'chì mài'},
+      {n:19,name:'颅息',py:'lú xī'},
+      {n:20,name:'角孙',py:'jiǎo sūn'},
+      {n:21,name:'耳门',py:'ěr mén'},
+      {n:22,name:'耳和髎',py:'ěr hé liáo'},
+      {n:23,name:'丝竹空',py:'sī zhú kōng'}
+    ]},
+    '手太阳小肠经': {py:'shǒu tài yáng xiǎo cháng jīng', count:19, points:[
+      {n:1,name:'少泽',py:'shǎo zé'},
+      {n:2,name:'前谷',py:'qián gǔ'},
+      {n:3,name:'后溪',py:'hòu xī'},
+      {n:4,name:'腕骨',py:'wàn gǔ'},
+      {n:5,name:'阳谷',py:'yáng gǔ'},
+      {n:6,name:'养老',py:'yǎng lǎo'},
+      {n:7,name:'支正',py:'zhī zhèng'},
+      {n:8,name:'小海',py:'xiǎo hǎi'},
+      {n:9,name:'肩贞',py:'jiān zhēn'},
+      {n:10,name:'臑俞',py:'nào shù'},
+      {n:11,name:'天宗',py:'tiān zōng'},
+      {n:12,name:'秉风',py:'bǐng fēng'},
+      {n:13,name:'曲垣',py:'qū yuán'},
+      {n:14,name:'肩外俞',py:'jiān wài shù'},
+      {n:15,name:'肩中俞',py:'jiān zhōng shù'},
+      {n:16,name:'天窗',py:'tiān chuāng'},
+      {n:17,name:'天容',py:'tiān róng'},
+      {n:18,name:'颧髎',py:'quán liáo'},
+      {n:19,name:'听宫',py:'tīng gōng'}
+    ]},
+    '足阳明胃经': {py:'zú yáng míng wèi jīng', count:45, points:[
+      {n:1,name:'承泣',py:'chéng qì'},
+      {n:2,name:'四白',py:'sì bái'},
+      {n:3,name:'巨髎',py:'jù liáo'},
+      {n:4,name:'地仓',py:'dì cāng'},
+      {n:5,name:'大迎',py:'dà yíng'},
+      {n:6,name:'颊车',py:'jiá chē'},
+      {n:7,name:'下关',py:'xià guān'},
+      {n:8,name:'头维',py:'tóu wéi'},
+      {n:9,name:'人迎',py:'rén yíng'},
+      {n:10,name:'水突',py:'shuǐ tū'},
+      {n:11,name:'气舍',py:'qì shě'},
+      {n:12,name:'缺盆',py:'quē pén'},
+      {n:13,name:'气户',py:'qì hù'},
+      {n:14,name:'库房',py:'kù fáng'},
+      {n:15,name:'屋翳',py:'wū yì'},
+      {n:16,name:'膺窗',py:'yīng chuāng'},
+      {n:17,name:'乳中',py:'rǔ zhōng'},
+      {n:18,name:'乳根',py:'rǔ gēn'},
+      {n:19,name:'不容',py:'bù róng'},
+      {n:20,name:'承满',py:'chéng mǎn'},
+      {n:21,name:'梁门',py:'liáng mén'},
+      {n:22,name:'关门',py:'guān mén'},
+      {n:23,name:'太乙',py:'tài yǐ'},
+      {n:24,name:'滑肉门',py:'huá ròu mén'},
+      {n:25,name:'天枢',py:'tiān shū'},
+      {n:26,name:'外陵',py:'wài líng'},
+      {n:27,name:'大巨',py:'dà jù'},
+      {n:28,name:'水道',py:'shuǐ dào'},
+      {n:29,name:'归来',py:'guī lái'},
+      {n:30,name:'气冲',py:'qì chōng'},
+      {n:31,name:'髀关',py:'bì guān'},
+      {n:32,name:'伏兔',py:'fú tù'},
+      {n:33,name:'阴市',py:'yīn shì'},
+      {n:34,name:'梁丘',py:'liáng qiū'},
+      {n:35,name:'犊鼻',py:'dú bí'},
+      {n:36,name:'足三里',py:'zú sān lǐ'},
+      {n:37,name:'上巨虚',py:'shàng jù xū'},
+      {n:38,name:'条口',py:'tiáo kǒu'},
+      {n:39,name:'下巨虚',py:'xià jù xū'},
+      {n:40,name:'丰隆',py:'fēng lóng'},
+      {n:41,name:'解溪',py:'jiě xī'},
+      {n:42,name:'冲阳',py:'chōng yáng'},
+      {n:43,name:'陷谷',py:'xiàn gǔ'},
+      {n:44,name:'内庭',py:'nèi tíng'},
+      {n:45,name:'厉兑',py:'lì duì'}
+    ]},
+    '足少阳胆经': {py:'zú shào yáng dǎn jīng', count:44, points:[
+      {n:1,name:'瞳子髎',py:'tóng zǐ liáo'},
+      {n:2,name:'听会',py:'tīng huì'},
+      {n:3,name:'上关',py:'shàng guān'},
+      {n:4,name:'颔厌',py:'hàn yàn'},
+      {n:5,name:'悬颅',py:'xuán lú'},
+      {n:6,name:'悬厘',py:'xuán lí'},
+      {n:7,name:'曲鬓',py:'qū bìn'},
+      {n:8,name:'率谷',py:'shuài gǔ'},
+      {n:9,name:'天冲',py:'tiān chōng'},
+      {n:10,name:'浮白',py:'fú bái'},
+      {n:11,name:'头窍阴',py:'tóu qiào yīn'},
+      {n:12,name:'完骨',py:'wán gǔ'},
+      {n:13,name:'本神',py:'běn shén'},
+      {n:14,name:'阳白',py:'yáng bái'},
+      {n:15,name:'头临泣',py:'tóu lín qì'},
+      {n:16,name:'目窗',py:'mù chuāng'},
+      {n:17,name:'正营',py:'zhèng yíng'},
+      {n:18,name:'承灵',py:'chéng líng'},
+      {n:19,name:'脑空',py:'nǎo kōng'},
+      {n:20,name:'风池',py:'fēng chí'},
+      {n:21,name:'肩井',py:'jiān jǐng'},
+      {n:22,name:'渊腋',py:'yuān yè'},
+      {n:23,name:'辄筋',py:'zhé jīn'},
+      {n:24,name:'日月',py:'rì yuè'},
+      {n:25,name:'京门',py:'jīng mén'},
+      {n:26,name:'带脉',py:'dài mài'},
+      {n:27,name:'五枢',py:'wǔ shū'},
+      {n:28,name:'维道',py:'wéi dào'},
+      {n:29,name:'居髎',py:'jū liáo'},
+      {n:30,name:'环跳',py:'huán tiào'},
+      {n:31,name:'风市',py:'fēng shì'},
+      {n:32,name:'中渎',py:'zhōng dú'},
+      {n:33,name:'膝阳关',py:'xī yáng guān'},
+      {n:34,name:'阳陵泉',py:'yáng líng quán'},
+      {n:35,name:'阳交',py:'yáng jiāo'},
+      {n:36,name:'外丘',py:'wài qiū'},
+      {n:37,name:'光明',py:'guāng míng'},
+      {n:38,name:'阳辅',py:'yáng fǔ'},
+      {n:39,name:'悬钟',py:'xuán zhōng'},
+      {n:40,name:'丘墟',py:'qiū xū'},
+      {n:41,name:'足临泣',py:'zú lín qì'},
+      {n:42,name:'地五会',py:'dì wǔ huì'},
+      {n:43,name:'侠溪',py:'xiá xī'},
+      {n:44,name:'足窍阴',py:'zú qiào yīn'}
+    ]},
+    '足太阳膀胱经': {py:'zú tài yáng páng guāng jīng', count:67, points:[
+      {n:1,name:'睛明',py:'jīng míng'},
+      {n:2,name:'攒竹',py:'cuán zhú'},
+      {n:3,name:'眉冲',py:'méi chōng'},
+      {n:4,name:'曲差',py:'qū chā'},
+      {n:5,name:'五处',py:'wǔ chù'},
+      {n:6,name:'承光',py:'chéng guāng'},
+      {n:7,name:'通天',py:'tōng tiān'},
+      {n:8,name:'络却',py:'luò què'},
+      {n:9,name:'玉枕',py:'yù zhěn'},
+      {n:10,name:'天柱',py:'tiān zhù'},
+      {n:11,name:'大杼',py:'dà zhù'},
+      {n:12,name:'风门',py:'fēng mén'},
+      {n:13,name:'肺俞',py:'fèi shù'},
+      {n:14,name:'厥阴俞',py:'jué yīn shù'},
+      {n:15,name:'心俞',py:'xīn shù'},
+      {n:16,name:'督俞',py:'dū shù'},
+      {n:17,name:'膈俞',py:'gé shù'},
+      {n:18,name:'肝俞',py:'gān shù'},
+      {n:19,name:'胆俞',py:'dǎn shù'},
+      {n:20,name:'脾俞',py:'pí shù'},
+      {n:21,name:'胃俞',py:'wèi shù'},
+      {n:22,name:'三焦俞',py:'sān jiāo shù'},
+      {n:23,name:'肾俞',py:'shèn shù'},
+      {n:24,name:'气海俞',py:'qì hǎi shù'},
+      {n:25,name:'大肠俞',py:'dà cháng shù'},
+      {n:26,name:'关元俞',py:'guān yuán shù'},
+      {n:27,name:'小肠俞',py:'xiǎo cháng shù'},
+      {n:28,name:'膀胱俞',py:'páng guāng shù'},
+      {n:29,name:'中膂俞',py:'zhōng lǚ shù'},
+      {n:30,name:'白环俞',py:'bái huán shù'},
+      {n:31,name:'上髎',py:'shàng liáo'},
+      {n:32,name:'次髎',py:'cì liáo'},
+      {n:33,name:'中髎',py:'zhōng liáo'},
+      {n:34,name:'下髎',py:'xià liáo'},
+      {n:35,name:'会阳',py:'huì yáng'},
+      {n:36,name:'承扶',py:'chéng fú'},
+      {n:37,name:'殷门',py:'yīn mén'},
+      {n:38,name:'浮郄',py:'fú xì'},
+      {n:39,name:'委阳',py:'wěi yáng'},
+      {n:40,name:'委中',py:'wěi zhōng'},
+      {n:41,name:'附分',py:'fù fēn'},
+      {n:42,name:'魄户',py:'pò hù'},
+      {n:43,name:'膏肓俞',py:'gāo huāng shù'},
+      {n:44,name:'神堂',py:'shén táng'},
+      {n:45,name:'譩譆',py:'yī xǐ'},
+      {n:46,name:'膈关',py:'gé guān'},
+      {n:47,name:'魂门',py:'hún mén'},
+      {n:48,name:'阳纲',py:'yáng gāng'},
+      {n:49,name:'意舍',py:'yì shè'},
+      {n:50,name:'胃仓',py:'wèi cāng'},
+      {n:51,name:'肓门',py:'huāng mén'},
+      {n:52,name:'志室',py:'zhì shì'},
+      {n:53,name:'胞肓',py:'bāo huāng'},
+      {n:54,name:'秩边',py:'zhì biān'},
+      {n:55,name:'合阳',py:'hé yáng'},
+      {n:56,name:'承筋',py:'chéng jīn'},
+      {n:57,name:'承山',py:'chéng shān'},
+      {n:58,name:'飞扬',py:'fēi yáng'},
+      {n:59,name:'跗阳',py:'fū yáng'},
+      {n:60,name:'昆仑',py:'kūn lún'},
+      {n:61,name:'仆参',py:'pū cān'},
+      {n:62,name:'申脉',py:'shēn mài'},
+      {n:63,name:'金门',py:'jīn mén'},
+      {n:64,name:'京骨',py:'jīng gǔ'},
+      {n:65,name:'束骨',py:'shù gǔ'},
+      {n:66,name:'足通谷',py:'zú tōng gǔ'},
+      {n:67,name:'至阴',py:'zhì yīn'}
+    ]},
+    '足太阴脾经': {py:'zú tài yīn pí jīng', count:21, points:[
+      {n:1,name:'隐白',py:'yǐn bái'},
+      {n:2,name:'大都',py:'dà dū'},
+      {n:3,name:'太白',py:'tài bái'},
+      {n:4,name:'公孙',py:'gōng sūn'},
+      {n:5,name:'商丘',py:'shāng qiū'},
+      {n:6,name:'三阴交',py:'sān yīn jiāo'},
+      {n:7,name:'漏谷',py:'lòu gǔ'},
+      {n:8,name:'地机',py:'dì jī'},
+      {n:9,name:'阴陵泉',py:'yīn líng quán'},
+      {n:10,name:'血海',py:'xuè hǎi'},
+      {n:11,name:'箕门',py:'jī mén'},
+      {n:12,name:'冲门',py:'chōng mén'},
+      {n:13,name:'府舍',py:'fǔ shě'},
+      {n:14,name:'腹结',py:'fù jié'},
+      {n:15,name:'大横',py:'dà héng'},
+      {n:16,name:'腹哀',py:'fù āi'},
+      {n:17,name:'食窦',py:'shí dòu'},
+      {n:18,name:'天溪',py:'tiān xī'},
+      {n:19,name:'胸乡',py:'xiōng xiāng'},
+      {n:20,name:'周荣',py:'zhōu róng'},
+      {n:21,name:'大包',py:'dà bāo'}
+    ]},
+    '足厥阴肝经': {py:'zú jué yīn gān jīng', count:14, points:[
+      {n:1,name:'大敦',py:'dà dūn'},
+      {n:2,name:'行间',py:'xíng jiān'},
+      {n:3,name:'太冲',py:'tài chōng'},
+      {n:4,name:'中封',py:'zhōng fēng'},
+      {n:5,name:'蠡沟',py:'lí gōu'},
+      {n:6,name:'中都',py:'zhōng dū'},
+      {n:7,name:'膝关',py:'xī guān'},
+      {n:8,name:'曲泉',py:'qū quán'},
+      {n:9,name:'阴包',py:'yīn bāo'},
+      {n:10,name:'足五里',py:'zú wǔ lǐ'},
+      {n:11,name:'阴廉',py:'yīn lián'},
+      {n:12,name:'急脉',py:'jí mài'},
+      {n:13,name:'章门',py:'zhāng mén'},
+      {n:14,name:'期门',py:'qī mén'}
+    ]},
+    '足少阴肾经': {py:'zú shào yīn shèn jīng', count:27, points:[
+      {n:1,name:'涌泉',py:'yǒng quán'},
+      {n:2,name:'然谷',py:'rán gǔ'},
+      {n:3,name:'太溪',py:'tài xī'},
+      {n:4,name:'大钟',py:'dà zhōng'},
+      {n:5,name:'水泉',py:'shuǐ quán'},
+      {n:6,name:'照海',py:'zhào hǎi'},
+      {n:7,name:'复溜',py:'fù liū'},
+      {n:8,name:'交信',py:'jiāo xìn'},
+      {n:9,name:'筑宾',py:'zhù bīn'},
+      {n:10,name:'阴谷',py:'yīn gǔ'},
+      {n:11,name:'横骨',py:'héng gǔ'},
+      {n:12,name:'大赫',py:'dà hè'},
+      {n:13,name:'气穴',py:'qì xué'},
+      {n:14,name:'四满',py:'sì mǎn'},
+      {n:15,name:'中注',py:'zhōng zhù'},
+      {n:16,name:'肓俞',py:'huāng shù'},
+      {n:17,name:'商曲',py:'shāng qū'},
+      {n:18,name:'石关',py:'shí guān'},
+      {n:19,name:'阴都',py:'yīn dū'},
+      {n:20,name:'腹通谷',py:'fù tōng gǔ'},
+      {n:21,name:'幽门',py:'yōu mén'},
+      {n:22,name:'步廊',py:'bù láng'},
+      {n:23,name:'神封',py:'shén fēng'},
+      {n:24,name:'灵墟',py:'líng xū'},
+      {n:25,name:'神藏',py:'shén cáng'},
+      {n:26,name:'彧中',py:'yù zhōng'},
+      {n:27,name:'俞府',py:'shù fǔ'}
+    ]},
+    '任脉': {py:'rèn mài', count:24, points:[
+      {n:1,name:'会阴',py:'huì yīn'},
+      {n:2,name:'曲骨',py:'qū gǔ'},
+      {n:3,name:'中极',py:'zhōng jí'},
+      {n:4,name:'关元',py:'guān yuán'},
+      {n:5,name:'石门',py:'shí mén'},
+      {n:6,name:'气海',py:'qì hǎi'},
+      {n:7,name:'阴交',py:'yīn jiāo'},
+      {n:8,name:'神阙',py:'shén quē'},
+      {n:9,name:'水分',py:'shuǐ fēn'},
+      {n:10,name:'下脘',py:'xià wǎn'},
+      {n:11,name:'建里',py:'jiàn lǐ'},
+      {n:12,name:'中脘',py:'zhōng wǎn'},
+      {n:13,name:'上脘',py:'shàng wǎn'},
+      {n:14,name:'巨阙',py:'jù quē'},
+      {n:15,name:'鸠尾',py:'jiū wěi'},
+      {n:16,name:'中庭',py:'zhōng tíng'},
+      {n:17,name:'膻中',py:'dàn zhōng'},
+      {n:18,name:'玉堂',py:'yù táng'},
+      {n:19,name:'紫宫',py:'zǐ gōng'},
+      {n:20,name:'华盖',py:'huá gài'},
+      {n:21,name:'璇玑',py:'xuán jī'},
+      {n:22,name:'天突',py:'tiān tū'},
+      {n:23,name:'廉泉',py:'lián quán'},
+      {n:24,name:'承浆',py:'chéng jiāng'}
+    ]},
+    '督脉': {py:'dū mài', count:28, points:[
+      {n:1,name:'长强',py:'cháng qiáng'},
+      {n:2,name:'腰俞',py:'yāo shù'},
+      {n:3,name:'腰阳关',py:'yāo yáng guān'},
+      {n:4,name:'命门',py:'mìng mén'},
+      {n:5,name:'悬枢',py:'xuán shū'},
+      {n:6,name:'脊中',py:'jí zhōng'},
+      {n:7,name:'中枢',py:'zhōng shū'},
+      {n:8,name:'筋缩',py:'jīn suō'},
+      {n:9,name:'至阳',py:'zhì yáng'},
+      {n:10,name:'灵台',py:'líng tái'},
+      {n:11,name:'神道',py:'shén dào'},
+      {n:12,name:'身柱',py:'shēn zhù'},
+      {n:13,name:'陶道',py:'táo dào'},
+      {n:14,name:'大椎',py:'dà zhuī'},
+      {n:15,name:'哑门',py:'yǎ mén'},
+      {n:16,name:'风府',py:'fēng fǔ'},
+      {n:17,name:'脑户',py:'nǎo hù'},
+      {n:18,name:'强间',py:'qiáng jiān'},
+      {n:19,name:'后顶',py:'hòu dǐng'},
+      {n:20,name:'百会',py:'bǎi huì'},
+      {n:21,name:'前顶',py:'qián dǐng'},
+      {n:22,name:'囟会',py:'xìn huì'},
+      {n:23,name:'上星',py:'shàng xīng'},
+      {n:24,name:'神庭',py:'shén tíng'},
+      {n:25,name:'素髎',py:'sù liáo'},
+      {n:26,name:'水沟',py:'shuǐ gōu'},
+      {n:27,name:'兑端',py:'duì duān'},
+      {n:28,name:'龈交',py:'yín jiāo'}
+    ]},
+  }
 },
 
 lessons: [
@@ -1625,6 +2087,61 @@ updates: [
     }).join('');
   }
 
+
+  /* ───────── 穴位（十四经） ───────── */
+  function normTone(s) {
+    return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  }
+  function renderAcu() {
+    var A = D.acu, root = $('#acu-root');
+    if (!A || !root) return;
+    var html = '';
+    A.groups.forEach(function (g) {
+      html += '<div class="acu-group"><div class="acu-gt">' + g.g + '</div>';
+      g.items.forEach(function (m) {
+        var M = A.meridians[m];
+        html += '<details class="mer" data-m="' + m + '"><summary>' +
+          '<span class="mer-n">' + m + '</span>' +
+          '<span class="mer-py">' + M.py + '</span>' +
+          '<span class="mer-c">' + M.count + ' 穴</span></summary>' +
+          '<div class="pt-grid">' +
+          M.points.map(function (p) {
+            return '<span class="pt" data-k="' + (p.name + ' ' + p.py + ' ' + normTone(p.py) + ' ' + normTone(p.py).replace(/\s+/g, '')).toLowerCase() + '">' +
+                   '<i>'+p.n+'</i><b>' + p.name + '</b><em>' + p.py + '</em></span>';
+          }).join('') +
+          '</div></details>';
+      });
+      html += '</div>';
+    });
+    root.innerHTML = html;
+
+    var q = $('#acu-q'), hit = $('#acu-hit');
+    function filter() {
+      var v = normTone(q.value.trim());
+      var shown = 0;
+      $$('.mer', root).forEach(function (d) {
+        var any = 0;
+        $$('.pt', d).forEach(function (p) {
+          var ok = !v || p.getAttribute('data-k').indexOf(v) > -1;
+          p.classList.toggle('hide', !ok);
+          if (ok) any++;
+        });
+        d.classList.toggle('hide', any === 0);
+        if (v && any > 0) d.open = true;
+        shown += any;
+      });
+      hit.textContent = v ? '匹配 ' + shown + ' 个穴' : ('共 ' + A.total + ' 个穴 · ' + Object.keys(A.meridians).length + ' 条经');
+    }
+    q.addEventListener('input', filter);
+    filter();
+    $('#acu-all').addEventListener('click', function () {
+      var open = this.getAttribute('data-open') !== '1';
+      $$('.mer', root).forEach(function (d) { d.open = open; });
+      this.setAttribute('data-open', open ? '1' : '0');
+      this.textContent = open ? '全部收起' : '全部展开';
+    });
+  }
+
   /* ───────── 通用交互 ───────── */
   function observe() {
     var els = $$('.rv:not(.in)');
@@ -1654,7 +2171,7 @@ updates: [
 
   /* ───────── init ───────── */
   renderStats(); renderRoute(); renderLessons(); renderQuiz(); renderSrc();
-  wireQuiz(); navScroll(); observe();
+  renderAcu(); wireQuiz(); navScroll(); observe();
   refreshCites();
   var nq = D.quiz.length;
   var na = document.getElementById('nav-quiz'); if (na) na.textContent = '练习 · ' + nq + ' 题';
