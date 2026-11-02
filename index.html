@@ -844,6 +844,9 @@ body{
 @media(max-width:640px){.vid-grid{grid-template-columns:1fr}.vid-box{width:100%}}
 .vtab.more{border-style:dashed;color:var(--zhu);border-color:rgba(156,58,47,.45)}
 .vtab.more:hover{background:rgba(156,58,47,.07)}
+.vep.seen{box-shadow:inset 3px 0 0 var(--zhu)}
+.vep::after{content:'↗';font-size:10px;color:var(--ink3);opacity:.55;margin-left:2px}
+.vep:hover::after{color:var(--zhu);opacity:1}
 </style>
 </head>
 <body>
@@ -928,7 +931,8 @@ body{
     <div class="sec-h">
       <span class="eyebrow">Video</span>
       <h2 id="vid-h2">人纪 · 针灸大成（79 集）</h2>
-      <p>这就是你发的那篇文章里的那套——<b>倪海厦 人纪《针灸大成》全 79 集（字幕版）</b>，按下针顺序从第 001 讲到 079。点任意一集直接在页内播放（可全屏），也可以跳去 B 站。会记住你上次看到哪一集。</p>
+      <p>这就是你发的那篇文章里的那套——<b>倪海厦 人纪《针灸大成》全 79 集（字幕版）</b>，按讲课顺序从第 001 到 079。点任意一集会<b>在新标签页直接打开该集播放</b>（B 站官方播放器），看完回来这一页还在，会标出你上次看到哪一集。</p>
+      <p style="font-size:13px;color:#7a4a1d;margin-top:8px">为什么不在页内播放：B 站对外链嵌入有时只给占位画面（我实测同一地址在标签页能播、塞进 iframe 就被拦），所以走官方播放页最稳。观看时建议<b>关掉 VPN/加速器</b>——B 站是国内源，走代理容易卡在缓冲。</p>
       <p style="font-size:13px;color:var(--ink3);margin-top:8px">其它四部（黄帝内经 81 · 伤寒论 199 · 金匮要略 200 · 神农本草经 66）不混在这里，折叠在下面的「其它人纪课程」里。</p>
     </div>
     <div class="vid-tabs" id="vid-tabs"></div>
@@ -940,20 +944,6 @@ body{
   </div>
 </section>
 
-<div class="vid-modal" id="vid-modal" hidden>
-  <div class="vid-box">
-    <div class="vid-head">
-      <span id="vm-title">—</span>
-      <button id="vm-close" title="关闭 (Esc)">✕</button>
-    </div>
-    <div class="vid-frame"><iframe id="vm-iframe" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-    <div class="vid-foot">
-      <button id="vm-prev">← 上一集</button>
-      <a id="vm-bili" target="_blank" rel="noopener">在 B 站打开 ↗</a>
-      <button id="vm-next">下一集 →</button>
-    </div>
-  </div>
-</div>
 
 <section id="acu" class="band">
   <div class="wrap">
@@ -2386,43 +2376,21 @@ updates: [
     });
     paint(cur);
 
-    $('#vm-close').addEventListener('click', closeVid);
-    $('#vid-modal').addEventListener('click', function (e) { if (e.target.id === 'vid-modal') closeVid(); });
-    $('#vm-prev').addEventListener('click', function () { stepVid(-1); });
-    $('#vm-next').addEventListener('click', function () { stepVid(1); });
-    document.addEventListener('keydown', function (e) {
-      if ($('#vid-modal').hidden) return;
-      if (e.key === 'Escape') closeVid();
-      if (e.key === 'ArrowLeft') stepVid(-1);
-      if (e.key === 'ArrowRight') stepVid(1);
-    });
   }
   function openVid(pi, ei) {
     var P = D.videos[pi], e = P.eps[ei];
     if (!e) return;
-    curVid = { pi: pi, ei: ei };
-    try { localStorage.setItem(VID_KEY, JSON.stringify(curVid)); } catch (err) {}
-    $('#vm-title').textContent = P.part + ' · 第 ' + e.p + ' 集 · ' + e.t;
-    $('#vm-iframe').src = 'https://player.bilibili.com/player.html?bvid=' + P.bvid +
-      '&page=' + e.p + '&autoplay=1&danmaku=1&high_quality=1&as_wide=1';
-    $('#vm-bili').href = 'https://www.bilibili.com/video/' + P.bvid + '?p=' + e.p;
-    $('#vid-modal').hidden = false;
-    document.body.style.overflow = 'hidden';
-    $$('.vep').forEach(function (b, k) { b.classList.toggle('watched', k === ei); });
+    var url = 'https://www.bilibili.com/video/' + P.bvid + '?p=' + e.p;
+    try { localStorage.setItem(VID_KEY, JSON.stringify({ pi: pi, ei: ei })); } catch (err) {}
+    var w = window.open(url, '_blank', 'noopener');
+    if (!w) location.href = url;
+    $$('.vep').forEach(function (b, k) {
+      b.classList.toggle('watched', k === ei);
+      if (k === ei) b.classList.add('seen');
+    });
   }
-  function closeVid() {
-    $('#vid-modal').hidden = true;
-    $('#vm-iframe').src = 'about:blank';
-    document.body.style.overflow = '';
-    if (curVid) { var b = $$('.vep')[curVid.ei]; if (b) b.classList.add('watched'); }
-  }
-  function stepVid(d) {
-    if (!curVid) return;
-    var P = D.videos[curVid.pi];
-    var next = curVid.ei + d;
-    if (next < 0 || next >= P.eps.length) return;
-    openVid(curVid.pi, next);
-  }
+  function closeVid() {}
+  function stepVid() {}
 
   /* ───────── 通用交互 ───────── */
   function observe() {
