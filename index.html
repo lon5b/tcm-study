@@ -892,6 +892,26 @@ body{
 .nm-imglink{display:block}
 .nm-tip{font-size:11.5px;color:var(--ink3);margin:6px 0 2px;text-align:center}
 .note-box:has(.nm-img){width:min(880px,100%)}
+
+/* ── 图文笔记总览 ── */
+.xhs-filter{display:flex;gap:8px;margin:14px 0 16px;flex-wrap:wrap}
+.xbtn{font-family:inherit;font-size:12.5px;padding:7px 14px;border-radius:2px;cursor:pointer;
+  border:1px solid rgba(58,46,34,.24);background:#fffdf7;color:var(--ink2)}
+.xbtn:hover{border-color:rgba(156,58,47,.5);color:var(--zhu)}
+.xbtn.on{background:var(--zhu);border-color:var(--zhu);color:#fff7ec}
+.xhs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
+.xcard{position:relative;border:1px solid rgba(58,46,34,.2);border-radius:2px;background:#fffdf8;
+  overflow:hidden;cursor:pointer;transition:.18s}
+.xcard:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(58,46,34,.14);border-color:rgba(156,58,47,.45)}
+.xthumb{aspect-ratio:3/4;overflow:hidden;background:#f3ece0}
+.xthumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.xmeta{padding:7px 9px 8px;display:flex;flex-direction:column;gap:2px}
+.xmeta b{font-family:"Kaiti SC","STKaiti",serif;font-size:13.5px;color:var(--ink);font-weight:600}
+.xmeta span{font-size:11px;color:var(--ink3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.xopen{position:absolute;top:6px;right:6px;width:22px;height:22px;line-height:20px;text-align:center;
+  border-radius:2px;background:rgba(253,248,236,.92);border:1px solid rgba(58,46,34,.2);
+  color:var(--ink2);font-size:12px;text-decoration:none}
+.xopen:hover{background:var(--zhu);color:#fff7ec;border-color:var(--zhu)}
 </style>
 </head>
 <body>
@@ -902,6 +922,7 @@ body{
   <a href="#quiz" id="nav-quiz">练习 · 18 题</a>
   <a href="#acu">穴位 · 361</a>
   <a href="#video" id="nav-vid">人纪 · 针灸 79 集</a>
+    <a href="#xhs" id="nav-xhs">图文笔记 · 79 篇</a>
   <a href="#src">出处</a>
   <a href="#log">更新日志</a>
 </div></div>
@@ -1019,6 +1040,22 @@ body{
     </div>
   </div>
 </div>
+
+
+<section id="xhs" class="band">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-k">图文笔记</span>
+      <h2>小红书 · 手写笔记 79 篇（第 1 课 → 第 79 课）</h2></div>
+    <p class="lead">按课号从第 1 课开始排。这些是小红书博主自己整理的手写笔记（页面标注了作者），不是倪师原稿，也不是我写的；我只做了课号对齐、抓图和拼接。点任意一卡看图，卡上「↗」直接去原帖。</p>
+    <div class="xhs-filter" id="xhs-filter">
+      <button class="xbtn on" data-f="all">全部 79</button>
+      <button class="xbtn" data-f="multi">多页笔记</button>
+      <button class="xbtn" data-f="yh">依惠札记（48）</button>
+    </div>
+    <div class="xhs-grid" id="xhs-grid"></div>
+    <div class="warnbox" style="margin-top:18px"><b>看图提示</b>：卡片是按课号顺序排的，往下滚就是第 2 课、第 3 课……点开后可继续往下滚读完整篇，点图能开大图。笔记属个人学习整理，可能有错漏，遇到和视频、经典原文不一致的地方，以视频和原文为准；不构成医疗建议。</div>
+  </div>
+</section>
 
 <section id="acu" class="band">
   <div class="wrap">
@@ -2559,6 +2596,44 @@ updates: [
   }
   function closeVid() {}
   function stepVid() {}
+
+
+  /* ───────── 图文笔记总览 ───────── */
+  (function renderXhs() {
+    var P = D.videos[0]; if (!P || !P.xhs) return;
+    var grid = $('#xhs-grid'); if (!grid) return;
+    var list = Object.keys(P.xhs).map(Number).sort(function (a, b) { return a - b; });
+    function card(n) {
+      var x = P.xhs[n], f = x.f || ('note-' + String(n).padStart(2, '0') + '.webp');
+      return '<article class="xcard" data-n="' + n + '">' +
+        '<div class="xthumb"><img src="' + f + '" loading="lazy" alt="第 ' + n + ' 课笔记"></div>' +
+        '<div class="xmeta"><b>第 ' + n + ' 课</b><span>' + x.a + ' · ' + x.n + ' 张</span></div>' +
+        '<a class="xopen" href="' + x.u + '" target="_blank" rel="noopener" title="去小红书原帖">↗</a>' +
+        '</article>';
+    }
+    function paint(filter) {
+      var sel = list.filter(function (n) {
+        if (filter === 'multi') return P.xhs[n].n > 1;
+        if (filter === 'yh') return P.xhs[n].a.indexOf('依惠') === 0;
+        return true;
+      });
+      grid.innerHTML = sel.map(card).join('');
+      grid.querySelectorAll('.xcard').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          if (e.target.closest('.xopen')) return;
+          openNote(0, +el.getAttribute('data-n') - 1);
+        });
+      });
+    }
+    paint('all');
+    var fbar = $('#xhs-filter');
+    if (fbar) fbar.addEventListener('click', function (e) {
+      var b = e.target.closest('.xbtn'); if (!b) return;
+      fbar.querySelectorAll('.xbtn').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      paint(b.getAttribute('data-f'));
+    });
+  })();
 
   /* ───────── 通用交互 ───────── */
   function observe() {
