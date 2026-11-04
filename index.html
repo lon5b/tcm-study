@@ -929,6 +929,27 @@ body{
 .hcard.lost{background:transparent;border-style:dashed;cursor:default;opacity:.62}
 .hcard.lost .hname{color:var(--ink3);font-family:inherit;font-size:13px}
 .hcard.lost:hover{transform:none;box-shadow:none;border-color:rgba(58,46,34,.2)}
+
+/* ── 穴位背诵 ── */
+.rec-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 16px}
+.rec-q{flex:1 1 220px;min-width:180px;font-family:inherit;font-size:13.5px;padding:9px 12px;border-radius:2px;
+  border:1px solid rgba(58,46,34,.26);background:#fffdf7;color:var(--ink);outline:none}
+.rec-q:focus{border-color:rgba(156,58,47,.55)}
+.rbtn{font-family:inherit;font-size:12.5px;padding:8px 13px;border-radius:2px;cursor:pointer;
+  border:1px solid rgba(58,46,34,.24);background:#fffdf7;color:var(--ink2)}
+.rbtn:hover{border-color:rgba(156,58,47,.5);color:var(--zhu)}
+.rbtn.on{background:var(--zhu);border-color:var(--zhu);color:#fff7ec}
+.rec-count{font-size:12px;color:var(--ink3);margin-left:auto}
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.rcard{border:1px solid rgba(58,46,34,.18);border-radius:2px;background:#fffdf8;padding:9px 8px;text-align:center;
+  cursor:pointer;transition:.14s;display:flex;flex-direction:column;gap:3px;align-items:center}
+.rcard:hover{border-color:rgba(156,58,47,.45);background:#fff}
+.rname{font-family:"Kaiti SC","STKaiti",serif;font-size:17px;color:var(--ink);font-weight:600;line-height:1.2}
+.rpy{font-size:11.5px;color:var(--ink3);letter-spacing:.02em}
+.rcard.m-hidepy .rpy{filter:blur(5px);color:transparent;transition:.15s}
+.rcard.m-hidepy:hover .rpy,.rcard.m-hidepy.reveal .rpy{filter:none;color:var(--ink3)}
+.rcard.m-hidename .rname{filter:blur(7px);color:transparent;transition:.15s}
+.rcard.m-hidename:hover .rname,.rcard.m-hidename.reveal .rname{filter:none;color:var(--ink)}
 </style>
 </head>
 <body>
@@ -941,6 +962,7 @@ body{
   <a href="#video" id="nav-vid">人纪 · 针灸 79 集</a>
     <a href="#xhs" id="nav-xhs">图文笔记 · 79 篇</a>
     <a href="#hd" id="nav-hd">黄帝内经 · 素问</a>
+    <a href="#recite" id="nav-recite">穴位背诵 · 361</a>
   <a href="#src">出处</a>
   <a href="#log">更新日志</a>
 </div></div>
@@ -1060,6 +1082,29 @@ body{
 </div>
 
 
+
+
+<section id="recite" class="band">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-k">穴位背诵</span>
+      <h2>361 穴 · 全部放一起（带拼音）</h2></div>
+    <p class="lead">不按经络分组，361 个穴位一次排开，就是给你背的。可以遮住拼音自测、遮住穴名反查、也可以打乱顺序抽查。</p>
+
+    <div class="rec-bar">
+      <input id="rec-q" class="rec-q" type="text" placeholder="搜穴名或拼音，如 合谷 / hé gǔ">
+      <button class="rbtn on" id="rec-both">穴名+拼音</button>
+      <button class="rbtn" id="rec-hidepy">遮拼音（自测）</button>
+      <button class="rbtn" id="rec-hidename">遮穴名（反查）</button>
+      <button class="rbtn" id="rec-shuffle">随机打乱</button>
+      <button class="rbtn" id="rec-reset">恢复顺序</button>
+      <span class="rec-count" id="rec-count">361 穴</span>
+    </div>
+
+    <div class="rec-grid" id="rec-grid"></div>
+
+    <div class="warnbox" style="margin-top:18px"><b>怎么背</b>：先看「穴名+拼音」过一遍读音；切到「遮拼音」，看到穴名先在心里念，点一下卡片看对不对；再切「遮穴名」，只看拼音想穴名，这个最难，考前用。拼音按标准读音人工校过（俞 shù、郄 xì、髎 liáo 这类多音字都在内）。</div>
+  </div>
+</section>
 
 <section id="hd" class="band">
   <div class="wrap">
@@ -2718,6 +2763,66 @@ updates: [
         paint(b.getAttribute('data-k'));
       });
     });
+  })();
+
+
+  /* ───────── 穴位背诵 · 361 穴平铺 ───────── */
+  (function renderRecite() {
+    var A = D.acu; if (!A || !A.meridians) return;
+    var grid = $('#rec-grid'); if (!grid) return;
+
+    // 拉平：按经络顺序排开，不带经络名
+    var ALL = [];
+    Object.keys(A.meridians).forEach(function (mer) {
+      (A.meridians[mer].points || []).forEach(function (p) {
+        ALL.push({ name: p.name, py: p.py });
+      });
+    });
+
+    var mode = 'both', shuffled = false, list = ALL.slice();
+
+    function card(x, i) {
+      var cls = 'rcard';
+      if (mode === 'hidepy') cls += ' m-hidepy';
+      if (mode === 'hidename') cls += ' m-hidename';
+      return '<div class="' + cls + '" data-i="' + i + '">' +
+        '<span class="rname">' + x.name + '</span>' +
+        '<span class="rpy">' + x.py + '</span></div>';
+    }
+
+    function paint() {
+      var q = ($('#rec-q').value || '').trim().toLowerCase();
+      var src = list.filter(function (x) {
+        if (!q) return true;
+        return x.name.indexOf(q) > -1 || x.py.replace(/\s/g, '').toLowerCase().indexOf(q.replace(/\s/g, '')) > -1;
+      });
+      grid.innerHTML = src.map(card).join('');
+      $('#rec-count').textContent = src.length + ' 穴';
+      grid.querySelectorAll('.rcard').forEach(function (el) {
+        el.addEventListener('click', function () { el.classList.toggle('reveal'); });
+      });
+    }
+
+    function setMode(m) {
+      mode = m;
+      ['#rec-both', '#rec-hidepy', '#rec-hidename'].forEach(function (id) {
+        $(id).classList.toggle('on', id === ({ both: '#rec-both', hidepy: '#rec-hidepy', hidename: '#rec-hidename' })[m]);
+      });
+      paint();
+    }
+
+    $('#rec-both').addEventListener('click', function () { setMode('both'); });
+    $('#rec-hidepy').addEventListener('click', function () { setMode('hidepy'); });
+    $('#rec-hidename').addEventListener('click', function () { setMode('hidename'); });
+    $('#rec-q').addEventListener('input', paint);
+    $('#rec-shuffle').addEventListener('click', function () {
+      list = ALL.slice();
+      for (var i = list.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = list[i]; list[i] = list[j]; list[j] = t; }
+      shuffled = true; paint();
+    });
+    $('#rec-reset').addEventListener('click', function () { list = ALL.slice(); shuffled = false; paint(); });
+
+    paint();
   })();
 
   /* ───────── 通用交互 ───────── */
