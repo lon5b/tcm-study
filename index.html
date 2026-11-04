@@ -2169,6 +2169,10 @@ section.band:nth-of-type(even),section.band:nth-of-type(odd){background:var(--pa
 /* 缩略图别只露白边 */
 .xthumb img{object-position:center 12% !important}
 .xthumb{background:repeating-linear-gradient(180deg,var(--paper-3) 0 18px,var(--paper-2) 18px 36px)}
+
+/* 长页面渲染优化：视口外区块延迟绘制（性能） */
+section{content-visibility:auto;contain-intrinsic-size:1200px}
+#lesson,#quiz,#xhs{contain-intrinsic-size:6000px}
 </style>
 </head>
 <body>
