@@ -2093,6 +2093,43 @@ section.band:nth-of-type(even),section.band:nth-of-type(odd){background:var(--pa
 .rcard{border-color:var(--line) !important}
 .rcard:hover{box-shadow:inset 0 0 0 1px var(--accent) !important}
 .hmeta,.xmeta span,.note-foot,.rec-count{color:var(--ink-2) !important}
+
+/* ══ 封面右侧：经络线 + 竖排原文（替代无意义的月亮） ══ */
+.cover-in{grid-template-columns:clamp(150px,17vw,230px) 1fr auto}
+.cover-quote{
+  align-self:center;justify-self:end;flex:none;
+  display:flex;flex-direction:row-reverse;align-items:flex-start;gap:clamp(10px,1.6vw,22px);
+  max-width:clamp(150px,20vw,260px);
+}
+.cover-quote .meridian{
+  width:clamp(52px,5vw,86px);height:clamp(150px,26vh,300px);
+  color:color-mix(in srgb, var(--moon) 42%, transparent);
+  animation:meridianFlow 14s ease-in-out infinite;
+}
+@keyframes meridianFlow{
+  0%,100%{opacity:.55;transform:translateY(0)}
+  50%{opacity:.95;transform:translateY(-6px)}
+}
+.cover-quote p{
+  writing-mode:vertical-rl;text-orientation:upright;
+  font-family:var(--kai);font-size:clamp(13px,1.35vw,17px);line-height:2.1;
+  letter-spacing:.14em;margin:0;color:color-mix(in srgb, var(--moon) 88%, transparent);
+}
+.cover-quote cite{
+  writing-mode:vertical-rl;text-orientation:upright;font-style:normal;
+  font-family:var(--kai);font-size:11px;letter-spacing:.16em;
+  color:color-mix(in srgb, var(--moon) 58%, transparent);margin-top:8px;
+}
+[data-theme="rice"] .cover-quote p{color:rgba(40,30,18,.86)}
+[data-theme="rice"] .cover-quote cite{color:rgba(40,30,18,.6)}
+[data-theme="rice"] .cover-quote .meridian{color:rgba(40,30,18,.3)}
+
+@media (max-width:860px){
+  .cover-quote{justify-self:start;max-width:none;margin-top:6px}
+  .cover-quote p{writing-mode:horizontal-tb;font-size:13px;letter-spacing:.06em}
+  .cover-quote cite{writing-mode:horizontal-tb;display:block;margin-top:4px}
+  .cover-quote .meridian{display:none}
+}
 </style>
 </head>
 <body>
@@ -2123,10 +2160,8 @@ section.band:nth-of-type(even),section.band:nth-of-type(odd){background:var(--pa
 
 <header class="cover">
   <div class="cover-bg" aria-hidden="true">
-    <div class="moon"></div>
     <div class="ink-wash w1"></div>
     <div class="ink-wash w2"></div>
-    <div class="ink-wash w3"></div>
     <div class="mist-layer a"></div>
     <div class="mist-layer b"></div>
     <div class="dust" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -2144,6 +2179,15 @@ section.band:nth-of-type(even),section.band:nth-of-type(odd){background:var(--pa
       <a href="#video"><i>七</i><span>人纪 · 针灸大成</span></a>
     </nav>
 
+    <div class="cover-quote" aria-hidden="true">
+      <svg class="meridian" viewBox="0 0 120 420" fill="none">
+        <path d="M62 8c-16 40 20 66 4 104s-22 58-4 96 18 60 2 96-6 42 2 62" stroke="currentColor" stroke-width="1" stroke-dasharray="3 5"/>
+        <circle cx="62" cy="26" r="3.4"/><circle cx="52" cy="118" r="2.6"/><circle cx="70" cy="212" r="2.6"/>
+        <circle cx="54" cy="300" r="2.6"/><circle cx="64" cy="386" r="3.4"/>
+      </svg>
+      <p>「善診者，察色按脈，先別陰陽。」</p>
+      <cite>《素問 · 陰陽應象大論》</cite>
+    </div>
     <div class="cover-core">
       <p class="pre">人纪为本　一字一句皆有出处</p>
       <h1 class="vtitle" aria-label="中医自学">
