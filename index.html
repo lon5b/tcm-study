@@ -2138,6 +2138,18 @@ section.band:nth-of-type(even),section.band:nth-of-type(odd){background:var(--pa
 .cover .toc a i{border-color:color-mix(in srgb, var(--moon) 22%, transparent) !important}
 .cover .toc a span{font-size:13.5px}
 .nav-theme{border-color:color-mix(in srgb, var(--line-strong) 80%, transparent) !important}
+
+/* ══ 干掉模板遗留的彩色光斑（挡住正文的椭圆） ══ */
+.aurora,.a1,.a2,.a3{display:none !important;background:none !important}
+.hero .ink-mtn,.ink-mtn{display:none !important}
+
+/* ══ 配色下拉不再被导航裁剪 ══ */
+@media (min-width:761px){
+  .nav-in{overflow:visible !important}
+  .theme-pop{position:fixed;right:18px;top:52px;z-index:900}
+}
+.theme-pop{min-width:150px}
+.theme-pop button{font-size:13.5px;padding:8px 12px}
 </style>
 </head>
 <body>
