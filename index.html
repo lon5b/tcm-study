@@ -1397,6 +1397,237 @@ section + section::before{
   .hero-in{padding-bottom:26px !important}
 }
 </style>
+<style>/* ══════════════════════════════════════════════════════════
+   v8 · 「線裝醫書」—— 深墨封面 / 豎排題簽 / 竹簡目錄
+   依 frontend-design skill：一个记忆点（竖排封面），其余克制
+   ══════════════════════════════════════════════════════════ */
+
+:root{
+  --ink:#1b1712;
+  --ink-2:#3a3128;
+  --ink-3:#6f6253;
+  --paper:#f0e9d8;
+  --paper-2:#f8f3e6;
+  --zhu:#a8342a;
+  --zhu-deep:#8a2a22;
+  --zhu-ink:#d4675a;
+  --zhu-soft:#c98a80;
+  --zhu-line:rgba(168,52,42,.35);
+  --zhu-line-soft:rgba(168,52,42,.18);
+  --night:#191d1a;
+  --night-2:#0f1311;
+  --moon:#e9e3ce;
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif SC",STSong,serif;
+  --kai:"Kaiti SC",STKaiti,"Kaiti TC",serif;
+}
+
+/* ══════ 封面 ══════ */
+.hero,.cover{position:relative;isolation:isolate}
+
+.cover{
+  min-height:min(100svh,900px);
+  display:flex;align-items:stretch;
+  background:
+    radial-gradient(140% 100% at 12% 0%, #20261f 0%, #191d1a 38%, #0f1311 100%);
+  color:#e8e2d2;
+  overflow:hidden;
+}
+.cover-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+
+/* 一轮冷月 */
+.cover .moon{
+  position:absolute;right:clamp(30px,9vw,150px);top:clamp(50px,14vh,150px);
+  width:clamp(160px,17vw,260px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 42% 38%, #f4efdc 0%, #e3dcc4 42%, #cfc6aa 70%, rgba(207,198,170,.06) 100%);
+  box-shadow:0 0 90px 30px rgba(233,227,206,.16), 0 0 220px 80px rgba(233,227,206,.06);
+  opacity:.92;
+}
+/* 墨晕 */
+.cover .ink-wash{
+  position:absolute;border-radius:50%;filter:blur(46px);mix-blend-mode:screen;pointer-events:none;
+}
+.cover .w1{left:-12%;bottom:-22%;width:70vw;height:56vh;background:radial-gradient(closest-side,#2f3a33,transparent 72%);opacity:.85}
+.cover .w2{left:26%;bottom:-30%;width:56vw;height:48vh;background:radial-gradient(closest-side,#26302a,transparent 70%);opacity:.8}
+.cover .w3{right:-6%;bottom:-14%;width:44vw;height:40vh;background:radial-gradient(closest-side,#3a3126,transparent 72%);opacity:.7}
+/* 纸纤维 */
+.cover .fiber{
+  position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/><feColorMatrix type='saturate' values='0'/></filter><rect width='260' height='260' filter='url(%23n)' opacity='0.4'/></svg>");
+}
+
+.cover-in{
+  position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:clamp(150px,17vw,230px) 1fr auto;
+  align-items:center;gap:clamp(20px,4vw,64px);
+  padding:clamp(28px,6vh,72px) clamp(20px,4vw,44px);
+}
+
+/* ── 竹簡目錄 ── */
+.cover .toc{display:flex;flex-direction:column;gap:2px;align-self:stretch;justify-content:center}
+.cover .toc a{
+  display:grid;grid-template-columns:34px 1fr;align-items:center;gap:10px;
+  padding:9px 8px;text-decoration:none;color:#b9b3a0;
+  border-bottom:1px solid rgba(200,190,160,.10);
+  transition:color .25s, background .25s, padding-left .25s;
+}
+.cover .toc a:last-child{border-bottom:0}
+.cover .toc a i{
+  font-style:normal;font-family:var(--kai);font-size:13px;color:#8d8672;letter-spacing:0;text-align:center;
+  border:1px solid rgba(200,190,160,.22);border-radius:50%;width:26px;height:26px;line-height:24px;
+  transition:.25s;
+}
+.cover .toc a span{font-family:var(--kai);font-size:14px;letter-spacing:.12em}
+.cover .toc a:hover{color:#f3edda;background:rgba(255,250,235,.045);padding-left:12px}
+.cover .toc a:hover i{color:#171a16;background:#d9cfb2;border-color:#d9cfb2}
+
+/* ── 竖排主标题 ── */
+.cover-core{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(10px,1.6vh,18px)}
+.cover .pre,.cover .post{
+  font-family:var(--kai);letter-spacing:.42em;margin:0;color:#9d947e;
+}
+.cover .pre{font-size:clamp(12px,1.1vw,14px)}
+.cover .post{font-size:clamp(11px,1vw,13px);letter-spacing:.3em;color:#8a8368}
+
+.vtitle{
+  writing-mode:vertical-rl;text-orientation:upright;
+  font-family:var(--serif);font-weight:600;
+  font-size:clamp(64px,10.5vw,132px);
+  line-height:1.06;letter-spacing:.16em;
+  margin:0;padding:0;
+  height:clamp(300px,46vh,470px);
+  color:#f2ecda;
+  display:flex;align-items:flex-start;justify-content:center;
+  text-shadow:0 1px 0 rgba(0,0,0,.5), 0 26px 60px rgba(0,0,0,.55);
+}
+.vtitle span{display:inline-block;opacity:0;transform:translateY(-14px);animation:charIn .9s cubic-bezier(.2,.75,.25,1) forwards}
+.vtitle span:nth-child(1){animation-delay:.12s}
+.vtitle span:nth-child(2){animation-delay:.26s}
+.vtitle span:nth-child(3){animation-delay:.40s}
+.vtitle span:nth-child(4){animation-delay:.54s}
+@keyframes charIn{to{opacity:1;transform:none}}
+
+.cover-note{max-width:440px}
+.cover-note p{
+  font-family:var(--kai);font-size:clamp(12.5px,1.2vw,15px);line-height:2;color:#a49c88;margin:0;
+  border-left:1px solid rgba(200,190,160,.28);padding-left:14px;
+}
+.cover-figures{display:flex;flex-wrap:wrap;gap:clamp(14px,2.4vw,34px);margin-top:6px}
+.cover-figures span{font-family:var(--kai);font-size:11.5px;letter-spacing:.14em;color:#8f8874}
+.cover-figures b{
+  font-family:var(--serif);font-size:clamp(17px,1.8vw,23px);font-weight:600;color:#efe8d4;
+  margin-right:5px;letter-spacing:0;
+}
+
+/* ── 朱印 ── */
+.cover-seal{
+  align-self:flex-end;flex:none;
+  width:clamp(56px,5vw,74px);aspect-ratio:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--zhu);color:#f7efe0;
+  font-family:var(--serif);font-size:clamp(17px,1.7vw,22px);line-height:1.05;letter-spacing:0;
+  transform:rotate(-3deg);
+  box-shadow:0 0 0 1px rgba(247,239,224,.25) inset;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.55'/></svg>");
+  background-blend-mode:multiply;
+  opacity:.95;
+}
+.cover-seal em{font-style:normal}
+
+/* 卷轴下沿 */
+.cover-edge{
+  position:absolute;left:0;right:0;bottom:0;height:14px;z-index:3;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.35) 40%, #2a2119 100%);
+  box-shadow:0 -1px 0 rgba(240,233,216,.16) inset;
+  border-bottom:3px solid #0c0d0b;
+}
+
+/* ══════ 正文：回归纸面 ══════ */
+body{background:var(--paper) !important}
+section{background:transparent}
+
+/* 章号 */
+section > .wrap > .sec-h{position:relative;padding-left:clamp(0px,2vw,10px)}
+body{counter-reset:chap}
+section{counter-increment:chap}
+section > .wrap > .sec-h::before{
+  content:counter(chap, cjk-ideographic);
+  position:absolute;left:-2px;top:-2px;
+  font-family:var(--kai);font-size:12px;letter-spacing:0;
+  color:var(--zhu);background:var(--paper);padding-right:8px;
+}
+section > .wrap > .sec-h{padding-top:20px}
+section > .wrap > .sec-h::after{
+  content:"";position:absolute;left:0;right:0;top:6px;height:1px;background:var(--zhu-line-soft);
+}
+
+/* 取消逐块淡入（skill：避免通用 fade-up） */
+.reveal{opacity:1 !important;animation:none !important}
+
+/* 导航：竹简横条 */
+.nav{background:rgba(246,240,227,.94) !important;border-bottom:1px solid var(--zhu-line-soft) !important}
+.nav a{font-family:var(--kai);letter-spacing:.08em}
+
+/* 手机 */
+@media (max-width:860px){
+  .cover{min-height:auto}
+  .cover-in{grid-template-columns:1fr;gap:22px;padding:26px 18px 34px}
+  .cover .toc{order:3;flex-direction:row;flex-wrap:wrap;gap:6px;justify-content:flex-start}
+  .cover .toc a{grid-template-columns:22px auto;gap:6px;border:1px solid rgba(200,190,160,.18);padding:6px 9px}
+  .cover .toc a i{width:18px;height:18px;line-height:16px;font-size:10px}
+  .cover .toc a span{font-size:11.5px;letter-spacing:.06em}
+  .vtitle{
+    writing-mode:horizontal-tb;height:auto;
+    font-size:clamp(52px,15vw,74px);letter-spacing:.06em;line-height:1.1;
+  }
+  .cover .moon{width:120px;right:14px;top:18px;opacity:.7}
+  .cover-seal{align-self:flex-start;width:52px}
+  .cover-figures{gap:12px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .vtitle span{animation:none;opacity:1;transform:none}
+}
+
+/* ── 修正：竖排标题不再压字 ── */
+.vtitle{
+  height:auto !important;
+  max-height:none !important;
+  font-size:clamp(54px, 8.2vw, 104px) !important;
+  letter-spacing:.14em;
+  padding-bottom:4px;
+}
+.cover-core{gap:clamp(12px,2vh,22px)}
+
+/* ── 冷月：氤氲毛边 ── */
+.cover .moon{
+  filter:blur(.6px);
+  background:
+    radial-gradient(circle at 46% 42%, #f6f1de 0%, #eee7d1 30%, #ded5b8 62%, rgba(222,213,184,.35) 86%, rgba(222,213,184,0) 100%);
+  box-shadow:0 0 70px 22px rgba(233,227,206,.14), 0 0 160px 70px rgba(233,227,206,.05);
+  -webkit-mask-image:radial-gradient(circle at 48% 46%, #000 62%, rgba(0,0,0,.72) 80%, transparent 96%);
+  mask-image:radial-gradient(circle at 48% 46%, #000 62%, rgba(0,0,0,.72) 80%, transparent 96%);
+}
+
+/* ── 竹简肌理 ── */
+.cover .toc{
+  position:relative;
+  background-image:repeating-linear-gradient(90deg, rgba(210,198,170,.05) 0 1px, transparent 1px 9px);
+  padding-right:6px;
+}
+.cover .toc a{border-bottom:1px solid rgba(200,190,160,.09)}
+
+/* ── 卷轴下沿做实 ── */
+.cover-edge{
+  height:26px !important;
+  background:linear-gradient(180deg, #1a1611 0%, #2e2418 42%, #241c13 78%, #120e0a 100%) !important;
+  box-shadow:0 -1px 0 rgba(240,233,216,.22) inset, 0 -14px 30px rgba(0,0,0,.35) !important;
+  border-bottom:0 !important;
+}
+.cover-edge::after{
+  content:"";position:absolute;left:0;right:0;top:9px;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(240,233,216,.16) 20%, rgba(240,233,216,.22) 50%, rgba(240,233,216,.16) 80%, transparent);
+}
+</style>
 </head>
 <body>
 <div class="nav"><div class="nav-in">
@@ -1414,52 +1645,48 @@ section + section::before{
 </div></div>
 <div class="pbar"><i></i></div>
 
-<header class="hero">
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-      <linearGradient id="gFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b5842"/><stop offset="1" stop-color="#8d7a61"/></linearGradient>
-      <filter id="inkRough" x="-12%" y="-12%" width="124%" height="130%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.028" numOctaves="3" seed="11" result="n"/>
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="30" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-    </defs></svg>
-  <div class="scene" aria-hidden="true">
-    <div class="sun"></div>
-    <div class="halo"></div>
-    <svg class="ridge ridge-far" filter="url(#inkRough)" viewBox="0 0 1440 420" preserveAspectRatio="none">
-      <path d="M0,420 L0,250 C90,214 150,268 230,236 C320,200 372,132 470,164 C560,193 610,262 700,246 C800,228 848,150 950,176 C1040,199 1090,262 1180,244 C1270,226 1330,196 1440,224 L1440,420 Z"/>
-    </svg>
-    <svg class="ridge ridge-mid" filter="url(#inkRough)" viewBox="0 0 1440 420" preserveAspectRatio="none">
-      <path d="M0,420 L0,300 C100,272 160,320 250,300 C340,280 390,222 480,250 C570,278 620,330 720,318 C820,306 870,246 960,272 C1050,298 1100,340 1190,326 C1280,312 1360,290 1440,306 L1440,420 Z"/>
-    </svg>
-    <svg class="ridge ridge-near" filter="url(#inkRough)" viewBox="0 0 1440 420" preserveAspectRatio="none">
-      <path d="M0,420 L0,356 C120,338 200,376 300,360 C400,344 470,300 580,322 C690,344 740,382 850,372 C960,362 1020,320 1120,338 C1220,356 1320,378 1440,364 L1440,420 Z"/>
-    </svg>
-    <svg class="birds" viewBox="0 0 120 40" aria-hidden="true"><path d="M8 22c6-7 10-7 16 0"/><path d="M34 14c5-6 9-6 14 0"/><path d="M56 26c6-7 10-7 16 0"/></svg>
-    <div class="mist mist-a"></div>
-    <div class="mist mist-b"></div>
+<header class="cover">
+  <div class="cover-bg" aria-hidden="true">
+    <div class="moon"></div>
+    <div class="ink-wash w1"></div>
+    <div class="ink-wash w2"></div>
+    <div class="ink-wash w3"></div>
+    <div class="fiber"></div>
   </div>
 
-  <div class="hero-in">
-    <div class="hero-main">
-      <span class="kicker"><i class="pulse"></i>每日一课 · 持续更新</span>
-      <p class="hero-eyebrow">人紀為本 · 一字一句皆有出處</p>
-      <h1 class="hero-title"><span>中医</span><span>自学</span></h1>
-      <p class="hero-sub">从认字开始 —— 先认字，再组词，读范文，最后自己写。</p>
-      <p class="sub">每一句中医知识都标了文件与行号，三类来源分色：<b class="w">经典原文</b> / <b class="j">讲课转写</b> / <b class="t">我的推论</b>。</p>
-      <div class="meta">
-        <span id="m-start">起始 2026-10-29</span>
-        <span>第 1 课 · 阴阳（12 节）</span>
-        <span id="m-quiz">18 道练习 · 每题有标准答案</span>
-        <span id="m-upd">更新 2026-10-29</span>
+  <div class="cover-in">
+    <nav class="toc" aria-label="章节">
+      <a href="#route"><i>一</i><span>学习路线</span></a>
+      <a href="#lesson"><i>二</i><span>第一课 · 阴阳</span></a>
+      <a href="#quiz"><i>三</i><span>练习 · 十八题</span></a>
+      <a href="#acu"><i>四</i><span>穴位 · 三百六十一</span></a>
+      <a href="#recite"><i>五</i><span>穴位背诵</span></a>
+      <a href="#xhs"><i>六</i><span>图文笔记 · 七十九篇</span></a>
+      <a href="#video"><i>七</i><span>人纪 · 针灸大成</span></a>
+    </nav>
+
+    <div class="cover-core">
+      <p class="pre">人紀為本　一字一句皆有出處</p>
+      <h1 class="vtitle" aria-label="中医自学">
+        <span>中</span><span>醫</span><span>自</span><span>學</span>
+      </h1>
+      <p class="post">從認字開始　先認字　再組詞　讀範文　後自寫</p>
+      <div class="cover-note">
+        <p>每一句都標了文件與行號。經典原文、講課轉寫、我的推論，三色分開，不混。</p>
       </div>
-      <div class="stats" id="stats"></div>
+      <div class="cover-figures">
+        <span><b>1</b>課已上線</span>
+        <span><b>18</b>節本課</span>
+        <span><b>18</b>題練習</span>
+        <span><b>361</b>穴帶拼音</span>
+        <span><b>79</b>集視頻</span>
+      </div>
     </div>
-    <div class="hero-side">
-      <div class="seal" title="自学"><span>自</span><span>学</span></div>
-      <div class="vcol">黃帝內經 · 神農本草 · 針灸大成</div>
-    </div>
+
+    <div class="cover-seal" aria-hidden="true"><em>自</em><em>學</em></div>
   </div>
-  <div class="scroll-cue"><i></i><span>下滑</span></div>
+
+  <div class="cover-edge" aria-hidden="true"></div>
 </header>
 
 <section id="route">
@@ -2730,7 +2957,7 @@ updates: [
 
   /* ───────── hero stats（数字全部按数据算出来，不写死） ───────── */
   function renderStats() {
-    var box = $('#stats');
+    var box = $('#stats'); if (!box) { /* 封面已改版，无 stats 容器 */ }
     var nums = {
       lessons: D.lessons.length,
       sections: D.lessons.reduce(function (a, L) { return a + L.sections.length; }, 0),
@@ -3334,8 +3561,8 @@ updates: [
   var na = document.getElementById('nav-quiz'); if (na) na.textContent = '练习 · ' + nq + ' 题';
   var hm = document.getElementById('m-quiz'); if (hm) hm.textContent = nq + ' 道练习 · 每题有标准答案';
   var h2q = document.getElementById('quiz-h2'); if (h2q) h2q.textContent = '配套练习 · ' + nq + ' 题（每题一个标准答案）';
-  $('#m-start').textContent = '起始 ' + D.meta.start;
-  $('#m-upd').textContent = '更新 ' + D.meta.updated;
+  if ($('#m-start')) $('#m-start').textContent = '起始 ' + D.meta.start;
+  if ($('#m-upd')) $('#m-upd').textContent = '更新 ' + D.meta.updated;
   $('#pledge').textContent = D.meta.pledge;
   var fu = $('#foot-upd'); if (fu) fu.textContent = D.meta.updated + '（' + D.meta.corpus + '）';
 })();
