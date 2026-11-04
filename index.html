@@ -2161,6 +2161,10 @@ section.band:nth-of-type(even),section.band:nth-of-type(odd){background:var(--pa
 .ink-reveal{opacity:1 !important;transform:none !important}
 .ink-reveal.ink-in{animation:none !important}
 .reveal{opacity:1 !important}
+
+/* ══ 彻底修空白：模板 .rv 不再默认隐藏 ══ */
+.rv{opacity:1 !important;transform:none !important;transition:none !important}
+.rv.in{opacity:1 !important;transform:none !important}
 </style>
 </head>
 <body>
@@ -4083,7 +4087,7 @@ updates: [
     var els = $$('.rv:not(.in)');
     if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
     var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('ink-in'); io.unobserve(e.target); } });
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
     els.forEach(function (el) { io.observe(el); });
   }
@@ -4201,17 +4205,6 @@ updates: [
   });
 })();
 
-/* ── 滚动入场 + 章节线 ── */
-(function revealInit(){
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var nodes = document.querySelectorAll('section > .wrap > .sec-h, .hd-grid, .xhs-grid, .rec-grid, .tb, .warnbox');
-  nodes.forEach(function(n){ n.classList.add('ink-reveal'); });
-  if (!('IntersectionObserver' in window)) { nodes.forEach(function(n){ n.classList.add('ink-in'); }); return; }
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('ink-in'); io.unobserve(e.target); } });
-  }, { threshold: .08, rootMargin: '0px 0px -6% 0px' });
-  nodes.forEach(function(n){ io.observe(n); });
-})();
 
 /* ── 配色下拉 ── */
 (function themePop(){
