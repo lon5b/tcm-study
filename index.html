@@ -2130,6 +2130,14 @@ section.band:nth-of-type(even),section.band:nth-of-type(odd){background:var(--pa
   .cover-quote cite{writing-mode:horizontal-tb;display:block;margin-top:4px}
   .cover-quote .meridian{display:none}
 }
+
+/* 引文提亮、目录减重 */
+.cover-quote p{color:color-mix(in srgb, var(--moon) 96%, transparent) !important;font-size:clamp(14px,1.5vw,18px) !important}
+.cover-quote cite{color:color-mix(in srgb, var(--moon) 66%, transparent) !important}
+.cover .toc a{border-bottom-color:color-mix(in srgb, var(--moon) 12%, transparent) !important}
+.cover .toc a i{border-color:color-mix(in srgb, var(--moon) 22%, transparent) !important}
+.cover .toc a span{font-size:13.5px}
+.nav-theme{border-color:color-mix(in srgb, var(--line-strong) 80%, transparent) !important}
 </style>
 </head>
 <body>
