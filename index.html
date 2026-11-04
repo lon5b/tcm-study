@@ -2173,6 +2173,10 @@ section.band:nth-of-type(even),section.band:nth-of-type(odd){background:var(--pa
 /* 长页面渲染优化：视口外区块延迟绘制（性能） */
 section{content-visibility:auto;contain-intrinsic-size:1200px}
 #lesson,#quiz,#xhs{contain-intrinsic-size:6000px}
+
+/* 正文里的 <b> 不该变成独立段落（模板 .callbox b 是给标题用的） */
+.callbox b,.card b,.note b,p b{display:inline !important;margin:0 !important}
+.callbox > b:first-child{display:block !important;margin-bottom:6px !important}
 </style>
 </head>
 <body>
