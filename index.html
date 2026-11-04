@@ -2177,6 +2177,9 @@ section{content-visibility:auto;contain-intrinsic-size:1200px}
 /* 正文里的 <b> 不该变成独立段落（模板 .callbox b 是给标题用的） */
 .callbox b,.card b,.note b,p b{display:inline !important;margin:0 !important}
 .callbox > b:first-child{display:block !important;margin-bottom:6px !important}
+
+/* 取消 content-visibility（会造成高度估算跳动） */
+section{content-visibility:visible !important;contain-intrinsic-size:auto !important}
 </style>
 </head>
 <body>
