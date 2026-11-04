@@ -2156,6 +2156,11 @@ section.band:nth-of-type(even),section.band:nth-of-type(odd){background:var(--pa
 .ink-reveal{opacity:0}
 .ink-reveal.ink-in{animation:cardIn .7s cubic-bezier(.22,.7,.28,1) forwards}
 .sec-h.ink-reveal.ink-in::after{animation:lineGrow .9s cubic-bezier(.2,.7,.3,1) forwards}
+
+/* ══ 修正：入场动画导致整片空白 —— 取消默认隐藏 ══ */
+.ink-reveal{opacity:1 !important;transform:none !important}
+.ink-reveal.ink-in{animation:none !important}
+.reveal{opacity:1 !important}
 </style>
 </head>
 <body>
