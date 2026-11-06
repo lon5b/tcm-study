@@ -2418,6 +2418,13 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   .mst{grid-template-columns:54px 1fr 40px}
   .rcard2{padding:12px 14px}
 }
+
+/* 阴阳模块子导航 */
+.yy-nav{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 0 14px;border-bottom:1px dashed var(--line);margin-bottom:18px}
+.yy-nav-k{font-size:11px;letter-spacing:.18em;color:var(--accent);margin-right:6px}
+.yy-nav a{font-size:12px;padding:5px 10px;border:1px solid var(--line-strong);color:var(--ink-2);text-decoration:none;border-radius:2px}
+.yy-nav a:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:760px){ .yy-nav{gap:5px} .yy-nav a{font-size:11.5px;padding:4px 8px} .yy-nav-k{width:100%;margin:0 0 2px} }
 </style>
 </head>
 <body>
@@ -2425,15 +2432,13 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   <span class="brand">中医自学</span>
   <button class="nav-toggle" id="nav-toggle" aria-label="目录">目录 ▾</button>
   <a href="#route">学习路线</a>
-  <a href="#lesson">第 1 课 · 阴阳</a>
-  <a href="#quiz" id="nav-quiz">练习 · 18 题</a>
+  <a href="#lesson" id="nav-yy">阴阳 · 学透</a>
   <span class="nav-sep"></span>
   <a href="#acu">穴位 · 361</a>
   <a href="#recite" id="nav-recite">穴位背诵 · 361</a>
   <span class="nav-sep"></span>
   <a href="#xhs" id="nav-xhs">图文笔记 · 79 篇</a>
   <a href="#jue" id="nav-jue">歌诀 · 口诀</a>
-  <a href="#yy" id="nav-yy">阴阳 · 学透</a>
   <a href="#video" id="nav-vid">人纪 · 针灸 79 集</a>
   <button class="nav-theme" id="nav-theme" aria-haspopup="true" aria-expanded="false">配色 ▾</button>
   <div class="theme-pop" id="theme-pop" hidden>
@@ -2461,14 +2466,12 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   <div class="cover-in">
     <nav class="toc" aria-label="章节">
       <a href="#route"><i>一</i><span>学习路线</span></a>
-      <a href="#lesson"><i>二</i><span>第一课 · 阴阳</span></a>
-      <a href="#quiz"><i>三</i><span>练习 · 十八题</span></a>
-      <a href="#acu"><i>四</i><span>穴位 · 三百六十一</span></a>
-      <a href="#recite"><i>五</i><span>穴位背诵</span></a>
-      <a href="#xhs"><i>六</i><span>图文笔记 · 七十九篇</span></a>
-      <a href="#jue"><i>七</i><span>歌诀 · 口诀</span></a>
-      <a href="#yy"><i>八</i><span>阴阳 · 学透</span></a>
-      <a href="#video"><i>九</i><span>人纪 · 针灸大成</span></a>
+      <a href="#lesson"><i>二</i><span>阴阳 · 学透</span></a>
+      <a href="#acu"><i>三</i><span>穴位 · 三百六十一</span></a>
+      <a href="#recite"><i>四</i><span>穴位背诵</span></a>
+      <a href="#xhs"><i>五</i><span>图文笔记 · 七十九篇</span></a>
+      <a href="#jue"><i>六</i><span>歌诀 · 口诀</span></a>
+      <a href="#video"><i>七</i><span>人纪 · 针灸大成</span></a>
     </nav>
 
     <div class="cover-quote" aria-hidden="true">
@@ -2516,10 +2519,20 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 
 <section id="lesson" class="band">
   <div class="wrap">
+    <nav class="yy-nav" aria-label="阴阳模块">
+      <span class="yy-nav-k">阴阳 · 学透</span>
+      <a href="#lesson">① 正文 17 节</a>
+      <a href="#quiz">② 课后 18 题</a>
+      <a href="#yy-basic">③ 基础</a>
+      <a href="#yy-teacher">④ 名师</a>
+      <a href="#yy-method">⑤ 方法论</a>
+      <a href="#yy-quiz">⑥ 题库 243</a>
+      <a href="#yy-recall-w">⑦ 背诵 · 计划</a>
+    </nav>
     <div class="sec-h">
       <span class="eyebrow">Lesson</span>
-      <h2>课程</h2>
-      <p>每节课都会留在这里，不删。新的课往后面的 tab 加。</p>
+      <h2>第 1 课 · 阴阳（正文 17 节）</h2>
+      <p>先读正文，再往下做课后题，最后进「阴阳 · 学透」用 243 道题把这块吃透。</p>
     </div>
     <div class="tabs" id="tabs"></div>
     <div id="lesson-root"></div>
@@ -2527,10 +2540,11 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 </section>
 
 <section id="quiz">
+  <div class="wrap" style="padding-bottom:0"><p class="lead" style="margin:0 0 4px">这 18 题是刚读完正文的自测；要真正吃透，请用下方的 <a href="#yy" style="color:var(--accent)">阴阳 · 学透 · 243 题</a>。</p></div>
   <div class="wrap">
     <div class="sec-h">
       <span class="eyebrow">Practice</span>
-      <h2 id="quiz-h2">配套练习 · 18 题（每题一个标准答案）</h2>
+      <h2 id="quiz-h2">课后自测 · 18 题（入门）</h2>
       <p>12 道全是选择题，每道都有<b>唯一标准答案</b>。点选项立刻判对错并给出答案和出处；不想做题就点「直接看答案」，或一次「全部显示答案」。作答记录存在你本机浏览器里。</p>
     </div>
     <div class="quiztop">
@@ -2606,7 +2620,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <p class="lead" id="yy-intro"></p>
 
     <div class="yy-block">
-      <h3 class="yy-h">一、阴阳到底指什么</h3>
+      <h3 class="yy-h" id="yy-basic">一、阴阳到底指什么</h3>
       <p class="lead" id="yy-def"></p>
       <div class="yy-points" id="yy-points"></div>
     </div>
@@ -2622,17 +2636,17 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     </div>
 
     <div class="yy-block">
-      <h3 class="yy-h">四、四位老师怎么讲阴阳</h3>
+      <h3 class="yy-h" id="yy-teacher">四、六位老师怎么讲阴阳</h3>
       <div class="yy-teachers" id="yy-teachers"></div>
     </div>
 
     <div class="yy-block">
-      <h3 class="yy-h">五、方法论：四步把阴阳学成能用的东西</h3>
+      <h3 class="yy-h" id="yy-method">五、方法论：四步把阴阳学成能用的东西</h3>
       <div class="yy-method" id="yy-method"></div>
     </div>
 
     <div class="yy-block">
-      <h3 class="yy-h">六、题库 <span id="yy-count" class="yy-count"></span></h3>
+      <h3 class="yy-h" id="yy-quiz">六、题库 <span id="yy-count" class="yy-count"></span></h3>
       <p class="lead">全部带答案与解析，每条都标了来源：教材考点的标「医学教育网/环球网校」，我自己按考点编的会明确标「自编」。</p>
       <div class="yy-bar">
         <div class="yy-tabs" id="yy-tabs"></div>
@@ -2649,7 +2663,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       </div>
     </div>
     <div class="yy-block">
-      <h3 class="yy-h">七、背诵卡：主动回忆（15 张）</h3>
+      <h3 class="yy-h" id="yy-recall-w">七、背诵卡：主动回忆（15 张）</h3>
       <p class="lead">只看问题，先在脑子里答一遍，再点开对原文。想不起来的那张，就是你今天要补的。</p>
       <div class="yy-recall" id="yy-recall"></div>
     </div>
