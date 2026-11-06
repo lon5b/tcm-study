@@ -2357,6 +2357,67 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   .yq{padding:18px 16px}
   .ym{grid-template-columns:28px 1fr;gap:10px}
 }
+
+/* ══ 阴阳：模式/掌握度/背诵卡/计划/误区 ══ */
+.yy-mode{display:inline-flex;border:1px solid var(--line-strong);border-radius:2px;overflow:hidden}
+.yy-mode button{font-family:inherit;font-size:12.5px;padding:6px 14px;background:transparent;border:0;color:var(--ink-2);cursor:pointer}
+.yy-mode button.on{background:var(--accent);color:#fff8ef}
+.ytab-x{border-style:dashed}
+#yy-mst{margin:0 0 14px}
+.mst-wrap{border:1px solid var(--line);background:var(--card);padding:14px 16px}
+.mst-top{font-size:12px;letter-spacing:.08em;color:var(--ink-3);margin-bottom:10px}
+.mst{display:grid;grid-template-columns:64px 1fr 44px;gap:10px;align-items:center;margin-bottom:7px}
+.mst span{font-size:12px;color:var(--ink-2)}
+.mst-bar{height:6px;background:var(--paper-3);border-radius:3px;overflow:hidden}
+.mst-bar i{display:block;height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+.mst em{font-style:normal;font-size:11.5px;color:var(--ink-3);text-align:right}
+.yq-msg{font-size:13px;color:var(--ink-2);margin:6px 0 0}
+.yans-act{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.yans-act .ybtn{font-size:12.5px;padding:6px 12px}
+
+.yy-recall{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.rcard2{text-align:left;font-family:inherit;background:var(--card);border:1px solid var(--line);
+  padding:14px 16px;cursor:pointer;display:flex;flex-direction:column;gap:8px;border-radius:2px}
+.rcard2:hover{border-color:var(--accent)}
+.rq{font-size:13.5px;color:var(--ink);line-height:1.6}
+.ra{font-family:var(--kai);font-size:14px;line-height:1.85;color:var(--ink);display:none;padding-top:8px;border-top:1px dashed var(--line)}
+.rhint{font-style:normal;font-size:11px;color:var(--ink-3);letter-spacing:.1em}
+.rcard2.open .ra{display:block}
+.rcard2.open .rhint{display:none}
+
+.yy-plan{display:flex;flex-direction:column;gap:8px}
+.pl-bar{height:6px;background:var(--paper-3);border-radius:3px;overflow:hidden;margin-bottom:4px}
+.pl-fill{height:100%;background:var(--accent);transition:width .3s}
+.pl-meta{font-size:11.5px;color:var(--ink-3);letter-spacing:.08em;margin-bottom:6px}
+.pl-item{display:grid;grid-template-columns:44px 1fr 22px;gap:12px;align-items:start;
+  background:var(--card);border:1px solid var(--line);padding:12px 14px;cursor:pointer;border-radius:2px}
+.pl-item:hover{border-color:var(--accent)}
+.pl-d{font-family:var(--serif);font-size:14px;color:var(--accent)}
+.pl-item h4{margin:0 0 3px;font-size:13.5px;color:var(--ink)}
+.pl-item p{margin:0;font-size:12.5px;line-height:1.7;color:var(--ink-2)}
+.pl-ck{font-style:normal;font-size:14px;color:var(--accent);text-align:right}
+.pl-item.on{background:var(--paper-3)}
+.pl-item.on h4{text-decoration:line-through;color:var(--ink-3)}
+
+.yy-pitfalls{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.pf{background:var(--card);border:1px solid var(--line);padding:14px 16px}
+.pf p{margin:0 0 8px;font-size:13px;line-height:1.8}
+.pf p:last-child{margin:0}
+.pf em{font-style:normal;font-size:10.5px;letter-spacing:.12em;margin-right:8px;padding:1px 5px;border:1px solid var(--line-strong);color:var(--ink-3)}
+.pf-w{color:var(--ink-3)}
+.pf-r{color:var(--ink)}
+.pf-r em{color:var(--accent);border-color:var(--accent)}
+
+.yy-howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.ht{background:var(--card);border:1px solid var(--line);padding:14px 16px}
+.ht b{display:block;font-size:13px;color:var(--accent);margin-bottom:6px;letter-spacing:.04em}
+.ht p{margin:0;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+.yy-howto-src{margin-top:12px;font-size:11.5px;line-height:1.8;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:10px}
+
+@media (max-width:760px){
+  .mst{grid-template-columns:54px 1fr 40px}
+  .rcard2{padding:12px 14px}
+}
 </style>
 </head>
 <body>
@@ -2575,14 +2636,42 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <p class="lead">全部带答案与解析，每条都标了来源：教材考点的标「医学教育网/环球网校」，我自己按考点编的会明确标「自编」。</p>
       <div class="yy-bar">
         <div class="yy-tabs" id="yy-tabs"></div>
-        <button class="yy-shuffle" id="yy-shuffle">随机抽 10 题</button>
+        <div class="yy-mode" id="yy-mode">
+          <button data-m="random" class="on">随机</button><button data-m="sequence">顺序</button>
+        </div>
+        <button class="yy-shuffle" id="yy-reshuffle">换一批</button>
       </div>
+      <div id="yy-mst"></div>
       <div id="yy-quiz"></div>
       <div class="yy-foot">
-        <button class="yy-btn" id="yy-reset">重做本类</button>
+        <button class="yy-btn" id="yy-reset">清空我的记录</button>
         <span id="yy-score"></span>
       </div>
     </div>
+    <div class="yy-block">
+      <h3 class="yy-h">七、背诵卡：主动回忆（15 张）</h3>
+      <p class="lead">只看问题，先在脑子里答一遍，再点开对原文。想不起来的那张，就是你今天要补的。</p>
+      <div class="yy-recall" id="yy-recall"></div>
+    </div>
+
+    <div class="yy-block">
+      <h3 class="yy-h">八、14 天学透计划</h3>
+      <p class="lead">每天 15–20 分钟。点一下打勾，进度存在本机，明天回来接着走。</p>
+      <div class="yy-plan" id="yy-plan"></div>
+    </div>
+
+    <div class="yy-block">
+      <h3 class="yy-h">九、十个最常见的误区</h3>
+      <p class="lead">这些是我在题库和讲课里反复见到的错法。先看「误区」，自己想一遍正解，再对照。</p>
+      <div class="yy-pitfalls" id="yy-pitfalls"></div>
+    </div>
+
+    <div class="yy-block">
+      <h3 class="yy-h">十、为什么这样设计</h3>
+      <div class="yy-howto" id="yy-howto"></div>
+      <p class="yy-howto-src" id="yy-howto-src"></p>
+    </div>
+
   </div>
 </section>
 
@@ -7325,7 +7414,210 @@ updates: [
 "why": "身热欲近衣，是假热之象。",
 "src": "自编 · 依据《中医基础理论》教材考点"
 }
-]
+],
+"recall": [
+{
+"q": "阴阳的定义句（素问·阴阳应象大论开篇）",
+"a": "阴阳者，天地之道也，万物之纲纪，变化之父母，生杀之本始，神明之府也。治病必求于本。"
+},
+{
+"q": "阴阳平衡与离决的那一句",
+"a": "阴平阳秘，精神乃治；阴阳离决，精气乃绝。"
+},
+{
+"q": "阳气像什么？（生气通天论）",
+"a": "阳气者，若天与日，失其所则折寿而不彰。"
+},
+{
+"q": "阴阳的关键在哪里？",
+"a": "凡阴阳之要，阳密乃固。"
+},
+{
+"q": "阴与阳各自的职责",
+"a": "阴者，藏精而起亟也；阳者，卫外而为固也。"
+},
+{
+"q": "互根的经典表述",
+"a": "孤阴不生，独阳不长；阴在内，阳之守也，阳在外，阴之使也。"
+},
+{
+"q": "转化的经典表述",
+"a": "重阴必阳，重阳必阴；寒极生热，热极生寒。"
+},
+{
+"q": "阳主阴从的一句",
+"a": "阳生阴长，阳杀阴藏。"
+},
+{
+"q": "形与气的分别",
+"a": "阳化气，阴成形。寒伤形，热伤气。气伤痛，形伤肿。"
+},
+{
+"q": "诊断的总纲",
+"a": "善诊者，察色按脉，先别阴阳。"
+},
+{
+"q": "治则总纲",
+"a": "谨察阴阳所在而调之，以平为期。"
+},
+{
+"q": "虚热的治法（王冰）",
+"a": "壮水之主，以制阳光。"
+},
+{
+"q": "虚寒的治法（王冰）",
+"a": "益火之源，以消阴翳。"
+},
+{
+"q": "补阳补阴的要诀（张景岳）",
+"a": "善补阳者，必于阴中求阳；善补阴者，必于阳中求阴。"
+},
+{
+"q": "阴阳可分到几层",
+"a": "阴阳者，数之可十，推之可百；数之可千，推之可万。"
+}
+],
+"plan": [
+{
+"d": 1,
+"t": "认阴阳（体感层）",
+"task": "背阴阳定义句；把身边 20 个东西分阴阳（天/地、动/静、热/冷…）；做「概念」类 10 题"
+},
+{
+"d": 2,
+"t": "属性归类",
+"task": "背属性速查表 7 行；专攻五藏阴阳（心阳中之太阳、肺阳中之少阴、肝阴中之少阳、脾至阴、肾阴中之太阴）；做「概念」类 15 题"
+},
+{
+"d": 3,
+"t": "对立制约",
+"task": "背 3 句原文（阴胜则阳病／寒者热之／动极者镇之以静）；做「关系」里对立类 15 题"
+},
+{
+"d": 4,
+"t": "互根互用",
+"task": "背孤阴不生、阴在内阳之守；搞清「互根=依存、互用=资生」；做互根类 15 题"
+},
+{
+"d": 5,
+"t": "交感互藏",
+"task": "理解互藏是消长与转化的内在依据；做互藏类 8 题 + 复习前四天错题"
+},
+{
+"d": 6,
+"t": "消长",
+"task": "分清「互为消长」与「皆消皆长」；背阳生阴长；做消长类 10 题"
+},
+{
+"d": 7,
+"t": "转化",
+"task": "背重阴必阳、寒极生热；分清「转化」与「格拒假象」；做转化类 10 题"
+},
+{
+"d": 8,
+"t": "小测（1-7 天）",
+"task": "随机抽 20 题，正确率低于 80% 就把错题全做一遍"
+},
+{
+"d": 9,
+"t": "病理：偏盛偏衰",
+"task": "四句话成组背（阳盛则热/阴盛则寒/阳虚则寒/阴虚则热）；做病理类 15 题"
+},
+{
+"d": 10,
+"t": "病理：互损与格拒",
+"task": "阴损及阳、阳损及阴；真寒假热 vs 真热假寒；做病理类剩余题"
+},
+{
+"d": 11,
+"t": "治则",
+"task": "背阳病治阴、阴病治阳、阴中求阳、阳中求阴、益火之源、壮水之主；做治则类 20 题"
+},
+{
+"d": 12,
+"t": "原文串讲",
+"task": "把 15 张背诵卡过一遍，能说出每条考什么关系；做原文类 20 题"
+},
+{
+"d": 13,
+"t": "医案实战",
+"task": "做医案 12 题，每题先自己写证型再对答案；把写错的整理成一句话"
+},
+{
+"d": 14,
+"t": "总测 + 输出",
+"task": "全部 243 题随机 40 题；然后不看页面，用自己的话讲一遍「阴阳是什么、怎么用」，讲不顺的地方回去补"
+}
+],
+"pitfalls": [
+{
+"w": "阴阳就是两个对立的东西",
+"r": "不是。必须是「相互关联又属性相反」的一对；寒与湿都属阴，不构成阴阳。"
+},
+{
+"w": "阴阳平衡＝各占一半",
+"r": "平衡是动态协调（阴平阳秘），不是数量相等。刘力红讲「大平衡里有不平衡」。"
+},
+{
+"w": "阴虚就是阴少、阳虚就是阳少，都是虚，治法一样",
+"r": "阴虚要滋阴制阳（阳病治阴），阳虚要扶阳抑阴（阴病治阳），方向相反。"
+},
+{
+"w": "寒极生热就是寒证变成了热证，该清热",
+"r": "多是阴寒极盛、虚阳外越的假热（格拒），本质仍寒，当温阳破阴。倪海厦强调「它会回头」。"
+},
+{
+"w": "阴虚则阳亢是阳太多，要泻阳",
+"r": "阳未必真多，是阴不足造成的相对偏亢，治法在补阴而非泻阳。"
+},
+{
+"w": "互根和互用是一回事",
+"r": "互根=相互依存（缺一不可），互用=相互资生促进（一方的功能助长另一方）。考试常拿「昼不精夜不瞑」考互用。"
+},
+{
+"w": "阴阳的绝对性和相对性只能二选一",
+"r": "同一层面内属性固定（绝对），换对象换层面可变（相对），两者并存。"
+},
+{
+"w": "八纲里阴阳只是两个证",
+"r": "阴阳是八纲总纲，统领表里寒热虚实：表热实属阳，里寒虚属阴。"
+},
+{
+"w": "「阳病治阴」是治阳虚",
+"r": "恰恰相反：阳病指阳相对偏亢（因阴虚），治法是补阴。"
+},
+{
+"w": "背了定义就算学会了",
+"r": "定义只是入口。能看着症状说出「哪一对关系失常、该用哪个治则」，才算会用。"
+}
+],
+"howto": [
+{
+"k": "每次题目都不一样",
+"d": "题序和选项顺序每次刷新都重新打乱。同一个知识点换个选项位置再考你，才是真会，而不是记住「选 C」。"
+},
+{
+"k": "先测后学（Testing effect）",
+"d": "研究里最稳的结论之一：先做测试再复习，记得比反复看更牢。所以这里一进来就是题目，而不是先读一大段。"
+},
+{
+"k": "间隔重复（Spaced repetition）",
+"d": "答错的题会进入「待复习」，按 1／2／4／7／15 天的间隔回来找你；答对一次推进一步，答错退回第一步。"
+},
+{
+"k": "交错练习（Interleaving）",
+"d": "随机模式下概念、关系、病理、治则混着出。研究显示混合练习比「一类做完再做一类」更能迁移到真实辨病。"
+},
+{
+"k": "主动回忆（Active recall）",
+"d": "背诵卡先只给问题，你想起来再翻。想不起来的那一张才是你真正要补的。"
+},
+{
+"k": "输出倒逼输入（费曼式）",
+"d": "第 14 天要求你不看页面讲一遍。讲得磕巴的地方，就是你没真懂的地方。"
+}
+],
+"howto_src": "关于学习方法的三条依据：Testing effect 与主动回忆（PMC4031794《How to Learn Effectively in Medical School》）、间隔重复的系统综述（PMC13657408）、交错练习与检索练习综述（Wiley《The Effectiveness of Spaced Repetition in Medical Education》）。这些是现代学习科学的结论，不是中医内容，我单独标出来，便于你分辨。"
 };
 </script>
 <script>/* 中医自学 · 每日一课 —— 渲染与交互 */
@@ -7965,108 +8257,227 @@ updates: [
   /* ───────── 阴阳 · 学透 ───────── */
   (function renderYY() {
     var Y = window.YY; if (!Y) return;
-    var $id = function (id) { return document.getElementById(id); };
-    $id('yy-intro').textContent = Y.meta.intro;
-    $id('yy-def').textContent = Y.basics.def;
+    var $ = function (id) { return document.getElementById(id); };
+    $('yy-intro').textContent = Y.meta.intro;
+    $('yy-def').textContent = Y.basics.def;
 
-    $id('yy-points').innerHTML = Y.basics.points.map(function (p) {
+    $('yy-points').innerHTML = Y.basics.points.map(function (p) {
       return '<div class="yp"><b>' + p.k + '</b><p>' + p.v + '</p></div>';
     }).join('');
 
-    $id('yy-attr').innerHTML =
+    $('yy-attr').innerHTML =
       '<div class="ya-row ya-head"><span>分类</span><span>属阳</span><span>属阴</span></div>' +
       Y.basics.attr.map(function (r) {
         return '<div class="ya-row"><span>' + r.g + '</span><span>' + r.y + '</span><span>' + r.i + '</span></div>';
       }).join('');
 
-    $id('yy-rel').innerHTML = Y.basics.relations.map(function (r) {
+    $('yy-rel').innerHTML = Y.basics.relations.map(function (r) {
       return '<article class="yr"><h4>' + r.k + '</h4><p class="yr-d">' + r.d + '</p>' +
         '<p class="yr-l"><em>原文</em>' + r.lit + '</p>' +
         '<p class="yr-i"><em>对应</em>' + r.ill + '</p></article>';
     }).join('');
 
-    $id('yy-teachers').innerHTML = Y.teachers.map(function (t) {
+    $('yy-teachers').innerHTML = Y.teachers.map(function (t) {
       return '<article class="yt"><header><b>' + t.name + '</b><em>' + t.tag + '</em></header>' +
         '<p>' + t.point + '</p><p class="yt-use"><em>怎么用</em>' + t.use + '</p>' +
         '<footer>来源：' + t.src + '</footer></article>';
     }).join('');
 
-    $id('yy-method').innerHTML = Y.method.map(function (m) {
+    $('yy-method').innerHTML = Y.method.map(function (m) {
       return '<div class="ym"><b>' + m.n + '</b><div><h4>' + m.t + '</h4><p>' + m.d + '</p></div></div>';
     }).join('');
 
-    /* ── 题库 ── */
-    var ALL = Y.quiz;
-    $id('yy-count').textContent = '（' + ALL.length + ' 题）';
-    var cats = ['全部'].concat(Object.keys(ALL.reduce(function (a, q) { a[q.cat] = 1; return a; }, {})));
-    var filter = '全部', subset = ALL.slice(), idx = 0, picked = [], answered = 0, right = 0;
-    var KEY = 'tcm.yy.progress';
+    /* 背诵卡 */
+    if ($('yy-recall')) {
+      $('yy-recall').innerHTML = Y.recall.map(function (r, i) {
+        return '<button class="rcard2" data-i="' + i + '"><span class="rq">' + r.q + '</span>' +
+          '<span class="ra">' + r.a + '</span><i class="rhint">点开看原文</i></button>';
+      }).join('');
+      $('yy-recall').addEventListener('click', function (e) {
+        var b = e.target.closest('.rcard2'); if (!b) return;
+        b.classList.toggle('open');
+      });
+    }
 
-    function renderTabs() {
-      $id('yy-tabs').innerHTML = cats.map(function (c) {
-        return '<button class="ytab' + (c === filter ? ' on' : '') + '" data-c="' + c + '">' + c +
-          '<i>' + (c === '全部' ? ALL.length : ALL.filter(function (q) { return q.cat === c; }).length) + '</i></button>';
+    /* 14 天计划 */
+    var PK = 'tcm.yy.plan';
+    var done = JSON.parse(localStorage.getItem(PK) || '[]');
+    function renderPlan() {
+      var n = done.length;
+      $('yy-plan').innerHTML =
+        '<div class="pl-bar"><div class="pl-fill" style="width:' + (n / Y.plan.length * 100) + '%"></div></div>' +
+        '<div class="pl-meta">已完成 ' + n + ' / ' + Y.plan.length + ' 天</div>' +
+        Y.plan.map(function (p) {
+          var on = done.indexOf(p.d) > -1;
+          return '<div class="pl-item' + (on ? ' on' : '') + '" data-d="' + p.d + '">' +
+            '<span class="pl-d">D' + p.d + '</span><div><h4>' + p.t + '</h4><p>' + p.task + '</p></div>' +
+            '<i class="pl-ck">' + (on ? '✓' : '') + '</i></div>';
+        }).join('');
+    }
+    if ($('yy-plan')) {
+      $('yy-plan').addEventListener('click', function (e) {
+        var it = e.target.closest('.pl-item'); if (!it) return;
+        var d = parseInt(it.dataset.d, 10);
+        var i = done.indexOf(d);
+        if (i > -1) done.splice(i, 1); else done.push(d);
+        localStorage.setItem(PK, JSON.stringify(done)); renderPlan();
+      });
+      renderPlan();
+    }
+
+    /* 误区 */
+    if ($('yy-pitfalls')) {
+      $('yy-pitfalls').innerHTML = Y.pitfalls.map(function (p) {
+        return '<div class="pf"><p class="pf-w"><em>误区</em>' + p.w + '</p>' +
+          '<p class="pf-r"><em>正解</em>' + p.r + '</p></div>';
       }).join('');
     }
-    function setSubset(list) {
-      subset = list.slice(); idx = 0; picked = []; answered = 0; right = 0; drawCount();
-    }
-    function drawCount() { $id('yy-score').textContent = answered ? ('已答 ' + answered + ' 题，答对 ' + right + ' 题') : ''; }
-    function render() {
-      var box = $id('yy-quiz');
-      if (!subset.length) { box.innerHTML = '<p class="lead">这个类别暂时没有题。</p>'; return; }
-      var q = subset[idx];
-      var opts = q.o.map(function (o, i) {
-        return '<button class="yopt" data-i="' + i + '"><em>' + 'ABCDE'[i] + '</em><span>' + o + '</span></button>';
+
+    /* 学习法说明 */
+    if ($('yy-howto')) {
+      $('yy-howto').innerHTML = Y.howto.map(function (h) {
+        return '<div class="ht"><b>' + h.k + '</b><p>' + h.d + '</p></div>';
       }).join('');
-      box.innerHTML = '<article class="yq"><div class="yq-top"><span class="yq-cat">' + q.cat + '</span>' +
-        '<span class="yq-idx">' + (idx + 1) + ' / ' + subset.length + '</span></div>' +
-        '<h4>' + q.q + '</h4><div class="yopts">' + opts + '</div>' +
-        '<div class="yans" hidden><b class="yans-k"></b><p class="yans-w"></p><p class="yans-s"></p></div>' +
+      if ($('yy-howto-src')) $('yy-howto-src').textContent = Y.howto_src;
+    }
+
+    /* ── 题库引擎 ── */
+    var QK = 'tcm.yy.v1';
+    var st = {};
+    try { st = JSON.parse(localStorage.getItem(QK) || '{}'); } catch (e) { st = {}; }
+    st.seen = st.seen || {}; st.wrong = st.wrong || {}; st.srs = st.srs || {}; st.cat = st.cat || {};
+    function save() { try { localStorage.setItem(QK, JSON.stringify(st)); } catch (e) {} }
+    function key(q) { return q.q.slice(0, 42); }
+    function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+    var STEPS = [1, 2, 4, 7, 15];
+
+    var ALL = Y.quiz;
+    $('yy-count').textContent = '（' + ALL.length + ' 题）';
+    var cats = ['全部'].concat(Object.keys(ALL.reduce(function (a, q) { a[q.cat] = 1; return a; }, {})));
+    var filter = '全部', mode = 'random';
+    var order = [], idx = 0, cur = null, curOpts = [], answered = false, lastOk = null;
+
+    function pool() {
+      if (filter === '错题') return ALL.filter(function (q) { return st.wrong[key(q)]; });
+      if (filter === '待复习') return ALL.filter(function (q) { var r = st.srs[key(q)]; return r && r.due <= Date.now(); });
+      if (filter === '全部') return ALL.slice();
+      return ALL.filter(function (q) { return q.cat === filter; });
+    }
+    function round() {
+      var list = pool();
+      var fresh = list.filter(function (q) { return !st.seen[key(q)]; });
+      var rest = list.filter(function (q) { return st.seen[key(q)]; });
+      order = (mode === 'random' ? shuffle(fresh).concat(shuffle(rest)) : fresh.concat(rest));
+      idx = 0; present();
+    }
+    function tabsHtml() {
+      var extra = [
+        { c: '错题', n: ALL.filter(function (q) { return st.wrong[key(q)]; }).length },
+        { c: '待复习', n: ALL.filter(function (q) { var r = st.srs[key(q)]; return r && r.due <= Date.now(); }).length }
+      ];
+      return cats.map(function (c) {
+        var n = c === '全部' ? ALL.length : ALL.filter(function (q) { return q.cat === c; }).length;
+        return '<button class="ytab' + (c === filter ? ' on' : '') + '" data-c="' + c + '">' + c + '<i>' + n + '</i></button>';
+      }).join('') + extra.map(function (e) {
+        return '<button class="ytab ytab-x' + (e.c === filter ? ' on' : '') + '" data-c="' + e.c + '">' + e.c + '<i>' + e.n + '</i></button>';
+      }).join('');
+    }
+    function masteryHtml() {
+      var rows = cats.slice(1).map(function (c) {
+        var s2 = st.cat[c] || { ok: 0, n: 0 };
+        var pct = s2.n ? Math.round(s2.ok / s2.n * 100) : 0;
+        return '<div class="mst"><span>' + c + '</span><div class="mst-bar"><i style="width:' + pct + '%"></i></div><em>' + (s2.n ? pct + '%' : '—') + '</em></div>';
+      }).join('');
+      var answeredN = Object.keys(st.seen).length;
+      return '<div class="mst-wrap"><div class="mst-top">掌握度 · 已做 ' + answeredN + ' / ' + ALL.length + ' 题</div>' + rows + '</div>';
+    }
+    function present() {
+      var box = $('yy-quiz');
+      if (!order.length) {
+        box.innerHTML = '<article class="yq"><h4>这个类别暂时没有题</h4><p class="yq-msg">' +
+          (filter === '错题' ? '错题本是空的——答错会自动进来。' : filter === '待复习' ? '现在没有到期该复习的题。' : '换个类别试试。') +
+          '</p></article>';
+        return;
+      }
+      cur = order[idx]; answered = false;
+      var opts = cur.o.map(function (t, i) { return { t: t, i: i }; });
+      if (mode === 'random') opts = shuffle(opts);
+      curOpts = opts;
+      box.innerHTML = '<article class="yq"><div class="yq-top"><span class="yq-cat">' + cur.cat + '</span>' +
+        '<span class="yq-idx">' + (idx + 1) + ' / ' + order.length + '</span></div>' +
+        '<h4>' + cur.q + '</h4><div class="yopts">' +
+        opts.map(function (o, n) {
+          return '<button class="yopt" data-n="' + n + '"><em>' + 'ABCDE'[n] + '</em><span>' + o.t + '</span></button>';
+        }).join('') + '</div>' +
+        '<div class="yans" hidden><b class="yans-k"></b><p class="yans-w"></p><p class="yans-s"></p>' +
+        '<div class="yans-act"><button class="ybtn ybtn-main" data-act="next2">下一题</button>' +
+        '<button class="ybtn" data-act="star">再来一次（1 天后复习）</button></div></div>' +
         '<div class="yq-nav"><button class="ybtn" data-act="prev">上一题</button>' +
-        '<button class="ybtn ybtn-main" data-act="next">' + (idx === subset.length - 1 ? '回到第一题' : '下一题') + '</button></div></article>';
+        '<button class="ybtn ybtn-main" data-act="next">' + (idx === order.length - 1 ? '回到第一题' : '下一题') + '</button></div></article>';
       box.querySelectorAll('.yopt').forEach(function (b) {
-        b.addEventListener('click', function () { answer(parseInt(b.dataset.i, 10)); });
+        b.addEventListener('click', function () { answer(parseInt(b.dataset.n, 10)); });
       });
-      box.querySelector('[data-act="prev"]').addEventListener('click', function () {
-        if (idx > 0) { idx--; render(); }
-      });
-      box.querySelector('[data-act="next"]').addEventListener('click', function () {
-        idx = (idx + 1) % subset.length; render();
+      box.querySelector('[data-act="prev"]').addEventListener('click', function () { if (idx > 0) { idx--; present(); } });
+      box.querySelector('[data-act="next"]').addEventListener('click', function () { idx = (idx + 1) % order.length; present(); });
+      box.querySelector('[data-act="next2"]').addEventListener('click', function () { idx = (idx + 1) % order.length; present(); });
+      box.querySelector('[data-act="star"]').addEventListener('click', function () {
+        var k = key(cur); st.srs[k] = { stage: 0, due: Date.now() + 864e5 }; save(); refreshSide(); lastOk && 0;
+        $('yy-score').textContent = '已加入明日复习';
       });
     }
-    function answer(i) {
-      var q = subset[idx];
-      var box = $id('yy-quiz');
-      if (box.querySelector('.yans').hidden === false) return;
-      var ok = i === q.a;
+    function answer(pos) {
+      if (answered) return;
+      answered = true;
+      var picked = curOpts[pos].i, ok = picked === cur.a, k = key(cur);
+      var box = $('yy-quiz');
       box.querySelectorAll('.yopt').forEach(function (b, n) {
         b.classList.add('locked');
-        if (n === q.a) b.classList.add('right');
-        if (n === i && !ok) b.classList.add('wrong');
+        if (curOpts[n].i === cur.a) b.classList.add('right');
+        if (n === pos && !ok) b.classList.add('wrong');
       });
-      var a = box.querySelector('.yans');
-      a.hidden = false;
-      a.querySelector('.yans-k').textContent = ok ? '答对了' : '答案是 ' + 'ABCDE'[q.a];
-      a.querySelector('.yans-w').textContent = q.why;
-      a.querySelector('.yans-s').textContent = '来源：' + q.src;
-      answered++; if (ok) right++; drawCount();
+      var a = box.querySelector('.yans'); a.hidden = false;
+      a.querySelector('.yans-k').textContent = ok ? '答对了' : '答案是 ' + 'ABCDE'[cur.o.indexOf(cur.o[cur.a])] + '（选项位置已打乱，以文字为准）';
+      a.querySelector('.yans-k').textContent = ok ? '答对了' : '答错了 · 正确答案：' + cur.o[cur.a];
+      a.querySelector('.yans-w').textContent = cur.why;
+      a.querySelector('.yans-s').textContent = '来源：' + cur.src;
+
+      st.seen[k] = 1;
+      st.cat[cur.cat] = st.cat[cur.cat] || { ok: 0, n: 0 };
+      st.cat[cur.cat].n++; if (ok) st.cat[cur.cat].ok++;
+      if (ok) {
+        delete st.wrong[k];
+        var r = st.srs[k] || { stage: 0 };
+        r.stage = Math.min((r.stage || 0) + 1, STEPS.length - 1);
+        r.due = Date.now() + STEPS[r.stage] * 864e5;
+        st.srs[k] = r;
+      } else {
+        st.wrong[k] = 1;
+        st.srs[k] = { stage: 0, due: Date.now() + 864e5 };
+      }
+      save(); refreshSide();
     }
-    renderTabs(); render();
-    $id('yy-tabs').addEventListener('click', function (e) {
+    function refreshSide() {
+      $('yy-tabs').innerHTML = tabsHtml();
+      if ($('yy-mst')) $('yy-mst').innerHTML = masteryHtml();
+    }
+    $('yy-tabs').addEventListener('click', function (e) {
       var b = e.target.closest('.ytab'); if (!b) return;
-      filter = b.dataset.c; renderTabs();
-      setSubset(filter === '全部' ? ALL : ALL.filter(function (q) { return q.cat === filter; }));
-      render();
+      filter = b.dataset.c; refreshSide(); round();
     });
-    $id('yy-shuffle').addEventListener('click', function () {
-      var pool = (filter === '全部' ? ALL : ALL.filter(function (q) { return q.cat === filter; })).slice();
-      for (var i = pool.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = pool[i]; pool[i] = pool[j]; pool[j] = t; }
-      setSubset(pool.slice(0, Math.min(10, pool.length))); render();
+    if ($('yy-mode')) {
+      $('yy-mode').addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return;
+        mode = b.dataset.m;
+        $('yy-mode').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x.dataset.m === mode); });
+        round();
+      });
+    }
+    if ($('yy-reshuffle')) $('yy-reshuffle').addEventListener('click', function () { round(); window.scrollTo({ top: $('yy-quiz').getBoundingClientRect().top + scrollY - 90, behavior: 'smooth' }); });
+    $('yy-reset').addEventListener('click', function () {
+      if (!confirm('清空答题记录、错题本和复习计划？')) return;
+      st = { seen: {}, wrong: {}, srs: {}, cat: {} }; save(); refreshSide(); round();
     });
-    $id('yy-reset').addEventListener('click', function () {
-      setSubset(filter === '全部' ? ALL : ALL.filter(function (q) { return q.cat === filter; })); render();
-    });
+    refreshSide(); round();
   })();
 
   /* ───────── 通用交互 ───────── */
