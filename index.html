@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="559e90dba9" />
+<meta name="build-id" content="0dc514a6e4" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -2603,6 +2603,8 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 </style>
 </head>
 <body>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
 <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
 <div id="pbar"><i></i></div>
 <div class="nav"><div class="nav-in">
@@ -9193,7 +9195,16 @@ function load(cb) {
   draco.setDecoderPath('https://unpkg.com/three@0.160.0/examples/jsm/libs/draco/');
   const loader = new GLTFLoader();
   loader.setDRACOLoader(draco);
-  loader.load('assets/body.glb', gltf => {
+  // GitHub Pages 国内慢，优先走 jsDelivr，失败再回落到本仓库
+  const MODEL_URLS = [
+    'https://cdn.jsdelivr.net/gh/lon5b/tcm-study@main/assets/body.glb',
+    'assets/body.glb'
+  ];
+  let tryIdx = 0;
+  const loadModel = () => {
+    if (tryIdx >= MODEL_URLS.length) { status('模型载入失败：检查网络后刷新页面重试。'); S.loading = false; return; }
+    const url = MODEL_URLS[tryIdx++];
+    loader.load(url, gltf => {
     const body = gltf.scene;
     const box = new THREE.Box3().setFromObject(body);
     const center = new THREE.Vector3(); box.getCenter(center);
@@ -9209,11 +9220,10 @@ function load(cb) {
     S.queue.forEach(f => f && f()); S.queue = [];
     renderList();
     cb && cb();
-  }, e => { if (e.total) status('载入模型 ' + Math.round(e.loaded / e.total * 100) + '%'); },
-  err => {
-    console.error(err); S.loading = false;
-    status('模型载入失败：关掉 VPN 再试一次，或稍后再来。');
-  });
+    }, e => { if (e.total) status('载入模型 ' + Math.round(e.loaded / e.total * 100) + '%'); },
+    err => { console.warn('model url failed, fallback', url, err); loadModel(); });
+  };
+  loadModel();
 }
 
 /* ---------- 交互 ---------- */
@@ -9345,6 +9355,14 @@ function bind() {
     const go = () => document.getElementById('body3d')?.scrollIntoView({ block: 'start', behavior: 'auto' });
     [0, 120, 350, 700, 1200, 2000, 3000].forEach(t => setTimeout(go, t));
   });
+  // 栏目滚到视口附近就预载，点「载入」时几乎瞬间出来
+  const sec = document.getElementById('body3d');
+  if (sec && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { io.disconnect(); openInline(); } });
+    }, { rootMargin: '400px' });
+    io.observe(sec);
+  }
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && floatShell && !floatShell.hidden) closeFloat();
   });
