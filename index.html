@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="b67c9c169f" />
+<meta name="build-id" content="0d482f513a" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -9288,8 +9288,8 @@ function openFloat(code) {
   if (!floatShell) { openInline(); return; }
   floatShell.hidden = false;
   mount(floatBody);
-  const p = allPts.find(x => x.c === code && x.side !== 'left') || allPts.find(x => x.c === code);
-  if (p && floatTitle) floatTitle.textContent = p.n + ' · ' + p.c;
+  const meta = PTS.find(x => x.c === code);
+  if (meta && floatTitle) floatTitle.textContent = meta.n + ' · ' + meta.c;
   load(() => {
     const q = allPts.find(x => x.c === code && x.side !== 'left') || allPts.find(x => x.c === code);
     if (q) focusPoint(q);
@@ -9342,12 +9342,8 @@ function bind() {
   const fb = document.getElementById('acu3d-float-full');
   fb && fb.addEventListener('click', () => {
     closeFloat();
-    const go = () => {
-      const el = document.getElementById('body3d');
-      if (!el) return;
-      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior: 'auto' });
-    };
-    [0, 80, 240, 600, 1200].forEach(t => setTimeout(go, t));
+    const go = () => document.getElementById('body3d')?.scrollIntoView({ block: 'start', behavior: 'auto' });
+    [0, 120, 350, 700, 1200, 2000, 3000].forEach(t => setTimeout(go, t));
   });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && floatShell && !floatShell.hidden) closeFloat();
