@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="f1147cab38" />
+<meta name="build-id" content="b67c9c169f" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -9293,6 +9293,10 @@ function openFloat(code) {
   load(() => {
     const q = allPts.find(x => x.c === code && x.side !== 'left') || allPts.find(x => x.c === code);
     if (q) focusPoint(q);
+    else if (floatTitle) {
+      const meta = PTS.find(x => x.c === code);
+      floatTitle.textContent = meta ? (meta.n + ' · ' + meta.c) : '3D 穴位';
+    }
     setTimeout(resize, 60);
   });
 }
@@ -9336,7 +9340,15 @@ function bind() {
   const cb = document.getElementById('acu3d-float-close');
   cb && cb.addEventListener('click', closeFloat);
   const fb = document.getElementById('acu3d-float-full');
-  fb && fb.addEventListener('click', () => { closeFloat(); document.getElementById('body3d')?.scrollIntoView({ behavior: 'smooth' }); });
+  fb && fb.addEventListener('click', () => {
+    closeFloat();
+    const go = () => {
+      const el = document.getElementById('body3d');
+      if (!el) return;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior: 'auto' });
+    };
+    [0, 80, 240, 600, 1200].forEach(t => setTimeout(go, t));
+  });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && floatShell && !floatShell.hidden) closeFloat();
   });
