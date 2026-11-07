@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="06c7699576" />
+<meta name="build-id" content="a6abb276db" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -2466,6 +2466,13 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .stale-bar b{font-weight:600;letter-spacing:.06em}
 .stale-bar button{font-family:inherit;font-size:12px;padding:4px 10px;background:transparent;border:1px solid rgba(255,248,239,.6);
   color:#fff8ef;cursor:pointer;border-radius:2px}
+
+/* 六经 */
+.lj-block{margin:34px 0}
+.lj-row b.lj-j{font-family:var(--serif);font-size:15px;color:var(--accent)}
+.lj-card .lj-tiao{font-family:var(--kai);font-size:13px;line-height:1.95;color:var(--ink);
+  background:var(--paper-2);padding:10px 12px;border-left:2px solid var(--accent);margin-bottom:12px !important}
+.lj-block .yy-points{margin-top:6px}
 </style>
 </head>
 <body>
@@ -2475,6 +2482,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   <a href="#route">学习路线</a>
   <a href="#lesson" id="nav-yy">阴阳 · 学透</a>
   <a href="#yy-quiz-h" id="nav-quiz">答题 · 243</a>
+  <a href="#liujing" id="nav-lj">六经 · 入门</a>
   <span class="nav-sep"></span>
   <a href="#acu">穴位 · 361</a>
   <a href="#recite" id="nav-recite">穴位背诵 · 361</a>
@@ -2510,11 +2518,12 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <a href="#route"><i>一</i><span>学习路线</span></a>
       <a href="#lesson"><i>二</i><span>阴阳 · 学透</span></a>
       <a href="#yy-quiz-h"><i>三</i><span>答题 · 243 题</span></a>
-      <a href="#acu"><i>四</i><span>穴位 · 三百六十一</span></a>
-      <a href="#recite"><i>五</i><span>穴位背诵</span></a>
-      <a href="#xhs"><i>六</i><span>图文笔记 · 七十九篇</span></a>
-      <a href="#jue"><i>七</i><span>歌诀 · 口诀</span></a>
-      <a href="#video"><i>八</i><span>人纪 · 针灸大成</span></a>
+      <a href="#liujing"><i>四</i><span>六经 · 入门</span></a>
+      <a href="#acu"><i>五</i><span>穴位 · 三百六十一</span></a>
+      <a href="#recite"><i>六</i><span>穴位背诵</span></a>
+      <a href="#xhs"><i>七</i><span>图文笔记 · 七十九篇</span></a>
+      <a href="#jue"><i>八</i><span>歌诀 · 口诀</span></a>
+      <a href="#video"><i>九</i><span>人纪 · 针灸大成</span></a>
     </nav>
 
     <div class="cover-quote" aria-hidden="true">
@@ -2750,6 +2759,38 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <p class="yy-howto-src" id="yy-howto-src"></p>
     </div>
 
+  </div>
+</section>
+
+
+<section id="liujing" class="band">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-k">六经</span><h2 id="lj-h2">六经 · 入门</h2></div>
+    <p class="lead" id="lj-intro"></p>
+    <div class="warnbox" id="lj-warn" style="margin:0 0 22px"></div>
+
+    <div class="lj-block"><h3 class="yy-h">一、六经到底是什么（先看这五条）</h3>
+      <div class="yy-points" id="lj-basics"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">二、六经速查表</h3>
+      <div class="yy-attr" id="lj-table"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">三、六张卡片：提纲原文 + 怎么读</h3>
+      <div class="yy-cases" id="lj-cards"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">四、传变：病是怎么往里走的</h3>
+      <div class="yy-method" id="lj-trans"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">五、先学哪一步（顺序别搞反）</h3>
+      <div class="yy-steps" id="lj-order"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">六、入门小测 <span id="lj-count" class="yy-count"></span></h3>
+      <p class="lead">只考「这是哪一层」，不考方剂加减。答完会告诉你为什么。</p>
+      <div class="yy-bar"><div class="yy-tabs" id="lj-tabs"></div>
+        <button class="yy-shuffle" id="lj-reshuffle">换一批</button></div>
+      <div id="lj-quiz"></div>
+      <div class="yy-foot"><button class="yy-btn" id="lj-reset">重新开始</button><span id="lj-score"></span></div>
+    </div>
   </div>
 </section>
 
@@ -7815,6 +7856,421 @@ updates: [
 }
 };
 </script>
+<script>window.LJ = {
+"meta": {
+"name": "六经 · 入门",
+"intro": "六经不是六个器官，是把「阴阳」再分六层：三阳（太阳、阳明、少阳）主表、里热、半表半里；三阴（太阴、少阴、厥阴）主虚寒、阳衰、寒热错杂。你还没学没关系，这里只讲「怎么分」和「长什么样」，不要求背方。",
+"warn": "六经辨证是《伤寒论》的框架，前置是阴阳。如果你对「寒热虚实」还没把握，先回去把阴阳那两块（两把尺子、三步判断）练熟，再来这里。"
+},
+"basics": [
+{
+"k": "一句话",
+"v": "六经＝把外感病按「病位深浅 + 阴阳属性」分成六类，每类有自己的主症和主方。"
+},
+{
+"k": "三阳",
+"v": "太阳（最外层，表）、阳明（最里层，里热实）、少阳（两者之间，半表半里）。三阳多属实证、热证。"
+},
+{
+"k": "三阴",
+"v": "太阴（脾虚寒湿）、少阴（心肾阳衰，最危险）、厥阴（寒热错杂，最复杂）。三阴多属虚证、寒证。"
+},
+{
+"k": "和阴阳的关系",
+"v": "太阳=阳之表，阳明=阳之里，少阳=阳之半；太阴=阴之轻，少阴=阴之重，厥阴=阴之尽。所以六经是阴阳的「分层版」。"
+},
+{
+"k": "为什么要分",
+"v": "因为治法完全不同：太阳要汗，阳明要清／下，少阳要和，太阴要温，少阴要回阳，厥阴要寒热并调。分错一层，方向就反了。"
+}
+],
+"table": [
+{
+"jing": "太阳",
+"pos": "表（最外）",
+"nature": "阳 · 表证",
+"sign": "脉浮、头项强痛、恶寒",
+"fang": "桂枝汤、麻黄汤",
+"tiao": "第 1 条"
+},
+{
+"jing": "阳明",
+"pos": "里（最内）",
+"nature": "阳 · 里实热",
+"sign": "胃家实：大热、大汗、大渴、便秘",
+"fang": "白虎汤、承气汤",
+"tiao": "第 180 条"
+},
+{
+"jing": "少阳",
+"pos": "半表半里",
+"nature": "阳 · 枢机",
+"sign": "口苦、咽干、目眩、往来寒热、胸胁苦满",
+"fang": "小柴胡汤",
+"tiao": "第 263 条"
+},
+{
+"jing": "太阴",
+"pos": "里（脾）",
+"nature": "阴 · 虚寒轻",
+"sign": "腹满而吐、食不下、自利、时腹自痛",
+"fang": "理中汤",
+"tiao": "第 273 条"
+},
+{
+"jing": "少阴",
+"pos": "里（心肾）",
+"nature": "阴 · 阳衰重",
+"sign": "脉微细、但欲寐、四肢厥冷",
+"fang": "四逆汤",
+"tiao": "第 281 条"
+},
+{
+"jing": "厥阴",
+"pos": "里（最深层）",
+"nature": "阴 · 寒热错杂",
+"sign": "消渴、气上撞心、心中疼热、饥不欲食",
+"fang": "乌梅丸",
+"tiao": "第 326 条"
+}
+],
+"cards": [
+{
+"jing": "太阳",
+"tiao": "「太阳之为病，脉浮，头项强痛而恶寒。」",
+"read": "最外层受邪，正气还在表层抵抗，所以脉浮（气血趋于表）、恶寒（卫阳被遏）。",
+"use": "见到「脉浮＋怕冷＋头项强」先想太阳；有汗用桂枝汤，无汗用麻黄汤。",
+"src": "《伤寒论》第 1 条；倪师讲义 01_shanghan_sun.md:19、103"
+},
+{
+"jing": "阳明",
+"tiao": "「阳明之为病，胃家实是也。」",
+"read": "邪入里化热，热与燥屎结于肠胃，属「阳盛＋实」。",
+"use": "大热大汗大渴脉洪大 → 白虎汤清热；痞满燥实坚 → 承气汤攻下。",
+"src": "《伤寒论》第 180 条；讲义 01_shanghan_sun.md:20、550、1577"
+},
+{
+"jing": "少阳",
+"tiao": "「少阳之为病，口苦，咽干，目眩也。」",
+"read": "不在表不在里，卡在中间，正邪分争 → 往来寒热。",
+"use": "口苦咽干＋胸胁苦满＋不欲饮食 → 小柴胡汤和解，不可汗也不可下。",
+"src": "《伤寒论》第 263 条；讲义 01_shanghan_sun.md:21、663"
+},
+{
+"jing": "太阴",
+"tiao": "「太阴之为病，腹满而吐，食不下，自利益甚，时腹自痛。」",
+"read": "脾阳不足、寒湿内停——阴证的「轻档」。",
+"use": "腹满喜温喜按、下利清稀 → 理中汤温中健脾。",
+"src": "《伤寒论》第 273 条；讲义 01_shanghan_sun.md:22"
+},
+{
+"jing": "少阴",
+"tiao": "「少阴之为病，脉微细，但欲寐也。」",
+"read": "心肾阳气衰微，是六经里最危险的一层。",
+"use": "脉微细＋但欲寐＋四肢厥冷 → 四逆汤回阳救逆。",
+"src": "《伤寒论》第 281 条；讲义 01_shanghan_sun.md:23、795"
+},
+{
+"jing": "厥阴",
+"tiao": "「厥阴之为病，消渴，气上撞心，心中疼热，饥而不欲食，食则吐蛔。」",
+"read": "阴之尽，寒热错杂：上热下寒同时存在。",
+"use": "寒热并用（乌梅丸），不能单纯清热或单纯温补。",
+"src": "《伤寒论》第 326 条（通行宋本编号）"
+}
+],
+"trans": [
+{
+"k": "循经传",
+"v": "按太阳→阳明→少阳→太阴→少阴→厥阴的顺序深入，说明正气渐退、病位渐深。"
+},
+{
+"k": "越经传",
+"v": "跳过某一经直接深入，多见于素体虚弱或误治。"
+},
+{
+"k": "直中",
+"v": "起病就在三阴（一上来就脉微细、四肢冷），说明阳气本虚。"
+},
+{
+"k": "合病",
+"v": "两经或三经同时发病，如「太阳与阳明合病」（讲义 01_shanghan_sun.md:637）。"
+},
+{
+"k": "并病",
+"v": "一经未罢，另一经又起，如「二阳并病」（讲义 :1513）、「三阳并病」（:663）。"
+}
+],
+"order": [
+"先认六经的「位置」：太阳最外 → 阳明最里 → 少阳在中间",
+"再认三阴的「轻重」：太阴轻、少阴重、厥阴杂",
+"只记每经的提纲主症（一句话），不背方",
+"能判断「这个人在哪一层」之后再学方",
+"最后才学传变（循经、越经、直中、合病并病）"
+],
+"quiz": [
+{
+"q": "六经辨证出自哪部书",
+"o": [
+"《黄帝内经》",
+"《伤寒论》",
+"《神农本草经》",
+"《难经》",
+"《温病条辨》"
+],
+"a": 1,
+"why": "六经辨证是《伤寒论》的框架；《内经》有阴阳，《伤寒》把它落成六层。",
+"src": "自编 · 依据《伤寒论》提纲与倪师讲义"
+},
+{
+"q": "六经中属于「最外层」的是",
+"o": [
+"阳明",
+"太阳",
+"少阳",
+"太阴",
+"少阴"
+],
+"a": 1,
+"why": "太阳主表，是最外层。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "「脉浮，头项强痛而恶寒」是哪一经的提纲",
+"o": [
+"太阳",
+"阳明",
+"少阳",
+"少阴",
+"厥阴"
+],
+"a": 0,
+"why": "《伤寒论》第 1 条太阳病提纲。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "「胃家实」是哪一经的特征",
+"o": [
+"太阳",
+"阳明",
+"少阳",
+"太阴",
+"厥阴"
+],
+"a": 1,
+"why": "第 180 条：阳明之为病，胃家实是也。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "「口苦、咽干、目眩」属于",
+"o": [
+"太阳病",
+"阳明病",
+"少阳病",
+"太阴病",
+"厥阴病"
+],
+"a": 2,
+"why": "第 263 条少阳提纲。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "「腹满而吐、食不下、自利益甚」属于",
+"o": [
+"太阳",
+"阳明",
+"少阳",
+"太阴",
+"少阴"
+],
+"a": 3,
+"why": "第 273 条太阴提纲，属脾虚寒湿。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "「脉微细，但欲寐」属于",
+"o": [
+"太阳",
+"少阳",
+"阳明",
+"少阴",
+"厥阴"
+],
+"a": 3,
+"why": "第 281 条少阴提纲，心肾阳衰，最危险的一层。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "「消渴，气上撞心，心中疼热，饥而不欲食」属于",
+"o": [
+"太阴",
+"少阴",
+"厥阴",
+"少阳",
+"阳明"
+],
+"a": 2,
+"why": "第 326 条厥阴提纲，寒热错杂。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "三阳证多属",
+"o": [
+"虚证寒证",
+"实证热证",
+"虚实夹杂",
+"表里同病",
+"寒热错杂"
+],
+"a": 1,
+"why": "三阳多实热，三阴多虚寒——这是最粗的一条分界线。",
+"src": "自编 · 依据《伤寒论》提纲与倪师讲义"
+},
+{
+"q": "三阴证多属",
+"o": [
+"实证热证",
+"虚证寒证",
+"表证",
+"半表半里",
+"里实热"
+],
+"a": 1,
+"why": "同上。",
+"src": "自编 · 依据《伤寒论》提纲与倪师讲义"
+},
+{
+"q": "少阳病的位置是",
+"o": [
+"表",
+"里",
+"半表半里",
+"上焦",
+"下焦"
+],
+"a": 2,
+"why": "少阳居表里之间，是「枢」。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "少阳病的治疗原则是",
+"o": [
+"发汗",
+"攻下",
+"和解",
+"温补",
+"清热"
+],
+"a": 2,
+"why": "不可汗不可下，只能和解（小柴胡汤）。",
+"src": "自编 · 依据《伤寒论》提纲与倪师讲义"
+},
+{
+"q": "太阳病有汗应用",
+"o": [
+"麻黄汤",
+"桂枝汤",
+"白虎汤",
+"承气汤",
+"四逆汤"
+],
+"a": 1,
+"why": "有汗桂枝汤（表虚），无汗麻黄汤（表实）。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "大热、大汗、大渴、脉洪大，属",
+"o": [
+"太阳病",
+"阳明病",
+"少阳病",
+"太阴病",
+"少阴病"
+],
+"a": 1,
+"why": "阳明四大症，白虎汤证。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "四肢厥冷、下利清谷、脉微欲绝，属",
+"o": [
+"太阴病",
+"少阴病",
+"厥阴病",
+"阳明病",
+"少阳病"
+],
+"a": 1,
+"why": "少阴阳衰，四逆汤证。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "病邪按太阳→阳明→少阳→太阴→少阴→厥阴逐层深入，称",
+"o": [
+"直中",
+"越经传",
+"循经传",
+"合病",
+"并病"
+],
+"a": 2,
+"why": "循经传=按顺序深入。",
+"src": "自编 · 依据《伤寒论》提纲与倪师讲义"
+},
+{
+"q": "起病即见三阴证（如脉微细、四肢冷），称",
+"o": [
+"循经传",
+"越经传",
+"直中",
+"合病",
+"并病"
+],
+"a": 2,
+"why": "直中：阳气本虚，邪气直入三阴。",
+"src": "自编 · 依据《伤寒论》提纲与倪师讲义"
+},
+{
+"q": "两经同时发病称",
+"o": [
+"并病",
+"合病",
+"直中",
+"越经传",
+"循经传"
+],
+"a": 1,
+"why": "合病=同时；并病=一经未罢另一经又起。",
+"src": "自编 · 依据《伤寒论》提纲与倪师讲义"
+},
+{
+"q": "「太阳与阳明合病，必自下利」用什么方",
+"o": [
+"桂枝汤",
+"葛根汤",
+"小柴胡汤",
+"理中汤",
+"四逆汤"
+],
+"a": 1,
+"why": "第 32 条，葛根汤（讲义 01_shanghan_sun.md:637）。",
+"src": "《伤寒论》条文与倪海厦讲义"
+},
+{
+"q": "学六经的第一步应该是",
+"o": [
+"背方剂",
+"认每一经的「位置」和提纲主症",
+"背条文号",
+"学传变",
+"学脉象"
+],
+"a": 1,
+"why": "先能判断「在哪一层」，再谈方——顺序反了会乱。",
+"src": "自编 · 依据《伤寒论》提纲与倪师讲义"
+}
+]
+};
+</script>
 <script>/* 中医自学 · 每日一课 —— 渲染与交互 */
 (function () {
   'use strict';
@@ -8709,6 +9165,84 @@ updates: [
       st = { seen: {}, wrong: {}, srs: {}, cat: {} }; save(); refreshSide(); round();
     });
     refreshSide(); round();
+  })();
+
+
+  /* ───────── 六经 · 入门 ───────── */
+  (function renderLJ() {
+    var L = window.LJ; if (!L) return;
+    var $ = function (id) { return document.getElementById(id); };
+    if (!$('lj-h2')) return;
+    $('lj-h2').textContent = L.meta.name;
+    $('lj-intro').textContent = L.meta.intro;
+    $('lj-warn').innerHTML = '<b>先看这句</b>：' + L.meta.warn;
+
+    $('lj-basics').innerHTML = L.basics.map(function (b) {
+      return '<div class="yp"><b>' + b.k + '</b><p>' + b.v + '</p></div>';
+    }).join('');
+
+    $('lj-table').innerHTML = '<div class="ya-row ya-head"><span>经</span><span>位置 · 性质 · 主症</span><span>代表方 · 提纲条</span></div>' +
+      L.table.map(function (r) {
+        return '<div class="ya-row lj-row"><span><b class="lj-j">' + r.jing + '</b></span>' +
+          '<span>' + r.pos + '｜' + r.nature + '｜' + r.sign + '</span>' +
+          '<span>' + r.fang + '｜' + r.tiao + '</span></div>';
+      }).join('');
+
+    $('lj-cards').innerHTML = L.cards.map(function (c) {
+      return '<article class="cs lj-card"><h4>' + c.jing + '</h4>' +
+        '<p class="lj-tiao">' + c.tiao + '</p>' +
+        '<p><em>怎么读</em>' + c.read + '</p>' +
+        '<p><em>怎么用</em>' + c.use + '</p>' +
+        '<footer>' + c.src + '</footer></article>';
+    }).join('');
+
+    $('lj-trans').innerHTML = L.trans.map(function (t, i) {
+      return '<div class="ym"><b>' + (i + 1) + '</b><div><h4>' + t.k + '</h4><p>' + t.v + '</p></div></div>';
+    }).join('');
+
+    $('lj-order').innerHTML = L.order.map(function (o, i) {
+      return '<div class="stp"><b>' + (i + 1) + '</b><div><p class="stp-r" style="margin:0">' + o + '</p></div></div>';
+    }).join('');
+
+    /* 小测 */
+    var ALL = L.quiz, box = $('lj-quiz');
+    $('lj-count').textContent = '（' + ALL.length + ' 题）';
+    var order = [], idx = 0, cur = null, opts = [], answered = false;
+    function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+    function round() { order = shuffle(ALL); idx = 0; present(); }
+    $('lj-tabs').innerHTML = '<button class="ytab on">全部<i>' + ALL.length + '</i></button>';
+    function present() {
+      cur = order[idx]; answered = false;
+      opts = shuffle(cur.o.map(function (t, i) { return { t: t, i: i }; }));
+      box.innerHTML = '<article class="yq"><div class="yq-top"><span class="yq-cat">六经</span>' +
+        '<span class="yq-idx">' + (idx + 1) + ' / ' + order.length + '</span></div>' +
+        '<h4>' + cur.q + '</h4><div class="yopts">' +
+        opts.map(function (o, n) { return '<button class="yopt" data-n="' + n + '"><em>' + 'ABCDE'[n] + '</em><span>' + o.t + '</span></button>'; }).join('') +
+        '</div><div class="yans" hidden><b class="yans-k"></b><p class="yans-w"></p><p class="yans-s"></p>' +
+        '<div class="yans-act"><button class="ybtn ybtn-main" data-act="next2">下一题</button></div></div>' +
+        '<div class="yq-nav"><button class="ybtn" data-act="next">下一题</button></div></article>';
+      box.querySelectorAll('.yopt').forEach(function (b) {
+        b.addEventListener('click', function () { answer(parseInt(b.dataset.n, 10)); });
+      });
+      box.querySelector('[data-act="next"]').addEventListener('click', function () { idx = (idx + 1) % order.length; present(); });
+      box.querySelector('[data-act="next2"]').addEventListener('click', function () { idx = (idx + 1) % order.length; present(); });
+    }
+    function answer(pos) {
+      if (answered) return; answered = true;
+      var picked = opts[pos].i, ok = picked === cur.a;
+      box.querySelectorAll('.yopt').forEach(function (b, n) {
+        b.classList.add('locked');
+        if (opts[n].i === cur.a) b.classList.add('right');
+        if (n === pos && !ok) b.classList.add('wrong');
+      });
+      var a = box.querySelector('.yans'); a.hidden = false;
+      a.querySelector('.yans-k').textContent = ok ? '答对了' : '答错了 · 正确答案：' + cur.o[cur.a];
+      a.querySelector('.yans-w').textContent = cur.why;
+      a.querySelector('.yans-s').textContent = '来源：' + cur.src;
+    }
+    $('lj-reshuffle').addEventListener('click', round);
+    $('lj-reset').addEventListener('click', round);
+    round();
   })();
 
   /* ───────── 通用交互 ───────── */
