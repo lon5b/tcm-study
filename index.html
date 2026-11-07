@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="5be2e1c198" />
+<meta name="build-id" content="f37c419b1c" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -9185,6 +9185,7 @@ function load(cb) {
     status('');
     const b = document.getElementById('acu3d-load'); if (b) b.style.display = 'none';
     S.queue.forEach(f => f && f()); S.queue = [];
+    renderList();
     cb && cb();
   }, e => { if (e.total) status('载入模型 ' + Math.round(e.loaded / e.total * 100) + '%'); },
   err => {
