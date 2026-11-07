@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="4ba5f0712a" />
+<meta name="build-id" content="96e6c6ad3e" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -2600,6 +2600,115 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .acu3d-canvas canvas{display:block}
 .acu3d-stage{overflow:hidden}
 @media (max-width:860px){ #acu3d-slot{height:420px} #acu3d-float-body{height:320px} }
+
+/* ═════════ 手机封面重排（<=860px）═════════ */
+@media (max-width:860px){
+  /* 不再整屏撑高，改为内容自然高度 + 安全区 */
+  .cover{min-height:auto !important;height:auto !important;max-height:none !important;display:block !important}
+  .cover-in{
+    display:flex !important;flex-direction:column !important;align-items:stretch !important;
+    gap:0 !important;justify-content:flex-start !important;height:auto !important;min-height:0 !important;
+    padding:calc(26px + env(safe-area-inset-top)) 18px calc(26px + env(safe-area-inset-bottom)) !important;
+  }
+  .cover .toc{display:none !important}
+
+  /* 标题：手机上一律实色高对比，关掉渐变/流光（Safari 上会变成看不见的暗色） */
+  .vtitle{
+    background-image:none !important;background:none !important;
+    -webkit-background-clip:border-box !important;background-clip:border-box !important;
+    -webkit-text-fill-color:currentColor !important;text-fill-color:currentColor !important;
+    animation:none !important;
+    color:#f7f1dd !important;text-shadow:0 2px 24px rgba(0,0,0,.55) !important;
+    font-size:clamp(42px,13vw,60px) !important;letter-spacing:.08em !important;
+    line-height:1.05 !important;height:auto !important;margin:2px 0 4px !important;
+  }
+  [data-theme="rice"] .vtitle{color:#2b2118 !important;text-shadow:none !important}
+
+  .cover-core{gap:8px !important;order:1 !important;align-items:flex-start !important;width:100% !important}
+  .cover .pre{font-size:11px !important;letter-spacing:.18em !important;color:#b9b09a !important;margin:0 !important}
+  .cover .post{font-size:11.5px !important;letter-spacing:.08em !important;color:#9e9680 !important;line-height:1.8 !important;margin:2px 0 4px !important}
+  .cover-note{margin:10px 0 2px !important;max-width:none !important}
+  .cover-note p{font-size:12.5px !important;line-height:1.9 !important;color:#b3aa93 !important;padding-left:11px !important;text-wrap:pretty}
+  .nw{white-space:nowrap}
+
+  /* 数据：3 列小卡片，不再挤成一行 */
+  .cover-figures{
+    display:grid !important;grid-template-columns:repeat(3,1fr) !important;
+    gap:7px !important;width:100% !important;margin:14px 0 0 !important;
+  }
+  .cover-figures span{
+    display:flex !important;flex-direction:column !important;align-items:flex-start !important;
+    gap:3px !important;padding:9px 10px !important;border-radius:2px;
+    background:rgba(255,248,232,.055) !important;border:1px solid rgba(220,208,180,.16) !important;
+  }
+  .cover-figures b{
+    font-family:var(--serif) !important;font-size:19px !important;line-height:1 !important;
+    color:#f0d9a8 !important;margin:0 !important;letter-spacing:0 !important;
+  }
+  .cover-figures em{font-style:normal !important;font-size:10.5px !important;letter-spacing:.02em;color:#a9a08a !important;white-space:nowrap}
+  .cover-figures span:nth-child(4),.cover-figures span:nth-child(5){grid-column:span 1}
+  .cover-figures span:nth-child(4){grid-column:1 / span 1}
+
+  /* 引文：作为封面底部一条，不再和标题抢位置 */
+  .cover-quote{
+    order:2 !important;margin:16px 0 0 !important;max-width:none !important;
+    justify-self:stretch !important;flex-direction:column !important;align-items:flex-start !important;
+    gap:4px !important;padding-top:12px !important;border-top:1px solid rgba(210,198,170,.18) !important;
+  }
+  .cover-quote .meridian{display:none !important}
+  .cover-quote p{font-size:12.5px !important;line-height:1.8 !important;letter-spacing:.02em !important;color:#cdc4ad !important;writing-mode:horizontal-tb !important;margin:0 !important}
+  .cover-quote cite{display:block !important;font-size:10.5px !important;color:#8d8570 !important;margin:0 !important}
+  .cover-edge{height:12px !important}
+
+  /* 页脚不被浏览器栏压住 */
+  body{padding-bottom:env(safe-area-inset-bottom)}
+  footer,.foot{padding-bottom:calc(26px + env(safe-area-inset-bottom)) !important}
+}
+@media (max-width:390px){
+  .vtitle{font-size:clamp(38px,12.5vw,50px) !important}
+  .cover-figures{grid-template-columns:repeat(3,1fr) !important}
+  .cover-figures b{font-size:17px !important}
+  .cover-figures em{font-size:10px !important}
+}
+
+/* ── 手机封面：配色跟随主题（修正硬编码造成的低对比） ── */
+@media (max-width:860px){
+  .vtitle{color:var(--moon) !important;text-shadow:0 2px 26px rgba(0,0,0,.45) !important}
+  [data-theme="rice"] .vtitle{color:#2b2118 !important;text-shadow:none !important}
+
+  .cover .pre,.cover .post,.cover-note p,.cover-quote p,.cover-quote cite,.cover-figures em{
+    color:color-mix(in srgb, var(--moon) 70%, transparent) !important;
+  }
+  .cover-figures b{color:var(--moon) !important}
+  .cover-figures span{background:color-mix(in srgb, var(--moon) 7%, transparent) !important;
+    border-color:color-mix(in srgb, var(--moon) 20%, transparent) !important}
+  .cover-quote{padding-top:12px !important;border-top:1px solid color-mix(in srgb, var(--moon) 18%, transparent) !important}
+
+  /* 宣纸（浅底）单独压深 */
+  [data-theme="rice"] .cover .pre,[data-theme="rice"] .cover .post,
+  [data-theme="rice"] .cover-note p,[data-theme="rice"] .cover-quote p{color:rgba(45,34,20,.86) !important}
+  [data-theme="rice"] .cover-quote cite,[data-theme="rice"] .cover-figures em{color:rgba(45,34,20,.62) !important}
+  [data-theme="rice"] .cover-figures b{color:#7a4a1e !important}
+  [data-theme="rice"] .cover-figures span{background:rgba(120,95,60,.06) !important;border-color:rgba(120,95,60,.22) !important}
+  [data-theme="rice"] .cover-quote{border-top-color:rgba(120,95,60,.25) !important}
+
+  /* 数据卡 3+2 均衡：6 栏，前三个各占 2 栏，后两个各占 3 栏 */
+  .cover-figures{grid-template-columns:repeat(6,1fr) !important}
+  .cover-figures span{grid-column:span 2}
+  .cover-figures span:nth-child(4),.cover-figures span:nth-child(5){grid-column:span 3}
+}
+
+/* 宣纸手机封面：压深一切小字（补 !important，覆盖前面的 color-mix） */
+@media (max-width:860px){
+  [data-theme="rice"] .cover .pre,
+  [data-theme="rice"] .cover .post,
+  [data-theme="rice"] .cover-note p,
+  [data-theme="rice"] .cover-quote p{color:rgba(38,28,16,.92) !important}
+  [data-theme="rice"] .cover-quote cite{color:rgba(38,28,16,.7) !important}
+  [data-theme="rice"] .cover-figures em{color:rgba(38,28,16,.78) !important;font-weight:500}
+  [data-theme="rice"] .cover-figures b{color:#7a3f16 !important}
+  [data-theme="rice"] .cover-figures span{background:rgba(122,63,22,.05) !important;border-color:rgba(122,63,22,.28) !important}
+}
 </style>
 </head>
 <body>
@@ -2675,16 +2784,16 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <h1 class="vtitle" aria-label="中医自学">
         <span>中</span><span>医</span><span>自</span><span>学</span>
       </h1>
-      <p class="post">从认字开始　先认字　再组词　读范文　后自写</p>
+      <p class="post">认字 → 组词 → 读范文 → 自写</p>
       <div class="cover-note">
-        <p>每一句都标了文件与行号。经典原文、讲课转写、我的推论，三色分开，不混。</p>
+        <p>每一句都标了文件与行号。<span class="nw">经典原文</span>、<span class="nw">讲课转写</span>、我的推论，<span class="nw">三色分开</span>，不混。</p>
       </div>
       <div class="cover-figures">
-        <span><b>1</b>課已上線</span>
-        <span><b>18</b>節本課</span>
-        <span><b>18</b>題練習</span>
-        <span><b>361</b>穴帶拼音</span>
-        <span><b>79</b>集視頻</span>
+        <span><b>1</b><em>课已上线</em></span>
+        <span><b>18</b><em>节本课</em></span>
+        <span><b>18</b><em>题练习</em></span>
+        <span><b>361</b><em>穴带拼音</em></span>
+        <span><b>79</b><em>集视频</em></span>
       </div>
     </div>
   </div>
