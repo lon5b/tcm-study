@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="0dc514a6e4" />
+<meta name="build-id" content="4ba5f0712a" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -9126,6 +9126,8 @@ function loop() {
 }
 
 function snap(geo, body) {
+  // 六个方向打射线，选「离原穴位最近」的那个命中点（不是沿射线最近），
+  // 否则大腿上的穴会被从头顶打下来的射线吸到胸口的表面上。
   const dirs = [
     new THREE.Vector3(1, 0, 0), new THREE.Vector3(-1, 0, 0),
     new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, -1),
@@ -9134,23 +9136,28 @@ function snap(geo, body) {
   const rc = new THREE.Raycaster();
   const arr = geo.attributes.position.array;
   const out = new THREE.Vector3(), n = new THREE.Vector3();
+  let snapped = 0;
   for (let i = 0; i < arr.length; i += 3) {
     const p = new THREE.Vector3(arr[i], arr[i + 1], arr[i + 2]);
     let best = null, bestD = Infinity;
     for (const d of dirs) {
-      rc.set(p.clone().addScaledVector(d, 0.7), d.clone().negate());
+      rc.set(p.clone().addScaledVector(d, 0.45), d.clone().negate());
       const hits = rc.intersectObject(body, true);
-      if (hits.length && hits[0].distance < bestD) { bestD = hits[0].distance; best = hits[0]; }
+      if (!hits.length) continue;
+      const dist = hits[0].point.distanceTo(p);
+      if (dist < bestD) { bestD = dist; best = hits[0]; }
     }
-    if (best) {
+    if (best && bestD < 0.1) {
       out.copy(best.point);
       n.copy(best.face ? best.face.normal : new THREE.Vector3(0, 0, 1)).transformDirection(best.object.matrixWorld).normalize();
       out.addScaledVector(n, 0.004);
       arr[i] = out.x; arr[i + 1] = out.y; arr[i + 2] = out.z;
+      snapped++;
     }
   }
   geo.attributes.position.needsUpdate = true;
   geo.computeBoundingSphere();
+  window.__acu3dSnapped = snapped;
 }
 
 function buildPoints(body) {
@@ -9252,6 +9259,10 @@ function focusPoint(p, mode) {
   controls.update();
   if (ring) { ring.position.copy(v); ring.lookAt(camera.position); ring.visible = true; }
   showInfo(p);
+  window.__acu3dState = { code: p.c, name: p.n, point: [p.vec.x, p.vec.y, p.vec.z].map(v => +v.toFixed(3)),
+    ring: ring ? [ring.position.x, ring.position.y, ring.position.z].map(v => +v.toFixed(3)) : null,
+    cam: [camera.position.x, camera.position.y, camera.position.z].map(v => +v.toFixed(3)),
+    target: [controls.target.x, controls.target.y, controls.target.z].map(v => +v.toFixed(3)) };
   if (floatTitle) floatTitle.textContent = p.n + ' · ' + p.c;
 }
 
