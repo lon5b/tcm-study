@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="375e43f53c" />
+<meta name="build-id" content="a610da947d" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -8743,9 +8743,9 @@ updates: [
   renderVideo(); renderAcu(); wireQuiz(); navScroll(); observe();
   refreshCites();
   var nq = D.quiz.length;
-  var na = document.getElementById('nav-quiz'); if (na) na.textContent = '练习 · ' + nq + ' 题';
+  /* nav-quiz 现在指向「答题 · 243」，文案由 HTML 决定，不再覆盖 */
   var hm = document.getElementById('m-quiz'); if (hm) hm.textContent = nq + ' 道练习 · 每题有标准答案';
-  var h2q = document.getElementById('quiz-h2'); if (h2q) h2q.textContent = '配套练习 · ' + nq + ' 题（每题一个标准答案）';
+  var h2q = document.getElementById('quiz-h2'); if (h2q) h2q.textContent = '课后自测 · ' + nq + ' 题（入门）';
   if ($('#m-start')) $('#m-start').textContent = '起始 ' + D.meta.start;
   if ($('#m-upd')) $('#m-upd').textContent = '更新 ' + D.meta.updated;
   $('#pledge').textContent = D.meta.pledge;
