@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="af19606e7f" />
+<meta name="build-id" content="f1147cab38" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -2592,6 +2592,14 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .a3d{border-bottom:1px dotted var(--accent);cursor:pointer;color:inherit}
 .a3d:hover{color:var(--accent);background:rgba(156,58,47,.06)}
 @media (max-width:760px){ .acu3d-canvas{height:400px} #acu3d-float{right:8px;left:8px;bottom:8px;width:auto} }
+/* 3D 尺寸修正：容器定高，画布铺满，避免溢出裁切 */
+#acu3d-slot{width:100%;height:520px;overflow:hidden;position:relative;background:transparent}
+#acu3d-float-body{height:360px;overflow:hidden;position:relative}
+.acu3d-view{width:100%;height:100%;display:block}
+.acu3d-canvas{width:100%!important;height:100%!important;min-height:0;overflow:hidden}
+.acu3d-canvas canvas{display:block}
+.acu3d-stage{overflow:hidden}
+@media (max-width:860px){ #acu3d-slot{height:420px} #acu3d-float-body{height:320px} }
 </style>
 </head>
 <body>
@@ -9052,15 +9060,27 @@ function ensureView() {
 function mount(el) {
   ensureView();
   if (el && view.parentElement !== el) el.appendChild(view);
+  watchHost();
   requestAnimationFrame(resize);
+  setTimeout(resize, 120);
 }
 
 function resize() {
   if (!renderer || !canvasHost) return;
-  const w = canvasHost.clientWidth || 420, h = canvasHost.clientHeight || 460;
+  const w = Math.max(120, canvasHost.clientWidth || 0);
+  const h = Math.max(120, canvasHost.clientHeight || 0);
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
-  renderer.setSize(w, h, false);
+  renderer.setSize(w, h, true);
+  renderer.domElement.style.width = '100%';
+  renderer.domElement.style.height = '100%';
+  renderer.domElement.style.display = 'block';
+}
+
+function watchHost() {
+  if (!canvasHost || canvasHost.__ro) return;
+  canvasHost.__ro = new ResizeObserver(() => resize());
+  canvasHost.__ro.observe(canvasHost);
 }
 
 function status(t) { if (statusEl) statusEl.textContent = t || ''; }
@@ -9091,6 +9111,7 @@ function initScene() {
   raycaster.params.Points.threshold = 0.02;
 
   renderer.domElement.addEventListener('click', pick);
+  renderer.domElement.addEventListener('dblclick', () => { if (current) focusPoint(current, 'near'); });
   addEventListener('resize', resize);
   loop();
 }
@@ -9146,15 +9167,16 @@ function buildPoints(body) {
   geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
   geo.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
   pointsMesh = new THREE.Points(geo, new THREE.PointsMaterial({
-    size: 0.011, vertexColors: true, sizeAttenuation: true, transparent: true, opacity: 0.95
+    size: 0.019, vertexColors: true, sizeAttenuation: true, transparent: true, opacity: 0.95
   }));
   scene.add(pointsMesh);
   snap(geo, body);
   const a = geo.attributes.position.array;
   allPts.forEach((p, i) => { p.vec = new THREE.Vector3(a[i * 3], a[i * 3 + 1], a[i * 3 + 2]); });
 
-  ring = new THREE.Mesh(new THREE.RingGeometry(0.011, 0.019, 28),
-    new THREE.MeshBasicMaterial({ color: 0xf0c060, side: THREE.DoubleSide, transparent: true, opacity: 0.95 }));
+  ring = new THREE.Mesh(new THREE.RingGeometry(0.019, 0.031, 32),
+    new THREE.MeshBasicMaterial({ color: 0xf0c060, side: THREE.DoubleSide, transparent: true, opacity: 1, depthTest: false }));
+  ring.renderOrder = 999;
   ring.visible = false;
   scene.add(ring);
 }
@@ -9195,15 +9217,28 @@ function load(cb) {
 }
 
 /* ---------- 交互 ---------- */
-function focusPoint(p, dist) {
-  dist = dist || 0.95;
+let current = null;
+const BODY_DIST = 3.42;  // 全身：fov32° 时竖向可见约 1.86 米
+const NEAR_DIST = 0.85;  // 局部放大
+const BODY_C = new THREE.Vector3(0, 0.9, 0);
+
+function focusPoint(p, mode) {
   if (!p || !p.vec) return;
+  current = p;
   const v = p.vec.clone();
-  controls.target.copy(v);
-  const outward = new THREE.Vector3(v.x, 0, v.z);
-  if (outward.lengthSq() < 1e-4) outward.set(0, 0, 1);
-  outward.normalize();
-  camera.position.copy(v.clone().addScaledVector(outward, dist).add(new THREE.Vector3(0, 0.14, 0)));
+  // 背部的穴（z 为负）从后面看，其余从正面看
+  const back = v.z < -0.02;
+  const dir = new THREE.Vector3(0, 0, back ? -1 : 1);
+  if (v.x > 0.16) dir.set(0.55, 0, back ? -0.55 : 0.55).normalize();   // 四肢外侧稍侧视
+  if (mode === 'near') {
+    controls.target.copy(v);
+    camera.position.copy(v.clone().addScaledVector(dir, NEAR_DIST).add(new THREE.Vector3(0, 0.06, 0)));
+    status('双击画面可回到全身');
+  } else {
+    controls.target.copy(BODY_C);
+    camera.position.copy(BODY_C.clone().addScaledVector(dir, BODY_DIST).add(new THREE.Vector3(0, 0.02, 0)));
+    status('双击画面放大到该穴位 · 滚轮缩放');
+  }
   controls.update();
   if (ring) { ring.position.copy(v); ring.lookAt(camera.position); ring.visible = true; }
   showInfo(p);
@@ -9257,7 +9292,7 @@ function openFloat(code) {
   if (p && floatTitle) floatTitle.textContent = p.n + ' · ' + p.c;
   load(() => {
     const q = allPts.find(x => x.c === code && x.side !== 'left') || allPts.find(x => x.c === code);
-    if (q) focusPoint(q, 1.15);
+    if (q) focusPoint(q);
     setTimeout(resize, 60);
   });
 }
@@ -9271,14 +9306,16 @@ function openInline() {
 
 function closeFloat() {
   if (floatShell) floatShell.hidden = true;
-  if (inlineSlot) mount(inlineSlot);
+  inlineSlot = inlineSlot || document.getElementById('acu3d-slot');
+  if (inlineSlot) { mount(inlineSlot); setTimeout(resize, 80); }
 }
 
 function openCode(code) {
+  inlineSlot = inlineSlot || document.getElementById('acu3d-slot');
   const sec = document.getElementById('body3d');
   const onScreen = sec && sec.getBoundingClientRect().top < innerHeight * 0.7 && sec.getBoundingClientRect().bottom > 0;
   if (onScreen) {
-    mount(document.getElementById('acu3d-slot'));
+    mount(inlineSlot);
     load(() => { const p = allPts.find(x => x.c === code && x.side !== 'left'); if (p) focusPoint(p); });
   } else {
     openFloat(code);
