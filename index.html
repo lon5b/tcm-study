@@ -2,6 +2,8 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
+<meta name="build-id" content="375e43f53c" />
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
 <title>中医自学 · 每日一课 · 从阴阳开始</title>
@@ -2425,6 +2427,45 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .yy-nav a{font-size:12px;padding:5px 10px;border:1px solid var(--line-strong);color:var(--ink-2);text-decoration:none;border-radius:2px}
 .yy-nav a:hover{border-color:var(--accent);color:var(--accent)}
 @media (max-width:760px){ .yy-nav{gap:5px} .yy-nav a{font-size:11.5px;padding:4px 8px} .yy-nav-k{width:100%;margin:0 0 2px} }
+
+/* 两把尺子 / 三步 / 病例 */
+.yy-ruler{border:1px solid var(--line);background:var(--card);margin-top:10px}
+.rl-row{display:grid;grid-template-columns:.9fr 1.5fr 1.5fr;border-bottom:1px solid var(--line)}
+.rl-row:last-child{border-bottom:0}
+.rl-row>span{padding:10px 14px;font-size:13px;border-right:1px solid var(--line);color:var(--ink-2)}
+.rl-row>span:last-child{border-right:0}
+.rl-head{background:var(--paper-3)}
+.rl-head>span{font-size:11.5px;letter-spacing:.14em;color:var(--accent);font-weight:600}
+.rl-y{color:var(--ink) !important}
+.rl-i{color:var(--ink-3) !important}
+
+.yy-steps{display:flex;flex-direction:column;gap:10px}
+.stp{display:grid;grid-template-columns:40px 1fr;gap:14px;background:var(--card);border:1px solid var(--line);padding:14px 18px}
+.stp>b{font-family:var(--serif);font-size:19px;color:var(--accent)}
+.stp h4{margin:0 0 6px;font-size:14.5px;color:var(--ink)}
+.stp-q{margin:0 0 6px;font-size:13px;line-height:1.75;color:var(--ink-3)}
+.stp-q::before{content:"问：";color:var(--accent);font-size:11px;letter-spacing:.1em;margin-right:4px}
+.stp-r{margin:0;font-size:13px;line-height:1.8;color:var(--ink-2)}
+.stp-r::before{content:"→ ";color:var(--accent)}
+
+.yy-cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+.cs{background:var(--card);border:1px solid var(--line);padding:16px 18px;display:flex;flex-direction:column}
+.cs h4{margin:0 0 10px;font-family:var(--serif);font-size:16px;color:var(--ink)}
+.cs p{margin:0 0 8px;font-size:13px;line-height:1.8;color:var(--ink-2)}
+.cs p em{font-style:normal;font-size:10.5px;letter-spacing:.12em;color:var(--accent);margin-right:8px;
+  border:1px solid var(--line-strong);padding:1px 5px}
+.cs footer{margin-top:auto;font-size:11px;line-height:1.7;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:9px}
+#yy-pulse{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);padding:14px 16px;margin-top:12px}
+#yy-pulse b{display:block;font-size:13.5px;color:var(--accent);margin-bottom:6px}
+#yy-pulse p{margin:0 0 6px;font-size:13px;line-height:1.8;color:var(--ink-2)}
+#yy-pulse em{font-style:normal;font-size:11px;color:var(--ink-3)}
+@media (max-width:760px){ .rl-row{grid-template-columns:1fr 1.2fr 1.2fr} .rl-row>span{padding:8px 10px;font-size:12px} }
+
+.stale-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9999;display:flex;gap:10px;align-items:center;
+  background:var(--accent);color:#fff8ef;padding:10px 14px;border-radius:2px;box-shadow:0 8px 24px rgba(0,0,0,.25);font-size:12.5px}
+.stale-bar b{font-weight:600;letter-spacing:.06em}
+.stale-bar button{font-family:inherit;font-size:12px;padding:4px 10px;background:transparent;border:1px solid rgba(255,248,239,.6);
+  color:#fff8ef;cursor:pointer;border-radius:2px}
 </style>
 </head>
 <body>
@@ -2433,6 +2474,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   <button class="nav-toggle" id="nav-toggle" aria-label="目录">目录 ▾</button>
   <a href="#route">学习路线</a>
   <a href="#lesson" id="nav-yy">阴阳 · 学透</a>
+  <a href="#yy-quiz-h" id="nav-quiz">答题 · 243</a>
   <span class="nav-sep"></span>
   <a href="#acu">穴位 · 361</a>
   <a href="#recite" id="nav-recite">穴位背诵 · 361</a>
@@ -2467,11 +2509,12 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <nav class="toc" aria-label="章节">
       <a href="#route"><i>一</i><span>学习路线</span></a>
       <a href="#lesson"><i>二</i><span>阴阳 · 学透</span></a>
-      <a href="#acu"><i>三</i><span>穴位 · 三百六十一</span></a>
-      <a href="#recite"><i>四</i><span>穴位背诵</span></a>
-      <a href="#xhs"><i>五</i><span>图文笔记 · 七十九篇</span></a>
-      <a href="#jue"><i>六</i><span>歌诀 · 口诀</span></a>
-      <a href="#video"><i>七</i><span>人纪 · 针灸大成</span></a>
+      <a href="#yy-quiz-h"><i>三</i><span>答题 · 243 题</span></a>
+      <a href="#acu"><i>四</i><span>穴位 · 三百六十一</span></a>
+      <a href="#recite"><i>五</i><span>穴位背诵</span></a>
+      <a href="#xhs"><i>六</i><span>图文笔记 · 七十九篇</span></a>
+      <a href="#jue"><i>七</i><span>歌诀 · 口诀</span></a>
+      <a href="#video"><i>八</i><span>人纪 · 针灸大成</span></a>
     </nav>
 
     <div class="cover-quote" aria-hidden="true">
@@ -2525,9 +2568,10 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <a href="#quiz">② 课后 18 题</a>
       <a href="#yy-basic">③ 基础</a>
       <a href="#yy-teacher">④ 名师</a>
-      <a href="#yy-method">⑤ 方法论</a>
-      <a href="#yy-quiz-h">⑥ 题库 243</a>
-      <a href="#yy-recall-w">⑦ 背诵 · 计划</a>
+      <a href="#yy-case">⑤ 病例 · 三步判断</a>
+      <a href="#yy-method">⑥ 方法论</a>
+      <a href="#yy-quiz-h">⑦ 题库 243</a>
+      <a href="#yy-recall-w">⑧ 背诵 · 计划</a>
     </nav>
     <div class="sec-h">
       <span class="eyebrow">Lesson</span>
@@ -2633,6 +2677,26 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div class="yy-block">
       <h3 class="yy-h">三、五组关系：定义 · 原文 · 病与治</h3>
       <div class="yy-rel" id="yy-rel"></div>
+    </div>
+
+
+    <div class="yy-block" id="yy-case">
+      <h3 class="yy-h">〇、先解决「到底什么意思」：阴阳是两把尺子</h3>
+      <p class="lead">不要先背定义。阴阳在临床上就干一件事：<b>把病人身上的表现分成两组，然后决定往哪边调</b>。它是一把「寒热尺」加一把「虚实尺」。</p>
+      <div class="yy-ruler" id="yy-ruler"></div>
+      <p class="lead" style="margin-top:14px">古人的原话就是这两把尺：「善诊者，察色按脉，先别阴阳」——看病第一件事不是定病名，是先分阴阳。</p>
+    </div>
+
+    <div class="yy-block">
+      <h3 class="yy-h">〇之二、三步判断：拿到一个病人，怎么分阴阳</h3>
+      <div class="yy-steps" id="yy-steps"></div>
+    </div>
+
+    <div class="yy-block">
+      <h3 class="yy-h">〇之三、六个方证：看阴阳怎么落到处方上</h3>
+      <p class="lead">每个病例都按「主症 → 阴阳判断 → 治法 → 出处」写。出处给的是条文号与讲义行号，你可以自己回去核。</p>
+      <div class="yy-cases" id="yy-cases"></div>
+      <div id="yy-pulse"></div>
     </div>
 
     <div class="yy-block">
@@ -7631,7 +7695,124 @@ updates: [
 "d": "第 14 天要求你不看页面讲一遍。讲得磕巴的地方，就是你没真懂的地方。"
 }
 ],
-"howto_src": "关于学习方法的三条依据：Testing effect 与主动回忆（PMC4031794《How to Learn Effectively in Medical School》）、间隔重复的系统综述（PMC13657408）、交错练习与检索练习综述（Wiley《The Effectiveness of Spaced Repetition in Medical Education》）。这些是现代学习科学的结论，不是中医内容，我单独标出来，便于你分辨。"
+"howto_src": "关于学习方法的三条依据：Testing effect 与主动回忆（PMC4031794《How to Learn Effectively in Medical School》）、间隔重复的系统综述（PMC13657408）、交错练习与检索练习综述（Wiley《The Effectiveness of Spaced Repetition in Medical Education》）。这些是现代学习科学的结论，不是中医内容，我单独标出来，便于你分辨。",
+"ruler": [
+{
+"g": "寒热",
+"y": "怕热、喜冷、手足温、面赤",
+"i": "怕冷、喜暖、手足凉、面白"
+},
+{
+"g": "精神",
+"y": "烦躁、亢奋、声高",
+"i": "倦怠、嗜睡、声低"
+},
+{
+"g": "口渴",
+"y": "口渴喜冷饮",
+"i": "不渴或喜热饮"
+},
+{
+"g": "二便",
+"y": "小便短赤、大便干结",
+"i": "小便清长、大便稀溏"
+},
+{
+"g": "汗",
+"y": "汗出而热、汗黏",
+"i": "汗出而冷、汗清稀或无汗"
+},
+{
+"g": "舌",
+"y": "舌红、苔黄燥",
+"i": "舌淡、苔白滑"
+},
+{
+"g": "脉",
+"y": "浮、数、洪、滑、有力",
+"i": "沉、迟、细、涩、无力"
+},
+{
+"g": "病程与体力",
+"y": "新病、体力尚可（多实）",
+"i": "久病、体力衰（多虚）"
+}
+],
+"steps": [
+{
+"n": "1",
+"t": "先分寒热（定阴阳的大方向）",
+"q": "问三句：怕冷还是怕热？想喝热水还是冷水？手脚凉不凉？",
+"r": "怕冷、喜热饮、手足凉 → 阴（寒）；怕热、喜冷饮、手足温 → 阳（热）。"
+},
+{
+"n": "2",
+"t": "再分虚实（定补还是泻）",
+"q": "看病程长短、体力、脉之有力无力、按之痛减不减。",
+"r": "新病、脉有力、拒按 → 实（泻）；久病、脉无力、喜按 → 虚（补）。"
+},
+{
+"n": "3",
+"t": "定位（表里上下）",
+"q": "症状在表还是在里？在上（头面胸）还是在下（腹腰腿）？",
+"r": "表者从表解，里者从里治；上病可下取，下病可上取。"
+},
+{
+"n": "4",
+"t": "合成一句话，定治法",
+"q": "把三步合成「某阴阳某虚实」：如「阳虚里寒」「阴虚内热」。",
+"r": "实则泻之（寒者热之／热者寒之）；虚则补之（阴病治阳／阳病治阴）。"
+}
+],
+"cases": [
+{
+"name": "桂枝汤证 · 表阳证",
+"sign": "发热、汗出、恶风、脉浮缓",
+"judge": "病位在表属阳，但汗出脉缓是「表虚」，不是实热",
+"treat": "解肌发表、调和营卫（桂枝汤）",
+"src": "《伤寒论》第 2 条；倪海厦讲义 01_shanghan_sun.md:103"
+},
+{
+"name": "白虎汤证 · 阳明实热",
+"sign": "大热、大汗、大渴、脉洪大",
+"judge": "阳盛＋实：热势盛、脉有力、无虚象",
+"treat": "清热生津（热者寒之）",
+"src": "《伤寒论》阳明病篇；讲义 01_shanghan_sun.md:550、1577"
+},
+{
+"name": "四逆汤证 · 少阴阳衰",
+"sign": "四肢厥冷、下利清谷、脉微欲绝",
+"judge": "阳虚欲脱，阴寒内盛——阴盛阳衰的危候",
+"treat": "回阳救逆（阴病治阳）",
+"src": "《伤寒论》第 29 条；讲义 01_shanghan_sun.md:795"
+},
+{
+"name": "真武汤证 · 阳虚水泛",
+"sign": "心下悸、头眩、身瞤动、小便不利、四肢沉重",
+"judge": "阳虚不能化气行水，水气内停（阳虚为本，水停为标）",
+"treat": "温阳利水",
+"src": "《伤寒论》第 82 条；讲义 01_shanghan_sun.md:3123"
+},
+{
+"name": "小柴胡汤证 · 少阳半表半里",
+"sign": "往来寒热、胸胁苦满、口苦咽干、默默不欲饮食",
+"judge": "不在表也不在里，是阴阳表里之间的「枢」",
+"treat": "和解枢机（小柴胡汤）",
+"src": "《伤寒论》第 99 条；讲义 01_shanghan_sun.md:663"
+},
+{
+"name": "黄连阿胶汤证 · 少阴阴虚火旺",
+"sign": "心中烦、不得卧、舌红少苔、脉细数",
+"judge": "阴虚不能制阳，虚火扰心（虚热，不是实火）",
+"treat": "滋阴降火、交通心肾（阳病治阴）",
+"src": "《伤寒论》第 303 条（经典原文）"
+}
+],
+"pulse": {
+"t": "脉法：寸为阳，尺为阴",
+"d": "倪海厦讲「脉阴阳俱紧」时给了最实用的落地法：寸脉候阳（上焦、表），尺脉候阴（下焦、里）。寸尺都浮紧＝表寒实；尺脉独弱＝下焦阳虚。",
+"src": "倪海厦讲义 01_shanghan_sun.md:53、128"
+}
 };
 </script>
 <script>/* 中医自学 · 每日一课 —— 渲染与交互 */
@@ -8301,6 +8482,34 @@ updates: [
       return '<div class="ym"><b>' + m.n + '</b><div><h4>' + m.t + '</h4><p>' + m.d + '</p></div></div>';
     }).join('');
 
+
+    /* 两把尺子 / 三步 / 病例 */
+    if ($('yy-ruler')) {
+      $('yy-ruler').innerHTML =
+        '<div class="rl-row rl-head"><span>看什么</span><span>偏阳</span><span>偏阴</span></div>' +
+        Y.ruler.map(function (r) {
+          return '<div class="rl-row"><span>' + r.g + '</span><span class="rl-y">' + r.y + '</span><span class="rl-i">' + r.i + '</span></div>';
+        }).join('');
+    }
+    if ($('yy-steps')) {
+      $('yy-steps').innerHTML = Y.steps.map(function (s2) {
+        return '<div class="stp"><b>' + s2.n + '</b><div><h4>' + s2.t + '</h4>' +
+          '<p class="stp-q">' + s2.q + '</p><p class="stp-r">' + s2.r + '</p></div></div>';
+      }).join('');
+    }
+    if ($('yy-cases')) {
+      $('yy-cases').innerHTML = Y.cases.map(function (c) {
+        return '<article class="cs"><h4>' + c.name + '</h4>' +
+          '<p><em>主症</em>' + c.sign + '</p>' +
+          '<p><em>阴阳</em>' + c.judge + '</p>' +
+          '<p><em>治法</em>' + c.treat + '</p>' +
+          '<footer>' + c.src + '</footer></article>';
+      }).join('');
+    }
+    if ($('yy-pulse') && Y.pulse) {
+      $('yy-pulse').innerHTML = '<b>' + Y.pulse.t + '</b><p>' + Y.pulse.d + '</p><em>' + Y.pulse.src + '</em>';
+    }
+
     /* 背诵卡 */
     if ($('yy-recall')) {
       $('yy-recall').innerHTML = Y.recall.map(function (r, i) {
@@ -8381,8 +8590,16 @@ updates: [
       var list = pool();
       var fresh = list.filter(function (q) { return !st.seen[key(q)]; });
       var rest = list.filter(function (q) { return st.seen[key(q)]; });
-      order = (mode === 'random' ? shuffle(fresh).concat(shuffle(rest)) : fresh.concat(rest));
-      idx = 0; present();
+      var deck = (mode === 'random' ? shuffle(fresh) : fresh).concat(mode === 'random' ? shuffle(rest) : rest);
+      if (mode === 'random' && deck.length > 1) {
+        // 保证本次第一题与上次访问不同
+        var lastFirst = localStorage.getItem('tcm.yy.lastFirst');
+        if (lastFirst && key(deck[0]) === lastFirst) {
+          var t0 = deck.shift(); deck.push(t0);
+        }
+        localStorage.setItem('tcm.yy.lastFirst', key(deck[0]));
+      }
+      order = deck; idx = 0; present();
     }
     function tabsHtml() {
       var extra = [
@@ -8633,6 +8850,30 @@ updates: [
   document.addEventListener('click', function(){ pop.hidden = true; btn.textContent = '配色 ▾'; btn.setAttribute('aria-expanded','false'); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { pop.hidden = true; btn.textContent = '配色 ▾'; } });
 })();
+
+  /* ── 版本陈旧提示：GitHub Pages 有 CDN 缓存，刷新可能拿到旧页 ── */
+  (function staleCheck() {
+    var me = document.querySelector('meta[name="build-id"]');
+    if (!me) return;
+    var mine = me.getAttribute('content');
+    setTimeout(function () {
+      fetch('index.html?probe=' + Date.now(), { cache: 'no-store' })
+        .then(function (r) { return r.text(); })
+        .then(function (t) {
+          var m = /name="build-id" content="([^"]+)"/.exec(t);
+          if (m && mine && m[1] !== mine) {
+            var d = document.createElement('div');
+            d.className = 'stale-bar';
+            d.innerHTML = '<b>有新版本</b><span>你看到的是浏览器缓存的旧页面</span>' +
+              '<button>刷新到最新</button>';
+            d.querySelector('button').addEventListener('click', function () {
+              location.replace(location.pathname + '?v=' + Date.now());
+            });
+            document.body.appendChild(d);
+          }
+        }).catch(function () {});
+    }, 1200);
+  })();
 </script>
 </body>
 </html>
