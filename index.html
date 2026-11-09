@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="96e6c6ad3e" />
+<meta name="build-id" content="7e4308ac7b" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -2709,6 +2709,36 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   [data-theme="rice"] .cover-figures b{color:#7a3f16 !important}
   [data-theme="rice"] .cover-figures span{background:rgba(122,63,22,.05) !important;border-color:rgba(122,63,22,.28) !important}
 }
+
+/* ── 阴阳 · 刷题 ── */
+.yd-bar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+.yd-stat{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--mu);margin:0 0 16px}
+.yd-stat b{color:var(--accent);font-size:14px;font-family:var(--serif)}
+.ydq{background:var(--card);border:1px solid var(--line);padding:16px 18px;margin:0 0 12px}
+.ydq-top{display:flex;justify-content:space-between;font-size:11px;color:var(--mu);letter-spacing:.06em;margin-bottom:8px}
+.ydq h4{font-size:14px;line-height:1.8;margin:0 0 10px;color:var(--ink)}
+
+/* ── 六经 · 开阖枢 ── */
+.kh3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.kh3>div{border:1px solid var(--line);background:var(--card);padding:12px 14px}
+.kh3 b{display:block;font-family:var(--serif);font-size:22px;color:var(--accent);line-height:1.1;margin-bottom:6px}
+.kh3 span{display:block;font-size:12.5px;line-height:1.7;color:var(--ink-2)}
+.kh3 em{display:block;font-style:normal;font-size:11px;color:var(--mu);margin-top:6px}
+.ljwen{margin:16px 0;padding:12px 16px;border-left:2px solid var(--accent);background:var(--paper-2);font-family:var(--serif);font-size:14.5px;line-height:1.95;color:var(--ink)}
+.ljwen cite{display:block;font-style:normal;font-size:11.5px;color:var(--mu);margin-top:6px;letter-spacing:.04em}
+.kh-tb{width:100%;font-size:12.5px;table-layout:auto}
+.kh-tb th,.kh-tb td{padding:8px 9px;vertical-align:top;line-height:1.7;border-bottom:1px solid var(--line)}
+.kh-tb td:first-child{font-family:var(--serif);font-size:13.5px;white-space:nowrap}
+.kh-use{margin:16px 0;padding:12px 14px;border:1px dashed var(--line-strong);font-size:13px;line-height:2;color:var(--ink-2)}
+.kh-use b{color:var(--accent);margin-right:6px}
+.kh-use span{display:block}
+.kh-src{font-size:11.5px;color:var(--mu);line-height:1.85;margin:0}
+@media (max-width:760px){.kh3{grid-template-columns:1fr}.kh-tb{font-size:11.5px}.kh-tb td:first-child{white-space:normal}}
+
+/* 属性速查表：脏腑注 + 小字 */
+.ya-row em{display:block;font-style:normal;font-size:11px;line-height:1.6;color:var(--mu);margin-top:3px}
+.ya-note{margin:12px 0 0;padding:10px 13px;border-left:2px solid var(--line-strong);background:var(--paper-2);
+  font-size:12px;line-height:1.95;color:var(--ink-3)}
 </style>
 </head>
 <body>
@@ -2720,8 +2750,8 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   <span class="brand">中医自学</span>
   <button class="nav-toggle" id="nav-toggle" aria-label="目录">目录 ▾</button>
   <a href="#route">学习路线</a>
-  <a href="#lesson" id="nav-yy">阴阳 · 学透</a>
-  <a href="#yy-quiz-h" id="nav-quiz">答题 · 243</a>
+  <a href="#yy" id="nav-yy">阴阳 · 学透</a>
+  <a href="#yydrill" id="nav-drill">阴阳 · 刷题</a>
   <a href="#liujing" id="nav-lj">六经 · 入门</a>
   <a href="#bing" id="nav-bing">常见病 · 取穴</a>
   <a href="#body3d" id="nav-3d">3D · 人体</a>
@@ -2758,8 +2788,8 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   <div class="cover-in">
     <nav class="toc" aria-label="章节">
       <a href="#route"><i>一</i><span>学习路线</span></a>
-      <a href="#lesson"><i>二</i><span>阴阳 · 学透</span></a>
-      <a href="#yy-quiz-h"><i>三</i><span>答题 · 243 题</span></a>
+      <a href="#yy"><i>二</i><span>阴阳 · 学透</span></a>
+      <a href="#yydrill"><i>三</i><span>阴阳 · 刷题</span></a>
       <a href="#liujing"><i>四</i><span>六经 · 入门</span></a>
       <a href="#bing"><i>五</i><span>常见病 · 取穴</span></a>
       <a href="#body3d"><i>六</i><span>3D · 人体穴位</span></a>
@@ -2829,7 +2859,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div class="sec-h">
       <span class="eyebrow">Lesson</span>
       <h2>第 1 课 · 阴阳（正文 17 节）</h2>
-      <p>先读正文，再往下做课后题，最后进「阴阳 · 学透」用 243 道题把这块吃透。</p>
+      <p>先读正文，做下面 18 题热身，然后进「阴阳 · 学透」看脉络，最后去「阴阳 · 刷题」用 243 道题反复刷。</p>
     </div>
     <div class="tabs" id="tabs"></div>
     <div id="lesson-root"></div>
@@ -2837,11 +2867,11 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 </section>
 
 <section id="quiz">
-  <div class="wrap" style="padding-bottom:0"><p class="lead" style="margin:0 0 4px">这 18 题是刚读完正文的自测；要真正吃透，请用下方的 <a href="#yy" style="color:var(--accent)">阴阳 · 学透 · 243 题</a>。</p></div>
+  <div class="wrap" style="padding-bottom:0"><p class="lead" style="margin:0 0 4px">这 18 题只够入门。要吃透，去 <a href="#yydrill" style="color:var(--accent)">阴阳 · 刷题（243 题，每次随机）</a>。</p></div>
   <div class="wrap">
     <div class="sec-h">
       <span class="eyebrow">Practice</span>
-      <h2 id="quiz-h2">课后自测 · 18 题（入门）</h2>
+      <h2 id="quiz-h2">第 1 课自测 · 18 题（入门）</h2>
       <p>12 道全是选择题，每道都有<b>唯一标准答案</b>。点选项立刻判对错并给出答案和出处；不想做题就点「直接看答案」，或一次「全部显示答案」。作答记录存在你本机浏览器里。</p>
     </div>
     <div class="quiztop">
@@ -2857,38 +2887,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 
 
 
-<section id="video">
-  <div class="wrap">
-    <div class="sec-h">
-      <span class="eyebrow">Video</span>
-      <h2 id="vid-h2">人纪 · 针灸大成（79 集）</h2>
-      <p>这就是你发的那篇文章里的那套——<b>倪海厦 人纪《针灸大成》全 79 集（字幕版）</b>，按讲课顺序从第 001 到 079。点任意一集会<b>在新标签页直接打开该集播放</b>（B 站官方播放器），看完回来这一页还在，会标出你上次看到哪一集。</p>
-      <p style="font-size:13px;color:#7a4a1d;margin-top:8px">为什么不在页内播放：B 站对外链嵌入有时只给占位画面（我实测同一地址在标签页能播、塞进 iframe 就被拦），所以走官方播放页最稳。观看时建议<b>关掉 VPN/加速器</b>——B 站是国内源，走代理容易卡在缓冲。</p>
-      <p style="font-size:13px;color:var(--ink3);margin-top:8px">其它四部（黄帝内经 81 · 伤寒论 199 · 金匮要略 200 · 神农本草经 66）不混在这里，折叠在下面的「其它人纪课程」里。</p>
-    </div>
-    <div class="vid-tabs" id="vid-tabs"></div>
-    <div class="vid-meta" id="vid-meta"></div>
-    <div class="vid-grid" id="vid-grid"></div>
-
-    <div class="card" id="vid-refs" style="margin-top:18px">
-      <div class="sc-t">笔记来源说明</div>
-      <p style="font-size:13.5px;color:var(--ink2);line-height:1.85;margin:8px 0 12px">
-        <b>文字摘要</b>：第 1–44 集，每集有逐课摘要（本机《人纪》讲义整理稿「针灸01–44」，约 2.2 万字），来自课程蒸馏稿，不是逐字讲稿。<br>
-        <b>手写图文笔记</b>：<b>79 集全部有</b>。主力是小红书作者「依惠札记」按第 N 课逐课发布的手写笔记（48 课），其余 31 课由「七安的笔记」「舒泉」「张小养」「爱养生的方方」等作者的对应课笔记补上。每集 1–7 张，点「图文」看长图，也可跳原帖。<br>
-        <b>看清楚是谁写的</b>：这些图文都是博主个人学习笔记，不是倪师原稿、也不是我写的；我的工作只是把课号对齐、抓图、拼成一张长图方便你读。看到不同作者的版本，可以对照着看，说法不一致的地方以视频和经典原文为准。</p>
-      <div class="refs">
-        <a href="https://zhuanlan.zhihu.com/p/710907977" target="_blank" rel="noopener">知乎 · 针灸大成 1–79 集摘要（主题式）↗</a>
-        <a href="https://www.douban.com/doulist/158102143/" target="_blank" rel="noopener">豆瓣豆列 · 倪师针灸大成笔记（66 篇，按章节）↗</a>
-        <a href="https://github.com/xiaogege6697/tcm-db" target="_blank" rel="noopener">GitHub · 倪海厦课程数据库（含板书 OCR）↗</a>
-        <a href="https://blog.csdn.net/qq_28306361/article/details/131626407" target="_blank" rel="noopener">CSDN · 针灸大成学习笔记↗</a>
-      </div>
-      <p style="font-size:12.5px;color:var(--ink3);margin:12px 0 0">上面四个都是外部资源，风格与准确度未经我逐条核对，只作为延伸阅读；看到了好的版本发我，我可以整理进这里。</p>
-    </div>
-    <div class="warnbox" style="margin-top:20px"><b>说明</b>
-      视频源为 B 站公开投稿（UP 主见上方），本站只做索引与嵌入播放，不存储视频、不主张版权；若某一集被下架，播放器会提示“视频去哪了”，换另一部合集或去 B 站搜同名即可。
-    </div>
-  </div>
-</section>
 
 
 
@@ -3009,6 +3007,91 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 
 
 
+
+<section id="yydrill" class="band">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-k">刷题</span><h2>阴阳 · 刷题 <span id="yd-count" class="yy-count"></span></h2></div>
+    <p class="lead">一轮 20 题，每次进来都是重新抽的，不会老是那几道。答完立刻判对错，给解析和出处；答错的自动进错题本，下一轮优先出现。</p>
+    <div class="yd-bar">
+      <div class="yy-tabs" id="yd-tabs"></div>
+      <div class="yy-mode" id="yd-size">
+        <button data-n="10">10 题</button><button data-n="20" class="on">20 题</button><button data-n="50">50 题</button>
+      </div>
+      <button class="yy-shuffle" id="yd-new">换一批</button>
+    </div>
+    <div class="yd-stat" id="yd-stat"></div>
+    <div id="yd-list"></div>
+    <div class="yy-foot"><span id="yd-score"></span></div>
+  </div>
+</section>
+
+<section id="liujing" class="band">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-k">六经</span><h2 id="lj-h2">六经 · 入门</h2></div>
+    <p class="lead" id="lj-intro"></p>
+    <div class="warnbox" id="lj-warn" style="margin:0 0 22px"></div>
+
+    <div class="lj-block"><h3 class="yy-h">一、六经到底是什么（先看这五条）</h3>
+      <div class="yy-points" id="lj-basics"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">二、开阖枢：六经真正的骨架</h3>
+      <p class="lead">六经不是六条并列的线，是<strong>三道门</strong>——每道门有「开」「阖」「枢」三种状态。这一层想通了，六经就不用背。</p>
+      <blockquote class="ljwen">太阳为开，阳明为阖，少阳为枢；太阴为开，厥阴为阖，少阴为枢。<cite>《素问·阴阳离合论》</cite></blockquote>
+      <div class="kh3">
+        <div><b>开</b><span>向外<br>敷布、卫外、出汗孔</span><em>门打开，气往外走</em></div>
+        <div><b>阖</b><span>向内<br>受纳、收藏、主里</span><em>门关上，气往里收</em></div>
+        <div><b>枢</b><span>转轴<br>半表半里、升降出入</span><em>门轴，决定往哪边开</em></div>
+      </div>
+      <table class="tb kh-tb">
+        <thead><tr><th>经</th><th>开阖枢</th><th>管什么</th><th>失职的样子</th><th>取穴</th></tr></thead>
+        <tbody>
+          <tr><td>太阳</td><td><b>开</b></td><td>主一身之表、卫外、汗孔开合</td><td>开不及：无汗、恶寒、身痛<br>开太过：汗漏不止、怕风</td><td>后溪、申脉</td></tr>
+          <tr><td>阳明</td><td><b>阖</b></td><td>受纳腐熟、主里、主降</td><td>阖太过：腑实、便秘、腹满<br>阖不及：下利、完谷不化</td><td>合谷、内庭、天枢</td></tr>
+          <tr><td>少阳</td><td><b>枢</b></td><td>半表半里、转枢气机</td><td>枢不利：寒热往来、口苦、胸胁苦满</td><td>外关、支沟、阳陵泉</td></tr>
+          <tr><td>太阴</td><td><b>开</b></td><td>输布津液、主运化（脾肺）</td><td>开不及：腹胀、便溏、四肢困重、口干不欲饮</td><td>太白、阴陵泉、足三里</td></tr>
+          <tr><td>少阴</td><td><b>枢</b></td><td>心肾水火之枢</td><td>枢不利：心肾不交、失眠、四逆、咽干</td><td>太溪、复溜、神门</td></tr>
+          <tr><td>厥阴</td><td><b>阖</b></td><td>藏血、收敛、主内</td><td>阖不及：气上撞心、寒热错杂、手足厥</td><td>太冲、内关</td></tr>
+        </tbody>
+      </table>
+      <p class="lead" style="margin-top:14px"><b>为什么这三对要这么配：</b>三阳管「外—中—里」三层的开合，三阴管「输布—收藏—水火」三条内线。太阳不开，表就闭住；阳明不合，里就堵；少阳不转，寒热就打架。三阴同理：太阴不开则津液不布（所以你口干却不想喝水），厥阴不合则血不藏，少阴不枢则水火不交（上热下寒）。</p>
+      <div class="kh-use"><b>拿它看病，三步：</b><span>① 先定病在哪一对（开病？阖病？枢病？）</span><span>② 再分虚实（开不及=虚，开太过=实；阖太过=实，阖不及=虚）</span><span>③ 最后才落到经与穴</span></div>
+      <p class="kh-src">原文只有「太阳为开，阳明为阖，少阳为枢；太阴为开，厥阴为阖，少阴为枢」这一句（《素问·阴阳离合论》）。上面的「管什么 / 失职 / 取穴」是我按经典与讲义整理的，属推论，不是倪师原话。</p>
+    </div>
+
+    <div class="lj-block"><h3 class="yy-h">三、六经速查表</h3>
+      <div class="yy-attr" id="lj-table"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">四、六张卡片：提纲原文 + 怎么读 + 取哪些穴</h3>
+      <div class="yy-cases" id="lj-cards"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">五、传变：病是怎么往里走的</h3>
+      <div class="yy-method" id="lj-trans"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">六、先学哪一步（顺序别搞反）</h3>
+      <div class="yy-steps" id="lj-order"></div></div>
+
+    <div class="lj-block"><h3 class="yy-h">七、入门小测 <span id="lj-count" class="yy-count"></span></h3>
+      <p class="lead">只考「这是哪一层、该取哪条经」，不考穴位定位与进针。答完会告诉你为什么。</p>
+      <div class="yy-bar"><div class="yy-tabs" id="lj-tabs"></div>
+        <button class="yy-shuffle" id="lj-reshuffle">换一批</button></div>
+      <div id="lj-quiz"></div>
+      <div class="yy-foot"><button class="yy-btn" id="lj-reset">重新开始</button><span id="lj-score"></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="bing" class="band">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-k">取穴</span><h2 id="cm-h2">常见病 · 取穴思路</h2></div>
+    <p class="lead" id="cm-intro"></p>
+    <div class="cm-legend">
+      <span><i class="tag-j">讲义</i>倪师课上明确讲过（附行号）</span>
+      <span><i class="tag-t">推论</i>按经络／五输穴理论推出，讲义未直接讲</span>
+    </div>
+    <div id="cm-list"></div>
+  </div>
+</section>
+
 <section id="body3d" class="band">
   <div class="wrap">
     <div class="sec-h"><span class="sec-k">三维</span><h2>3D 人体 · 穴位</h2></div>
@@ -3029,45 +3112,23 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   </div>
 </section>
 
-<section id="bing" class="band">
+
+
+<section id="acu" class="band">
   <div class="wrap">
-    <div class="sec-h"><span class="sec-k">取穴</span><h2 id="cm-h2">常见病 · 取穴思路</h2></div>
-    <p class="lead" id="cm-intro"></p>
-    <div class="cm-legend">
-      <span><i class="tag-j">讲义</i>倪师课上明确讲过（附行号）</span>
-      <span><i class="tag-t">推论</i>按经络／五输穴理论推出，讲义未直接讲</span>
+    <div class="sec-h">
+      <span class="eyebrow">Acupoints</span>
+      <h2>十四经穴 · 361 个</h2>
+      <p>十二正经 + 任脉 + 督脉，按经脉循行顺序排列（首穴 → 末穴）。每个穴都带拼音；点经脉名可展开／收起，上面的搜索框支持穴名和拼音（<b>合谷</b>／<b>hegu</b>／<b>feng</b> 都行）。</p>
     </div>
-    <div id="cm-list"></div>
-  </div>
-</section>
-
-<section id="liujing" class="band">
-  <div class="wrap">
-    <div class="sec-h"><span class="sec-k">六经</span><h2 id="lj-h2">六经 · 入门</h2></div>
-    <p class="lead" id="lj-intro"></p>
-    <div class="warnbox" id="lj-warn" style="margin:0 0 22px"></div>
-
-    <div class="lj-block"><h3 class="yy-h">一、六经到底是什么（先看这五条）</h3>
-      <div class="yy-points" id="lj-basics"></div></div>
-
-    <div class="lj-block"><h3 class="yy-h">二、六经速查表</h3>
-      <div class="yy-attr" id="lj-table"></div></div>
-
-    <div class="lj-block"><h3 class="yy-h">三、六张卡片：提纲原文 + 怎么读 + 取哪些穴</h3>
-      <div class="yy-cases" id="lj-cards"></div></div>
-
-    <div class="lj-block"><h3 class="yy-h">四、传变：病是怎么往里走的</h3>
-      <div class="yy-method" id="lj-trans"></div></div>
-
-    <div class="lj-block"><h3 class="yy-h">五、先学哪一步（顺序别搞反）</h3>
-      <div class="yy-steps" id="lj-order"></div></div>
-
-    <div class="lj-block"><h3 class="yy-h">六、入门小测 <span id="lj-count" class="yy-count"></span></h3>
-      <p class="lead">只考「这是哪一层、该取哪条经」，不考穴位定位与进针。答完会告诉你为什么。</p>
-      <div class="yy-bar"><div class="yy-tabs" id="lj-tabs"></div>
-        <button class="yy-shuffle" id="lj-reshuffle">换一批</button></div>
-      <div id="lj-quiz"></div>
-      <div class="yy-foot"><button class="yy-btn" id="lj-reset">重新开始</button><span id="lj-score"></span></div>
+    <div class="acu-bar">
+      <input id="acu-q" type="search" placeholder="搜穴名或拼音：合谷 / hegu / feng / zhōng" autocomplete="off" spellcheck="false" />
+      <span id="acu-hit"></span>
+      <button class="reset" id="acu-all">全部展开</button>
+    </div>
+    <div id="acu-root"></div>
+    <div class="warnbox" style="margin-top:20px"><b>边界</b>
+      这份表只用于<b>学习经脉走向与穴名</b>。针刺、艾灸、放血是操作技术，需要面授与现场判断——尤其胸部、颈部、背部深刺有气胸、伤及脏器的风险，别照着名字自己扎。要练手，找有资质的针灸师带。
     </div>
   </div>
 </section>
@@ -3144,21 +3205,36 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   </div>
 </section>
 
-<section id="acu" class="band">
+
+<section id="video">
   <div class="wrap">
     <div class="sec-h">
-      <span class="eyebrow">Acupoints</span>
-      <h2>十四经穴 · 361 个</h2>
-      <p>十二正经 + 任脉 + 督脉，按经脉循行顺序排列（首穴 → 末穴）。每个穴都带拼音；点经脉名可展开／收起，上面的搜索框支持穴名和拼音（<b>合谷</b>／<b>hegu</b>／<b>feng</b> 都行）。</p>
+      <span class="eyebrow">Video</span>
+      <h2 id="vid-h2">人纪 · 针灸大成（79 集）</h2>
+      <p>这就是你发的那篇文章里的那套——<b>倪海厦 人纪《针灸大成》全 79 集（字幕版）</b>，按讲课顺序从第 001 到 079。点任意一集会<b>在新标签页直接打开该集播放</b>（B 站官方播放器），看完回来这一页还在，会标出你上次看到哪一集。</p>
+      <p style="font-size:13px;color:#7a4a1d;margin-top:8px">为什么不在页内播放：B 站对外链嵌入有时只给占位画面（我实测同一地址在标签页能播、塞进 iframe 就被拦），所以走官方播放页最稳。观看时建议<b>关掉 VPN/加速器</b>——B 站是国内源，走代理容易卡在缓冲。</p>
+      <p style="font-size:13px;color:var(--ink3);margin-top:8px">其它四部（黄帝内经 81 · 伤寒论 199 · 金匮要略 200 · 神农本草经 66）不混在这里，折叠在下面的「其它人纪课程」里。</p>
     </div>
-    <div class="acu-bar">
-      <input id="acu-q" type="search" placeholder="搜穴名或拼音：合谷 / hegu / feng / zhōng" autocomplete="off" spellcheck="false" />
-      <span id="acu-hit"></span>
-      <button class="reset" id="acu-all">全部展开</button>
+    <div class="vid-tabs" id="vid-tabs"></div>
+    <div class="vid-meta" id="vid-meta"></div>
+    <div class="vid-grid" id="vid-grid"></div>
+
+    <div class="card" id="vid-refs" style="margin-top:18px">
+      <div class="sc-t">笔记来源说明</div>
+      <p style="font-size:13.5px;color:var(--ink2);line-height:1.85;margin:8px 0 12px">
+        <b>文字摘要</b>：第 1–44 集，每集有逐课摘要（本机《人纪》讲义整理稿「针灸01–44」，约 2.2 万字），来自课程蒸馏稿，不是逐字讲稿。<br>
+        <b>手写图文笔记</b>：<b>79 集全部有</b>。主力是小红书作者「依惠札记」按第 N 课逐课发布的手写笔记（48 课），其余 31 课由「七安的笔记」「舒泉」「张小养」「爱养生的方方」等作者的对应课笔记补上。每集 1–7 张，点「图文」看长图，也可跳原帖。<br>
+        <b>看清楚是谁写的</b>：这些图文都是博主个人学习笔记，不是倪师原稿、也不是我写的；我的工作只是把课号对齐、抓图、拼成一张长图方便你读。看到不同作者的版本，可以对照着看，说法不一致的地方以视频和经典原文为准。</p>
+      <div class="refs">
+        <a href="https://zhuanlan.zhihu.com/p/710907977" target="_blank" rel="noopener">知乎 · 针灸大成 1–79 集摘要（主题式）↗</a>
+        <a href="https://www.douban.com/doulist/158102143/" target="_blank" rel="noopener">豆瓣豆列 · 倪师针灸大成笔记（66 篇，按章节）↗</a>
+        <a href="https://github.com/xiaogege6697/tcm-db" target="_blank" rel="noopener">GitHub · 倪海厦课程数据库（含板书 OCR）↗</a>
+        <a href="https://blog.csdn.net/qq_28306361/article/details/131626407" target="_blank" rel="noopener">CSDN · 针灸大成学习笔记↗</a>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink3);margin:12px 0 0">上面四个都是外部资源，风格与准确度未经我逐条核对，只作为延伸阅读；看到了好的版本发我，我可以整理进这里。</p>
     </div>
-    <div id="acu-root"></div>
-    <div class="warnbox" style="margin-top:20px"><b>边界</b>
-      这份表只用于<b>学习经脉走向与穴名</b>。针刺、艾灸、放血是操作技术，需要面授与现场判断——尤其胸部、颈部、背部深刺有气胸、伤及脏器的风险，别照着名字自己扎。要练手，找有资质的针灸师带。
+    <div class="warnbox" style="margin-top:20px"><b>说明</b>
+      视频源为 B 站公开投稿（UP 主见上方），本站只做索引与嵌入播放，不存储视频、不主张版权；若某一集被下架，播放器会提示“视频去哪了”，换另一部合集或去 B 站搜同名即可。
     </div>
   </div>
 </section>
@@ -4288,6 +4364,7 @@ updates: [
 "v": "「阴阳者，一分为二也」（张景岳《类经》）。阴中有阳、阳中有阴，可以一直分下去。"
 }
 ],
+"attrNote": "脏腑这一层：五脏属阴、六腑属阳，依据《素问·五脏别论》「藏精气而不泻／传化物而不藏」。第二行不是「心属阳」，而是《素问·金匮真言论》按部位再分——背为阳、腹为阴，心肺在阳位，故心为阳中之阳、肺为阳中之阴；肝为阴中之阳、肾为阴中之阴、脾为阴中之至阴。",
 "attr": [
 {
 "g": "部位",
@@ -4295,9 +4372,14 @@ updates: [
 "i": "下、内、腹、四肢内侧"
 },
 {
-"g": "脏腑",
-"y": "六腑、心、肺（阳中之阴）",
-"i": "五脏、肝脾肾（脾为至阴）"
+"g": "脏腑（藏泻）",
+"y": "六腑：胆、胃、小肠、大肠、膀胱、三焦<br><em>传化物而不藏</em>",
+"i": "五脏：心、肝、脾、肺、肾<br><em>藏精气而不泻</em>"
+},
+{
+"g": "部位再分（阳中之阳）",
+"y": "心＝阳中之阳<br>肺＝阳中之阴",
+"i": "肝＝阴中之阳<br>肾＝阴中之阴<br>脾＝阴中之至阴"
 },
 {
 "g": "气血津液",
@@ -10353,7 +10435,8 @@ new MutationObserver(() => {
       '<div class="ya-row ya-head"><span>分类</span><span>属阳</span><span>属阴</span></div>' +
       Y.basics.attr.map(function (r) {
         return '<div class="ya-row"><span>' + r.g + '</span><span>' + r.y + '</span><span>' + r.i + '</span></div>';
-      }).join('');
+      }).join('') +
+      (Y.basics.attrNote ? '<p class="ya-note">' + Y.basics.attrNote + '</p>' : '');
 
     $('yy-rel').innerHTML = Y.basics.relations.map(function (r) {
       return '<article class="yr"><h4>' + r.k + '</h4><p class="yr-d">' + r.d + '</p>' +
@@ -10850,6 +10933,104 @@ new MutationObserver(() => {
           }
         }).catch(function () {});
     }, 1200);
+  })();
+
+  /* ───────── 阴阳 · 刷题（独立引擎，每次重新抽题） ───────── */
+  (function () {
+    var box = document.getElementById('yd-list');
+    if (!box || !window.YY || !window.YY.quiz) return;
+    var ALL = window.YY.quiz, K = 'tcm.yd.v1', st = {};
+    try { st = JSON.parse(localStorage.getItem(K) || '{}'); } catch (e) { st = {}; }
+    st.seen = st.seen || {}; st.ok = st.ok || {}; st.wrong = st.wrong || {};
+    function save() { try { localStorage.setItem(K, JSON.stringify(st)); } catch (e) {} }
+    function ky(q) { return q.q.slice(0, 42); }
+    function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+    var cats = ['全部'].concat(Object.keys(ALL.reduce(function (a, q) { a[q.cat] = 1; return a; }, {})));
+    var filter = '全部', size = 20, round = [], done = 0, right = 0;
+    var $c = document.getElementById('yd-count');
+    if ($c) $c.textContent = '（' + ALL.length + ' 题）';
+
+    function pool() {
+      if (filter === '错题') return ALL.filter(function (q) { return st.wrong[ky(q)]; });
+      if (filter === '全部') return ALL.slice();
+      return ALL.filter(function (q) { return q.cat === filter; });
+    }
+    function tabs() {
+      var t = document.getElementById('yd-tabs'); if (!t) return;
+      t.innerHTML = cats.map(function (c) {
+        var n = c === '全部' ? ALL.length : ALL.filter(function (q) { return q.cat === c; }).length;
+        return '<button class="ytab' + (c === filter ? ' on' : '') + '" data-c="' + c + '">' + c + '<i>' + n + '</i></button>';
+      }).join('') + '<button class="ytab ytab-x' + (filter === '错题' ? ' on' : '') + '" data-c="错题">错题<i>' +
+        ALL.filter(function (q) { return st.wrong[ky(q)]; }).length + '</i></button>';
+    }
+    function stat() {
+      var n = Object.keys(st.seen).length, ok = Object.keys(st.ok).length;
+      var wr = Object.keys(st.wrong).length;
+      document.getElementById('yd-stat').innerHTML =
+        '<span>本轮 <b>' + done + ' / ' + round.length + '</b></span>' +
+        '<span>本轮正确 <b>' + right + '</b></span>' +
+        '<span>累计做过 <b>' + n + ' / ' + ALL.length + '</b></span>' +
+        '<span>累计正确率 <b>' + (n ? Math.round(ok / n * 100) : 0) + '%</b></span>' +
+        '<span>错题 <b>' + wr + '</b></span>';
+    }
+    function newRound() {
+      var list = pool();
+      var fresh = list.filter(function (q) { return !st.seen[ky(q)]; });
+      var wrongs = list.filter(function (q) { return st.wrong[ky(q)]; });
+      var rest = list.filter(function (q) { return st.seen[ky(q)] && !st.wrong[ky(q)]; });
+      var deck = shuffle(wrongs).concat(shuffle(fresh), shuffle(rest)).slice(0, Math.min(size, list.length));
+      deck = shuffle(deck);
+      var last = localStorage.getItem('tcm.yd.lastFirst');
+      if (deck.length > 1 && last && ky(deck[0]) === last) { var t0 = deck.shift(); deck.push(t0); }
+      if (deck.length) localStorage.setItem('tcm.yd.lastFirst', ky(deck[0]));
+      round = deck; done = 0; right = 0;
+      if (!round.length) { box.innerHTML = '<article class="ydq"><h4>这个类别暂时没有题</h4></article>'; stat(); return; }
+      box.innerHTML = round.map(function (q, i) {
+        var opts = q.o.map(function (t, n2) { return { t: t, n: n2 }; });
+        opts = shuffle(opts);
+        return '<article class="ydq" data-i="' + i + '"><div class="ydq-top"><span class="yq-cat">' + q.cat +
+          '</span><span>' + (i + 1) + ' / ' + round.length + '</span></div>' +
+          '<h4>' + q.q + '</h4><div class="yopts">' + opts.map(function (o, n2) {
+            return '<button class="yopt" data-n="' + n2 + '" data-r="' + o.n + '"><em>' + 'ABCDE'[n2] + '</em><span>' + o.t + '</span></button>';
+          }).join('') + '</div>' +
+          '<div class="yans" hidden><b class="yans-k"></b><p class="yans-w"></p><p class="yans-s"></p></div></article>';
+      }).join('');
+      stat();
+    }
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('.yopt'); if (!b || b.classList.contains('locked')) return;
+      var card = b.closest('.ydq'), i = +card.dataset.i, q = round[i];
+      var picked = +b.dataset.r, ok = picked === q.a, k = ky(q);
+      card.querySelectorAll('.yopt').forEach(function (x) {
+        x.classList.add('locked');
+        if (+x.dataset.r === q.a) x.classList.add('right');
+        if (x === b && !ok) x.classList.add('wrong');
+      });
+      var a = card.querySelector('.yans'); a.hidden = false;
+      a.querySelector('.yans-k').textContent = ok ? '答对了' : '答错了 · 正确答案：' + q.o[q.a];
+      a.querySelector('.yans-w').textContent = q.why;
+      a.querySelector('.yans-s').textContent = '来源：' + q.src;
+      done++; if (ok) right++;
+      st.seen[k] = 1;
+      if (ok) { st.ok[k] = 1; delete st.wrong[k]; } else { st.wrong[k] = 1; delete st.ok[k]; }
+      save(); stat();
+    });
+    document.getElementById('yd-tabs').addEventListener('click', function (e) {
+      var b = e.target.closest('.ytab'); if (!b) return;
+      filter = b.dataset.c; tabs(); newRound();
+    });
+    document.getElementById('yd-size').addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      size = +b.dataset.n;
+      this.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      newRound();
+    });
+    document.getElementById('yd-new').addEventListener('click', function () {
+      newRound();
+      var y = document.getElementById('yydrill').getBoundingClientRect().top + scrollY - 64;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+    tabs(); newRound();
   })();
 </script>
 </body>
