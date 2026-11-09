@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="6b998a81f2" />
+<meta name="build-id" content="5f06b1c523" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -2739,6 +2739,14 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .ya-row em{display:block;font-style:normal;font-size:11px;line-height:1.6;color:var(--mu);margin-top:3px}
 .ya-note{margin:12px 0 0;padding:10px 13px;border-left:2px solid var(--line-strong);background:var(--paper-2);
   font-size:12px;line-height:1.95;color:var(--ink-3)}
+
+/* 刷题：本轮记录 */
+.yd-log{display:flex;flex-wrap:wrap;gap:8px;font-size:11.5px;color:var(--mu);margin:-4px 0 14px}
+.yd-log b{color:var(--ink-2);font-size:11px;letter-spacing:.08em;margin-right:2px}
+.yd-log span{padding:3px 8px;border:1px solid var(--line);background:var(--paper-2);border-radius:2px}
+.yd-log i{font-style:normal;color:var(--accent);margin:0 2px}
+.yd-log .lg-ok{border-color:rgba(74,124,89,.4);color:#4a7c59}
+.yd-log .lg-no{border-color:rgba(156,58,47,.45);color:var(--accent)}
 </style>
 </head>
 <body>
@@ -3020,6 +3028,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <button class="yy-shuffle" id="yd-new">换一批</button>
     </div>
     <div class="yd-stat" id="yd-stat"></div>
+    <div class="yd-log" id="yd-log"></div>
     <div id="yd-list"></div>
     <div class="yy-foot"><span id="yd-score"></span></div>
   </div>
@@ -10640,7 +10649,9 @@ new MutationObserver(() => {
       });
       var a = box.querySelector('.yans'); a.hidden = false;
       a.querySelector('.yans-k').textContent = ok ? '答对了' : '答案是 ' + 'ABCDE'[cur.o.indexOf(cur.o[cur.a])] + '（选项位置已打乱，以文字为准）';
-      a.querySelector('.yans-k').textContent = ok ? '答对了' : '答错了 · 正确答案：' + cur.o[cur.a];
+      a.querySelector('.yans-k').textContent = (ok ? '✅ 答对了' : '❌ 答错了') +
+        ' · 你选：' + 'ABCDE'[pos] + ' ' + curOpts[pos].t + ' ｜ 正确：' + 'ABCDE'[cur.a] + ' ' + cur.o[cur.a];
+      a.querySelector('.yans-k').setAttribute('data-ok', ok ? '1' : '0');
       a.querySelector('.yans-w').textContent = cur.why;
       a.querySelector('.yans-s').textContent = '来源：' + cur.src;
 
@@ -10752,7 +10763,9 @@ new MutationObserver(() => {
         if (n === pos && !ok) b.classList.add('wrong');
       });
       var a = box.querySelector('.yans'); a.hidden = false;
-      a.querySelector('.yans-k').textContent = ok ? '答对了' : '答错了 · 正确答案：' + cur.o[cur.a];
+      a.querySelector('.yans-k').textContent = (ok ? '✅ 答对了' : '❌ 答错了') +
+        ' · 你选：' + opts[pos].t + ' ｜ 正确：' + cur.o[cur.a];
+      a.querySelector('.yans-k').setAttribute('data-ok', ok ? '1' : '0');
       a.querySelector('.yans-w').textContent = cur.why;
       a.querySelector('.yans-s').textContent = '来源：' + cur.src;
     }
@@ -10946,7 +10959,7 @@ new MutationObserver(() => {
     function ky(q) { return q.q.slice(0, 42); }
     function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
     var cats = ['全部'].concat(Object.keys(ALL.reduce(function (a, q) { a[q.cat] = 1; return a; }, {})));
-    var filter = '全部', size = 20, round = [], done = 0, right = 0;
+    var filter = '全部', size = 20, round = [], done = 0, right = 0, log = [];
     var $c = document.getElementById('yd-count');
     if ($c) $c.textContent = '（' + ALL.length + ' 题）';
 
@@ -10973,6 +10986,14 @@ new MutationObserver(() => {
         '<span>累计正确率 <b>' + (n ? Math.round(ok / n * 100) : 0) + '%</b></span>' +
         '<span>错题 <b>' + wr + '</b></span>';
     }
+    function drawLog() {
+      var el = document.getElementById('yd-log'); if (!el) return;
+      if (!log.length) { el.innerHTML = ''; return; }
+      el.innerHTML = '<b>本轮记录</b>' + log.slice(0, 8).map(function (r) {
+        return '<span class="' + (r.ok ? 'lg-ok' : 'lg-no') + '">' + (r.ok ? '✓' : '✗') +
+          '<i>' + r.pick + '</i>→<i>' + r.cor + '</i> ' + r.q + '</span>';
+      }).join('');
+    }
     function newRound() {
       var list = pool();
       var fresh = list.filter(function (q) { return !st.seen[ky(q)]; });
@@ -10983,7 +11004,7 @@ new MutationObserver(() => {
       var last = localStorage.getItem('tcm.yd.lastFirst');
       if (deck.length > 1 && last && ky(deck[0]) === last) { var t0 = deck.shift(); deck.push(t0); }
       if (deck.length) localStorage.setItem('tcm.yd.lastFirst', ky(deck[0]));
-      round = deck; done = 0; right = 0;
+      round = deck; done = 0; right = 0; log = []; drawLog();
       if (!round.length) { box.innerHTML = '<article class="ydq"><h4>这个类别暂时没有题</h4></article>'; stat(); return; }
       box.innerHTML = round.map(function (q, i) {
         var opts = q.o.map(function (t, n2) { return { t: t, n: n2 }; });
@@ -11007,13 +11028,16 @@ new MutationObserver(() => {
         if (x === b && !ok) x.classList.add('wrong');
       });
       var a = card.querySelector('.yans'); a.hidden = false;
-      a.querySelector('.yans-k').textContent = ok ? '答对了' : '答错了 · 正确答案：' + q.o[q.a];
+      a.querySelector('.yans-k').textContent = (ok ? '✅ 答对了' : '❌ 答错了') +
+        ' · 你选：' + 'ABCDE'[+b.dataset.n] + ' ' + q.o[picked] + ' ｜ 正确：' + 'ABCDE'[q.a] + ' ' + q.o[q.a];
+      a.querySelector('.yans-k').setAttribute('data-ok', ok ? '1' : '0');
       a.querySelector('.yans-w').textContent = q.why;
       a.querySelector('.yans-s').textContent = '来源：' + q.src;
       done++; if (ok) right++;
       st.seen[k] = 1;
       if (ok) { st.ok[k] = 1; delete st.wrong[k]; } else { st.wrong[k] = 1; delete st.ok[k]; }
-      save(); stat();
+      log.unshift({ ok: ok, pick: 'ABCDE'[+b.dataset.n], cor: 'ABCDE'[q.a], q: q.q.slice(0, 22) });
+      save(); stat(); drawLog();
     });
     document.getElementById('yd-tabs').addEventListener('click', function (e) {
       var b = e.target.closest('.ytab'); if (!b) return;
