@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="99e3823289" />
+<meta name="build-id" content="241386a13c" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -2747,6 +2747,36 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .yd-log i{font-style:normal;color:var(--accent);margin:0 2px}
 .yd-log .lg-ok{border-color:rgba(74,124,89,.4);color:#4a7c59}
 .yd-log .lg-no{border-color:rgba(156,58,47,.45);color:var(--accent)}
+
+/* ── 阴阳 · 题库：六级 ── */
+.bank-sum{display:flex;flex-wrap:wrap;gap:18px;font-size:12.5px;color:var(--mu);margin:0 0 16px;padding:10px 14px;border:1px solid var(--line);background:var(--paper-2);border-radius:3px}
+.bank-sum b{color:var(--ink);font-size:15px;margin-left:4px}
+.lv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:14px;margin-bottom:8px}
+.lv-card{position:relative;display:flex;flex-direction:column;gap:7px;text-align:left;padding:18px 18px 16px 22px;
+  border:1px solid var(--line);background:var(--paper-2);border-radius:3px;cursor:pointer;transition:.25s;color:inherit;font-family:inherit}
+.lv-card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 10px 26px rgba(0,0,0,.09)}
+.lv-no{position:absolute;left:0;top:16px;width:22px;text-align:center;font-family:"Songti SC",serif;font-size:13px;color:var(--accent);opacity:.55}
+.lv-t{font-size:16.5px;color:var(--ink);letter-spacing:.02em}
+.lv-sub{font-size:12px;color:var(--mu);line-height:1.6}
+.lv-bar{display:block;height:3px;background:var(--line);border-radius:2px;overflow:hidden;margin:4px 0 2px}
+.lv-bar i{display:block;height:100%;background:var(--accent);transition:width .4s}
+.lv-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--mu)}
+.lv-meta em{font-style:normal}
+.lv-go{font-size:12px;color:var(--accent);letter-spacing:.06em}
+.lv-done{border-color:rgba(74,124,89,.45)}
+.lv-wrong{background:transparent;border-style:dashed}
+.lv-panel{margin-top:6px}
+.lv-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.lv-head b{font-family:"Songti SC",serif;font-size:19px;color:var(--ink);font-weight:600}
+.lv-head span{font-size:12px;color:var(--mu);margin-left:auto}
+@media(max-width:860px){
+  .lv-grid{grid-template-columns:1fr}
+  .lv-card{padding:15px 15px 14px 20px}
+  .bank-sum{gap:12px;font-size:12px;padding:9px 12px}
+  .bank-sum b{font-size:14px}
+  .lv-head b{font-size:17px}
+  .lv-head span{width:100%;margin-left:0}
+}
 </style>
 </head>
 <body>
@@ -2759,7 +2789,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   <button class="nav-toggle" id="nav-toggle" aria-label="目录">目录 ▾</button>
   <a href="#route">学习路线</a>
   <a href="#yy" id="nav-yy">阴阳 · 学透</a>
-  <a href="#yydrill" id="nav-drill">阴阳 · 刷题</a>
+  <a href="#yydrill" id="nav-drill">阴阳 · 题库</a>
   <a href="#liujing" id="nav-lj">六经 · 入门</a>
   <a href="#bing" id="nav-bing">常见病 · 取穴</a>
   <a href="#body3d" id="nav-3d">3D · 人体</a>
@@ -2797,7 +2827,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <nav class="toc" aria-label="章节">
       <a href="#route"><i>一</i><span>学习路线</span></a>
       <a href="#yy"><i>二</i><span>阴阳 · 学透</span></a>
-      <a href="#yydrill"><i>三</i><span>阴阳 · 刷题</span></a>
+      <a href="#yydrill"><i>三</i><span>阴阳 · 题库</span></a>
       <a href="#liujing"><i>四</i><span>六经 · 入门</span></a>
       <a href="#bing"><i>五</i><span>常见病 · 取穴</span></a>
       <a href="#body3d"><i>六</i><span>3D · 人体穴位</span></a>
@@ -2861,7 +2891,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <a href="#yy-teacher">④ 名师</a>
       <a href="#yy-case">⑤ 病例 · 三步判断</a>
       <a href="#yy-method">⑥ 方法论</a>
-      <a href="#yy-quiz-h">⑦ 题库 243</a>
+      <a href="#yydrill">⑦ 题库 · 六级</a>
       <a href="#yy-recall-w">⑧ 背诵 · 计划</a>
     </nav>
     <div class="sec-h">
@@ -2875,7 +2905,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 </section>
 
 <section id="quiz">
-  <div class="wrap" style="padding-bottom:0"><p class="lead" style="margin:0 0 4px">这 18 题只够入门。要吃透，去 <a href="#yydrill" style="color:var(--accent)">阴阳 · 刷题（243 题，每次随机）</a>。</p></div>
+  <div class="wrap" style="padding-bottom:0"><p class="lead" style="margin:0 0 4px">这 18 题只够入门。要吃透，去 <a href="#yydrill" style="color:var(--accent)">阴阳 · 题库（六级，每次随机）</a>。</p></div>
   <div class="wrap">
     <div class="sec-h">
       <span class="eyebrow">Practice</span>
@@ -2969,8 +2999,10 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     </div>
 
     <div class="yy-block">
-      <h3 class="yy-h" id="yy-quiz-h">六、题库 <span id="yy-count" class="yy-count"></span></h3>
-      <p class="lead">全部带答案与解析，每条都标了来源：教材考点的标「医学教育网/环球网校」，我自己按考点编的会明确标「自编」。</p>
+      <h3 class="yy-h" id="yy-quiz-h">六、题库</h3>
+      <p class="lead">题库已经搬到独立的一节：<b>阴阳 · 题库</b>，按由浅入深六级排列（入门 → 关系 → 病理 → 治则 → 原文 → 医案），每级单独统计进度，答错自动进错题本。</p>
+      <p><a href="#yydrill" class="yy-btn" style="display:inline-block;text-decoration:none">进题库刷题 <span id="yy-count" class="yy-count"></span></a></p>
+      <div hidden>
       <div class="yy-bar">
         <div class="yy-tabs" id="yy-tabs"></div>
         <div class="yy-mode" id="yy-mode">
@@ -2983,6 +3015,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <div class="yy-foot">
         <button class="yy-btn" id="yy-reset">清空我的记录</button>
         <span id="yy-score"></span>
+      </div>
       </div>
     </div>
     <div class="yy-block">
@@ -3018,19 +3051,30 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 
 <section id="yydrill" class="band">
   <div class="wrap">
-    <div class="sec-h"><span class="sec-k">刷题</span><h2>阴阳 · 刷题 <span id="yd-count" class="yy-count"></span></h2></div>
-    <p class="lead">一轮 20 题，每次进来都是重新抽的，不会老是那几道。答完立刻判对错，给解析和出处；答错的自动进错题本，下一轮优先出现。</p>
-    <div class="yd-bar">
-      <div class="yy-tabs" id="yd-tabs"></div>
-      <div class="yy-mode" id="yd-size">
-        <button data-n="10">10 题</button><button data-n="20" class="on">20 题</button><button data-n="50">50 题</button>
+    <div class="sec-h"><span class="sec-k">题库</span><h2>阴阳 · 题库 <span id="yd-count" class="yy-count"></span></h2></div>
+    <p class="lead">一条线走到底：<b>入门（阴阳是什么）→ 关系（四对怎么转）→ 病理（坏了什么样）→ 治则（怎么调回来）→ 原文（三篇逐句）→ 医案（上手判断）</b>。每级独立记进度，答错自动进错题本，答对一次就移出。</p>
+
+    <div class="bank-sum" id="yd-sum"></div>
+    <div class="lv-grid" id="yd-levels"></div>
+
+    <div class="lv-panel" id="yd-panel" hidden>
+      <div class="lv-head">
+        <button class="yy-btn" id="yd-back">← 返回六级</button>
+        <b id="yd-title"></b>
+        <span id="yd-prog"></span>
       </div>
-      <button class="yy-shuffle" id="yd-new">换一批</button>
+      <div class="yd-bar">
+        <div class="yy-tabs" id="yd-tabs"></div>
+        <div class="yy-mode" id="yd-size">
+          <button data-n="10">10 题</button><button data-n="20" class="on">20 题</button><button data-n="50">50 题</button>
+        </div>
+        <button class="yy-shuffle" id="yd-new">换一批</button>
+      </div>
+      <div class="yd-stat" id="yd-stat"></div>
+      <div class="yd-log" id="yd-log"></div>
+      <div id="yd-list"></div>
+      <div class="yy-foot"><span id="yd-score"></span></div>
     </div>
-    <div class="yd-stat" id="yd-stat"></div>
-    <div class="yd-log" id="yd-log"></div>
-    <div id="yd-list"></div>
-    <div class="yy-foot"><span id="yd-score"></span></div>
   </div>
 </section>
 
@@ -10952,79 +10996,163 @@ new MutationObserver(() => {
     }, 1200);
   })();
 
-  /* ───────── 阴阳 · 刷题（独立引擎，每次重新抽题） ───────── */
+  /* ───────── 阴阳 · 题库（六级，由浅入深） ───────── */
   (function () {
-    var box = document.getElementById('yd-list');
-    if (!box || !window.YY || !window.YY.quiz) return;
+    var levelsEl = document.getElementById('yd-levels');
+    if (!levelsEl || !window.YY || !window.YY.quiz) return;
     var ALL = window.YY.quiz, K = 'tcm.yd.v1', st = {};
     try { st = JSON.parse(localStorage.getItem(K) || '{}'); } catch (e) { st = {}; }
     st.seen = st.seen || {}; st.ok = st.ok || {}; st.wrong = st.wrong || {};
     function save() { try { localStorage.setItem(K, JSON.stringify(st)); } catch (e) {} }
     function ky(q) { return q.q.slice(0, 42); }
     function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-    var cats = ['全部'].concat(Object.keys(ALL.reduce(function (a, q) { a[q.cat] = 1; return a; }, {})));
-    var filter = '全部', size = 20, round = [], done = 0, right = 0, log = [];
-    var $c = document.getElementById('yd-count');
-    if ($c) $c.textContent = '（' + ALL.length + ' 题）';
+    function pct(a, b) { return b ? Math.round(a / b * 100) : 0; }
+
+    var LV = [
+      { id: 'L1', no: '一', t: '入门 · 阴阳是什么', sub: '定义、属性、归类 —— 先把两把尺子拿稳', cats: ['概念'] },
+      { id: 'L2', no: '二', t: '关系 · 四对关系', sub: '对立制约 · 互根互用 · 消长平衡 · 相互转化', cats: ['关系'] },
+      { id: 'L3', no: '三', t: '病理 · 偏胜偏衰', sub: '阴阳一失调，病是什么样', cats: ['病理'] },
+      { id: 'L4', no: '四', t: '治则 · 怎么调回来', sub: '寒者热之、从阴引阳、阳病治阴', cats: ['治则'] },
+      { id: 'L5', no: '五', t: '经典原文 · 三篇逐句', sub: '应象大论 · 生气通天论 · 至真要大论', cats: ['原文', '原文·应象大论', '原文·通天论', '原文·至真论'] },
+      { id: 'L6', no: '六', t: '医案 · 综合判断', sub: '拿到一个人，先分阴阳再落手', cats: ['医案'] }
+    ];
+    var L5SUB = [{ c: '', t: '全部' }, { c: '原文·应象大论', t: '应象大论' }, { c: '原文·通天论', t: '生气通天论' }, { c: '原文·至真论', t: '至真要大论' }, { c: '原文', t: '通用原文' }];
+
+    var state = { lv: null, sub: '', size: 20, round: [], done: 0, right: 0, log: [] };
+    var $count = document.getElementById('yd-count');
+    if ($count) $count.textContent = '（' + ALL.length + ' 题）';
+
+    function qsOf(lv) { return ALL.filter(function (q) { return lv.cats.indexOf(q.cat) >= 0; }); }
+    function levelById(id) { for (var i = 0; i < LV.length; i++) if (LV[i].id === id) return LV[i]; return null; }
+
+    function renderLevels() {
+      var sum = document.getElementById('yd-sum');
+      var seenAll = ALL.filter(function (q) { return st.seen[ky(q)]; }).length;
+      var okAll = ALL.filter(function (q) { return st.ok[ky(q)]; }).length;
+      if (sum) sum.innerHTML =
+        '<span>总题 <b>' + ALL.length + '</b></span>' +
+        '<span>已做 <b>' + seenAll + '</b></span>' +
+        '<span>正确率 <b>' + pct(okAll, seenAll) + '%</b></span>' +
+        '<span>错题 <b>' + Object.keys(st.wrong).length + '</b></span>';
+      var html = LV.map(function (lv) {
+        var qs = qsOf(lv), seen = 0, ok = 0;
+        qs.forEach(function (q) { var k = ky(q); if (st.seen[k]) { seen++; if (st.ok[k]) ok++; } });
+        var p = pct(seen, qs.length), done = qs.length && seen === qs.length;
+        return '<button class="lv-card' + (done ? ' lv-done' : '') + '" data-lv="' + lv.id + '">' +
+          '<span class="lv-no">' + lv.no + '</span>' +
+          '<b class="lv-t">' + lv.t + '</b>' +
+          '<span class="lv-sub">' + lv.sub + '</span>' +
+          '<span class="lv-bar"><i style="width:' + p + '%"></i></span>' +
+          '<span class="lv-meta"><em>' + qs.length + ' 题</em><em>已做 ' + seen + '</em>' +
+          '<em>' + (seen ? '正确率 ' + pct(ok, seen) + '%' : '未开始') + '</em></span>' +
+          '<span class="lv-go">' + (seen ? (done ? '再刷一轮' : '继续') : '开始') + ' →</span></button>';
+      }).join('');
+      var wr = Object.keys(st.wrong).length;
+      html += '<button class="lv-card lv-wrong" data-lv="WRONG"><span class="lv-no">✗</span>' +
+        '<b class="lv-t">错题本</b><span class="lv-sub">答错过的题都在这里，答对一次就移出</span>' +
+        '<span class="lv-bar"><i style="width:' + pct(wr, ALL.length) + '%"></i></span>' +
+        '<span class="lv-meta"><em>' + wr + ' 题</em><em>跨全部六级</em></span>' +
+        '<span class="lv-go">复习 →</span></button>';
+      levelsEl.innerHTML = html;
+    }
 
     function pool() {
-      if (filter === '错题') return ALL.filter(function (q) { return st.wrong[ky(q)]; });
-      if (filter === '全部') return ALL.slice();
-      return ALL.filter(function (q) { return q.cat === filter; });
+      if (state.lv === 'WRONG') return ALL.filter(function (q) { return st.wrong[ky(q)]; });
+      var lv = levelById(state.lv); if (!lv) return [];
+      var qs = qsOf(lv);
+      if (state.sub) qs = qs.filter(function (q) { return q.cat === state.sub; });
+      return qs;
     }
-    function tabs() {
-      var t = document.getElementById('yd-tabs'); if (!t) return;
-      t.innerHTML = cats.map(function (c) {
-        var n = c === '全部' ? ALL.length : ALL.filter(function (q) { return q.cat === c; }).length;
-        return '<button class="ytab' + (c === filter ? ' on' : '') + '" data-c="' + c + '">' + c + '<i>' + n + '</i></button>';
-      }).join('') + '<button class="ytab ytab-x' + (filter === '错题' ? ' on' : '') + '" data-c="错题">错题<i>' +
-        ALL.filter(function (q) { return st.wrong[ky(q)]; }).length + '</i></button>';
+
+    function drawSubs() {
+      var tabs = document.getElementById('yd-tabs'); if (!tabs) return;
+      var lv = levelById(state.lv);
+      if (!lv || lv.id !== 'L5') { tabs.innerHTML = ''; tabs.style.display = 'none'; return; }
+      tabs.style.display = '';
+      tabs.innerHTML = L5SUB.map(function (s) {
+        var qs = qsOf(lv).filter(function (q) { return !s.c || q.cat === s.c; });
+        return '<button class="ytab' + (state.sub === s.c ? ' on' : '') + '" data-c="' + s.c + '">' + s.t + '<i>' + qs.length + '</i></button>';
+      }).join('');
     }
+
     function stat() {
-      var n = Object.keys(st.seen).length, ok = Object.keys(st.ok).length;
-      var wr = Object.keys(st.wrong).length;
-      document.getElementById('yd-stat').innerHTML =
-        '<span>本轮 <b>' + done + ' / ' + round.length + '</b></span>' +
-        '<span>本轮正确 <b>' + right + '</b></span>' +
-        '<span>累计做过 <b>' + n + ' / ' + ALL.length + '</b></span>' +
-        '<span>累计正确率 <b>' + (n ? Math.round(ok / n * 100) : 0) + '%</b></span>' +
-        '<span>错题 <b>' + wr + '</b></span>';
+      var el = document.getElementById('yd-stat'); if (!el) return;
+      var poolN = pool().length;
+      var seen = pool().filter(function (q) { return st.seen[ky(q)]; }).length;
+      el.innerHTML =
+        '<span>本轮 <b>' + state.done + ' / ' + state.round.length + '</b></span>' +
+        '<span>本轮正确 <b>' + state.right + '</b></span>' +
+        '<span>本级进度 <b>' + seen + ' / ' + poolN + '</b></span>' +
+        '<span>本级正确率 <b>' + pct(pool().filter(function (q) { return st.ok[ky(q)]; }).length, seen) + '%</b></span>';
+      var pr = document.getElementById('yd-prog');
+      if (pr) pr.textContent = '已做 ' + seen + ' / ' + poolN + ' 题';
     }
+
     function drawLog() {
       var el = document.getElementById('yd-log'); if (!el) return;
-      if (!log.length) { el.innerHTML = ''; return; }
-      el.innerHTML = '<b>本轮记录</b>' + log.slice(0, 8).map(function (r) {
+      if (!state.log.length) { el.innerHTML = ''; return; }
+      el.innerHTML = '<b>本轮记录</b>' + state.log.slice(0, 8).map(function (r) {
         return '<span class="' + (r.ok ? 'lg-ok' : 'lg-no') + '">' + (r.ok ? '✓' : '✗') +
           '<i>' + r.pick + '</i>→<i>' + r.cor + '</i> ' + r.q + '</span>';
       }).join('');
     }
+
     function newRound() {
+      var box = document.getElementById('yd-list');
       var list = pool();
       var fresh = list.filter(function (q) { return !st.seen[ky(q)]; });
       var wrongs = list.filter(function (q) { return st.wrong[ky(q)]; });
       var rest = list.filter(function (q) { return st.seen[ky(q)] && !st.wrong[ky(q)]; });
-      var deck = shuffle(wrongs).concat(shuffle(fresh), shuffle(rest)).slice(0, Math.min(size, list.length));
+      var deck = shuffle(wrongs).concat(shuffle(fresh), shuffle(rest)).slice(0, Math.min(state.size, list.length));
       deck = shuffle(deck);
       var last = localStorage.getItem('tcm.yd.lastFirst');
       if (deck.length > 1 && last && ky(deck[0]) === last) { var t0 = deck.shift(); deck.push(t0); }
       if (deck.length) localStorage.setItem('tcm.yd.lastFirst', ky(deck[0]));
-      round = deck; done = 0; right = 0; log = []; drawLog();
-      if (!round.length) { box.innerHTML = '<article class="ydq"><h4>这个类别暂时没有题</h4></article>'; stat(); return; }
-      box.innerHTML = round.map(function (q, i) {
-        var opts = q.o.map(function (t, n2) { return { t: t, n: n2 }; });
-        opts = shuffle(opts);
+      state.round = deck; state.done = 0; state.right = 0; state.log = [];
+      drawLog(); stat();
+      if (!deck.length) {
+        box.innerHTML = '<article class="ydq"><h4>' + (state.lv === 'WRONG' ? '错题本是空的 —— 继续保持' : '这一级暂时没有题') + '</h4></article>';
+        return;
+      }
+      box.innerHTML = deck.map(function (q, i) {
+        var opts = shuffle(q.o.map(function (t, n2) { return { t: t, n: n2 }; }));
         return '<article class="ydq" data-i="' + i + '"><div class="ydq-top"><span class="yq-cat">' + q.cat +
-          '</span><span>' + (i + 1) + ' / ' + round.length + '</span></div>' +
+          '</span><span>' + (i + 1) + ' / ' + deck.length + '</span></div>' +
           '<h4>' + q.q + '</h4><div class="yopts">' + opts.map(function (o, n2) {
             return '<button class="yopt" data-n="' + n2 + '" data-r="' + o.n + '"><em>' + 'ABCDE'[n2] + '</em><span>' + o.t + '</span></button>';
           }).join('') + '</div>' +
           '<div class="yans" hidden><b class="yans-k"></b><p class="yans-w"></p><p class="yans-s"></p></div></article>';
       }).join('');
-      stat();
     }
-    box.addEventListener('click', function (e) {
+
+    function open(lvId) {
+      state.lv = lvId; state.sub = '';
+      var lv = levelById(lvId);
+      document.getElementById('yd-levels').hidden = true;
+      var sum = document.getElementById('yd-sum'); if (sum) sum.hidden = true;
+      var panel = document.getElementById('yd-panel'); panel.hidden = false;
+      var t = document.getElementById('yd-title');
+      if (t) t.innerHTML = lvId === 'WRONG' ? '错题本' : (lv.no + '、' + lv.t);
+      drawSubs(); newRound();
+      panel.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+    function back() {
+      state.lv = null; state.sub = '';
+      document.getElementById('yd-panel').hidden = true;
+      document.getElementById('yd-levels').hidden = false;
+      var sum = document.getElementById('yd-sum'); if (sum) sum.hidden = false;
+      renderLevels();
+    }
+
+    levelsEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.lv-card'); if (!b) return;
+      open(b.dataset.lv);
+    });
+    document.getElementById('yd-back').addEventListener('click', back);
+
+    document.getElementById('yd-list').addEventListener('click', function (e) {
       var b = e.target.closest('.yopt'); if (!b || b.classList.contains('locked')) return;
-      var card = b.closest('.ydq'), i = +card.dataset.i, q = round[i];
+      var card = b.closest('.ydq'), i = +card.dataset.i, q = state.round[i];
       var picked = +b.dataset.r, ok = picked === q.a, k = ky(q);
       card.querySelectorAll('.yopt').forEach(function (x) {
         x.classList.add('locked');
@@ -11038,28 +11166,26 @@ new MutationObserver(() => {
       a.querySelector('.yans-k').setAttribute('data-ok', ok ? '1' : '0');
       a.querySelector('.yans-w').textContent = q.why;
       a.querySelector('.yans-s').textContent = '来源：' + q.src;
-      done++; if (ok) right++;
+      state.done++; if (ok) state.right++;
       st.seen[k] = 1;
       if (ok) { st.ok[k] = 1; delete st.wrong[k]; } else { st.wrong[k] = 1; delete st.ok[k]; }
-      log.unshift({ ok: ok, pick: 'ABCDE'[+b.dataset.n], cor: 'ABCDE'[corPos], q: q.q.slice(0, 22) });
+      state.log.unshift({ ok: ok, pick: 'ABCDE'[+b.dataset.n], cor: 'ABCDE'[corPos], q: q.q.slice(0, 22) });
       save(); stat(); drawLog();
     });
+
     document.getElementById('yd-tabs').addEventListener('click', function (e) {
       var b = e.target.closest('.ytab'); if (!b) return;
-      filter = b.dataset.c; tabs(); newRound();
+      state.sub = b.dataset.c; drawSubs(); newRound();
     });
     document.getElementById('yd-size').addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
-      size = +b.dataset.n;
+      state.size = +b.dataset.n;
       this.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
       newRound();
     });
-    document.getElementById('yd-new').addEventListener('click', function () {
-      newRound();
-      var y = document.getElementById('yydrill').getBoundingClientRect().top + scrollY - 64;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    });
-    tabs(); newRound();
+    document.getElementById('yd-new').addEventListener('click', function () { newRound(); });
+
+    renderLevels();
   })();
 </script>
 </body>
