@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="01a0205be2" />
+<meta name="build-id" content="6e0972df08" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3160,6 +3160,63 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .plq-end{margin-top:12px;font-size:12.5px;color:var(--ink);background:color-mix(in srgb,var(--accent) 9%,transparent);
   border-radius:10px;padding:10px 12px}
 @media(max-width:640px){.plq{padding:11px 12px}.plq-b{font-size:12px;padding:7px 9px}}
+
+/* ───────── 阴阳 · 四象补讲 ───────── */
+.a4-sub{margin:20px 0 8px;font-size:13px;letter-spacing:.1em;color:var(--ink-3);font-weight:600}
+.a4-why{display:grid;gap:10px;margin:14px 0 4px}
+.a4-w{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;
+  border:1px solid color-mix(in srgb,var(--line) 75%,transparent);border-radius:12px;padding:12px 14px;background:color-mix(in srgb,var(--paper) 94%,transparent)}
+.a4-w>b{width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600}
+.a4-w h5{margin:0 0 4px;font-size:13px;color:var(--ink)}
+.a4-w p{margin:0;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+.a4-t{border:1px solid color-mix(in srgb,var(--line) 80%,transparent);border-radius:12px;overflow:hidden;margin-bottom:6px}
+.a4-h,.a4-r{display:grid;align-items:stretch}
+.a4-t.wu .a4-h,.a4-t.wu .a4-r{grid-template-columns:58px 120px 150px minmax(150px,1fr)}
+.a4-t.day .a4-h,.a4-t.day .a4-r{grid-template-columns:130px 110px 1fr}
+.a4-t.si .a4-h,.a4-t.si .a4-r{grid-template-columns:80px 130px 1fr}
+.a4-h{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.a4-h span{font-size:11.5px;letter-spacing:.08em;color:var(--ink-3);padding:8px 12px}
+.a4-r{border-top:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+.a4-r span{padding:9px 12px;font-size:12.5px;line-height:1.7;color:var(--ink-2);border-left:1px solid color-mix(in srgb,var(--line) 45%,transparent)}
+.a4-r span:first-child{border-left:0;color:var(--ink)}
+.a4-r b{color:var(--ink)}
+.a4-r em{display:block;font-style:normal;font-size:11px;color:var(--ink-3);margin-top:2px}
+.a4-san{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.a4-s{border:1px solid color-mix(in srgb,var(--line) 75%,transparent);border-radius:12px;padding:12px 14px;background:color-mix(in srgb,var(--paper) 94%,transparent)}
+.a4-s b{font-size:13.5px;color:var(--ink);margin-right:8px}
+.a4-s i{font-style:normal;font-size:11px;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);border-radius:5px;padding:1px 6px}
+.a4-s p{margin:7px 0 0;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+@media(max-width:760px){
+  .a4-t.wu .a4-h,.a4-t.wu .a4-r{grid-template-columns:44px 1fr 1fr}
+  .a4-t.wu .a4-h span:nth-child(3),.a4-t.wu .a4-r span:nth-child(3){display:none}
+  .a4-t.day .a4-h,.a4-t.day .a4-r{grid-template-columns:1fr 1fr}
+  .a4-t.day .a4-h span:nth-child(3),.a4-t.day .a4-r span:nth-child(3){display:none}
+}
+
+/* ───────── 阴阳 · 病理四偏与治则 ───────── */
+.b4-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 6px}
+.b4-c{border:1px solid color-mix(in srgb,var(--line) 80%,transparent);border-radius:14px;padding:14px 16px;background:color-mix(in srgb,var(--paper) 95%,transparent)}
+.b4-c header{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.b4-c header b{font-size:15px;color:var(--ink);letter-spacing:.04em}
+.b4-c header em{font-style:normal;font-size:11.5px;color:#A63A2E;border:1px solid color-mix(in srgb,#A63A2E 35%,transparent);border-radius:5px;padding:1px 6px}
+.b4-y{margin:0 0 6px;font-size:12.5px;color:var(--ink-3);letter-spacing:.02em}
+.b4-b{margin:0 0 8px;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+.b4-t{margin:0;font-size:12.5px;line-height:1.75;color:var(--ink);background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:9px;padding:8px 10px}
+.b4-t i,.b4-mt i{font-style:normal;font-size:10.5px;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);
+  border-radius:4px;padding:0 5px;margin-right:7px;vertical-align:1px}
+.b4-s{display:block;font-size:10.5px;color:var(--ink-3);margin-top:7px;line-height:1.6}
+.b4-more{display:grid;gap:10px;margin-top:4px}
+.b4-m{border-left:2px solid color-mix(in srgb,var(--accent) 35%,transparent);padding:2px 0 2px 13px}
+.b4-m>b{font-size:13.5px;color:var(--ink)}
+.b4-m p{margin:5px 0;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+.b4-mt{margin:0;color:var(--ink)}
+.a4-t.rule .a4-r{grid-template-columns:96px minmax(0,1fr)}
+.a4-t.rule .a4-r.br span{padding:9px 12px}
+.a4-t.rule .a4-r.br span:first-child{border-left:0;border-top:0}
+.b4-tip{margin:14px 0 0;font-size:12.5px;line-height:1.85;color:var(--ink-2);background:color-mix(in srgb,#B8862B 10%,transparent);border-radius:10px;padding:11px 13px}
+.b4-tip b{color:var(--ink);margin-right:6px}
+@media(max-width:700px){.b4-grid{grid-template-columns:1fr}.a4-t.rule .a4-r{grid-template-columns:80px minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -3350,9 +3407,37 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <div class="yy-attr" id="yy-attr"></div>
     </div>
 
+    <div class="yy-block" id="yy-attr4-block">
+      <h3 class="yy-h" id="yy-attr4-h">二·补：四象与三阴三阳——把「阳中之阴」一次讲透</h3>
+      <p class="lead" id="yy-attr4-lead"></p>
+      <div class="a4-why" id="yy-attr4-why"></div>
+      <h4 class="a4-sub">五脏 × 四象（同一个脏，两种叫法）</h4>
+      <div class="a4-host" id="yy-attr4-wu"></div>
+      <h4 class="a4-sub">昼夜四象（上午为什么是「阳中之阳」）</h4>
+      <div class="a4-host" id="yy-attr4-day"></div>
+      <h4 class="a4-sub">四时四象</h4>
+      <div class="a4-host" id="yy-attr4-si"></div>
+      <h4 class="a4-sub">三阴三阳：开 · 阖 · 枢</h4>
+      <div class="a4-san" id="yy-attr4-san"></div>
+      <h4 class="a4-sub">四句话记住</h4>
+      <div class="yy-points" id="yy-attr4-memo"></div>
+      <p class="ya-note" id="yy-attr4-src"></p>
+    </div>
+
     <div class="yy-block">
       <h3 class="yy-h">三、五组关系：定义 · 原文 · 病与治</h3>
       <div class="yy-rel" id="yy-rel"></div>
+    </div>
+
+    <div class="yy-block" id="yy-bing-block">
+      <h3 class="yy-h" id="yy-bing-h">三·补：病理四偏与治则四条（题库一半的题都在这）</h3>
+      <p class="lead" id="yy-bing-lead"></p>
+      <div class="b4-grid" id="yy-bing-core"></div>
+      <div class="b4-more" id="yy-bing-more"></div>
+      <h4 class="a4-sub">治则：四条原文 + 一条总纲</h4>
+      <div class="a4-t rule" id="yy-bing-rule"></div>
+      <p class="b4-tip" id="yy-bing-tip"></p>
+      <p class="ya-note" id="yy-bing-src"></p>
     </div>
 
 
@@ -8784,6 +8869,114 @@ window.YY_PLAN_Q = {
   14: { cat: '*', n: 40, note: '总测' }
 };
 </script>
+<script>/* 阴阳属性归类 · 四象与三阴三阳（补「阳中之阴」这一类考点的讲解）
+   原文依据：
+   ·《素问·金匮真言论》「故背为阳，阳中之阳，心也；背为阳，阳中之阴，肺也；腹为阴，阴中之阴，肾也；
+     腹为阴，阴中之阳，肝也；腹为阴，阴中之至阴，脾也。」
+   ·《素问·金匮真言论》「平旦至日中，天之阳，阳中之阳也；日中至黄昏，天之阳，阳中之阴也；
+     合夜至鸡鸣，天之阴，阴中之阴也；鸡鸣至平旦，天之阴，阴中之阳也。」
+   ·《素问·六节藏象论》「心者……为阳中之太阳，通于夏气；肺者……为阳中之少阴，通于秋气；
+     肾者……为阴中之太阴，通于冬气；肝者……为阴中之少阳，通于春气；脾者……为阴中之至阴，通于土气。」
+     （版本异文：肺一作「阳中之太阴」、肾一作「阴中之少阴」，新校正以肺当作少阴、肾当作太阴。）
+   ·《素问·阴阳离合论》「太阳为开，阳明为阖，少阳为枢；太阴为开，厥阴为阖，少阴为枢。」
+   教材依据：《中医基础理论》（规划教材）阴阳学说·属性归类一节。 */
+window.YY_ATTR4 = {
+  lead: '「阳中之阴」不是文绉绉的说法，它是一套两步定位法：先分背腹（大阴阳），再在背或腹里分阴阳（小阴阳）。看懂这一步，五脏的属性、昼夜四时、三阴三阳，全是一张表。',
+  why: [
+    { k: '第一步：先分背腹', v: '背为阳、腹为阴（《素问·金匮真言论》）。横膈以上、背侧属阳；横膈以下、腹侧属阴。' },
+    { k: '第二步：在阳位里再分阴阳', v: '心和肺都在背（阳位）里，但心在上、属火 → 阳中之阳；肺在其下、属金而主肃降 → 阳中之阴。' },
+    { k: '腹（阴位）里再分三段', v: '肝在腹之上部、主升发 → 阴中之阳；肾在腹之下部、主藏精 → 阴中之阴；脾居中、主运化而属土 → 阴中之至阴（「至」＝到极处，不是「最阴」）。' },
+    { k: '关键理解', v: '「阳中之阴」说的是位置层次，不是「阴比阳多一点」。同一脏腑在不同层面可以有不同属性：肺在脏腑层面属阴（五脏），在部位层面属「阳中之阴」。' }
+  ],
+  wu: [
+    { z: '心', s: '阳中之阳', s2: '阳中之太阳', w: '背（阳位）· 上 · 属火', q: '通于夏气' },
+    { z: '肺', s: '阳中之阴', s2: '阳中之少阴／太阴', w: '背（阳位）· 下 · 属金', q: '通于秋气' },
+    { z: '肝', s: '阴中之阳', s2: '阴中之少阳', w: '腹（阴位）· 上 · 主升发', q: '通于春气' },
+    { z: '脾', s: '阴中之至阴', s2: '阴中之至阴', w: '腹（阴位）· 居中 · 属土', q: '通于土气（长夏）' },
+    { z: '肾', s: '阴中之阴', s2: '阴中之太阴／少阴', w: '腹（阴位）· 下 · 主藏精', q: '通于冬气' }
+  ],
+  day: [
+    { t: '平旦 → 日中', s: '阳中之阳', d: '上午，阳气升到最旺' },
+    { t: '日中 → 黄昏', s: '阳中之阴', d: '下午，阳渐退、阴渐生' },
+    { t: '合夜 → 鸡鸣', s: '阴中之阴', d: '前半夜，阴最盛' },
+    { t: '鸡鸣 → 平旦', s: '阴中之阳', d: '后半夜，阳气初动' }
+  ],
+  si: [
+    { t: '春', s: '阴中之少阳', z: '肝' },
+    { t: '夏', s: '阳中之太阳', z: '心' },
+    { t: '秋', s: '阳中之少阴', z: '肺' },
+    { t: '冬', s: '阴中之太阴', z: '肾' },
+    { t: '长夏', s: '阴中之至阴', z: '脾' }
+  ],
+  san: [
+    { n: '太阳', k: '开', v: '主表、主一身之藩篱；「太阳为开」——阳气向外敷布，故太阳主表，外邪先犯太阳。' },
+    { n: '阳明', k: '阖', v: '「阳明为阖」——阳气内收、主里实；阳明病多里热燥实。' },
+    { n: '少阳', k: '枢', v: '「少阳为枢」——居表里之间，转输内外；少阳病多见往来寒热。' },
+    { n: '太阴', k: '开', v: '「太阴为开」——主运化敷布，太阴病多见脾虚寒湿。' },
+    { n: '少阴', k: '枢', v: '「少阴为枢」——心肾水火之枢，少阴病有寒化、热化两途。' },
+    { n: '厥阴', k: '阖', v: '「厥阴为阖」——阴尽阳生，厥阴病多见寒热错杂。' }
+  ],
+  memo: [
+    '背阳腹阴是根：背上是心（阳中之阳）与肺（阳中之阴），腹里从上到下是肝（阴中之阳）、脾（阴中之至阴）、肾（阴中之阴）。',
+    '「至阴」不是最阴，是「阴到了极点要转阳」的那个中土——所以脾主长夏、主运化，是气机升降的轴。',
+    '昼夜与四时用同一套四象：上午／夏＝阳中之阳，下午／秋＝阳中之阴，前半夜／冬＝阴中之阴，后半夜／春＝阴中之阳。',
+    '三阴三阳只记开阖枢：太阳开、阳明阖、少阳枢；太阴开、厥阴阖、少阴枢。'
+  ],
+  src: '原文：《素问·金匮真言论》《素问·六节藏象论》《素问·阴阳离合论》；归纳：规划教材《中医基础理论》阴阳学说·属性归类'
+};
+</script>
+<script>/* 阴阳病理四偏 + 治则四条（补题库里大量涉及、正文讲得薄的部分）
+   原文依据：
+   ·《素问·阴阳应象大论》「阳胜则热，阴胜则寒」「阳病治阴，阴病治阳」
+   ·《素问·调经论》「阳虚则外寒，阴虚则内热，阳盛则外热，阴盛则内寒」
+   ·《素问·至真要大论》「寒者热之，热者寒之」「谨察阴阳所在而调之，以平为期」
+   ·《素问·至真要大论》「热因寒用，寒因热用，塞因塞用，通因通用，必伏其所主，而先其所因」
+     （教材写作「热因热用、寒因寒用」，指用热药治假热、用寒药治假寒）
+   ·《伤寒论·辨太阳病脉证并治上》「身大热，反欲得衣者，热在皮肤，寒在骨髓也」
+   · 王冰《黄帝内经素问注》「益火之源，以消阴翳」「壮水之主，以制阳光」
+   · 张景岳《景岳全书》「善补阳者，必于阴中求阳，则阳得阴助而生化无穷；
+     善补阴者，必于阳中求阴，则阴得阳升而泉源不竭」
+   教材依据：《中医基础理论》阴阳失调（偏盛·偏衰·互损·格拒·亡失）与治则 */
+window.YY_BING = {
+  lead: '题库里一半的题其实在考这张 2×2 表：阳／阴 × 盛／衰。四个格子，四个证，四种治法。把它背下来，病理和治则的题基本就没了。',
+  core: [
+    {
+      n: '阳偏盛', z: '实热证', y: '「阳胜则热」', b: '外感阳热之邪，或机能亢奋；壮热、面赤、口渴喜冷、烦躁、便干尿黄、脉洪数有力',
+      t: '热者寒之（实则泻之）——清热泻火', s: '《素问·阴阳应象大论》「阳胜则热」'
+    },
+    {
+      n: '阴偏盛', z: '实寒证', y: '「阴胜则寒」', b: '外感阴寒之邪，或阴寒内盛；恶寒肢冷、腹痛喜温、泻下清稀、脉沉迟有力',
+      t: '寒者热之（实则泻之）——温散里寒', s: '《素问·阴阳应象大论》「阴胜则寒」'
+    },
+    {
+      n: '阳偏衰', z: '虚寒证', y: '「阳虚则寒」', b: '阳气不足，温煦无力；畏寒喜暖、神疲乏力、自汗、小便清长、脉沉迟无力、舌淡胖',
+      t: '阴病治阳——益火之源，以消阴翳（补阳）', s: '《素问·调经论》「阳虚则外寒」；王冰注'
+    },
+    {
+      n: '阴偏衰', z: '虚热证', y: '「阴虚则热」', b: '阴液不足，制阳无力；低热、五心烦热、盗汗、口干、舌红少苔、脉细数无力',
+      t: '阳病治阴——壮水之主，以制阳光（补阴）', s: '《素问·调经论》「阴虚则内热」；王冰注'
+    }
+  ],
+  more: [
+    { n: '阴阳互损', b: '阴虚日久累及阳（阴损及阳）、阳虚日久累及阴（阳损及阴），最后成阴阳两虚。',
+      t: '阴中求阳 / 阳中求阴：补阳时佐以滋阴，补阴时佐以助阳', s: '张景岳《景岳全书》' },
+    { n: '格拒（真假）', b: '阴寒极盛把阳气格于外 → 真寒假热（身大热反欲得衣、面赤而足冷、脉大而无根）；阳热极盛把阴气格于外 → 真热假寒（身寒而手足心热、脉沉而有力）。',
+      t: '辨真假看「喜恶」与「脉之根」：喜近火／欲得衣者为真寒；脉重按有力者为真热。治从本质，勿被假象带走', s: '《伤寒论》「热在皮肤，寒在骨髓也」' },
+    { n: '亡阴 / 亡阳', b: '亡阴：汗热而黏、烦躁、脉细数疾；亡阳：汗冷如水、神萎、脉微欲绝。',
+      t: '亡阳急灸关元、气海回阳固脱；两者都是危候，必须立即送医', s: '教材归纳；危候处理须执业医师' }
+  ],
+  rule: [
+    { k: '寒热', v: '「寒者热之，热者寒之」——这是最直白的一条。', s: '《素问·至真要大论》' },
+    { k: '补泻', v: '「虚则补之，实则泻之」。虚实不明时，先辨虚实再动手，泻反了比不治更糟。', s: '《素问·三部九候论》' },
+    { k: '从阴引阳', v: '「阳病治阴，阴病治阳」——阳热之病从阴治（滋阴以制阳），阴寒之病从阳治（扶阳以消阴）。', s: '《素问·阴阳应象大论》' },
+    { k: '求阴阳', v: '「善补阳者，必于阴中求阳；善补阴者，必于阳中求阴」——补一边要带一点另一边，否则补不进去。', s: '张景岳《景岳全书》' },
+    { k: '总纲', v: '「谨察阴阳所在而调之，以平为期」——不是「补到满」，是调到平。', s: '《素问·至真要大论》' },
+    { k: '正治 / 反治', v: '正治（逆治）：寒者热之、热者寒之，逆着病象治，最常用。反治（从治）：病有假象时顺着假象用药——「热因寒用，寒因热用，塞因塞用，通因通用」。', s: '《素问·至真要大论》' }
+  ],
+  tip: '判断用哪一格，只问两句：一、是邪气盛（实）还是正气虚（虚）？二、主要矛盾在阳还是在阴？——盛而属阳＝实热；盛而属阴＝实寒；虚而属阳＝虚寒（阳不足）；虚而属阴＝虚热（阴不足）。注意「虚寒」是阳虚，「虚热」是阴虚，别记反。',
+  src: '原文：《素问·阴阳应象大论》《素问·调经论》《素问·至真要大论》《伤寒论》；注家：王冰、张景岳；归纳：规划教材《中医基础理论》'
+};
+</script>
 <script>/* ══════════════════════════════════════════════════════
    穴名解读 · 常用穴首批（字义 + 命名依据）
    说明：字义取《说文解字》及通行训释；命名依据取《针灸学》教材、
@@ -13924,6 +14117,64 @@ new MutationObserver(() => {
   });
 
   refresh(); table(); jian(); rel(); extras();
+})();
+
+/* ───────── 阴阳属性归类 · 四象与三阴三阳（补讲「阳中之阴」类考点） ───────── */
+(function () {
+  'use strict';
+  var A = window.YY_ATTR4;
+  var host = document.getElementById('yy-attr4-wu');
+  if (!A || !host) return;
+  function $(id) { return document.getElementById(id); }
+  function tbl(cls, head, rows) {
+    return '<div class="a4-t ' + cls + '"><div class="a4-h">' + head.map(function (h) { return '<span>' + h + '</span>'; }).join('') + '</div>' +
+      rows.map(function (r) {
+        return '<div class="a4-r">' + r.map(function (c) { return '<span>' + c + '</span>'; }).join('') + '</div>';
+      }).join('') + '</div>';
+  }
+  $('yy-attr4-lead').textContent = A.lead;
+  $('yy-attr4-why').innerHTML = A.why.map(function (w, i) {
+    return '<div class="a4-w"><b>' + (i + 1) + '</b><div><h5>' + w.k + '</h5><p>' + w.v + '</p></div></div>';
+  }).join('');
+  $('yy-attr4-wu').innerHTML = tbl('wu', ['脏', '《金匮真言论》', '《六节藏象论》', '位置与依据'],
+    A.wu.map(function (r) { return ['<b>' + r.z + '</b>', r.s, r.s2, r.w + '<em>' + r.q + '</em>']; }));
+  $('yy-attr4-day').innerHTML = tbl('day', ['时段', '四象', '说明'],
+    A.day.map(function (r) { return [r.t, '<b>' + r.s + '</b>', r.d]; }));
+  $('yy-attr4-si').innerHTML = tbl('si', ['时令', '四象', '对应脏'],
+    A.si.map(function (r) { return [r.t, '<b>' + r.s + '</b>', r.z]; }));
+  $('yy-attr4-san').innerHTML = A.san.map(function (s) {
+    return '<div class="a4-s"><b>' + s.n + '</b><i>' + s.k + '</i><p>' + s.v + '</p></div>';
+  }).join('');
+  $('yy-attr4-memo').innerHTML = A.memo.map(function (m, i) {
+    return '<div class="yp"><b>' + (i + 1) + '</b><p>' + m + '</p></div>';
+  }).join('');
+  $('yy-attr4-src').textContent = A.src;
+})();
+
+/* ───────── 阴阳病理四偏 + 治则（补讲） ───────── */
+(function () {
+  'use strict';
+  var B = window.YY_BING;
+  var host = document.getElementById('yy-bing-core');
+  if (!B || !host) return;
+  function $(id) { return document.getElementById(id); }
+  $('yy-bing-lead').textContent = B.lead;
+  $('yy-bing-core').innerHTML = B.core.map(function (c) {
+    return '<article class="b4-c"><header><b>' + c.n + '</b><em>' + c.z + '</em></header>' +
+      '<p class="b4-y">' + c.y + '</p>' +
+      '<p class="b4-b">' + c.b + '</p>' +
+      '<p class="b4-t"><i>治</i>' + c.t + '</p>' +
+      '<span class="b4-s">' + c.s + '</span></article>';
+  }).join('');
+  $('yy-bing-more').innerHTML = B.more.map(function (m) {
+    return '<div class="b4-m"><b>' + m.n + '</b><p>' + m.b + '</p>' +
+      '<p class="b4-mt"><i>处理</i>' + m.t + '</p><span class="b4-s">' + m.s + '</span></div>';
+  }).join('');
+  $('yy-bing-rule').innerHTML = B.rule.map(function (r) {
+    return '<div class="a4-r br"><span><b>' + r.k + '</b></span><span>' + r.v + '<em>' + r.s + '</em></span></div>';
+  }).join('');
+  $('yy-bing-tip').innerHTML = '<b>怎么落到自己身上：</b>' + B.tip;
+  $('yy-bing-src').textContent = B.src;
 })();
 </script>
 </body>
