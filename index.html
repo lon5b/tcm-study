@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="f21728e206" />
+<meta name="build-id" content="802a0948a6" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3049,6 +3049,16 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   .acuc-src{font-size:11.5px}
   .acuc-h em{font-size:12.5px}
 }
+
+/* 维度值 + 中心维度名 + 面板当前维度高亮 */
+.ac-tv{font-family:"Songti SC","STSong",serif;font-size:19px;font-weight:600;fill:#22262C;letter-spacing:.04em;pointer-events:none}
+.ac-core-d{font-size:14px;fill:var(--mu);letter-spacing:.16em;pointer-events:none}
+.ac-fact{cursor:pointer;border-radius:8px;transition:background .18s ease}
+.ac-fact:hover{background:rgba(0,0,0,.035)}
+.ac-fact.on{background:rgba(0,0,0,.055)}
+.ac-fact.on span{color:var(--ink);font-weight:600}
+.ac-fact.on b{color:var(--accent)}
+@media(max-width:640px){.ac-tv{font-size:17px}.ac-core-d{font-size:12.5px}}
 </style>
 </head>
 <body>
@@ -3362,7 +3372,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <div class="ac-grid">
         <div class="ac-stage">
           <svg id="corr-wheel" viewBox="0 0 700 700" role="img" aria-label="五行藏象转盘"></svg>
-          <p class="ac-hint">拖动转盘 · 点扇区 · 按 ← →</p>
+          <p class="ac-hint">拖动转盘 · ← → 换脏 · ↑ ↓ 换维度</p>
           <div class="ac-snd" id="cw-snd"></div>
         </div>
         <div class="ac-panel">
@@ -3376,9 +3386,11 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
         </div>
       </div>
       <div class="ac-ctrl">
+        <button class="ac-btn" id="cw-dup" aria-label="上一个维度" title="上一个维度">↑</button>
         <button class="ac-btn" id="cw-prev" aria-label="上一脏">‹</button>
         <button class="ac-btn ac-btn-wide" id="cw-auto">自动转一圈</button>
         <button class="ac-btn" id="cw-next" aria-label="下一脏">›</button>
+        <button class="ac-btn" id="cw-ddn" aria-label="下一个维度" title="下一个维度">↓</button>
         <button class="ac-btn ac-mute" id="cw-mute" aria-label="音效开关" title="音效已开启，点击静音">
           <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 9.5h3.2L12 5.6v12.8L7.2 14.5H4z" fill="currentColor"/><path class="ac-wave" d="M15.2 8.9a4.2 4.2 0 0 1 0 6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="ac-wave" d="M17.6 6.6a7.4 7.4 0 0 1 0 10.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".62"/><path class="ac-x" d="M16 9.6l4.4 4.8M20.4 9.6L16 14.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
         </button>
@@ -11773,76 +11785,98 @@ new MutationObserver(() => {
   var glow = el('circle', { cx: CX, cy: CY, r: R_OUT - 6, class: 'ac-glow', id: 'cw-glow' });
   rot.appendChild(glow);
   var lblG = el('g', { id: 'cw-labels' }); svg.appendChild(lblG);
-  var labels = [];
-
-  /* 五个扇区 */
-  C.cols.forEach(function (c, i) {
-    var a0 = i * 72 - 36 + GAP, a1 = i * 72 + 36 - GAP;
-    var w = el('path', { d: wedgePath(a0, a1, R_IN, R_OUT), fill: 'url(#cwG' + i + ')', class: 'ac-wedge', 'data-i': i });
-    rot.appendChild(w);
-    var ring = el('path', { d: wedgePath(a0, a1, R_IN, R_OUT), class: 'ac-wedge-line', 'data-i': i });
-    rot.appendChild(ring);
-    var band = el('path', { d: wedgePath(a0, a1, R_OUT - 13, R_OUT - 3), fill: c.color, opacity: '.85', class: 'ac-band', 'data-i': i });
-    rot.appendChild(band);
-
-    [['ac-tz', -42, c.zang], ['ac-tw', -8, c.wu], ['ac-tf', 20, c.fu], ['ac-tt', 44, c.ti + ' · ' + c.qiao]]
-      .forEach(function (d) {
-        var t = el('text', { x: CX, y: CY, 'text-anchor': 'middle', class: d[0], 'data-i': i });
-        t.textContent = d[2];
-        lblG.appendChild(t);
-        labels.push({ el: t, i: i, dy: d[1] });
-      });
-  });
-
-  /* 相生弧：木→火→土→金→水，顺时针；箭头画在终点，方向 = 该点切线 */
-  for (var i = 0; i < 5; i++) {
-    var R2 = R_OUT + 18, a0 = i * 72 + 15, a1 = (i + 1) * 72 - 15;
-    var s0 = pt(R2, a0), s1 = pt(R2, a1);
-    rot.appendChild(el('path', {
-      d: 'M' + s0.join(',') + ' A' + R2 + ',' + R2 + ' 0 0 1 ' + s1.join(','),
-      class: 'ac-sheng', 'data-i': i
-    }));
-    var head = el('path', { d: 'M-1,-4.6 L8.6,0 L-1,4.6 Z', class: 'ac-sheng-head', 'data-i': i });
-    head.setAttribute('transform', 'translate(' + s1[0].toFixed(2) + ',' + s1[1].toFixed(2) + ') rotate(' + a1 + ')');
-    rot.appendChild(head);
+  var labels = [], valTxt = [], valLbl = [];
+  /* 文字自适应：用 SVG 实测字宽（canvas 量中文在部分环境返回 0），超宽换行、超限缩字号 */
+  var measureEl = el('text', { x: -9999, y: -9999, 'aria-hidden': 'true' });
+  measureEl.setAttribute('style', 'fill:none;stroke:none');
+  svg.appendChild(measureEl);
+  function _mw(str, fs, cls) {
+    measureEl.setAttribute('class', cls || 'ac-tv');
+    measureEl.style.fontSize = fs + 'px';
+    measureEl.textContent = str;
+    try { return measureEl.getComputedTextLength(); } catch (e) { return str.length * fs; }
   }
-
-  /* 中心 + 指针 */
-  var core = el('g', { class: 'ac-core' });
-  core.appendChild(el('circle', { cx: CX, cy: CY, r: R_IN - 14, class: 'ac-core-c' }));
-  var coreT = el('text', { x: CX, y: CY + 12, 'text-anchor': 'middle', class: 'ac-core-t', id: 'cw-core' });
-  coreT.textContent = '木'; core.appendChild(coreT);
-  svg.appendChild(core);
-  svg.appendChild(el('path', { d: 'M350,42 L336,16 Q350,24 364,16 Z', class: 'ac-ptr' }));
-
-
-  /* ── 音效：五行各一声音（WebAudio 合成，无外部文件） ── */
-  var AC = null, MASTER = null;
-  var MUTE_KEY = 'tcm.corr.mute';
-  var muted = localStorage.getItem(MUTE_KEY) === '1';
-  function ctx() {
-    if (!AC) {
-      var K = window.AudioContext || window.webkitAudioContext;
-      if (!K) return null;
-      AC = new K();
-      MASTER = AC.createGain(); MASTER.gain.value = 0.9; MASTER.connect(AC.destination);
+  function _wrap(str, maxW, fs, cls) {
+    /* 优先在标点处断行，避免把「辛胜酸」这种语义单元拆开 */
+    var segs = [], cur = '', PUNC = '，、；。：,;';
+    for (var k = 0; k < str.length; k++) {
+      var ch = str.charAt(k); cur += ch;
+      if (PUNC.indexOf(ch) > -1) { segs.push(cur); cur = ''; }
     }
-    if (AC.state === 'suspended') AC.resume();
-    return AC;
+    if (cur) segs.push(cur);
+    var lines = [], line = '';
+    function pushChar(s2) {                     /* 单段过长时退化为逐字断行 */
+      for (var j = 0; j < s2.length; j++) {
+        var c2 = s2.charAt(j);
+        if (line && _mw(line + c2, fs, cls) > maxW) { lines.push(line); line = c2; }
+        else line += c2;
+      }
+    }
+    segs.forEach(function (sg) {
+      if (_mw(sg, fs, cls) > maxW) { if (line) { lines.push(line); line = ''; } pushChar(sg); return; }
+      if (line && _mw(line + sg, fs, cls) > maxW) { lines.push(line); line = sg; }
+      else line += sg;
+    });
+    if (line) lines.push(line);
+    return lines;
   }
-  function noise(c, dur) {
-    var n = Math.floor(c.sampleRate * dur), b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0);
-    for (var i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
-    var src = c.createBufferSource(); src.buffer = b; return src;
+  function _fit(str, maxW, fs0, maxLines, cls) {
+    var fs = fs0, lines;
+    while (fs >= 9) {
+      lines = _wrap(str, maxW, fs, cls);
+      if (lines.length <= maxLines) break;
+      fs -= 1;
+    }
+    return { fs: fs, lines: lines };
   }
-  function env(c, peak, a, d) {
-    var g = c.createGain();
-    g.gain.setValueAtTime(0.0001, c.currentTime);
-    g.gain.exponentialRampToValueAtTime(peak, c.currentTime + a);
-    g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + a + d);
-    return g;
+  function paintCenter(t, str, fs0, maxR) {
+    var fs = fs0, lines = null, off = 20;
+    while (fs >= 11) {
+      lines = _wrap(str, 132, fs, 'ac-core-t');
+      var w = 0;
+      lines.forEach(function (l) { w = Math.max(w, _mw(l, fs, 'ac-core-t')); });
+      var h = lines.length * fs * 1.3;
+      off = lines.length >= 3 ? 30 : 20;
+      var corner = Math.sqrt((w / 2) * (w / 2) + (off + h / 2) * (off + h / 2));
+      if (corner <= maxR - 8 && lines.length <= 3) break;
+      fs -= 1;
+    }
+    var lh = fs * 1.3, top = CY + off - (lines.length - 1) * lh / 2;
+    t.innerHTML = '';
+    t.style.fontSize = fs + 'px';
+    t.setAttribute('y', top);
+    lines.forEach(function (ln, k) {
+      var sp = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+      sp.setAttribute('dy', k === 0 ? 0 : lh);
+      sp.textContent = ln; t.appendChild(sp);
+    });
   }
-  /* 五行采样：木=木鱼、火=柴火、土=鼓、金=铜磬、水=溪流 */
+  function paintText(t, str, maxW, fs0, maxLines, cy, cls) {
+    var f = _fit(str, maxW, fs0, maxLines, cls);
+    var lh = f.fs * 1.36;
+    if (cy != null) t.setAttribute('y', cy - (f.lines.length - 1) * lh / 2);
+    t.innerHTML = '';
+    t.style.fontSize = f.fs + 'px';
+    f.lines.forEach(function (ln, k) {
+      var sp = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+      sp.setAttribute('dy', k === 0 ? 0 : lh);
+      sp.textContent = ln; t.appendChild(sp);
+    });
+    return { lines: f.lines.length, fs: f.fs, lh: lh };
+  }
+  /* ── 音效核心：五音合成 + 真实采样 ── */
+  var MUTE_KEY = 'tcm.corr.mute';
+  var muted = false;
+  try { muted = localStorage.getItem(MUTE_KEY) === '1'; } catch (e) {}
+  var actx = null, MASTER = null;
+  function ctx() {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!actx) { actx = new AC(); MASTER = actx.createGain(); MASTER.gain.value = 0.9; MASTER.connect(actx.destination); }
+    if (actx.state === 'suspended') { try { actx.resume(); } catch (e) {} }
+    return actx;
+  }
+  /* 木=木鱼 火=柴火 土=鼓 金=铜磬 水=溪流 */
   var SAMPLE_NAMES = ['mu', 'huo', 'tu', 'jin', 'shui'];
   var CLIPS = {};
   SAMPLE_NAMES.forEach(function (n) {
@@ -11871,6 +11905,41 @@ new MutationObserver(() => {
     if (clip) { try { clip.currentTime = 0; var pr = clip.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {} }
     var c = ctx(); if (c) { try { tone(i, c); } catch (e) {} }
   }
+  /* ── 五个扇区（色环 + 淡染 + 三行文字） ── */
+  C.cols.forEach(function (c, i) {
+    var a0 = i * 72 - 36 + GAP, a1 = i * 72 + 36 - GAP;
+    rot.appendChild(el('path', { d: wedgePath(a0, a1, R_IN, R_OUT), fill: 'url(#cwG' + i + ')', class: 'ac-wedge', 'data-i': i }));
+    rot.appendChild(el('path', { d: wedgePath(a0, a1, R_IN, R_OUT), class: 'ac-wedge-line', 'data-i': i }));
+    rot.appendChild(el('path', { d: wedgePath(a0, a1, R_OUT - 13, R_OUT - 3), fill: c.color, opacity: '.85', class: 'ac-band', 'data-i': i }));
+    [['ac-tz', -44, c.zang], ['ac-tf', -10, c.wu + ' · ' + c.fu], ['ac-tv', 36, '']].forEach(function (d) {
+      var t = el('text', { x: CX, y: CY, 'text-anchor': 'middle', class: d[0], 'data-i': i });
+      t.textContent = d[2];
+      lblG.appendChild(t);
+      labels.push({ el: t, i: i, dy: d[1] });
+      if (d[0] === 'ac-tv') { valTxt[i] = t; valLbl[i] = labels[labels.length - 1]; }
+    });
+  });
+
+  /* ── 相生弧：木→火→土→金→水，顺时针 ── */
+  for (var ai = 0; ai < 5; ai++) {
+    var R2 = R_OUT + 18, s0a = ai * 72 + 15, s1a = (ai + 1) * 72 - 15;
+    var p0 = pt(R2, s0a), p1 = pt(R2, s1a);
+    rot.appendChild(el('path', { d: 'M' + p0.join(',') + ' A' + R2 + ',' + R2 + ' 0 0 1 ' + p1.join(','), class: 'ac-sheng', 'data-i': ai }));
+    var head = el('path', { d: 'M-1,-4.6 L8.6,0 L-1,4.6 Z', class: 'ac-sheng-head', 'data-i': ai });
+    head.setAttribute('transform', 'translate(' + p1[0].toFixed(2) + ',' + p1[1].toFixed(2) + ') rotate(' + s1a + ')');
+    rot.appendChild(head);
+  }
+
+  /* ── 中心（维度名 + 当前值）与顶部指针 ── */
+  var core = el('g', { class: 'ac-core' });
+  core.appendChild(el('circle', { cx: CX, cy: CY, r: R_IN - 14, class: 'ac-core-c' }));
+  var coreD = el('text', { x: CX, y: CY - 18, 'text-anchor': 'middle', class: 'ac-core-d', id: 'cw-dim' });
+  coreD.textContent = '五脏'; core.appendChild(coreD);
+  var coreT = el('text', { x: CX, y: CY + 22, 'text-anchor': 'middle', class: 'ac-core-t', id: 'cw-core' });
+  coreT.textContent = '—'; core.appendChild(coreT);
+  svg.appendChild(core);
+  svg.appendChild(el('path', { d: 'M350,42 L336,16 Q350,24 364,16 Z', class: 'ac-ptr' }));
+
   function tick() {
     if (muted) return;
     var c = ctx(); if (!c) return;
@@ -11913,8 +11982,39 @@ new MutationObserver(() => {
   });
   paintMute(); paintSnd();
 
-  var st = { idx: 0, rot: 0, vel: 0, target: 0, raf: null, drag: null };
+  /* ── 维度排序：常用在前、冷门在后（表格与转盘共用一份） ── */
+  function orderedRows() {
+    var SEC_ORDER = ['脏腑 · 身形', '天时 · 地理', '情志 · 病理', '气味 · 饮食', '经络 · 诊治', '五行关系'];
+    var DIM_PRI = ['五脏', '六腑（相表里）', '五体（所合）', '官窍', '五色（自然）', '五味', '五志',
+      '五液', '五脉（脉象）', '五季', '五方', '五气（在天）', '五藏所藏（五神）', '五音', '五华（其荣）',
+      '五声', '五藏所主', '五行', '五充', '五化', '五变（在变动）', '相生（我生／生我）', '相克（我克／克我）',
+      '五数', '五臭', '五谷', '五畜', '五菜', '五果', '五星（天象）', '五政', '五令'];
+    function rank(r) {
+      var d = r.dim, i = DIM_PRI.indexOf(d);
+      if (i < 0) { for (var k = 0; k < DIM_PRI.length; k++) if (d.indexOf(DIM_PRI[k]) === 0) { i = k; break; } }
+      return i < 0 ? 500 : i;
+    }
+    var secCur = '';
+    C.rows.forEach(function (r) { if (r.sec) secCur = r.sec; r._sec = secCur; });
+    var ordered = C.rows.map(function (r, i) { return { r: r, i: i, k: rank(r) }; })
+      .sort(function (a, b) {
+        var sa = SEC_ORDER.indexOf(a.r._sec || ''), sb = SEC_ORDER.indexOf(b.r._sec || '');
+        if (sa < 0) sa = 99; if (sb < 0) sb = 99;
+        if (sa !== sb) return sa - sb;
+        if (a.k !== b.k) return a.k - b.k;
+        return a.i - b.i;
+      }).map(function (x) { return x.r; });
+    var COMMON = DIM_PRI.slice(0, 14);
+    var head = ordered.filter(function (r) { return COMMON.indexOf(r.dim) > -1; })
+      .sort(function (a, b) { return COMMON.indexOf(a.dim) - COMMON.indexOf(b.dim); });
+    return head.map(function (r) { r._sec = '常用 · 先记这些'; return r; })
+      .concat(ordered.filter(function (r) { return COMMON.indexOf(r.dim) < 0; }));
+  }
+  var DIMS = orderedRows();
+
+  var st = { idx: 0, rot: 0, vel: 0, target: 0, raf: null, drag: null, dim: 0 };
   var booted = false, lastSound = 0;
+  for (var di = 0; di < DIMS.length; di++) if (DIMS[di].dim === '五脏') { st.dim = di; break; }
 
   function norm(d) { d = d % 360; if (d > 180) d -= 360; if (d < -180) d += 360; return d; }
   function apply() {
@@ -11964,14 +12064,13 @@ new MutationObserver(() => {
       b.setAttribute('opacity', +b.dataset.i === st.idx ? '1' : '.55');
     });
     rot.querySelectorAll('.ac-sheng').forEach(function (s) { s.classList.toggle('on', +s.dataset.i === st.idx); });
-    svg.querySelectorAll('.ac-tz,.ac-tw,.ac-tf,.ac-tt').forEach(function (t) {
+    svg.querySelectorAll('.ac-tz,.ac-tf,.ac-tv').forEach(function (t) {
       t.style.opacity = +t.dataset.i === st.idx ? '1' : '.55';
       t.classList.toggle('on', +t.dataset.i === st.idx);
     });
     var c = C.cols[st.idx];
     var core = document.getElementById('cw-core');
-    core.textContent = c.wu; core.style.fill = c.color;
-    core.classList.remove('pulse'); void core.offsetWidth; core.classList.add('pulse');
+    if (core) { core.style.fill = c.color; core.classList.remove('pulse'); void core.offsetWidth; core.classList.add('pulse'); }
     if (booted && st.idx !== lastSound) { lastSound = st.idx; playEl(st.idx); }
     var tb = document.getElementById('corr-table');
     if (tb) tb.querySelectorAll('[data-col]').forEach(function (n) { n.classList.toggle('col-on', +n.dataset.col === st.idx); });
@@ -11981,20 +12080,30 @@ new MutationObserver(() => {
   var PANEL_DIMS = ['六腑（相表里）', '五体（所合）', '官窍', '五志', '五色（自然）', '五味', '五液', '五脉（脉象）', '五藏所藏（五神）', '五季', '五音', '五方'];
   function panel() {
     var i = st.idx, c = C.cols[i], host = document.getElementById('cw-facts');
+    /* 当前维度 */
+    var row = DIMS[st.dim] || DIMS[0];
+    var dimNice = row.dim.replace(/（.*?）/, '');
+    for (var vi = 0; vi < 5; vi++) {
+      var v = row.vals[vi], t = valTxt[vi];
+      if (!t) continue;
+      var fi = paintText(t, v, 138, 16, 3, null, 'ac-tv');
+      if (valLbl[vi]) valLbl[vi].dy = 36 - (fi.lines - 1) * fi.lh / 2;
+    }
+    apply();
+    var cd = document.getElementById('cw-dim');
+    if (cd) cd.textContent = dimNice;
+    var cc = document.getElementById('cw-core');
+    if (cc) paintCenter(cc, row.vals[st.idx], 24, 96);
     document.getElementById('cw-zang').textContent = c.zang;
     document.getElementById('cw-wu').textContent = c.wu;
     document.getElementById('cw-dot').style.background = c.color;
     document.getElementById('cw-jing').textContent = c.jing + ' · ' + c.shi;
-    host.style.opacity = '0';
-    setTimeout(function () {
-      host.innerHTML = PANEL_DIMS.map(function (dim) {
+    host.innerHTML = (function () { return PANEL_DIMS.map(function (dim) {
         var r = null;
         for (var k = 0; k < C.rows.length; k++) if (C.rows[k].dim === dim) { r = C.rows[k]; break; }
         if (!r) return '';
-        return '<div class="ac-fact"><span>' + dim.replace(/（.*?）/, '') + '</span><b>' + r.vals[i] + '</b></div>';
-      }).join('');
-      host.style.opacity = '1';
-    }, 90);
+        return '<div class="ac-fact' + (dim === row.dim ? ' on' : '') + '" data-dim="' + dim + '"><span>' + dim.replace(/（.*?）/, '') + '</span><b>' + r.vals[i] + '</b></div>';
+      }).join(''); })();
     var sheng = [['水', '木', '火', '土', '金'][i], ['火', '土', '金', '水', '木'][i], ['金', '水', '木', '火', '土'][i], ['土', '金', '水', '木', '火'][i]];
     function z(w) { for (var k = 0; k < 5; k++) if (C.cols[k].wu === w) return C.cols[k].zang; return ''; }
     document.getElementById('cw-rel').innerHTML =
@@ -12054,20 +12163,36 @@ new MutationObserver(() => {
       if (n >= 5) { clearInterval(auto); auto = null; btn.textContent = '自动转一圈'; }
     }, 1200);
   });
+  function setDim(k) {
+    st.dim = ((k % DIMS.length) + DIMS.length) % DIMS.length;
+    paint();
+    var core = document.getElementById('cw-core');
+    if (core) { core.classList.remove('pulse'); void core.offsetWidth; core.classList.add('pulse'); }
+  }
   function keyNav(e) {
     if (!e.key || e.key.indexOf('Arrow') !== 0) return;
     var r = document.getElementById('corr').getBoundingClientRect();
     if (r.bottom < 0 || r.top > innerHeight) return;      /* 只在转盘可见时响应 */
     if (/INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '')) return;
-    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { goto(st.idx + 1); e.preventDefault(); }
-    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { goto(st.idx - 1); e.preventDefault(); }
+    if (e.key === 'ArrowDown') { setDim(st.dim + 1); e.preventDefault(); }   /* ↓ 下一个维度 */
+    if (e.key === 'ArrowUp') { setDim(st.dim - 1); e.preventDefault(); }     /* ↑ 上一个维度 */
+    if (e.key === 'ArrowRight') { goto(st.idx + 1); e.preventDefault(); }    /* → 下一脏 */
+    if (e.key === 'ArrowLeft') { goto(st.idx - 1); e.preventDefault(); }     /* ← 上一脏 */
   }
   document.addEventListener('keydown', keyNav);
+  var dup = document.getElementById('cw-dup'), ddn = document.getElementById('cw-ddn');
+  if (dup) dup.addEventListener('click', function () { setDim(st.dim - 1); });
+  if (ddn) ddn.addEventListener('click', function () { setDim(st.dim + 1); });
+  var factsHost = document.getElementById('cw-facts');
+  if (factsHost) factsHost.addEventListener('click', function (e) {
+    var f = e.target.closest('[data-dim]'); if (!f) return;
+    for (var k = 0; k < DIMS.length; k++) if (DIMS[k].dim === f.dataset.dim) { setDim(k); break; }
+  });
   document.getElementById('corr').setAttribute('tabindex', '0');
   /* 触屏设备换提示语：键盘箭头对手机没意义 */
   if (window.matchMedia && (window.matchMedia('(pointer:coarse)').matches || window.matchMedia('(max-width:640px)').matches)) {
     var hint = document.querySelector('.ac-hint');
-    if (hint) hint.textContent = '手指滑一圈 · 点扇区切换 · 或用下方箭头';
+    if (hint) hint.textContent = '↓↑ 换维度 · ↓↑按钮在下方 · 拖动转盘换脏';
   }
 
   /* 全表 */
@@ -12078,34 +12203,7 @@ new MutationObserver(() => {
       h += '<th data-col="' + ci + '" style="--dot:' + c.color + '"><i class="ac-leg-dot"></i>' + c.zang + '<em>' + c.wu + '</em></th>';
     });
     h += '<th class="ac-th-src">出处</th></tr></thead><tbody>';
-    /* 常用在前、冷门在后 */
-    var SEC_ORDER = ['脏腑 · 身形', '天时 · 地理', '情志 · 病理', '气味 · 饮食', '经络 · 诊治', '五行关系'];
-    var DIM_PRI = ['五脏', '六腑（相表里）', '五体（所合）', '官窍', '五色（自然）', '五味', '五志',
-      '五液', '五脉（脉象）', '五季', '五方', '五气（在天）', '五藏所藏（五神）', '五音', '五华（其荣）',
-      '五声', '五藏所主', '五行', '五充', '五化', '五变（在变动）', '相生（我生／生我）', '相克（我克／克我）',
-      '五数', '五臭', '五谷', '五畜', '五菜', '五果', '五星（天象）', '五政', '五令'];
-    function rank(r) {
-      var d = r.dim, i = DIM_PRI.indexOf(d);
-      if (i < 0) { for (var k = 0; k < DIM_PRI.length; k++) if (d.indexOf(DIM_PRI[k]) === 0) { i = k; break; } }
-      return i < 0 ? 500 : i;
-    }
-    /* r.sec 只出现在每节第一行，先向后补齐，排序才不会把同节的行打散 */
-    var secCur = '';
-    C.rows.forEach(function (r) { if (r.sec) secCur = r.sec; r._sec = secCur; });
-    var ordered = C.rows.map(function (r, i) { return { r: r, i: i, k: rank(r) }; })
-      .sort(function (a, b) {
-        var sa = SEC_ORDER.indexOf(a.r._sec || ''), sb = SEC_ORDER.indexOf(b.r._sec || '');
-        if (sa < 0) sa = 99; if (sb < 0) sb = 99;
-        if (sa !== sb) return sa - sb;
-        if (a.k !== b.k) return a.k - b.k;
-        return a.i - b.i;
-      }).map(function (x) { return x.r; });
-    /* 最常用的十来个维度提到最前面一节，冷门的自然落到后面各节 */
-    var COMMON = DIM_PRI.slice(0, 14);
-    var head = ordered.filter(function (r) { return COMMON.indexOf(r.dim) > -1; })
-      .sort(function (a, b) { return COMMON.indexOf(a.dim) - COMMON.indexOf(b.dim); });
-    ordered = head.map(function (r) { r._sec = '常用 · 先记这些'; return r; })
-      .concat(ordered.filter(function (r) { return COMMON.indexOf(r.dim) < 0; }));
+    var ordered = DIMS;
 
     var cur = '';
     ordered.forEach(function (r) {
