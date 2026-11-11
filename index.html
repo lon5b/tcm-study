@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="936f6a69c9" />
+<meta name="build-id" content="9d321f7705" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3255,6 +3255,15 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .a4-t.jg-how .a4-r{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}
 .a4-t.jg-how .a4-r.jg-h span{font-size:12.5px;padding:9px 12px}
 .a4-t.jg-how .a4-r.jg-h span:last-child{color:#A63A2E;font-weight:600;border-left:0}
+
+/* ───────── 段落分隔（学 / 用 / 库 / 溯） ───────── */
+.seg-h{display:flex;align-items:center;gap:16px;max-width:1180px;margin:44px auto 6px;padding:0 26px}
+.seg-h .seg-n{width:34px;height:34px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:15px;color:var(--paper);background:var(--accent);letter-spacing:0}
+.seg-h h3{margin:0 0 3px;font-family:var(--serif);font-size:17px;letter-spacing:.16em;color:var(--ink)}
+.seg-h p{margin:0;font-size:12px;line-height:1.6;color:var(--ink-3);letter-spacing:.02em}
+.seg-h>div{flex:1;border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent);padding-bottom:9px}
+@media(max-width:700px){.seg-h{margin:32px auto 4px;padding:0 18px;gap:11px}.seg-h h3{font-size:15px}.seg-h p{font-size:11.5px}}
 </style>
 </head>
 <body>
@@ -3266,20 +3275,13 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
   <span class="brand">中医自学</span>
   <button class="nav-toggle" id="nav-toggle" aria-label="目录">目录 ▾</button>
   <a href="#route">学习路线</a>
-  <a href="#yy" id="nav-yy">阴阳 · 学透</a>
-  <a href="#yydrill" id="nav-drill">阴阳 · 题库</a>
-  <a href="#corr" id="nav-corr">五行 · 对照</a>
-  <a href="#bagang" id="nav-bg">八纲 · 辨证</a>
-  <a href="#liujing" id="nav-lj">六经 · 入门</a>
-  <a href="#bing" id="nav-bing">常见病 · 取穴</a>
-  <a href="#body3d" id="nav-3d">3D · 人体</a>
-  <span class="nav-sep"></span>
-  <a href="#acu">穴位 · 361</a>
-  <a href="#recite" id="nav-recite">穴位背诵 · 361</a>
-  <span class="nav-sep"></span>
-  <a href="#xhs" id="nav-xhs">图文笔记 · 79 篇</a>
-  <a href="#jue" id="nav-jue">歌诀 · 口诀</a>
-  <a href="#video" id="nav-vid">人纪 · 针灸 79 集</a>
+  <a href="#lesson">阴阳 · 学</a>
+  <a href="#corr">五行</a>
+  <a href="#bagang">八纲</a>
+  <a href="#liujing">六经</a>
+  <a href="#bing">常见病</a>
+  <a href="#body3d">穴位库</a>
+  <a href="#hd">溯源</a>
   <button class="nav-theme" id="nav-theme" aria-haspopup="true" aria-expanded="false">配色 ▾</button>
   <div class="theme-pop" id="theme-pop" hidden>
     <button data-theme-set="ink" class="t-ink"><em></em>墨夜</button>
@@ -3362,6 +3364,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div style="margin-top:26px" id="route-table"></div>
   </div>
 </section>
+<div class="seg-h" id="seg-lesson"><span class="seg-n">一</span><div><h3>学理</h3><p>先把阴阳、五行、八纲、六经这四个底座立住；理论不清，取穴就是背口诀</p></div></div>
 
 <section id="lesson" class="band">
   <div class="wrap">
@@ -3385,50 +3388,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div id="lesson-root"></div>
   </div>
 </section>
-
-<section id="quiz">
-  <div class="wrap" style="padding-bottom:0"><p class="lead" style="margin:0 0 4px">这 18 题只够入门。要吃透，去 <a href="#yydrill" style="color:var(--accent)">阴阳 · 题库（六级，每次随机）</a>。</p></div>
-  <div class="wrap">
-    <div class="sec-h">
-      <span class="eyebrow">Practice</span>
-      <h2 id="quiz-h2">第 1 课自测 · 18 题（入门）</h2>
-      <p>12 道全是选择题，每道都有<b>唯一标准答案</b>。点选项立刻判对错并给出答案和出处；不想做题就点「直接看答案」，或一次「全部显示答案」。作答记录存在你本机浏览器里。</p>
-    </div>
-    <div class="quiztop">
-      <span>得分</span><b id="qscore">0 / 12</b>
-      <div class="bar"><i id="qbar"></i></div>
-      <button class="qsolid" id="qall">全部显示答案</button>
-      <button class="reset" id="qreset">清空重做</button>
-    </div>
-    <div id="qnote" style="font-size:12px;color:var(--mu);margin:-10px 0 18px"></div>
-    <div id="quiz-root"></div>
-  </div>
-</section>
-
-
-
-
-
-
-<div class="note-modal" id="note-modal" hidden>
-  <div class="note-box">
-    <div class="note-head">
-      <span id="nm-title">—</span>
-      <button id="nm-close" title="关闭 (Esc)">✕</button>
-    </div>
-    <div class="note-body" id="nm-body"></div>
-    <div class="note-foot">
-      <span id="nm-src"></span>
-      <button id="nm-play">去播放这一集 ↗</button>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
 <section id="yy" class="band">
   <div class="wrap">
     <div class="sec-h"><span class="sec-k">学透</span><h2>阴阳 · 学透</h2></div>
@@ -3572,11 +3531,24 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 
   </div>
 </section>
-
-
-
-
-
+<section id="quiz">
+  <div class="wrap" style="padding-bottom:0"><p class="lead" style="margin:0 0 4px">这是<b>固定卷</b>：18 题每次都是同样这 18 道，专门用来量你的起点——学完两三天再回来做一遍，分数变化才是真进步。想要每换个样子的，去 <a href="#yydrill" style="color:var(--accent)">阴阳 · 题库（534 题，每级随机）</a> 或 <a href="#yy-plan" style="color:var(--accent)">14 天计划（每天一组，题序选项都打乱）</a>。</p></div>
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="eyebrow">Practice</span>
+      <h2 id="quiz-h2">阴阳 · 入门定测（18 题固定卷）</h2>
+      <p>18 题里 12 道选择、6 道简答，选择每道都有<b>唯一标准答案</b>。点选项立刻判对错并给出答案和出处；不想做题就点「直接看答案」，或一次「全部显示答案」。作答记录存在你本机浏览器里。</p>
+    </div>
+    <div class="quiztop">
+      <span>得分</span><b id="qscore">0 / 12</b>
+      <div class="bar"><i id="qbar"></i></div>
+      <button class="qsolid" id="qall">全部显示答案</button>
+      <button class="reset" id="qreset">清空重做</button>
+    </div>
+    <div id="qnote" style="font-size:12px;color:var(--mu);margin:-10px 0 18px"></div>
+    <div id="quiz-root"></div>
+  </div>
+</section>
 <section id="yydrill" class="band">
   <div class="wrap">
     <div class="sec-h"><span class="sec-k">题库</span><h2>阴阳 · 题库 <span id="yd-count" class="yy-count"></span></h2></div>
@@ -3605,8 +3577,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     </div>
   </div>
 </section>
-
-
 <section id="corr" class="band">
   <div class="wrap">
     <div class="sec-h"><span class="sec-k">藏象</span><h2>五行 · 藏象全息对照</h2></div>
@@ -3652,7 +3622,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     </div>
   </div>
 </section>
-
 <section id="bagang" class="band">
   <div class="wrap">
     <div class="sec-h"><span class="sec-k">辨证</span><h2>八纲 · 辨证</h2></div>
@@ -3695,7 +3664,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <p class="ac-note">本页证候描述按《中医诊断学》教材通行表述整理；凡经典原句均标出处，教材归纳处不冒充原文。八纲用于辨识证型，不作自行用药依据。</p>
   </div>
 </section>
-
 <section id="liujing" class="band">
   <div class="wrap">
     <div class="sec-h"><span class="sec-k">六经</span><h2 id="lj-h2">六经 · 入门</h2></div>
@@ -3750,6 +3718,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     </div>
   </div>
 </section>
+<div class="seg-h" id="seg-bing"><span class="seg-n">二</span><div><h3>用</h3><p>理论落到病上：先辨阴阳虚实，再落穴位</p></div></div>
 
 <section id="bing" class="band">
   <div class="wrap">
@@ -3762,6 +3731,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div id="cm-list"></div>
   </div>
 </section>
+<div class="seg-h" id="seg-body3d"><span class="seg-n">三</span><div><h3>穴位库</h3><p>361 个穴，三种用法：认位置（3D）→ 查主治（列表）→ 默写（背诵卡、歌诀）</p></div></div>
 
 <section id="body3d" class="band">
   <div class="wrap">
@@ -3782,9 +3752,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <p class="acu3d-credit">模型：Z-Anatomy 衍生人体（CC BY-SA 4.0）；穴位坐标：开源项目 tcm-3d（MIT，BodyParts3D 坐标系，按标准定位估算并吸附皮肤）；主治文字：Meridian Atlas 的 WHO 2008 整理（事实性数据）。坐标未经逐穴专业审核，仅供认穴，不作取穴与操作依据。</p>
   </div>
 </section>
-
-
-
 <section id="acu" class="band">
   <div class="wrap">
     <div class="sec-h">
@@ -3803,26 +3770,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     </div>
   </div>
 </section>
-
-<section id="jue" class="band">
-  <div class="wrap">
-    <div class="sec-h"><span class="sec-k">歌诀</span>
-      <h2 id="jue-h2">歌诀 · 口诀</h2></div>
-    <p class="lead" id="jue-intro"></p>
-    <div id="jue-cards"></div>
-
-    <div class="jue-sub">
-      <h3>子午流注 · 十二时辰一览</h3>
-      <p class="lead">十二时辰一座钟，顺着走一圈就是一昼夜。点任意一格，看这个时辰哪条经当令。</p>
-    </div>
-    <div class="jue-hours" id="jue-hours"></div>
-
-    <div class="jue-groups" id="jue-groups"></div>
-
-    <div class="warnbox" style="margin-top:20px"><b>怎么用</b>：先背两条纳干支歌（韵文，读三遍就顺），再用「时辰一览」把十二个时辰串成一天的故事：天亮肺、起床大肠、早饭胃、消化脾、午休心、吸收小肠、下午膀胱、傍晚肾、饭后心包、睡前三焦、熟睡胆、深睡肝。故事顺了，歌诀就忘不掉。</div>
-  </div>
-</section>
-
 <section id="recite" class="band">
   <div class="wrap">
     <div class="sec-h"><span class="sec-k">穴位背诵</span>
@@ -3844,6 +3791,25 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div class="warnbox" style="margin-top:18px"><b>怎么背</b>：先看「穴名+拼音」过一遍读音；切到「遮拼音」，看到穴名先在心里念，点一下卡片看对不对；再切「遮穴名」，只看拼音想穴名，这个最难，考前用。拼音按标准读音人工校过（俞 shù、郄 xì、髎 liáo 这类多音字都在内）。</div>
   </div>
 </section>
+<section id="jue" class="band">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-k">歌诀</span>
+      <h2 id="jue-h2">歌诀 · 口诀</h2></div>
+    <p class="lead" id="jue-intro"></p>
+    <div id="jue-cards"></div>
+
+    <div class="jue-sub">
+      <h3>子午流注 · 十二时辰一览</h3>
+      <p class="lead">十二时辰一座钟，顺着走一圈就是一昼夜。点任意一格，看这个时辰哪条经当令。</p>
+    </div>
+    <div class="jue-hours" id="jue-hours"></div>
+
+    <div class="jue-groups" id="jue-groups"></div>
+
+    <div class="warnbox" style="margin-top:20px"><b>怎么用</b>：先背两条纳干支歌（韵文，读三遍就顺），再用「时辰一览」把十二个时辰串成一天的故事：天亮肺、起床大肠、早饭胃、消化脾、午休心、吸收小肠、下午膀胱、傍晚肾、饭后心包、睡前三焦、熟睡胆、深睡肝。故事顺了，歌诀就忘不掉。</div>
+  </div>
+</section>
+<div class="seg-h" id="seg-hd"><span class="seg-n">四</span><div><h3>溯源</h3><p>回到原文与课堂：素问、手写笔记、人纪 79 集，出处可查</p></div></div>
 
 <section id="hd" class="band">
   <div class="wrap">
@@ -3860,7 +3826,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div class="warnbox" style="margin-top:18px"><b>来源与边界</b>：篇名、篇序取本机《人纪·黄帝内经》讲义目录（`huangdi.md`）；前十五篇字数来自你分享的那个小红书「黄帝内经」工具（素问八十一篇约 8.8 万字）；每篇下面的文字是<b>倪师讲课的原文转写摘录</b>，我原样截取未改写，并标了行号，可逐条核对。<b>本栏目不含《素问》原文全文</b>——原文请回那个工具或纸质书对照读，我这里只做「篇目地图 + 倪师怎么讲这一篇」。灵枢八十一篇暂无篇目来源，未列。</div>
   </div>
 </section>
-
 <section id="xhs" class="band">
   <div class="wrap">
     <div class="sec-h"><span class="sec-k">图文笔记</span>
@@ -3875,8 +3840,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div class="warnbox" style="margin-top:18px"><b>看图提示</b>：卡片是按课号顺序排的，往下滚就是第 2 课、第 3 课……点开后可继续往下滚读完整篇，点图能开大图。笔记属个人学习整理，可能有错漏，遇到和视频、经典原文不一致的地方，以视频和原文为准；不构成医疗建议。</div>
   </div>
 </section>
-
-
 <section id="video">
   <div class="wrap">
     <div class="sec-h">
@@ -3909,7 +3872,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     </div>
   </div>
 </section>
-
 <section id="src" class="band">
   <div class="wrap">
     <div class="sec-h">
@@ -3920,7 +3882,6 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div id="src-root"></div>
   </div>
 </section>
-
 <section id="log">
   <div class="wrap">
     <div class="sec-h">
@@ -3931,6 +3892,20 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div class="card" id="updates"></div>
   </div>
 </section>
+
+<div class="note-modal" id="note-modal" hidden>
+  <div class="note-box">
+    <div class="note-head">
+      <span id="nm-title">—</span>
+      <button id="nm-close" title="关闭 (Esc)">✕</button>
+    </div>
+    <div class="note-body" id="nm-body"></div>
+    <div class="note-foot">
+      <span id="nm-src"></span>
+      <button id="nm-play">去播放这一集 ↗</button>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="wrap">
