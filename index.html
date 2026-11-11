@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="2438ce4f49" />
+<meta name="build-id" content="2c6a8173dc" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -2880,7 +2880,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 }
 .ac-btn:hover{background:color-mix(in srgb,var(--accent) 10%,var(--paper-2))}
 .ac-btn:active{transform:scale(.94)}
-.ac-btn-wide{font-size:13px;letter-spacing:.04em}
+.ac-btn-wide{width:auto;min-width:0;padding:0 15px;border-radius:999px;font-size:12.5px;letter-spacing:.06em;white-space:nowrap}
 
 .ac-table-card{padding:0;overflow:hidden}
 .ac-tb-head{display:flex;align-items:center;gap:14px;padding:20px 24px 16px;border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent);flex-wrap:wrap}
@@ -3002,11 +3002,12 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 @media (max-width:640px){
   .ac-card{border-radius:20px}
   .ac-grid{grid-template-columns:1fr;gap:18px}
-  .ac-snd{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:12px}
-  .ac-snd-i{height:34px;padding:0 2px;justify-content:center;font-size:11px;border-radius:10px;white-space:nowrap}
-  .ac-snd-i i{width:5px;height:5px}
-  .ac-ctrl{gap:8px;margin-top:14px}
-  .ac-ctrl button{min-width:44px;height:44px;font-size:13px}
+  .ac-snd{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}
+  .ac-snd-i{height:32px;padding:0;justify-content:center;gap:3px;font-size:10.5px;border-radius:9px;white-space:nowrap;letter-spacing:0}
+  .ac-snd-i i{width:5px;height:5px;flex:none}
+  .ac-ctrl{gap:7px;margin-top:14px}
+  .ac-ctrl button{min-width:42px;height:42px;font-size:13px;flex:none}
+  .ac-ctrl .ac-btn-wide{flex:1;min-width:0;height:42px;padding:0 10px;font-size:12px}
   .ac-ctrl button.ac-btn-main{flex:1}
   .ac-hint{font-size:11.5px;line-height:1.7}
   .ac-panel{padding:0 2px}
@@ -12382,7 +12383,7 @@ new MutationObserver(() => {
     var a0 = i * 72 - 36 + GAP, a1 = i * 72 + 36 - GAP;
     rot.appendChild(el('path', { d: wedgePath(a0, a1, R_IN, R_OUT), fill: 'url(#cwG' + i + ')', class: 'ac-wedge', 'data-i': i }));
     rot.appendChild(el('path', { d: wedgePath(a0, a1, R_IN, R_OUT), class: 'ac-wedge-line', 'data-i': i }));
-    rot.appendChild(el('path', { d: wedgePath(a0, a1, R_OUT - 13, R_OUT - 3), fill: c.color, opacity: '.85', class: 'ac-band', 'data-i': i }));
+    rot.appendChild(el('path', { d: wedgePath(i * 72 - 36, i * 72 + 36, R_OUT - 17, R_OUT - 2), fill: c.color, opacity: '.9', class: 'ac-band', 'data-i': i }));
     [['ac-tz', -44, c.zang], ['ac-tf', -10, c.wu + ' · ' + c.fu], ['ac-tv', 36, '']].forEach(function (d) {
       var t = el('text', { x: CX, y: CY, 'text-anchor': 'middle', class: d[0], 'data-i': i });
       t.textContent = d[2];
@@ -12410,7 +12411,7 @@ new MutationObserver(() => {
   var coreT = el('text', { x: CX, y: CY + 22, 'text-anchor': 'middle', class: 'ac-core-t', id: 'cw-core' });
   coreT.textContent = '—'; coreG.appendChild(coreT);
   svg.appendChild(coreG);
-  svg.appendChild(el('path', { d: 'M350,42 L336,16 Q350,24 364,16 Z', class: 'ac-ptr' }));
+  svg.appendChild(el('path', { d: 'M350,54 L334,20 Q350,29 366,20 Z', class: 'ac-ptr' }));
 
   function tick() {
     if (muted) return;
