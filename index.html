@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="3f6ce7df14" />
+<meta name="build-id" content="1c3e4ea2b4" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3264,6 +3264,13 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .seg-h p{margin:0;font-size:12px;line-height:1.6;color:var(--ink-3);letter-spacing:.02em}
 .seg-h>div{flex:1;border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent);padding-bottom:9px}
 @media(max-width:700px){.seg-h{margin:32px auto 4px;padding:0 18px;gap:11px}.seg-h h3{font-size:15px}.seg-h p{font-size:11.5px}}
+
+/* ───────── 封面目录：四段分组 ───────── */
+.cover .toc .toc-g{font-family:var(--serif);font-size:10.5px;letter-spacing:.28em;color:rgba(217,207,178,.55);
+  padding:10px 2px 5px;border-bottom:1px solid rgba(200,190,160,.12);margin-bottom:2px}
+.cover .toc .toc-g:first-child{padding-top:0}
+.cover .toc a i{font-size:10.5px;letter-spacing:0}
+@media(max-width:700px){.cover .toc .toc-g{width:100%}}
 </style>
 </head>
 <body>
@@ -3307,19 +3314,26 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 
   <div class="cover-in">
     <nav class="toc" aria-label="章节">
-      <a href="#route"><i>一</i><span>学习路线</span></a>
-      <a href="#yy"><i>二</i><span>阴阳 · 学透</span></a>
-      <a href="#yydrill"><i>三</i><span>阴阳 · 题库</span></a>
-      <a href="#corr"><i>四</i><span>五行 · 对照</span></a>
-      <a href="#bagang"><i>五</i><span>八纲 · 辨证</span></a>
-      <a href="#liujing"><i>六</i><span>六经 · 入门</span></a>
-      <a href="#bing"><i>七</i><span>常见病 · 取穴</span></a>
-      <a href="#body3d"><i>八</i><span>3D · 人体穴位</span></a>
-      <a href="#acu"><i>九</i><span>穴位 · 三百六十一</span></a>
-      <a href="#recite"><i>十</i><span>穴位背诵</span></a>
-      <a href="#xhs"><i>十一</i><span>图文笔记 · 七十九篇</span></a>
-      <a href="#jue"><i>十二</i><span>歌诀 · 口诀</span></a>
-      <a href="#video"><i>十三</i><span>人纪 · 针灸大成</span></a>
+      <div class="toc-g">一 · 学理</div>
+      <a href="#lesson"><i>1</i><span>阴阳 · 正文</span></a>
+      <a href="#yy"><i>2</i><span>阴阳 · 学透</span></a>
+      <a href="#quiz"><i>3</i><span>入门定测 · 18 题</span></a>
+      <a href="#yydrill"><i>4</i><span>阴阳 · 题库 534</span></a>
+      <a href="#corr"><i>5</i><span>五行 · 对照</span></a>
+      <a href="#bagang"><i>6</i><span>八纲 · 辨证</span></a>
+      <a href="#liujing"><i>7</i><span>六经 · 入门</span></a>
+      <div class="toc-g">二 · 用</div>
+      <a href="#bing"><i>8</i><span>常见病 · 取穴</span></a>
+      <div class="toc-g">三 · 穴位库</div>
+      <a href="#body3d"><i>9</i><span>3D · 人体穴位</span></a>
+      <a href="#acu"><i>10</i><span>穴位 · 361 个</span></a>
+      <a href="#recite"><i>11</i><span>穴位背诵</span></a>
+      <a href="#jue"><i>12</i><span>歌诀 · 口诀</span></a>
+      <div class="toc-g">四 · 溯源</div>
+      <a href="#hd"><i>13</i><span>素问 · 81 篇</span></a>
+      <a href="#xhs"><i>14</i><span>手写笔记 · 79 篇</span></a>
+      <a href="#video"><i>15</i><span>人纪 · 针灸大成</span></a>
+      <a href="#src"><i>16</i><span>出处清单</span></a>
     </nav>
 
     <div class="cover-quote" aria-hidden="true">
@@ -3341,10 +3355,10 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
         <p>每一句都标了文件与行号。<span class="nw">经典原文</span>、<span class="nw">讲课转写</span>、我的推论，<span class="nw">三色分开</span>，不混。</p>
       </div>
       <div class="cover-figures">
-        <span><b>1</b><em>课已上线</em></span>
-        <span><b>18</b><em>节本课</em></span>
-        <span><b>18</b><em>题练习</em></span>
+        <span><b>4</b><em>段结构</em></span>
+        <span><b>534</b><em>道阴阳题</em></span>
         <span><b>361</b><em>穴带拼音</em></span>
+        <span><b>81</b><em>篇素问</em></span>
         <span><b>79</b><em>集视频</em></span>
       </div>
     </div>
