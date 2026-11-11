@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="15aa5cc4b6" />
+<meta name="build-id" content="f9cb1f33df" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -12116,24 +12116,19 @@ new MutationObserver(() => {
     for (var vi = 0; vi < 5; vi++) {
       var v = row.vals[vi], t = valTxt[vi];
       if (!t) continue;
-      var shown = v;
-      if (v.length > 10) shown = v.split('；')[0];
-      if (shown.length > 12) shown = shown.slice(0, 12) + '…';
+      var shown = v.indexOf('；') > -1 ? v.split('；')[0] : v;   /* 分号句取前半，后半在右侧面板和总表里 */
       var fi = paintFit(t, shown, {
-        fs0: 17, fsMin: 13, maxW: 142, maxLines: 3, cls: 'ac-tv',
-        rMax: 288, rMin: 126, anchor: pt(202, vi * 72 + st.rot), anchorR: 76
+        fs0: 17, fsMin: 11, maxW: 148, maxLines: 3, cls: 'ac-tv',
+        rMax: 290, rMin: 124, anchor: pt(202, vi * 72 + st.rot), anchorR: 84
       });
       if (valLbl[vi]) valLbl[vi].dy = 36 - (fi.lines.length - 1) * fi.fs * 1.34 / 2;
     }
     apply();
     var cd = document.getElementById('cw-dim');
-    if (cd) cd.textContent = dimNice;
+    if (cd) cd.textContent = '';   /* 维度名改由中心大字显示，避免重复两行 */
     var cc = document.getElementById('cw-core');
-    var cv0 = row.vals[st.idx];
-    if (cv0.length > 11) cv0 = cv0.split('；')[0];
-    if (cv0.length > 13) cv0 = cv0.slice(0, 13) + '…';
-    if (cc) paintFit(cc, cv0, {
-      fs0: 24, fsMin: 13, maxW: 152, maxLines: 3, cls: 'ac-core-t', rMax: 100, cy: CY + 20
+    if (cc) paintFit(cc, dimNice, {
+      fs0: 36, fsMin: 18, maxW: 178, maxLines: 2, cls: 'ac-core-t', rMax: 96, cy: CY + 8
     });
     document.getElementById('cw-zang').textContent = c.zang;
     document.getElementById('cw-wu').textContent = c.wu;
