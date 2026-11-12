@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="1c3e4ea2b4" />
+<meta name="build-id" content="491ff61cf5" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3271,6 +3271,44 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .cover .toc .toc-g:first-child{padding-top:0}
 .cover .toc a i{font-size:10.5px;letter-spacing:0}
 @media(max-width:700px){.cover .toc .toc-g{width:100%}}
+
+/* ───────── 五脏四象 · 楼房类比 ───────── */
+.bldg-lead{margin:2px 0 14px;font-size:13px;line-height:1.9;color:var(--ink-2)}
+.bd-floor{display:flex;align-items:center;gap:10px;margin:16px 0 10px}
+.bd-floor span{font-family:var(--serif);font-size:12px;letter-spacing:.16em;color:var(--ink-3);
+  border:1px solid color-mix(in srgb,var(--line) 75%,transparent);border-radius:20px;padding:4px 12px;
+  background:color-mix(in srgb,var(--paper) 92%,transparent)}
+.bd-floor:after{content:'';flex:1;height:1px;background:color-mix(in srgb,var(--line) 55%,transparent)}
+.bd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.bd-c{border:1px solid color-mix(in srgb,var(--line) 78%,transparent);border-radius:14px;padding:14px 15px 12px;
+  background:color-mix(in srgb,var(--paper) 96%,transparent);border-top:3px solid var(--accent)}
+.bd-c.yin{border-top-color:#2A5566}
+.bd-c.zhong{border-top-color:#B8862B}
+.bd-c header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.bd-c h5{margin:0;font-family:var(--serif);font-size:19px;letter-spacing:.1em;color:var(--ink)}
+.bd-c header em{font-style:normal;font-size:11px;letter-spacing:.06em;color:var(--accent);
+  background:color-mix(in srgb,var(--accent) 10%,transparent);border-radius:5px;padding:2px 7px}
+.bd-c.yin header em{color:#2A5566;background:color-mix(in srgb,#2A5566 10%,transparent)}
+.bd-c.zhong header em{color:#8A6414;background:color-mix(in srgb,#B8862B 14%,transparent)}
+.bd-pos{margin:0 0 8px;font-size:11px;color:var(--ink-3);letter-spacing:.03em}
+.bd-egg{margin:0 0 10px;font-size:13.5px;line-height:1.7;color:var(--ink);font-family:var(--serif);
+  background:color-mix(in srgb,var(--accent) 6%,transparent);border-radius:8px;padding:8px 10px}
+.bd-c.yin .bd-egg{background:color-mix(in srgb,#2A5566 6%,transparent)}
+.bd-c.zhong .bd-egg{background:color-mix(in srgb,#B8862B 9%,transparent)}
+.bd-act,.bd-fail{margin:0 0 7px;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+.bd-act b,.bd-fail b{display:block;font-size:11px;letter-spacing:.1em;color:var(--ink-3);font-weight:500;margin-bottom:2px}
+.bd-fail{color:color-mix(in srgb,var(--ink-2) 88%,#A63A2E)}
+.bd-memo{margin:2px 0 0;font-size:11.5px;line-height:1.7;color:var(--ink-3);border-top:1px dashed color-mix(in srgb,var(--line) 60%,transparent);padding-top:8px}
+.bldg-key{margin:2px 0 10px;border:1px solid color-mix(in srgb,var(--line) 72%,transparent);border-radius:13px;
+  padding:13px 15px;background:color-mix(in srgb,var(--paper) 94%,transparent)}
+.bldg-key h5{margin:0 0 10px;font-size:12.5px;letter-spacing:.08em;color:var(--ink)}
+.bd-kr{display:grid;gap:6px}
+.bd-k{display:grid;grid-template-columns:96px 76px 1fr;gap:10px;align-items:center;font-size:12px;
+  padding:6px 8px;border-radius:7px;background:color-mix(in srgb,var(--line) 22%,transparent)}
+.bd-k b{font-weight:600;color:var(--ink)}
+.bd-k i{font-style:normal;font-size:11px;color:var(--ink-3)}
+.bd-k span{color:var(--ink-2)}
+@media(max-width:640px){.bd-k{grid-template-columns:1fr 1fr;row-gap:2px}.bd-k span{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -3430,6 +3468,11 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <div class="a4-why" id="yy-attr4-why"></div>
       <h4 class="a4-sub">五脏 × 四象（同一个脏，两种叫法）</h4>
       <div class="a4-host" id="yy-attr4-wu"></div>
+      <h4 class="a4-sub">一栋两层楼，把五句话变成五个画面（记住这个就再不会混）</h4>
+      <p class="bldg-lead" id="yy-bldg-lead"></p>
+      <div class="bldg" id="yy-bldg"></div>
+      <div class="bldg-key" id="yy-bldg-key"></div>
+      <p class="ya-note" id="yy-bldg-src"></p>
       <h4 class="a4-sub">昼夜四象（上午为什么是「阳中之阳」）</h4>
       <div class="a4-host" id="yy-attr4-day"></div>
       <h4 class="a4-sub">四时四象</h4>
@@ -8969,6 +9012,61 @@ window.YY_ATTR4 = {
   ],
   src: '原文：《素问·金匮真言论》《素问·六节藏象论》《素问·阴阳离合论》；归纳：规划教材《中医基础理论》阴阳学说·属性归类'
 };
+
+/* ───────── 楼房类比（用户给的五个画面 + 延展） ─────────
+   类比本身是记忆工具，不是经典原文（标「类比」）；
+   每条下面的功能与失常，按《中医基础理论》藏象各节归纳。 */
+window.YY_ATTR4.bldg = {
+  lead: '把身体想成一栋两层楼：楼上（膈上、背侧）是阳区，楼下（膈下、腹侧）是阴区。五个脏就是这栋楼里的五样东西——看清它在哪一层、在干什么，五句绕口的话就变成五个画面。',
+  items: [
+    {
+      w: '心', s: '阳中之阳', f: '阳中之太阳', pos: '楼上 · 阳区最高处', tone: 'yang',
+      egg: '楼上一直烧着的火炉',
+      act: '一刻不停地跳、泵血、把热送到全身——阳气最旺、输出最猛。',
+      fail: '火太旺：心烦失眠、口舌生疮、面赤；火不足：心慌胸闷、四肢不温。',
+      memo: '太阳＝阳之最盛，所以心配「太阳」'
+    },
+    {
+      w: '肺', s: '阳中之阴', f: '阳中之少阴', pos: '楼上 · 火炉旁', tone: 'yin',
+      egg: '火炉旁那台排风口（抽油烟机）',
+      act: '主肃降、通调水道——把气往下收、把水往下送，偏收敛清润。',
+      fail: '排不出去：咳喘胸闷、水肿；太干：干咳无痰、鼻干咽干。',
+      memo: '同在楼上却主收敛，是阳位里的阴，所以叫「少阴」'
+    },
+    {
+      w: '肝', s: '阴中之阳', f: '阴中之少阳', pos: '楼下 · 阴区上层', tone: 'yin',
+      egg: '地下室里顶开土往上冒的小树苗',
+      act: '主升发、主疏泄——像春天的树，憋着劲往上舒展、往外长。',
+      fail: '长不动＝郁：爱叹气、胁胀、情绪低落；长过头＝亢：头胀、目赤、易怒。',
+      memo: '少阳＝初生的阳（一阳），所以肝配「少阳」'
+    },
+    {
+      w: '脾', s: '阴中之至阴', f: '至阴', pos: '楼下 · 正中间的中转层', tone: 'zhong',
+      egg: '整栋楼的地基和土壤，也是上下水管的转换层',
+      act: '主运化、主升清——把吃进来的化成气血，往上交给心肺、往下送给肝肾，是阴阳升降的中转站。',
+      fail: '中转站堵：腹胀、便溏、身重乏力；清阳不升：头晕、下陷（脱肛、内脏下垂）。',
+      memo: '「至」训「极」也训「到」——它在阴区最深处，又正卡在阴阳转换点上，才叫至阴；≠阴气最重所以不好'
+    },
+    {
+      w: '肾', s: '阴中之阴', f: '阴中之太阴', pos: '楼下 · 最深的地基里', tone: 'yin',
+      egg: '地下室最深处的地下水',
+      act: '主藏精、主水——把能量牢牢收在体内，不随便外泄，最内敛。',
+      fail: '藏不住：夜尿多、遗精、动则气喘；水不够（阴虚）：腰膝酸软、耳鸣、潮热盗汗。',
+      memo: '太阴＝阴之最盛，所以肾配「太阴」'
+    }
+  ],
+  key: {
+    t: '为什么名字是这几个字？—— 对应三阴三阳的「强弱」',
+    rows: [
+      { k: '太阳（三阳）', v: '阳最多', m: '心 · 阳中之阳' },
+      { k: '少阳（一阳）', v: '阳初生', m: '肝 · 阴中之阳' },
+      { k: '少阴（二阴）', v: '阴渐多', m: '肺 · 阳中之阴' },
+      { k: '太阴（三阴）', v: '阴最多', m: '肾 · 阴中之阴' },
+      { k: '至阴', v: '阴极与枢纽', m: '脾 · 阴中之至阴' }
+    ]
+  },
+  src: '位置与命名：《素问·金匮真言论》《素问·六节藏象论》；功能与失常：规划教材《中医基础理论》藏象各节。楼房类比是记忆工具（橙色），不是经典原文。'
+};
 </script>
 <script>/* 阴阳病理四偏 + 治则四条（补题库里大量涉及、正文讲得薄的部分）
    原文依据：
@@ -14321,6 +14419,39 @@ new MutationObserver(() => {
   }).join('');
   $('yy-jg-memo').innerHTML = '<b>一句话记住：</b>' + J.memo;
   $('yy-jg-src').textContent = J.src;
+})();
+
+/* ───────── 五脏四象 · 楼房类比 ───────── */
+(function () {
+  'use strict';
+  var A = window.YY_ATTR4, B = A && A.bldg, host = document.getElementById('yy-bldg');
+  if (!B || !host) return;
+  function $(id) { return document.getElementById(id); }
+  $('yy-bldg-lead').textContent = B.lead;
+  var floors = [
+    { k: '楼上 · 阳区（膈上、背侧）', pick: '楼上' },
+    { k: '楼下 · 阴区（膈下、腹侧）', pick: '楼下' }
+  ];
+  host.innerHTML = floors.map(function (f) {
+    var items = B.items.filter(function (it) { return it.pos.indexOf(f.pick) === 0; });
+    if (!items.length) return '';
+    return '<div class="bd-floor"><span>' + f.k + '</span></div>' +
+      '<div class="bd-grid">' + items.map(function (it) {
+        return '<article class="bd-c ' + it.tone + '">' +
+          '<header><h5>' + it.w + '</h5><em>' + it.s + '</em></header>' +
+          '<p class="bd-pos">' + it.pos + ' · ' + it.f + '</p>' +
+          '<p class="bd-egg">' + it.egg + '</p>' +
+          '<p class="bd-act"><b>它在干什么</b>' + it.act + '</p>' +
+          '<p class="bd-fail"><b>出问题会怎样</b>' + it.fail + '</p>' +
+          '<p class="bd-memo">' + it.memo + '</p>' +
+        '</article>';
+      }).join('') + '</div>';
+  }).join('');
+  $('yy-bldg-key').innerHTML = '<h5>' + B.key.t + '</h5><div class="bd-kr">' +
+    B.key.rows.map(function (r) {
+      return '<div class="bd-k"><b>' + r.k + '</b><i>' + r.v + '</i><span>' + r.m + '</span></div>';
+    }).join('') + '</div>';
+  $('yy-bldg-src').textContent = B.src;
 })();
 </script>
 </body>
