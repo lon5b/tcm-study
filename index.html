@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="b3055b310d" />
+<meta name="build-id" content="119db57b00" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3357,6 +3357,34 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .bge-c.yin{border-top-color:#23272E}.bge-c.yin b{color:#23272E}
 .bge-r{align-items:flex-start;flex-direction:column;gap:2px}
 .bge-r i{font-size:11.5px;color:var(--accent)}
+
+/* ───────── 六经 · 六扇门 ───────── */
+.lje-grid{grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+.lje-path{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:0 0 16px}
+.lje-p{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);
+  border:1px solid color-mix(in srgb,var(--line) 75%,transparent);border-radius:20px;padding:4px 11px 4px 5px;
+  background:color-mix(in srgb,var(--paper) 96%,transparent)}
+.lje-p b{width:17px;height:17px;border-radius:50%;background:color-mix(in srgb,var(--accent) 80%,transparent);
+  color:#fff;font-size:10.5px;display:grid;place-items:center;font-weight:600}
+.lje-path em{font-style:normal;color:var(--ink-3);font-size:12px}
+.lje-c header{flex-direction:column;align-items:flex-start;gap:2px}
+.lje-c header h5{font-size:11.5px;color:var(--ink-3);margin-left:0}
+.lje-life span,.lje-one b,.lje-mix b,.lje-c .egg-memo b{display:block;font-size:10.5px;letter-spacing:.09em;color:var(--ink-3);font-weight:500;margin-bottom:2px}
+.lje-life span{color:var(--accent);letter-spacing:.06em}
+.lje-one,.lje-mix{margin:0 0 6px;font-size:12.5px;line-height:1.78;color:var(--ink-2)}
+.lje-c.taiyang{border-top-color:#3F7C8C}.lje-c.taiyang b{color:#3F7C8C}
+.lje-c.yangming{border-top-color:#B33A2B}.lje-c.yangming b{color:#B33A2B}
+.lje-c.shaoyang{border-top-color:#8C7A2E}.lje-c.shaoyang b{color:#8C7A2E}
+.lje-c.taiyin{border-top-color:#2A5566}.lje-c.taiyin b{color:#2A5566}
+.lje-c.shaoyin{border-top-color:#23272E}.lje-c.shaoyin b{color:#23272E}
+.lje-c.jueyin{border-top-color:#6B4A8C}.lje-c.jueyin b{color:#6B4A8C}
+@media(max-width:640px){.lje-grid{grid-template-columns:1fr}}
+/* 六扇门路径条：压紧，尽量一行排完 */
+.lje-path{gap:5px}
+.lje-p{font-size:11.5px;padding:3px 9px 3px 4px;gap:5px}
+.lje-p b{width:16px;height:16px;font-size:10px}
+.lje-life{font-weight:500}
+.lje-life span{font-weight:600;letter-spacing:.1em;margin-bottom:3px}
 </style>
 </head>
 <body>
@@ -3789,6 +3817,13 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     <div class="sec-h"><span class="sec-k">六经</span><h2 id="lj-h2">六经 · 入门</h2></div>
     <p class="lead" id="lj-intro"></p>
     <div class="warnbox" id="lj-warn" style="margin:0 0 22px"></div>
+
+    <div class="lj-block"><h3 class="yy-h">〇、六扇门：六经一眼分清</h3>
+      <p class="egg-lead" id="lje-lead"></p>
+      <div class="lje-path" id="lje-path"></div>
+      <div class="egg-grid lje-grid" id="lje-grid"></div>
+      <p class="egg-tip" id="lje-tip"></p>
+      <p class="ac-note" id="lje-src"></p></div>
 
     <div class="lj-block"><h3 class="yy-h">一、六经到底是什么（先看这五条）</h3>
       <div class="yy-points" id="lj-basics"></div></div>
@@ -9362,6 +9397,60 @@ window.BG_EGG = {
   src: '八纲内容：《中医诊断学》规划教材（表里、寒热、虚实、阴阳四对）。「邪气盛则实，精气夺则虚」出《素问·通评虚实论》。八纲只用于辨识证型，不作自行用药依据。'
 };
 </script>
+<script>/* 六经 · 六扇门（生活例子版）
+   结构同四象「楼房」、五行「五个画面」、八纲「四个开关」：定位画面 + 生活场景 + 一句话判据 + 最容易混。
+   提纲原文见 _data_lj.js（标条号）；生活场景只是帮助辨认，不是诊断依据。 */
+window.LJ_EGG = {
+  lead: '把身体想成一间屋子，病邪从大门往里走，一共要过六道门。走得越深，正气越弱，人越危险。这就是六经——不是什么玄学，是<b>病位的深度尺</b>。',
+  path: ['大门 · 太阳', '厅堂 · 阳明', '门缝 · 少阳', '里屋 · 太阴', '最里屋 · 少阴', '后门 · 厥阴'],
+  items: [
+    {
+      jing: '太阳', door: '大门（最外层：皮毛、后颈、后背）', tone: 'taiyang',
+      life: '淋了雨、空调对着后脖子吹一夜，第二天：怕冷、后颈发僵、打喷嚏、有点烧、身上没汗。',
+      one: '脉浮 + 怕冷 + 头项强痛 → 邪还在门口，正气正在门口打。',
+      mix: '和少阳混：太阳是「一直怕冷」，少阳是「一阵冷一阵热」。',
+      risk: '轻。这时候最好治——把门关上把邪赶出去就行。'
+    },
+    {
+      jing: '阳明', door: '厅堂（已经进屋：胃肠）', tone: 'yangming',
+      life: '连吃两天火锅烧烤：高烧不退、口渴得猛灌冰水、肚子胀得难受、好几天没大便、出汗多。',
+      one: '大热 + 大汗 + 大渴 + 脉洪大（或腹胀便秘、脉沉实）→ 邪已入里化热。',
+      mix: '和太阳混：太阳是「怕冷」，阳明是「怕热、口渴」。',
+      risk: '较重，但正气还壮（实证），是「打得动」的阶段。'
+    },
+    {
+      jing: '少阳', door: '门缝（半在门里半在门外，卡住了）', tone: 'shaoyang',
+      life: '连着熬夜又生一场气：嘴里发苦、眼睛发花、两边肋骨胀、一会儿冷一会儿热、不想吃饭、心里烦。',
+      one: '口苦 + 咽干 + 目眩 + 往来寒热 + 胸胁苦满 → 卡在中间，进不去也出不来。',
+      mix: '和太阳混：少阳有「往来寒热」；和阳明混：少阳「不想吃饭」而不是「大渴大热」。',
+      risk: '中。拖久了就往里走（见肝传脾）。'
+    },
+    {
+      jing: '太阴', door: '里屋（脾：把吃进去的东西变成气血的地方）', tone: 'taiyin',
+      life: '常年冰饮冷食、久坐不动：肚子胀、吃一点就饱、一吃凉的就拉稀、肚子隐隐作痛但用手按着反而舒服。',
+      one: '腹满而吐 + 食不下 + 自利 + 时腹自痛（喜温喜按）→ 里虚寒的「轻档」。',
+      mix: '和阳明混：都是肚子胀——阳明拒按、便干；太阴喜按、便稀。',
+      risk: '中。是阴证的第一层，及时温中还能扳回来。'
+    },
+    {
+      jing: '少阴', door: '最里屋（心肾：全身的火种和水库）', tone: 'shaoyin',
+      life: '老人或久病的人：整天没劲只想睡、叫醒又迷糊、手脚冰凉、脉细得摸不清、稍微动就喘。',
+      one: '脉微细 + 但欲寐 + 四肢厥冷 → 火要灭了，六经里最危险的一层。',
+      mix: '和太阴混：太阴是「肚子的问题」，少阴是「整个人没神、脉微」。',
+      risk: '危。这种情况不是在家能处理的，必须马上送医。'
+    },
+    {
+      jing: '厥阴', door: '后门（阴阳交界：寒热搅在一起）', tone: 'jueyin',
+      life: '上半身冒火、下半身冰凉：口腔溃疡、心烦睡不着，同时脚冷、肚子怕凉、容易拉稀。',
+      one: '消渴 + 气上撞心 + 心中疼热 + 饥不欲食 → 上热下寒，寒热错杂。',
+      mix: '和少阴混：少阴是「一片冷到底」，厥阴是「上面热下面冷」。',
+      risk: '危。阴之尽，正邪最后一搏。'
+    }
+  ],
+  tip: '一句话记住顺序：<b>门 → 厅 → 缝 → 里屋 → 最里屋 → 后门</b>，越往后越深、越冷、越危险。判断时只问两件事：<b>怕冷还是怕热、想不想吃饭</b>——答案基本就把门找出来了。',
+  src: '六经提纲原文见《伤寒论》第 1、180、263、273、281、326 条（本站「六经速查表」与六张卡片逐条标注）。生活场景为帮助辨认所设的举例，不构成诊断。'
+};
+</script>
 <script>/* ══════════════════════════════════════════════════════
    穴名解读 · 常用穴首批（字义 + 命名依据）
    说明：字义取《说文解字》及通行训释；命名依据取《针灸学》教材、
@@ -14684,6 +14773,29 @@ new MutationObserver(() => {
     }).join('') + '</div>';
   $('bge-tip').innerHTML = E.tip;
   $('bge-src').textContent = E.src;
+})();
+
+/* ───────── 六经 · 六扇门 ───────── */
+(function () {
+  'use strict';
+  var E = window.LJ_EGG, host = document.getElementById('lje-grid');
+  if (!E || !host) return;
+  function $(id) { return document.getElementById(id); }
+  $('lje-lead').innerHTML = E.lead;
+  $('lje-path').innerHTML = E.path.map(function (p, i) {
+    return '<span class="lje-p"><b>' + (i + 1) + '</b>' + p + '</span>' + (i < E.path.length - 1 ? '<em>›</em>' : '');
+  }).join('');
+  host.innerHTML = E.items.map(function (it) {
+    return '<article class="egg-c lje-c ' + it.tone + '">' +
+      '<header><b>' + it.jing + '</b><h5>' + it.door + '</h5></header>' +
+      '<p class="egg-pic lje-life"><span>生活里长这样</span>' + it.life + '</p>' +
+      '<p class="lje-one"><b>一句话判据</b>' + it.one + '</p>' +
+      '<p class="lje-mix"><b>最容易混</b>' + it.mix + '</p>' +
+      '<p class="egg-memo"><b>深浅 / 危险度</b>' + it.risk + '</p>' +
+    '</article>';
+  }).join('');
+  $('lje-tip').innerHTML = E.tip;
+  $('lje-src').textContent = E.src;
 })();
 </script>
 </body>
