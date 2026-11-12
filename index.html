@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="8d7f5d070b" />
+<meta name="build-id" content="eec70c4a18" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3405,6 +3405,12 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .cm-life{margin:0 0 12px;font-size:12.5px;line-height:1.85;color:var(--ink-2);
   background:color-mix(in srgb,var(--line) 16%,transparent);border-radius:9px;padding:9px 12px}
 .cm-life em{font-style:normal;font-size:10.5px;letter-spacing:.12em;color:var(--accent);font-weight:600;margin-right:8px}
+
+/* 全站「生活里」一句话 */
+.yl-one{margin:14px 0 0;font-size:12.5px;line-height:1.85;color:var(--ink-2);
+  border-left:3px solid color-mix(in srgb,var(--accent) 70%,transparent);
+  background:color-mix(in srgb,var(--accent) 4%,transparent);border-radius:0 9px 9px 0;padding:8px 12px}
+.yl-one em{font-style:normal;font-size:10.5px;letter-spacing:.12em;color:var(--accent);font-weight:600;margin-right:8px}
 </style>
 </head>
 <body>
@@ -3642,7 +3648,7 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
     </div>
 
     <div class="yy-block">
-      <h3 class="yy-h" id="yy-method">五、方法论：四步把阴阳学成能用的东西</h3>
+      <h3 class="yy-h" id="yy-method-h">五、方法论：四步把阴阳学成能用的东西</h3>
       <div class="yy-method" id="yy-method"></div>
     </div>
 
@@ -9534,6 +9540,31 @@ window.YY_LIFE = {
   src: '阴阳概念与病机：《素问·阴阳应象大论》《素问·调经论》「阳虚则外寒，阴虚则内热，阳盛则外热，阴盛则内寒」；治则：王冰注「益火之源，以消阴翳」「壮水之主，以制阳光」，《素问·至真要大论》「寒者热之，热者寒之」。生活场景为举例，不构成诊断与用药建议。'
 };
 </script>
+<script>/* 全站「生活里」一句话层：按小节标题匹配，自动挂到各知识块末尾。
+   一条 = 一个生活画面，不新增医学结论，只做类比与场景。 */
+window.LIFE_MAP = [
+  { k: '阴阳到底指什么', v: '一支温度计就能记住阴阳：刻度往上＝阳（热、动、快），往下＝阴（冷、静、慢）。同一根管子，只是两头。' },
+  { k: '属性速查', v: '电风扇能吹风是因为通了电（阳），一断电立刻就静了（阴）——凡是「能动」的，背后都靠一个「静的东西」托着。' },
+  { k: '五组关系', v: '像一对过了三十年的老夫妻：谁也离不开谁（互根），一个脾气上来另一个就让（消长），吵完还能和好（交感），各自心里装着对方（互藏），一个倒下了另一个也撑不住（转化）。' },
+  { k: '两把尺子', v: '量身高用尺子、量体温用温度计——阴阳也是两把尺子：一把量「偏哪边」，一把量「够不够」。别用一把尺量两件事。' },
+  { k: '三步判断', v: '跟门诊量体温一个顺序：先摸手脚冷热（属性）→ 再看精神头旺不旺（虚实）→ 最后定总纲。顺序反了，结论就反。' },
+  { k: '六个证型', v: '像洗衣机上的六个档位：档位选错，水也放了、衣服也湿了，就是洗不干净——穴选对一半，证分错照样没效。' },
+  { k: '六位老师怎么讲阴阳', v: '六位老师像六个人摸同一头大象：摸到腿的说像柱子，摸到耳朵的说像扇子——都对，但都不全。你要做的是把六个描述拼成一头象。' },
+  { k: '五、方法论', v: '跟学开车一样：先认仪表盘（概念）→ 上路练（做题）→ 走固定路线（14 天计划）→ 自己找路（临床辨）。跳过哪一步都上不了路。' },
+  { k: '六、题库', v: '刷题像健身：看教练示范（看讲解）长不出肌肉，得自己举。每天 20 题，一个月就有手感。' },
+  { k: '背诵卡', v: '主动回忆像找钥匙：翻书看＝知道钥匙在抽屉里；合上书回想＝真把钥匙拿在手上。手上没钥匙，用的时候才翻抽屉就晚了。' },
+  { k: '14 天学透计划', v: '像减脂打卡：不靠某一天猛练，靠每天不断。断两天没事，别断一周。' },
+  { k: '十个最常见的误区', v: '最常见那个：一上火就灌凉茶。你要是「水少」的虚火，越喝越糟。生活里九成的自我调理错误，都错在没分虚实。' },
+  { k: '真假鉴别', v: '真热假寒像空调外机：外壳冰凉，里面压缩机烫手。看病不能只摸外壳。' },
+  { k: '八纲与六经', v: '八纲是「坐标系」，六经是「楼层」，脏腑是「房间号」。同一个地址，三种写法。' },
+  { k: '三条要记死的', v: '像开车三件事：刹车（虚实）、方向（表里寒热）、油量（阴阳）。三样心里有数，路才敢开。' },
+  { k: '四个开关', v: '看病跟查电箱一样：先看是哪一路跳闸（表里），再看是过热还是过冷（寒热），再看是负载太大还是供电不足（虚实），最后看总闸。' },
+  { k: '六经到底是什么', v: '六经像小区门禁：外门 → 单元门 → 入户门 → 卧室门，一层层往里。病走到哪道门，症状就长那样。' },
+  { k: '开阖枢', v: '门要能开（太阳）、能合（阳明）、门轴要灵（少阳）。轴坏了，门既关不严也开不利索——所以少阳病最常见的就是「卡着」。' },
+  { k: '传变', v: '像漏水：从天花板的墙角慢慢往里渗，一路按顺序走（循经传）；也可能直接漏到楼下（越经传）；老房子本来就潮，一漏就是一大片（直中）。' },
+  { k: '先学哪一步', v: '先学会看门牌（六经定位），再学怎么推门（选穴）。一上来就背方子，等于没看门牌就撬锁。' }
+];
+</script>
 <script>/* ══════════════════════════════════════════════════════
    穴名解读 · 常用穴首批（字义 + 命名依据）
    说明：字义取《说文解字》及通行训释；命名依据取《针灸学》教材、
@@ -14906,6 +14937,39 @@ new MutationObserver(() => {
   }).join('');
   $('yl-tip').innerHTML = E.tip;
   $('yl-src').textContent = E.src;
+})();
+
+/* ───────── 全站「生活里」一句话层 ───────── */
+(function () {
+  'use strict';
+  var M = window.LIFE_MAP;
+  if (!M || !M.length) return;
+  var used = {}, sorted = M.slice().sort(function (a, b) { return b.k.length - a.k.length; });
+  document.querySelectorAll('h3').forEach(function (h) {
+    if (h.dataset.yl) return;
+    var t = h.textContent;
+    for (var i = 0; i < sorted.length; i++) {
+      var kk = sorted[i].k;
+      if (used[kk] || t.indexOf(kk) < 0) continue;
+      used[kk] = 1; h.dataset.yl = kk;
+      var blk = h.closest('.yy-block, .lj-block, .yl-block');
+      var p = document.createElement('p');
+      p.className = 'yl-one';
+      p.setAttribute('data-k', kk);
+      p.innerHTML = '<em>生活里</em>' + sorted[i].v;
+      if (blk) {
+        var note = blk.querySelector('.ac-note');
+        if (note && note.parentElement === blk) blk.insertBefore(p, note); else blk.appendChild(p);
+      } else {
+        // 没有包裹块：插到本节最后（下一个 h3 之前）
+        var nx = h.nextElementSibling, last = h;
+        while (nx && nx.tagName !== 'H3') { last = nx; nx = nx.nextElementSibling; }
+        if (last.parentElement) last.parentElement.insertBefore(p, last.nextSibling);
+        else h.parentElement.appendChild(p);
+      }
+      break;
+    }
+  });
 })();
 </script>
 </body>
