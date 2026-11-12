@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="dfb0474f88" />
+<meta name="build-id" content="7d63ccfef6" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -15425,8 +15425,8 @@ function loadSkin() {
             color: 0xf6f2ec, roughness: 0.55, metalness: 0.0,
             clearcoat: 0.45, clearcoatRoughness: 0.45,
             sheen: 0.6, sheenColor: new THREE.Color(0x9fb8d8),
-            transparent: true, opacity: 0.26, depthWrite: false,
-            side: THREE.DoubleSide
+            transparent: true, opacity: 0.42, depthWrite: true,
+            side: THREE.FrontSide
           });
         }
       });
@@ -15496,6 +15496,8 @@ function show(code) {
   controls.update();
 
   S.t = 0;
+  const viewKey = meta.side === 'back' ? 'back' : (meta.side === 'side' ? 'side' : 'front');
+  document.querySelectorAll('.m3-views button[data-v]').forEach((b) => b.classList.toggle('on', b.dataset.v === viewKey));
   renderList(code, codes);
   toast(meta.n + ' · 巡行路线已载入');
 }
