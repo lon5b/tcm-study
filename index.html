@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="3a28eb50d4" />
+<meta name="build-id" content="b3055b310d" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3342,6 +3342,21 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .egg-tip{margin:16px 0 4px;font-size:12.5px;line-height:1.9;color:var(--ink-2);border-left:3px solid var(--accent);
   padding:8px 0 8px 12px;background:color-mix(in srgb,var(--accent) 5%,transparent);border-radius:0 8px 8px 0}
 @media(max-width:640px){.egg-grid{grid-template-columns:1fr}}
+
+/* ───────── 八纲 · 四个开关 ───────── */
+.bge-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.bge-c header b{letter-spacing:.14em}
+.bge-c header h5{margin-left:2px;font-size:12px;color:var(--ink-3);font-weight:400}
+.bge-body{margin:2px 0 0;font-size:12.5px;line-height:1.85;color:var(--ink-2)}
+.bge-body b{color:var(--ink)}
+.bge-body hr{border:0;border-top:1px dashed color-mix(in srgb,var(--line) 60%,transparent);margin:7px 0}
+.bge-c .egg-memo b{display:block;font-size:10.5px;letter-spacing:.09em;color:var(--ink-3);font-weight:500;margin-bottom:2px}
+.bge-c.biao{border-top-color:#3F7C8C}.bge-c.biao b{color:#3F7C8C}
+.bge-c.han{border-top-color:#3A6EA5}.bge-c.han b{color:#3A6EA5}
+.bge-c.xu{border-top-color:#8C7A2E}.bge-c.xu b{color:#8C7A2E}
+.bge-c.yin{border-top-color:#23272E}.bge-c.yin b{color:#23272E}
+.bge-r{align-items:flex-start;flex-direction:column;gap:2px}
+.bge-r i{font-size:11.5px;color:var(--accent)}
 </style>
 </head>
 <body>
@@ -3750,6 +3765,13 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       </div>
       <div class="ac-tb-scroll" id="bg-table"></div>
     </div>
+
+    <h3 class="yy-h">〇、四个开关：八纲一次扳明白</h3>
+    <p class="egg-lead" id="bge-lead"></p>
+    <div class="egg-grid bge-grid" id="bge-grid"></div>
+    <div class="egg-rel" id="bge-combo"></div>
+    <p class="egg-tip" id="bge-tip"></p>
+    <p class="ac-note" id="bge-src"></p>
 
     <h3 class="yy-h">一、真假鉴别（最容易翻车的地方）</h3>
     <div class="bg-jian" id="bg-jian"></div>
@@ -9293,6 +9315,53 @@ window.CORR_EGG = {
   src: '五行属性与生克：《素问·阴阳应象大论》《素问·宝命全形论》「木得金而伐，火得水而灭，土得木而达，金得火而缺，水得土而绝」；功能与病机：规划教材《中医基础理论》五行学说、藏象各节。画面类比是记忆工具。'
 };
 </script>
+<script>/* 八纲 · 四个开关（与四象「楼房」、五行「五个画面」同一套记法：一句话判据 + 阳性/阴性 + 最容易混的地方）
+   证候表述按《中医诊断学》规划教材通行表述；出处逐条标注，教材归纳不冒充原文。 */
+window.BG_EGG = {
+  lead: '八纲不是八个证，是<b>四个开关</b>。看病时按顺序扳一遍：先问病在哪儿（表里），再问冷还是热（寒热），再问是敌人多还是自己人少（虚实），最后看总闸扳到哪边（阴阳）。四个开关定完，方子的大方向就出来了。',
+  items: [
+    {
+      k: '表里', axis: '开关一 · 病在哪儿', tone: 'biao',
+      ask: '病在门外（肌表皮毛），还是已经进屋（脏腑气血）？',
+      yes: '<b>表证</b>：发热与恶寒同时出现、头身痛、鼻塞流涕、脉浮、苔薄白。<br>一句话：<b>脉浮 + 恶寒发热并见</b>。',
+      no: '<b>里证</b>：但热不寒或但寒不热、脏腑症状突出（咳、呕、泻、痛定点）、脉沉。',
+      trap: '「半表半里」不在八纲里，那是六经的少阳（寒热往来、口苦咽干、脉弦）。八纲只分表里，别再分第三格。'
+    },
+    {
+      k: '寒热', axis: '开关二 · 冷还是热', tone: 'han',
+      ask: '这个人整体偏冷，还是偏热？',
+      yes: '<b>寒证</b>：恶寒喜暖、口不渴或渴喜热饮、面色苍白、四肢冷、小便清长、便稀、舌淡苔白、脉迟。',
+      no: '<b>热证</b>：发热喜凉、口渴喜冷饮、面红目赤、小便短赤、便干、舌红苔黄、脉数。',
+      trap: '别只看体温计。<b>看渴不渴、喜冷喜热、二便、舌脉</b>——真热假寒时四肢冰冷但胸腹灼热、口渴喜冷、脉滑数。'
+    },
+    {
+      k: '虚实', axis: '开关三 · 敌人多还是自己人少', tone: 'xu',
+      ask: '是邪气太盛（实），还是正气不够（虚）？',
+      yes: '<b>实证</b>：新病、体质壮、痛处拒按、声高气粗、腹胀便秘、脉有力。',
+      no: '<b>虚证</b>：久病、体弱、痛处喜按、精神萎靡、声低气短、自汗盗汗、脉无力。',
+      trap: '虚实可以同时存在（虚实夹杂）。「邪气盛则实，精气夺则虚」——一句定生死，别只看病名长短。'
+    },
+    {
+      k: '阴阳', axis: '开关四 · 总闸', tone: 'yin',
+      ask: '四个开关合起来，整体偏阳（表·热·实）还是偏阴（里·寒·虚）？',
+      yes: '<b>阳证</b>：表、热、实——正气尚能与邪争。<br><b>阴证</b>：里、寒、虚——正气已退。',
+      no: '<b>亡阴 / 亡阳</b>是危候：亡阴见汗热而黏、手足温、脉细数疾；亡阳见冷汗淋漓、手足厥冷、脉微欲绝。',
+      trap: '阴阳是<b>总纲</b>，不是第五个开关——它把前三个开关的结果合起来算总账。'
+    }
+  ],
+  combo: {
+    t: '四个开关扳完，怎么念成一个证',
+    rows: [
+      { c: '表 · 寒 · 实', why: '外感风寒——恶寒重发热轻、无汗、头身痛、脉浮紧' },
+      { c: '里 · 热 · 实', why: '阳明腑实——高热、腹胀满、便秘、脉沉实' },
+      { c: '里 · 寒 · 虚', why: '脾肾阳虚——畏寒肢冷、便溏、腰膝冷、脉沉迟无力' },
+      { c: '里 · 热 · 虚', why: '阴虚内热——潮热盗汗、五心烦热、舌红少苔、脉细数' }
+    ]
+  },
+  tip: '顺序别乱：<b>表里定位置 → 寒热定性质 → 虚实定力量 → 阴阳定总纲</b>。乱了顺序，最容易把「表寒」看成「里寒」，把「真热假寒」看成寒证。真假鉴别那一节就是防这个的。',
+  src: '八纲内容：《中医诊断学》规划教材（表里、寒热、虚实、阴阳四对）。「邪气盛则实，精气夺则虚」出《素问·通评虚实论》。八纲只用于辨识证型，不作自行用药依据。'
+};
+</script>
 <script>/* ══════════════════════════════════════════════════════
    穴名解读 · 常用穴首批（字义 + 命名依据）
    说明：字义取《说文解字》及通行训释；命名依据取《针灸学》教材、
@@ -14592,6 +14661,29 @@ new MutationObserver(() => {
   rel('egg-ke', E.ke);
   $('egg-tip').innerHTML = E.tip;
   $('egg-src').textContent = E.src;
+})();
+
+/* ───────── 八纲 · 四个开关 ───────── */
+(function () {
+  'use strict';
+  var E = window.BG_EGG, host = document.getElementById('bge-grid');
+  if (!E || !host) return;
+  function $(id) { return document.getElementById(id); }
+  $('bge-lead').innerHTML = E.lead;
+  host.innerHTML = E.items.map(function (it) {
+    return '<article class="egg-c bge-c ' + it.tone + '">' +
+      '<header><b>' + it.k + '</b><h5>' + it.axis + '</h5></header>' +
+      '<p class="egg-pic">' + it.ask + '</p>' +
+      '<div class="bge-body">' + it.yes + '<hr>' + it.no + '</div>' +
+      '<p class="egg-memo"><b>最容易混</b>' + it.trap + '</p>' +
+    '</article>';
+  }).join('');
+  $('bge-combo').innerHTML = '<h5>' + E.combo.t + '</h5><div class="egg-rw">' +
+    E.combo.rows.map(function (r) {
+      return '<span class="egg-r bge-r"><i>' + r.c + '</i><u>' + r.why + '</u></span>';
+    }).join('') + '</div>';
+  $('bge-tip').innerHTML = E.tip;
+  $('bge-src').textContent = E.src;
 })();
 </script>
 </body>
