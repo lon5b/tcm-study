@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="ffeb9db8ef" />
+<meta name="build-id" content="8d7f5d070b" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3400,6 +3400,11 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .yl-c.c{border-left-color:#B33A2B}.yl-c.d{border-left-color:#3A6EA5}
 .yl-c.e{border-left-color:#8C7A2E}
 @media(max-width:640px){.yl-grid{grid-template-columns:1fr}}
+
+/* 常见病 · 生活里 */
+.cm-life{margin:0 0 12px;font-size:12.5px;line-height:1.85;color:var(--ink-2);
+  background:color-mix(in srgb,var(--line) 16%,transparent);border-radius:9px;padding:9px 12px}
+.cm-life em{font-style:normal;font-size:10.5px;letter-spacing:.12em;color:var(--accent);font-weight:600;margin-right:8px}
 </style>
 </head>
 <body>
@@ -10994,6 +10999,7 @@ window.ACU_NJ = {
 "list": [
 {
 "name": "头痛",
+"life": "加班盯屏幕一整天，或者洗完头没吹干就吹了风——太阳穴一跳一跳，一按更痛。",
 "sign": "先分部位：前额属阳明、两侧属少阳、后枕属太阳、巅顶属厥阴",
 "main": [
 {
@@ -11024,6 +11030,7 @@ window.ACU_NJ = {
 },
 {
 "name": "胃痛 · 胃胀",
+"life": "赶时间囫囵吃、冰咖啡配凉沙拉，下午就顶着胃胀、打嗝、按着更难受。",
 "sign": "先分寒热：喜温喜按、遇冷加重属寒；灼痛、口臭、便秘属热",
 "main": [
 {
@@ -11053,6 +11060,7 @@ window.ACU_NJ = {
 },
 {
 "name": "便秘",
+"life": "出差几天、水喝少了、蔬菜也没吃，第三天开始蹲不出来，肚子胀得像鼓。",
 "sign": "先分寒热虚实：腹胀拒按、口臭属实；便软无力、面色淡属虚寒",
 "main": [
 {
@@ -11081,6 +11089,7 @@ window.ACU_NJ = {
 },
 {
 "name": "腰痛 · 腰扭伤",
+"life": "弯腰拎了一箱水，或者久坐一天起身——腰一下像断电，弯不下去也直不起来。",
 "sign": "先分部位与诱因：受寒加重、喜温属寒湿；扭伤后刺痛固定属瘀",
 "main": [
 {
@@ -11109,6 +11118,7 @@ window.ACU_NJ = {
 },
 {
 "name": "月经不调 · 痛经",
+"life": "来之前两天淋了雨、又喝了冰奶茶，小腹一阵阵坠痛、发凉、热水袋焐着才舒服。",
 "sign": "先分虚实寒热：经色淡、腹冷喜暖属虚寒；经色暗有块、胀痛属气滞血瘀",
 "main": [
 {
@@ -11137,6 +11147,7 @@ window.ACU_NJ = {
 },
 {
 "name": "失眠",
+"life": "躺下脑子停不下来，翻来覆去到一点多；或者睡着了也是一有动静就醒，早上起来像没睡。",
 "sign": "先分虚实：心烦易怒、口苦属心肝火（实）；心悸健忘、面色淡属心血不足（虚）",
 "main": [
 {
@@ -11165,6 +11176,7 @@ window.ACU_NJ = {
 },
 {
 "name": "颈项强 · 落枕",
+"life": "空调对着后脖子吹一夜，或者枕头太高——早上起床脖子转不动，得整个身子一起转。",
 "sign": "先分：受寒后僵硬、遇热舒服属风寒；低头久坐、转头受限属劳损",
 "main": [
 {
@@ -11193,6 +11205,7 @@ window.ACU_NJ = {
 },
 {
 "name": "感冒初起 · 表证",
+"life": "淋了雨、或者空调房进出太频繁：打喷嚏、怕冷、后颈发紧、身上没汗，还没发烧。",
 "sign": "先分风寒风热：怕冷重、无汗、清涕属风寒；发热重、咽痛、黄涕属风热",
 "main": [
 {
@@ -12695,6 +12708,7 @@ new MutationObserver(() => {
       var subHtml = (d.sub || []).map(function (x) { return '<li>' + x + '</li>'; }).join('');
       return '<article class="cm-card" id="cm-' + di + '">' +
         '<header><h3>' + d.name + '</h3></header>' +
+        (d.life ? '<p class="cm-life"><em>生活里</em>' + d.life + '</p>' : '') +
         '<p class="cm-sign"><em>先辨证</em>' + d.sign + '</p>' +
         '<ul class="cm-main">' + mainHtml + '</ul>' +
         (subHtml ? '<div class="cm-sub"><b>加配</b><ul>' + subHtml + '</ul></div>' : '') +
