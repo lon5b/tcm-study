@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="491ff61cf5" />
+<meta name="build-id" content="3a28eb50d4" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3309,6 +3309,39 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .bd-k i{font-style:normal;font-size:11px;color:var(--ink-3)}
 .bd-k span{color:var(--ink-2)}
 @media(max-width:640px){.bd-k{grid-template-columns:1fr 1fr;row-gap:2px}.bd-k span{grid-column:1/-1}}
+
+/* ───────── 五行 · 五个画面 ───────── */
+.egg-h{font-family:var(--serif);font-size:17px;letter-spacing:.12em;color:var(--ink);margin:34px 0 8px}
+.egg-lead{margin:0 0 16px;font-size:13px;line-height:1.9;color:var(--ink-2)}
+.egg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:12px}
+.egg-c{border:1px solid color-mix(in srgb,var(--line) 78%,transparent);border-radius:14px;padding:13px 14px 11px;
+  background:color-mix(in srgb,var(--paper) 96%,transparent);border-top:3px solid var(--line)}
+.egg-c header{display:flex;align-items:baseline;gap:8px;margin-bottom:7px}
+.egg-c header b{font-family:var(--serif);font-size:22px;line-height:1;letter-spacing:.06em}
+.egg-c header h5{margin:0;font-size:14px;color:var(--ink)}
+.egg-c header em{font-style:normal;font-size:11px;color:var(--ink-3);border:1px solid var(--line);border-radius:5px;padding:1px 6px;margin-left:auto}
+.egg-pic{margin:0 0 9px;font-family:var(--serif);font-size:13.5px;line-height:1.7;color:var(--ink);
+  border-radius:8px;padding:8px 10px;background:color-mix(in srgb,var(--line) 18%,transparent)}
+.egg-act,.egg-over,.egg-under{margin:0 0 6px;font-size:12.5px;line-height:1.78;color:var(--ink-2)}
+.egg-act b,.egg-over b,.egg-under b{display:block;font-size:10.5px;letter-spacing:.09em;color:var(--ink-3);font-weight:500;margin-bottom:2px}
+.egg-memo{margin:6px 0 0;font-size:11.5px;line-height:1.7;color:var(--ink-3);border-top:1px dashed color-mix(in srgb,var(--line) 60%,transparent);padding-top:7px}
+.egg-c.mu{border-top-color:#2E6B5A}.egg-c.mu b{color:#2E6B5A}
+.egg-c.huo{border-top-color:#A63A2E}.egg-c.huo b{color:#A63A2E}
+.egg-c.tu{border-top-color:#B8862B}.egg-c.tu b{color:#8A6414}
+.egg-c.jin{border-top-color:#8F8F88}.egg-c.jin b{color:#6E6E68}
+.egg-c.shui{border-top-color:#23272E}.egg-c.shui b{color:#23272E}
+.egg-rel{margin:14px 0 0;border:1px solid color-mix(in srgb,var(--line) 72%,transparent);border-radius:13px;
+  padding:12px 14px;background:color-mix(in srgb,var(--paper) 94%,transparent)}
+.egg-rel h5{margin:0 0 9px;font-size:12.5px;letter-spacing:.06em;color:var(--ink)}
+.egg-rw{display:flex;flex-wrap:wrap;gap:8px}
+.egg-r{display:inline-flex;align-items:center;gap:6px;font-size:12px;background:color-mix(in srgb,var(--line) 20%,transparent);
+  border-radius:8px;padding:5px 9px}
+.egg-r i{font-style:normal;font-weight:600;color:var(--ink)}
+.egg-r em{font-style:normal;color:var(--ink-3)}
+.egg-r u{text-decoration:none;color:var(--ink-2);font-size:11.5px}
+.egg-tip{margin:16px 0 4px;font-size:12.5px;line-height:1.9;color:var(--ink-2);border-left:3px solid var(--accent);
+  padding:8px 0 8px 12px;background:color-mix(in srgb,var(--accent) 5%,transparent);border-radius:0 8px 8px 0}
+@media(max-width:640px){.egg-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -3676,6 +3709,14 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       </div>
       <div class="ac-tb-scroll" id="corr-table"></div>
       <p class="ac-note" id="corr-extra"></p>
+
+      <h3 class="egg-h">五个画面，一次记住五行</h3>
+      <p class="egg-lead" id="egg-lead"></p>
+      <div class="egg-grid" id="egg-grid"></div>
+      <div class="egg-rel" id="egg-sheng"></div>
+      <div class="egg-rel" id="egg-ke"></div>
+      <p class="egg-tip" id="egg-tip"></p>
+      <p class="ac-note" id="egg-src"></p>
     </div>
   </div>
 </section>
@@ -9182,6 +9223,76 @@ window.YY_JG = {
   src: '原文：《素问·阴阳应象大论》《素问·生气通天论》；临床：倪海厦讲稿「水火既济」；归纳：规划教材《中医基础理论》'
 };
 </script>
+<script>/* 五行 · 画面类比（沿用「五脏四象 · 楼房」的同一套结构：位置/类比/在干什么/太过/不及/记法）
+   类比是记忆工具（不是经典原文）；功能与病理由《中医基础理论》五行学说、藏象各节归纳。 */
+window.CORR_EGG = {
+  lead: '五行最怕背成五个字。给它五个画面：一棵树、一灶火、一块田、一口钟、一眼井——每一行在干什么、过了会怎样、不够会怎样，一眼就看见。',
+  items: [
+    {
+      k: '木', z: '肝', season: '春', tone: 'mu',
+      egg: '春天顶开冻土的小树苗',
+      act: '主升发、主疏泄——把全身的气机往上、往外舒展，别憋住。',
+      over: '长过头：急躁易怒、头胀、胁痛，还会「木旺克土」——一发火就吃不下、拉肚子。',
+      under: '长不动：情绪低落、爱叹气、眼睛干涩、筋不柔。',
+      memo: '木＝生发，看春天那棵树'
+    },
+    {
+      k: '火', z: '心', season: '夏', tone: 'huo',
+      egg: '灶膛里稳稳烧着的那灶火',
+      act: '主温煦、推动血行，心还主神明——火够，人才暖、才有精神。',
+      over: '烧太旺：心烦失眠、口舌生疮、面红，甚至「火克金」——咳血、咽干。',
+      under: '火苗弱：心慌胸闷、畏寒、精神不振、四肢不温。',
+      memo: '火＝温煦，看夏天正午'
+    },
+    {
+      k: '土', z: '脾', season: '长夏', tone: 'tu',
+      egg: '一块能长庄稼的田，也是灶上那口锅',
+      act: '主运化——把吃进来的东西变成气血；居中央，是气机升降的轴。',
+      over: '太湿太实：腹胀、身重、大便黏、舌苔厚腻。',
+      under: '地力不足：食欲差、便溏、乏力、四肢沉、面色萎黄。',
+      memo: '土＝承载与转化，看长夏的田'
+    },
+    {
+      k: '金', z: '肺', season: '秋', tone: 'jin',
+      egg: '一口倒扣的钟（叩之有声，声从上往下走）',
+      act: '主宣发肃降、主气司呼吸、通调水道——气和水都要往下收。',
+      over: '太燥太肃：干咳无痰、鼻干、皮肤干、便秘。',
+      under: '钟不响：气短、说话没劲、易感冒、自汗、易水肿。',
+      memo: '金＝收敛肃降，看秋天的落叶'
+    },
+    {
+      k: '水', z: '肾', season: '冬', tone: 'shui',
+      egg: '村口那口深井（看着不动，底下有水）',
+      act: '主藏精、主水、主纳气——把能量收在底下，吸气也要能纳得住。',
+      over: '水泛：水肿、小便不利、畏寒肢冷、痰多清稀。',
+      under: '井快见底：腰膝酸软、耳鸣、健忘、潮热盗汗、动则气喘。',
+      memo: '水＝封藏，看冬天的井'
+    }
+  ],
+  sheng: {
+    t: '相生（谁养谁）——一句话：柴 → 火 → 灰 → 矿 → 水 → 树',
+    rows: [
+      { a: '木', b: '火', why: '柴能烧火' },
+      { a: '火', b: '土', why: '火烧成灰，灰归土' },
+      { a: '土', b: '金', why: '土里出矿、出金石' },
+      { a: '金', b: '水', why: '金石之间凝出水气（山有多高，水有多高）' },
+      { a: '水', b: '木', why: '浇水才长树' }
+    ]
+  },
+  ke: {
+    t: '相克（谁管谁）——一句话：根扎土 · 土挡水 · 水灭火 · 火熔金 · 斧砍木',
+    rows: [
+      { a: '木', b: '土', why: '树根扎进土里，木能疏土' },
+      { a: '土', b: '水', why: '筑堤挡水' },
+      { a: '水', b: '火', why: '水能灭火' },
+      { a: '火', b: '金', why: '火能熔金' },
+      { a: '金', b: '木', why: '斧头砍树' }
+    ]
+  },
+  tip: '看病时常说的两句话，其实就是这两张表：<b>母病及子</b>（养它的那个先坏了，它跟着虚）、<b>子盗母气</b>（教材术语：它抽得太狠，把养它的拖垮）。比如久咳（金）拖到脾虚（土）＝子盗母气，治要补土生金。',
+  src: '五行属性与生克：《素问·阴阳应象大论》《素问·宝命全形论》「木得金而伐，火得水而灭，土得木而达，金得火而缺，水得土而绝」；功能与病机：规划教材《中医基础理论》五行学说、藏象各节。画面类比是记忆工具。'
+};
+</script>
 <script>/* ══════════════════════════════════════════════════════
    穴名解读 · 常用穴首批（字义 + 命名依据）
    说明：字义取《说文解字》及通行训释；命名依据取《针灸学》教材、
@@ -14452,6 +14563,35 @@ new MutationObserver(() => {
       return '<div class="bd-k"><b>' + r.k + '</b><i>' + r.v + '</i><span>' + r.m + '</span></div>';
     }).join('') + '</div>';
   $('yy-bldg-src').textContent = B.src;
+})();
+
+/* ───────── 五行 · 五个画面 ───────── */
+(function () {
+  'use strict';
+  var E = window.CORR_EGG, host = document.getElementById('egg-grid');
+  if (!E || !host) return;
+  function $(id) { return document.getElementById(id); }
+  $('egg-lead').textContent = E.lead;
+  host.innerHTML = E.items.map(function (it) {
+    return '<article class="egg-c ' + it.tone + '">' +
+      '<header><b>' + it.k + '</b><h5>' + it.z + '</h5><em>' + it.season + '</em></header>' +
+      '<p class="egg-pic">' + it.egg + '</p>' +
+      '<p class="egg-act"><b>在干什么</b>' + it.act + '</p>' +
+      '<p class="egg-over"><b>太过会怎样</b>' + it.over + '</p>' +
+      '<p class="egg-under"><b>不及会怎样</b>' + it.under + '</p>' +
+      '<p class="egg-memo">' + it.memo + '</p>' +
+    '</article>';
+  }).join('');
+  function rel(box, data) {
+    $(box).innerHTML = '<h5>' + data.t + '</h5><div class="egg-rw">' +
+      data.rows.map(function (r) {
+        return '<span class="egg-r"><i>' + r.a + '</i><em>→</em><i>' + r.b + '</i><u>' + r.why + '</u></span>';
+      }).join('') + '</div>';
+  }
+  rel('egg-sheng', E.sheng);
+  rel('egg-ke', E.ke);
+  $('egg-tip').innerHTML = E.tip;
+  $('egg-src').textContent = E.src;
 })();
 </script>
 </body>
