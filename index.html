@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="ccc81b9907" />
+<meta name="build-id" content="7a37f7fdf9" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -15193,6 +15193,46 @@ new MutationObserver(() => {
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(attach, 60); });
   else setTimeout(attach, 60);
+})();
+</script>
+<script>/* 拼音校正（针灸学惯例读音）：页面渲染后按字修正多音字音调。
+   少/曲/长/郄/俞/髎… 等字在穴名中按教材读音，不按常用字读音。 */
+(function () {
+  'use strict';
+  var OVR = {
+    '少': 'shào', '曲': 'qū', '长': 'cháng', '郄': 'xì', '俞': 'shù', '腧': 'shù',
+    '髎': 'liáo', '髃': 'yú', '臑': 'nào', '攒': 'cuán', '龈': 'yín', '髭': 'zī',
+    '囟': 'xìn', '骶': 'dǐ', '髀': 'bì', '腘': 'guó', '喙': 'huì', '颔': 'hàn',
+    '眦': 'zì', '脘': 'wǎn', '翳': 'yì', '蠡': 'lǐ', '瘛': 'chì', '肓': 'huāng',
+    '窌': 'liáo', '髁': 'kē', '髌': 'bìn', '椎': 'zhuī', '兑': 'duì'
+  };
+
+  function fix(name, py) {
+    if (!name || !py) return py;
+    var syl = py.trim().split(/\s+/);
+    if (syl.length !== name.length) return py;      // 音节数对不上就不动，宁可不改
+    var out = name.split('').map(function (ch, i) { return OVR[ch] || syl[i]; });
+    return out.join(' ');
+  }
+
+  function run() {
+    document.querySelectorAll('.pt[data-name]').forEach(function (el) {
+      var em = el.querySelector('em');
+      if (!em) return;
+      var v = fix(el.getAttribute('data-name'), em.textContent);
+      if (v && v !== em.textContent) em.textContent = v;
+    });
+    document.querySelectorAll('.acuc-h').forEach(function (h) {
+      var em = h.querySelector('em'); if (!em) return;
+      var t = h.parentElement && h.parentElement.getAttribute('data-name');
+      if (!t) return;
+      var v = fix(t, em.textContent);
+      if (v && v !== em.textContent) em.textContent = v;
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(run, 120); });
+  else setTimeout(run, 120);
+  window.__fixPy = run;
 })();
 </script>
 </body>
