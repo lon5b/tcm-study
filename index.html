@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="119db57b00" />
+<meta name="build-id" content="ffeb9db8ef" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3385,6 +3385,21 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .lje-p b{width:16px;height:16px;font-size:10px}
 .lje-life{font-weight:500}
 .lje-life span{font-weight:600;letter-spacing:.1em;margin-bottom:3px}
+
+/* ───────── 生活里的阴阳 ───────── */
+.yl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.yl-c{border:1px solid color-mix(in srgb,var(--line) 75%,transparent);border-radius:14px;padding:13px 15px 12px;
+  background:color-mix(in srgb,var(--paper) 96%,transparent);border-left:3px solid var(--line)}
+.yl-c h5{margin:0 0 8px;font-family:var(--serif);font-size:15px;letter-spacing:.06em;color:var(--ink)}
+.yl-life{margin:0 0 8px;font-size:12.5px;line-height:1.8;color:var(--ink-2);background:color-mix(in srgb,var(--line) 16%,transparent);
+  border-radius:8px;padding:8px 10px}
+.yl-life span{display:block;font-size:10.5px;letter-spacing:.1em;color:var(--accent);font-weight:600;margin-bottom:2px}
+.yl-read{margin:0;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+.yl-read b{display:block;font-size:10.5px;letter-spacing:.09em;color:var(--ink-3);font-weight:500;margin-bottom:2px}
+.yl-c.a{border-left-color:#3F7C8C}.yl-c.b{border-left-color:#2A5566}
+.yl-c.c{border-left-color:#B33A2B}.yl-c.d{border-left-color:#3A6EA5}
+.yl-c.e{border-left-color:#8C7A2E}
+@media(max-width:640px){.yl-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -3525,6 +3540,14 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
       <p class="map-lead" id="yy-map-lead"></p>
       <div class="map-rail" id="yy-map-rail"></div>
       <div class="map-after" id="yy-map-after"></div>
+    </div>
+
+    <div class="yl-block">
+      <h3 class="yy-h">生活里的阴阳（先把概念落地）</h3>
+      <p class="egg-lead" id="yl-lead"></p>
+      <div class="yl-grid" id="yl-grid"></div>
+      <p class="egg-tip" id="yl-tip"></p>
+      <p class="ac-note" id="yl-src"></p>
     </div>
 
     <div class="yy-block">
@@ -9451,6 +9474,61 @@ window.LJ_EGG = {
   src: '六经提纲原文见《伤寒论》第 1、180、263、273、281、326 条（本站「六经速查表」与六张卡片逐条标注）。生活场景为帮助辨认所设的举例，不构成诊断。'
 };
 </script>
+<script>/* 生活里的阴阳：把抽象概念落回日常场景
+   每条 = 概念（教材术语） + 生活场景 + 怎么读。场景是例子，不是诊断。 */
+window.YY_LIFE = {
+  lead: '阴阳最难的不是记定义，是<b>看不出它在哪儿</b>。下面九条，每条都从一个你天天遇到的场景说起——看完你会发现阴阳不是玄学，是你身体每天的收支账。',
+  items: [
+    {
+      k: '阴阳是什么', tone: 'a',
+      life: '一锅热汤端上桌，汤是热的（阳），碗是凉的（阴）；白天人活动（阳），夜里睡觉（阴）。',
+      read: '阴阳不是两种东西，是<b>同一件事的两面</b>：动/静、热/冷、外/内、上/下。凡是「相对」的，都能分阴阳。'
+    },
+    {
+      k: '互根（谁也离不开谁）', tone: 'b',
+      life: '连着熬夜三天的人：明明累到虚脱，躺下却睡不着、心里发慌——阴（储备）耗光了，阳（精神）反而浮起来收不住。',
+      read: '「阴在内，阳之守也；阳在外，阴之使也」——阴是阳的根，根空了，上面的火就没处落。'
+    },
+    {
+      k: '消长（此消彼长）', tone: 'a',
+      life: '夏天出汗多、尿就少；冬天出汗少、尿就多。喝一大杯冰水，汗收住了，尿就来了。',
+      read: '总量大致守恒：这边多，那边就少。所以「出汗太多伤津」「利水太过伤阴」不是空话。'
+    },
+    {
+      k: '交感（要碰在一起才生东西）', tone: 'b',
+      life: '天不下雨、地不上蒸，庄稼就不长；两口子谁也不理谁，家里就冷。',
+      read: '阴阳要「相交」才生化。人身上最典型的是<b>心肾相交</b>：心火往下、肾水往上，水火既济，人才睡得沉、手脚才温。'
+    },
+    {
+      k: '阳盛（实热）', tone: 'c',
+      life: '一顿麻辣火锅配白酒，第二天：脸红、口渴猛灌冰水、便秘、心烦睡不着。',
+      read: '<b>邪火太多</b>。特点是有力量——脉洪大有力、声音高。治法「热者寒之」，泻掉多余的火。'
+    },
+    {
+      k: '阴盛（实寒）', tone: 'd',
+      life: '三伏天一次吃掉半个冰西瓜、又在空调房里坐一下午：肚子绞痛、拉稀、手脚发凉、想裹被子。',
+      read: '<b>寒气太多</b>。也是实证，脉沉紧有力。治法「寒者热之」，把寒散掉。'
+    },
+    {
+      k: '阳虚（虚寒）', tone: 'd',
+      life: '常年手脚冰凉、冬天要穿两双袜子、喝热水才舒服、大便偏稀、精神提不起来。',
+      read: '<b>火不够</b>，不是寒太多。脉沉迟无力。治法「益火之源，以消阴翳」——补火，不是驱寒。'
+    },
+    {
+      k: '阴虚（虚热）', tone: 'c',
+      life: '连着熬夜加班：手心脚心发热、下午两颊发红、夜里出汗（盗汗）、口干但喝水也不解。',
+      read: '<b>水不够</b>，不是火太多。脉细数。治法「壮水之主，以制阳光」——补水，不是泻火。虚火千万别用苦寒泻。'
+    },
+    {
+      k: '治则四条（一句话版）', tone: 'e',
+      life: '上火 → 喝绿豆汤、吃苦瓜（热者寒之）；受凉 → 姜糖水、热水泡脚（寒者热之）；虚了 → 少折腾、早睡、吃好（虚则补之）；吃撑胀住 → 山楂、散步（实则泻之）。',
+      read: '四条治则不用背，抓一个原则：<b>多余的就减掉，不够的就补上；但先分清是「真多」还是「显得多」</b>——虚火当实火泻，越泻越糟。'
+    }
+  ],
+  tip: '自测一句问话：<b>「我是火多了，还是水少了？」</b>火多＝实热（要泻）；水少＝虚热（要补）。这一问能挡住大半的错误自我调理。',
+  src: '阴阳概念与病机：《素问·阴阳应象大论》《素问·调经论》「阳虚则外寒，阴虚则内热，阳盛则外热，阴盛则内寒」；治则：王冰注「益火之源，以消阴翳」「壮水之主，以制阳光」，《素问·至真要大论》「寒者热之，热者寒之」。生活场景为举例，不构成诊断与用药建议。'
+};
+</script>
 <script>/* ══════════════════════════════════════════════════════
    穴名解读 · 常用穴首批（字义 + 命名依据）
    说明：字义取《说文解字》及通行训释；命名依据取《针灸学》教材、
@@ -14796,6 +14874,24 @@ new MutationObserver(() => {
   }).join('');
   $('lje-tip').innerHTML = E.tip;
   $('lje-src').textContent = E.src;
+})();
+
+/* ───────── 生活里的阴阳 ───────── */
+(function () {
+  'use strict';
+  var E = window.YY_LIFE, host = document.getElementById('yl-grid');
+  if (!E || !host) return;
+  function $(id) { return document.getElementById(id); }
+  $('yl-lead').innerHTML = E.lead;
+  host.innerHTML = E.items.map(function (it) {
+    return '<article class="yl-c ' + it.tone + '">' +
+      '<h5>' + it.k + '</h5>' +
+      '<p class="yl-life"><span>生活里</span>' + it.life + '</p>' +
+      '<p class="yl-read"><b>怎么读</b>' + it.read + '</p>' +
+    '</article>';
+  }).join('');
+  $('yl-tip').innerHTML = E.tip;
+  $('yl-src').textContent = E.src;
 })();
 </script>
 </body>
