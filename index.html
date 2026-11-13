@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="59b72227b8" />
+<meta name="build-id" content="3ce52be34b" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3590,6 +3590,21 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
  border:1px solid var(--line-strong);background:transparent;color:var(--ink-2);cursor:pointer}
 .ux-more:hover{border-color:var(--accent);color:var(--accent)}
 @media(max-width:620px){#ux-toc-panel{width:calc(100vw - 36px)}}
+
+/* 3D 穴位左侧列表：能看、能点、能搜 */
+#acu3d-list{display:block;max-height:360px;overflow-y:auto;border-top:1px solid var(--line);margin-top:8px;padding-top:6px}
+.acu3d-count{font-size:10.5px;color:var(--ink-3);letter-spacing:.04em;margin:2px 2px 6px}
+.acu3d-grp{font-size:10px;letter-spacing:.14em;color:var(--accent);opacity:.75;margin:9px 2px 3px;
+ position:sticky;top:0;background:var(--card);padding:2px 0}
+.acu3d-row{display:flex;align-items:center;gap:7px;width:100%;font-family:inherit;font-size:12.5px;
+ padding:5px 7px;border:0;border-radius:3px;background:transparent;color:var(--ink-2);cursor:pointer;text-align:left}
+.acu3d-row:hover{background:var(--paper-2);color:var(--accent)}
+.acu3d-row.on{background:rgba(166,58,46,.10);color:var(--accent);font-weight:600}
+.acu3d-row b{font-weight:500;min-width:3.2em}
+.acu3d-row i{font-style:normal;font-size:10.5px;color:var(--ink-3);flex:1;
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acu3d-row span{font-size:10px;color:var(--ink-3);letter-spacing:.04em}
+.acu3d-empty{font-size:11.5px;color:var(--ink-3);padding:10px 4px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -12232,7 +12247,11 @@ function buildPoints(body, off) {
     size: 0.019, vertexColors: true, sizeAttenuation: true, transparent: true, opacity: 0.95
   }));
   scene.add(pointsMesh);
-  snap(geo, body);
+  // 坐标 p3 已经是 meridian-atlas 配准到本模型表面的点，直接显示就是贴皮的。
+  // 逐点射线吸附（原 3900 次 raycast）会把主线程卡住好几秒，这里默认关闭，
+  // 需要校验时在控制台执行 window.__acuSnap = true 再重新载入即可。
+  if (window.__acuSnap) snap(geo, body);
+  else geo.computeBoundingSphere();
   const a = geo.attributes.position.array;
   allPts.forEach((p, i) => { p.vec = new THREE.Vector3(a[i * 3], a[i * 3 + 1], a[i * 3 + 2]); });
 
@@ -12364,11 +12383,28 @@ function renderList() {
   const q = (document.getElementById('acu3d-q')?.value || '').trim().toLowerCase();
   const rows = allPts.filter(p => p.side !== 'left'
     && (activeMer === 'all' || p.m === activeMer)
-    && (!q || (p.n + p.c + (p.py || '')).toLowerCase().includes(q))).slice(0, 80);
-  host.innerHTML = rows.map(p => '<button class="acu3d-row" data-c="' + p.c + '"><b>' + p.n + '</b><span>' + p.c + '</span></button>').join('');
+    && (!q || (p.n + p.c + (p.py || '') + (p.mn || '')).toLowerCase().includes(q)));
+
+  if (!rows.length) {
+    host.innerHTML = '<p class="acu3d-empty">没有匹配的穴位。试试「合谷」「hegu」「LI4」。</p>';
+    return;
+  }
+  const cur = current ? current.c : '';
+  let html = '<div class="acu3d-count">共 ' + rows.length + ' 穴' +
+    (activeMer === 'all' ? '（点经脉可只看一经）' : '') + '</div>';
+  let lastMer = '';
+  rows.forEach(p => {
+    if (activeMer === 'all' && p.mn && p.mn !== lastMer) {
+      html += '<div class="acu3d-grp">' + p.mn + '</div>';
+      lastMer = p.mn;
+    }
+    html += '<button class="acu3d-row' + (cur === p.c ? ' on' : '') + '" data-c="' + p.c + '">' +
+      '<b>' + p.n + '</b><i>' + (p.py || '') + '</i><span>' + p.c + '</span></button>';
+  });
+  host.innerHTML = html;
   host.querySelectorAll('.acu3d-row').forEach(b => b.addEventListener('click', () => {
-    const p = allPts.find(x => x.c === b.dataset.c && x.side !== 'left');
-    if (p) focusPoint(p);
+    const p = allPts.find(x => x.c === b.dataset.c && x.side !== 'left') || allPts.find(x => x.c === b.dataset.c);
+    if (p) { focusPoint(p); host.querySelectorAll('.acu3d-row').forEach(x => x.classList.toggle('on', x === b)); }
   }));
 }
 
@@ -12425,7 +12461,9 @@ function bind() {
   const q = document.getElementById('acu3d-q');
   q && q.addEventListener('input', renderList);
   document.querySelectorAll('[data-3d-mer]').forEach(b => b.addEventListener('click', () => {
-    activeMer = b.dataset.b3dMer;
+    // 注意：data-3d-mer → dataset 的键是 '3dMer'（数字开头不能点访问），
+    // 之前写成 b.dataset.b3dMer 恒为 undefined，一点经脉按钮列表就空了。
+    activeMer = b.getAttribute('data-3d-mer') || 'all';
     document.querySelectorAll('[data-3d-mer]').forEach(x => x.classList.toggle('on', x === b));
     renderList();
   }));
@@ -12448,6 +12486,8 @@ function bind() {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && floatShell && !floatShell.hidden) closeFloat();
   });
+  // 兜底：万一载入回调没跑到（懒加载时序），1.6 秒后再刷一次列表
+  setTimeout(() => { const l = document.getElementById('acu3d-list'); if (l && !l.children.length) renderList(); }, 1600);
   document.addEventListener('click', e => {
     const el = e.target.closest && e.target.closest('.a3d[data-cd]');
     if (!el) return;
