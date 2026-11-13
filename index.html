@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="37ff621372" />
+<meta name="build-id" content="59b72227b8" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -12169,8 +12169,12 @@ function loop() {
 }
 
 function snap(geo, body) {
-  // 六个方向打射线，选「离原穴位最近」的那个命中点（不是沿射线最近），
-  // 否则大腿上的穴会被从头顶打下来的射线吸到胸口的表面上。
+  // 分片执行：651 个点 × 6 方向 = 3900 次射线检测，一口气跑会把主线程卡住十几秒。
+  // 先让点按配准坐标显示，再在空闲时逐批吸附到皮肤表面。
+  snapChunk(geo, body, 0);
+}
+
+function snapChunk(geo, body, start) {
   const dirs = [
     new THREE.Vector3(1, 0, 0), new THREE.Vector3(-1, 0, 0),
     new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, -1),
@@ -12179,8 +12183,9 @@ function snap(geo, body) {
   const rc = new THREE.Raycaster();
   const arr = geo.attributes.position.array;
   const out = new THREE.Vector3(), n = new THREE.Vector3();
-  let snapped = 0;
-  for (let i = 0; i < arr.length; i += 3) {
+  let snapped = (window.__acu3dSnapped || 0);
+  const END = Math.min(arr.length, start * 3 + 120 * 3);
+  for (let i = start * 3; i < END; i += 3) {
     const p = new THREE.Vector3(arr[i], arr[i + 1], arr[i + 2]);
     let best = null, bestD = Infinity;
     for (const d of dirs) {
@@ -12199,8 +12204,11 @@ function snap(geo, body) {
     }
   }
   geo.attributes.position.needsUpdate = true;
-  geo.computeBoundingSphere();
+  geo.computeBoundingSphere();          // 边吸附边更新，避免被视锥剔除掉
   window.__acu3dSnapped = snapped;
+  if (END < arr.length) {
+    setTimeout(() => snapChunk(geo, body, END / 3), 16);
+  }
 }
 
 function buildPoints(body, off) {
@@ -15459,6 +15467,16 @@ new MutationObserver(() => {
       btn.textContent = open ? '展开全部 ' + items.length + ' 篇 ↓' : '收起 ↑';
     };
     grid.parentElement.insertBefore(btn, grid.nextSibling);
+
+    // 课号筛选会和折叠打架：一筛选就全部展开，不然筛出来的结果被折叠藏住
+    const filter = document.querySelector('#xhs .xhs-filter');
+    if (filter) {
+      filter.addEventListener('click', () => setTimeout(() => {
+        items.forEach((el) => el.classList.remove('ux-hide'));
+        btn.dataset.open = '1';
+        btn.textContent = '收起 ↑';
+      }, 30), true);
+    }
   }
 
   function go() { buildNav(); foldLongList(); }
