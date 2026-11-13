@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="5817bf85ed" />
+<meta name="build-id" content="8cd87fc8ac" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3504,6 +3504,68 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .m3-row{font-size:12.5px;padding:5px 7px}
 .m3-row i{font-size:10px}
 .m3-note{font-size:10.5px;color:#727d8c}
+
+/* ══ 五脏六腑 · 3D 拆解 ══ */
+.zf-entry{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+ margin:10px 0 14px;padding:14px 16px;border:1px solid var(--line-strong);border-radius:12px;
+ background:linear-gradient(135deg,rgba(180,60,40,.06),rgba(90,74,138,.06))}
+.zf-entry b{display:block;font-family:var(--serif);font-size:15px;color:var(--ink);letter-spacing:.02em}
+.zf-entry span{display:block;font-size:12px;color:var(--ink-3);margin-top:3px}
+.zf-entry button{font:inherit;font-size:12.5px;padding:8px 16px;border-radius:22px;cursor:pointer;
+ border:1px solid var(--accent);background:var(--accent);color:#fff}
+.zf-entry button:hover{filter:brightness(1.08)}
+.zf-float{position:fixed;inset:auto 18px 18px auto;width:min(980px,calc(100vw - 36px));height:min(660px,calc(100vh - 36px));
+ z-index:2650;display:flex;flex-direction:column;border-radius:18px;overflow:hidden;color:#e9edf3;
+ background:linear-gradient(160deg,rgba(20,18,22,.97),rgba(10,10,14,.99));border:1px solid rgba(255,255,255,.10);
+ box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.07);
+ backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.zf-float[hidden]{display:none}
+.zf-float header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.zf-float header b{font-size:13.5px;letter-spacing:.06em;font-weight:600}
+.zf-tools button{width:26px;height:26px;border-radius:8px;border:1px solid rgba(255,255,255,.14);
+ background:rgba(255,255,255,.06);color:#cfd6e0;cursor:pointer}
+.zf-body{flex:1;display:grid;grid-template-columns:1fr 268px;min-height:0}
+.zf-stage{position:relative;min-height:0;background:radial-gradient(120% 90% at 50% 20%,#232028 0%,#0e0d11 62%,#07060a 100%)}
+.zf-canvas{width:100%;height:100%;display:block}
+.zf-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12.5px;color:#93a0b4}
+.zf-views{position:absolute;left:12px;top:12px;display:flex;gap:5px;flex-wrap:wrap;z-index:3}
+.zf-views button{font:inherit;font-size:10.5px;padding:4px 9px;border-radius:7px;cursor:pointer;
+ border:1px solid rgba(255,255,255,.14);background:rgba(10,13,18,.6);color:#b7c1cf}
+.zf-views button.on{background:#d08a78;color:#14100e;border-color:transparent;font-weight:600}
+.zf-side{border-left:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;min-height:0;padding:11px}
+.zf-info h4{margin:0 0 5px;font-size:14px;color:#f2f5f9;display:flex;align-items:center;gap:7px}
+.zf-info h4 span{font-size:10px;color:#d08a78;border:1px solid rgba(208,138,120,.5);border-radius:5px;padding:1px 5px}
+.zf-info p{margin:0 0 10px;font-size:11.5px;line-height:1.75;color:#a9b3c1}
+.zf-list{flex:1;overflow-y:auto;min-height:0}
+.zf-grp{font-size:10px;letter-spacing:.16em;color:#6f7a8a;margin:8px 2px 4px}
+.zf-row{display:flex;align-items:center;gap:8px;width:100%;text-align:left;font:inherit;font-size:13px;
+ padding:6px 8px;border:0;border-radius:7px;background:transparent;color:#c8d0dc;cursor:pointer}
+.zf-row i{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.zf-row:hover{background:rgba(255,255,255,.08);color:#fff}
+.zf-row.on{background:rgba(208,138,120,.22);color:#fff}
+.zf-miss{font-size:10px;line-height:1.6;color:#6b7482;margin:10px 2px 0;border-top:1px dashed rgba(255,255,255,.1);padding-top:8px}
+.zf-explode{display:flex;align-items:center;gap:9px;margin:10px 2px 8px;font-size:11.5px;color:#a9b3c1}
+.zf-explode input[type=range]{flex:1;accent-color:#d08a78}
+.zf-explode b{font-size:10.5px;color:#7c8797;min-width:18px;text-align:right}
+.zf-note{font-size:9.5px;line-height:1.6;color:#66707f;margin:4px 2px 0}
+.zf-tip{position:absolute;pointer-events:none;background:rgba(8,8,12,.94);border:1px solid rgba(255,255,255,.16);
+ border-radius:7px;padding:4px 9px;font-size:11.5px;color:#eef2f7;white-space:nowrap;z-index:3}
+.zf-tip b{color:#e2a08e;margin-right:5px}
+.zf-tip i{font-style:normal;color:#7f8b9c;font-size:9.5px}
+@media(max-width:680px){.zf-body{grid-template-columns:1fr}.zf-side{display:none}.zf-float{inset:auto 8px 8px 8px;width:auto;height:min(80vh,640px)}}
+.zf-list{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:min-content;gap:2px 8px;align-content:start;overflow-y:auto}
+.zf-grp{grid-column:1/-1;margin:6px 2px 2px}
+.zf-miss{grid-column:1/-1}
+.zf-row{font-size:12.5px;padding:5px 6px}
+.zf-info p{font-size:11px;line-height:1.65;margin-bottom:8px}
+/* 列表改回单列：两列会让分组读起来像错位 */
+.zf-list{display:block}
+.zf-row{font-size:12.5px;padding:5px 8px}
+.zf-side{padding:9px 10px}
+.zf-info p{margin-bottom:6px;max-height:2.9em;overflow:hidden}
+.zf-list{flex:1 1 auto;min-height:180px}
+.zf-explode{margin:6px 2px 4px}
+.zf-note{font-size:9px;line-height:1.45;max-height:4.2em;overflow:hidden}
 </style>
 </head>
 <body>
@@ -15683,6 +15745,321 @@ function bindButtons() {
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindButtons);
 else setTimeout(bindButtons, 400);
+
+</script>
+<script>window.ZANGFU_META={"organs":[{"id":"heart","cn":"心","cat":"脏","color":"#b23a30","tcm":"心主血脉、主神明；与小肠相表里","center":[0.0214,1.2268,0.0],"bbox":[[-0.0363,1.1742,-0.0532],[0.0791,1.2795,0.0532]]},{"id":"liver","cn":"肝","cat":"脏","color":"#7a4a2f","tcm":"肝主疏泄、藏血；与胆相表里","center":[-0.0208,1.1055,-0.0005],"bbox":[[-0.1151,1.0279,-0.0801],[0.0734,1.1831,0.079]]},{"id":"kidney","cn":"肾","cat":"脏","color":"#4a5a8a","tcm":"肾藏精、主水；与膀胱相表里","center":[0.0014,1.0286,-0.0377],"bbox":[[-0.0876,0.9668,-0.0638],[0.0904,1.0904,-0.0115]]},{"id":"gall","cn":"胆","cat":"腑","color":"#2f7d63","tcm":"胆主决断、藏精汁；与肝相表里","center":[-0.0406,1.0617,0.0194],"bbox":[[-0.0633,1.0196,-0.0164],[-0.0179,1.1039,0.0552]]},{"id":"stomach","cn":"胃","cat":"腑","color":"#c39a1c","tcm":"胃主受纳、腐熟水谷；与脾相表里","center":[0.0383,1.0984,0.0145],"bbox":[[-0.029,1.0399,-0.0419],[0.1055,1.1569,0.071]]},{"id":"small","cn":"小肠","cat":"腑","color":"#b07a3a","tcm":"小肠受盛化物、泌别清浊；与心相表里","center":[0.0098,0.9412,0.0203],"bbox":[[-0.0871,0.8053,-0.0195],[0.1066,1.0771,0.06]]},{"id":"large","cn":"大肠","cat":"腑","color":"#8a6a2f","tcm":"大肠传导糟粕；与肺相表里","center":[-0.0047,0.911,-0.0193],"bbox":[[-0.1268,0.7573,-0.1121],[0.1175,1.0647,0.0735]]},{"id":"bladder","cn":"膀胱","cat":"腑","color":"#3a74a8","tcm":"膀胱贮尿排尿；与肾相表里","center":[-0.0008,0.8099,-0.031],"bbox":[[-0.0341,0.7897,-0.0669],[0.0326,0.83,0.0048]]}],"source":"BodyParts3D 4.0（CC BY-SA 2.1 JP）","note":"器官形态来自 BodyParts3D；位置为解剖学相对位置，仅供认识脏腑方位"};</script>
+<script type="module">
+/* 五脏六腑 · 3D 拆解（three.js）
+   器官几何：BodyParts3D 4.0（CC BY-SA 2.1 JP），由 _build_zangfu.py 合并为 zangfu.glb
+   人体外壳：MakeHuman base body（CC0）
+   经络线：meridian-atlas 配准的 14 条巡行路线（window.MERI3D.routes）
+   说明：器官形态为真实解剖网格；肺、脾、三焦、心包暂缺（开源数据无对应实质网格）。 */
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const S = { built: false, ready: false, loading: false, open: false, explode: 0, selected: null, showBody: true, showMer: false };
+
+let scene, camera, renderer, controls, canvasEl, stageEl, host;
+let bodyMesh = null, organGroup = null, merGroup = null, raycaster, tipEl;
+let organs = [];         // [{id,cn,cat,color,tcm,mesh,home}]
+
+const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
+const $ = (s, r) => (r || document).querySelector(s);
+
+function initScene() {
+  canvasEl = el('canvas'); canvasEl.className = 'zf-canvas';
+  stageEl.appendChild(canvasEl);
+  renderer = new THREE.WebGLRenderer({ canvas: canvasEl, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(34, 1, 0.05, 40);
+  camera.position.set(0.85, 1.30, 2.1);
+
+  controls = new OrbitControls(camera, canvasEl);
+  controls.target.set(0, 1.15, 0);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.09;
+  controls.minDistance = 0.5;
+  controls.maxDistance = 4.5;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.45;
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x4a5566, 2.0));
+  const k = new THREE.DirectionalLight(0xffffff, 2.0); k.position.set(1.4, 2.6, 2.2); scene.add(k);
+  const r = new THREE.DirectionalLight(0xb8d0ff, 1.0); r.position.set(-2.0, 1.2, -2.2); scene.add(r);
+
+  organGroup = new THREE.Group(); scene.add(organGroup);
+  merGroup = new THREE.Group(); scene.add(merGroup);
+
+  raycaster = new THREE.Raycaster();
+  tipEl = el('div', 'zf-tip'); tipEl.hidden = true; stageEl.appendChild(tipEl);
+
+  canvasEl.addEventListener('pointermove', onHover);
+  canvasEl.addEventListener('pointerleave', () => { tipEl.hidden = true; });
+  canvasEl.addEventListener('click', onClick);
+
+  new ResizeObserver(resize).observe(stageEl);
+  resize();
+  renderer.setAnimationLoop(tick);
+
+  // 视图按钮
+  const bar = el('div', 'zf-views',
+    '<button data-v="front" class="on">正面</button><button data-v="back">背面</button>' +
+    '<button data-v="left">左侧</button><button data-v="right">右侧</button>' +
+    '<button data-t="me">经络</button><button data-t="body">人体</button>');
+  stageEl.appendChild(bar);
+  bar.querySelectorAll('button').forEach((b) => {
+    b.onclick = () => {
+      if (b.dataset.v) { setView(b.dataset.v); bar.querySelectorAll('[data-v]').forEach((x) => x.classList.toggle('on', x === b)); }
+      else if (b.dataset.t === 'me') { S.showMer = !S.showMer; b.classList.toggle('on', S.showMer); merGroup.visible = S.showMer; }
+      else if (b.dataset.t === 'body') { S.showBody = !S.showBody; b.classList.toggle('on', S.showBody); if (bodyMesh) bodyMesh.visible = S.showBody; }
+      else if (b.dataset.t === 'body') { }
+    };
+    if (b.dataset.t === 'body') b.classList.add('on');
+  });
+}
+
+function resize() {
+  if (!renderer || !stageEl) return;
+  const w = stageEl.clientWidth || 640, h = stageEl.clientHeight || 520;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+
+function setView(v) {
+  const t = new THREE.Vector3(0, 1.15, 0), d = 2.1;
+  if (v === 'back') camera.position.set(0.5, 1.3, -d);
+  else if (v === 'left') camera.position.set(-d, 1.3, 0.2);
+  else if (v === 'right') camera.position.set(d, 1.3, 0.2);
+  else camera.position.set(0.5, 1.3, d);
+  controls.target.copy(t); controls.update();
+}
+
+/* ---------- 加载 ---------- */
+function loadAll() {
+  return Promise.all([loadOrgans(), loadBody()]);
+}
+
+function loadOrgans() {
+  return new Promise((resolve) => {
+    new GLTFLoader().load('assets/zangfu.glb', (g) => {
+      const meta = window.ZANGFU_META || { organs: [] };
+      const byName = {};
+      meta.organs.forEach((m) => { byName[m.cn] = m; });
+      const meshes = [];
+      g.scene.traverse((o) => { if (o.isMesh) meshes.push(o); });
+      // node 顺序与 meta.organs 一致
+      meshes.forEach((m, i) => {
+        const mm = meta.organs[i] || {};     // 注意别和上面的 meta 同名（TDZ 会抛错）
+        const color = new THREE.Color(mm.color || '#b06a5a');
+        m.material = new THREE.MeshPhysicalMaterial({
+          color, roughness: 0.46, metalness: 0.0,
+          clearcoat: 0.4, clearcoatRoughness: 0.38,
+          emissive: color.clone(), emissiveIntensity: 0.18,
+          side: THREE.DoubleSide
+        });
+        m.userData = { id: mm.id, cn: mm.cn || m.name, cat: mm.cat, tcm: mm.tcm, color };
+        m.frustumCulled = false;          // accessor 无 min/max 时 three 的视锥剔除会误杀
+        m.geometry.computeBoundingBox();
+        m.geometry.computeBoundingSphere();
+        const c = new THREE.Vector3(); m.geometry.boundingBox.getCenter(c);
+        m.userData.home = m.position.clone();
+        // 展开方向：按器官预设（腹部器官都在中线附近，用 center 归一化会挤成一团）
+        const DIRS = {
+          heart: [0.15, 0.45, 0.88], liver: [0.72, 0.18, 0.66], kidney: [-0.35, -0.02, -0.94],
+          gall: [0.88, 0.05, 0.46], stomach: [-0.62, 0.3, 0.72], small: [0.08, -0.62, 0.78],
+          large: [-0.72, -0.5, 0.48], bladder: [0.0, -0.94, 0.34]
+        };
+        const dv = DIRS[mm.id] || [c.x, c.y, c.z];
+        m.userData.dir = new THREE.Vector3(dv[0], dv[1], dv[2]).normalize();
+        organGroup.add(m);
+        organs.push(m);
+      });
+      buildList();
+      resolve();
+    }, undefined, (e) => { console.warn('zangfu.glb 加载失败', e); resolve(); });
+  });
+}
+
+function loadBody() {
+  return new Promise((resolve) => {
+    new GLTFLoader().load('assets/human-learning.glb', (g) => {
+      bodyMesh = g.scene;
+      bodyMesh.traverse((o) => {
+        if (o.isMesh) o.material = new THREE.MeshPhysicalMaterial({
+          color: 0xf2ece3, roughness: 0.6, clearcoat: 0.3,
+          transparent: true, opacity: 0.13, depthWrite: false, side: THREE.FrontSide
+        });
+      });
+      scene.add(bodyMesh);
+      resolve();
+    }, undefined, () => resolve());
+  });
+}
+
+function buildMeridians() {
+  const D = window.MERI3D; if (!D || !D.routes) return;
+  const COL = { LU: '#4a8fd0', LI: '#c2622f', ST: '#c39a1c', SP: '#8a6a2f', HT: '#b23a30', SI: '#9a8f7a',
+    BL: '#2f5f96', KI: '#2b3140', PC: '#7b4a8f', TE: '#3a74a8', GB: '#2f7d63', LR: '#3f7a3a', CV: '#8a6a4f', GV: '#5a4a8a' };
+  Object.keys(D.routes).forEach((code) => {
+    const pts = D.routes[code].map(([x, y, z]) => new THREE.Vector3(x, y, z));
+    if (pts.length < 2) return;
+    const curve = new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.35);
+    const m = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 160, 0.006, 6, false),
+      new THREE.MeshBasicMaterial({ color: COL[code] || '#8a8a8a', transparent: true, opacity: 0.55, depthWrite: false })
+    );
+    merGroup.add(m);
+  });
+  merGroup.visible = S.showMer;
+}
+
+/* ---------- 交互 ---------- */
+function pickOrgan(e) {
+  const r = canvasEl.getBoundingClientRect();
+  const v = new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  raycaster.setFromCamera(v, camera);
+  const hit = raycaster.intersectObjects(organs, false)[0];
+  return hit ? hit.object : null;
+}
+function onHover(e) {
+  const o = pickOrgan(e);
+  if (!o) { tipEl.hidden = true; canvasEl.style.cursor = 'grab'; return; }
+  const u = o.userData;
+  tipEl.innerHTML = '<b>' + u.cn + '</b><i>' + (u.cat || '') + '</i>';
+  const r = stageEl.getBoundingClientRect();
+  tipEl.style.left = (e.clientX - r.left + 12) + 'px';
+  tipEl.style.top = (e.clientY - r.top + 10) + 'px';
+  tipEl.hidden = false;
+  canvasEl.style.cursor = 'pointer';
+}
+function onClick(e) {
+  const o = pickOrgan(e);
+  if (!o) { select(null); return; }
+  select(o.userData.id === S.selected ? null : o.userData.id);
+}
+
+function select(id) {
+  S.selected = id;
+  const o = organs.find((m) => m.userData.id === id);
+  organs.forEach((m) => {
+    const on = !id || m.userData.id === id;
+    m.material.opacity = on ? 1 : 0.16;
+    m.material.transparent = !on;
+    m.material.emissiveIntensity = on ? 0.12 : 0.02;
+  });
+  document.querySelectorAll('.zf-row').forEach((r) => r.classList.toggle('on', r.dataset.id === id));
+  if (o) flyTo(o);
+  const box = $('#zf-info');
+  box.innerHTML = o
+    ? '<h4>' + o.userData.cn + '<span>' + o.userData.cat + '</span></h4><p>' + (o.userData.tcm || '') + '</p>'
+    : '<h4>五脏六腑</h4><p>点器官看位置与表里关系；拖「拆开」分开看。</p>';
+}
+
+function flyTo(m) {
+  const box = new THREE.Box3().setFromObject(m);
+  const c = new THREE.Vector3(); box.getCenter(c);
+  const size = box.getSize(new THREE.Vector3()).length();
+  controls.target.lerp(c, 1);
+  const dir = camera.position.clone().sub(c).normalize();
+  const dist = Math.max(0.42, size * 1.15);
+  camera.position.copy(c).addScaledVector(dir, dist);
+  controls.update();
+}
+
+function buildList() {
+  const box = $('#zf-list'); if (!box) return;
+  const zang = organs.filter((o) => o.userData.cat === '脏');
+  const fu = organs.filter((o) => o.userData.cat === '腑');
+  const grp = (t, arr) => '<div class="zf-grp">' + t + '</div>' + arr.map((o) =>
+    '<button class="zf-row" data-id="' + o.userData.id + '"><i style="background:' + o.userData.color.getStyle() + '"></i>' +
+    o.userData.cn + '</button>').join('');
+  box.innerHTML = grp('五脏', zang) + grp('六腑', fu) +
+    '<div class="zf-miss">开源解剖数据里缺：肺、脾、三焦、心包（无实质网格），未画。</div>';
+  box.querySelectorAll('.zf-row').forEach((b) => { b.onclick = () => select(b.dataset.id === S.selected ? null : b.dataset.id); });
+}
+
+/* ---------- 拆分 ---------- */
+function applyExplode(v) {
+  S.explode = v;
+  organs.forEach((m) => {
+    m.position.copy(m.userData.home).addScaledVector(m.userData.dir, v * 0.34);
+  });
+}
+
+function tick() {
+  if (!renderer) return;
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+/* ---------- 外壳 ---------- */
+function buildShell() {
+  host = el('div', 'zf-float'); host.id = 'zangfu-float';
+  host.innerHTML =
+    '<header><b>五脏六腑 · 3D 拆解</b><span class="zf-tools">' +
+      '<button id="zf-close" title="关闭">✕</button></span></header>' +
+    '<div class="zf-body"><div class="zf-stage" id="zf-stage"></div>' +
+      '<aside class="zf-side">' +
+        '<div class="zf-info" id="zf-info"><h4>五脏六腑</h4><p>点器官看位置与表里关系；拖「拆开」分开看。</p></div>' +
+        '<div class="zf-list" id="zf-list"></div>' +
+        '<label class="zf-explode"><span>拆开</span><input id="zf-range" type="range" min="0" max="100" value="0"><b id="zf-pct">0</b></label>' +
+        '<p class="zf-note">器官形态：BodyParts3D 4.0（CC BY-SA 2.1 JP）；人体外壳：MakeHuman（CC0）；经络：meridian-atlas 配准路线。位置为解剖学相对位置，仅供认识方位，不作诊断依据。</p>' +
+      '</aside></div>';
+  document.body.appendChild(host);
+  stageEl = $('#zf-stage');
+
+  $('#zf-close').onclick = close;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  const rng = $('#zf-range');
+  rng.oninput = () => { applyExplode(+rng.value / 100); $('#zf-pct').textContent = rng.value; };
+}
+
+export function open() {
+  if (!S.built) { buildShell(); S.built = true; }
+  host.hidden = false; S.open = true;
+  if (S.ready) return;
+  if (S.loading) return;
+  S.loading = true;
+  stageEl.innerHTML = '<div class="zf-loading">正在载入脏腑模型…</div>';
+  initScene();
+  const ld = stageEl.querySelector('.zf-loading'); if (ld) ld.remove();
+  loadAll().then(() => {
+    buildMeridians();
+    S.ready = true; S.loading = false;
+    const rng = $('#zf-range');
+    if (rng) { rng.value = 58; $('#zf-pct').textContent = '58'; applyExplode(0.58); }
+    select(null);
+  });
+}
+
+function close() { if (host) { host.hidden = true; S.open = false; } }
+
+window.ZangFu3D = { open, close };
+// 调试钩子（页面里排查模型位置用）
+window.__zf = { get scene() { return scene; }, get organs() { return organs; }, get camera() { return camera; } };
+document.addEventListener('click', (e) => {
+  const b = e.target.closest && e.target.closest('[data-zangfu]');
+  if (b) { e.preventDefault(); open(); }
+});
+
+/* 入口：挂在 3D 穴位板块旁边，让人一眼能看见 */
+function injectEntry() {
+  if (document.getElementById('zf-entry')) return;
+  const slot = document.getElementById('acu3d-slot') || document.querySelector('.acu3d-wrap');
+  if (!slot) return;
+  const box = el('div', 'zf-entry');
+  box.id = 'zf-entry';
+  box.innerHTML = '<div><b>五脏六腑在哪</b><span>可拆开、可旋转，点器官看方位与表里关系</span></div>' +
+    '<button type="button" data-zangfu="1">打开脏腑 3D</button>';
+  slot.parentElement.insertBefore(box, slot);
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(injectEntry, 800));
+else setTimeout(injectEntry, 800);
 
 </script>
 </body>
