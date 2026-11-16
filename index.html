@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="bed674dc95" />
+<meta name="build-id" content="d9bc06e511" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3781,6 +3781,8 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .aq-combo{background:rgba(120,200,160,.06);border:1px solid rgba(120,200,160,.22);border-radius:16px;padding:18px 20px;margin-bottom:16px}
 .aq-combo h3{margin:0 0 6px;font-size:19px}
 @media(max-width:600px){.acuq{padding:40px 14px 30px}.aq-card{padding:14px}.aq-img{max-width:100%}}
+
+.aq-miss{opacity:.85}.aq-miss .aq-src-h{color:#c9a86a}
 </style>
 </head>
 <body>
@@ -15925,17 +15927,28 @@ new MutationObserver(() => {
     </div>`;
   }
 
+
+  function njBlock(name, p) {
+    const arr = p['nj'] || [];
+    if (!arr.length) return `<div class="aq-src aq-miss"><div class="aq-src-h">倪海厦《人纪·针灸篇》</div><p class="aq-note">这两本文稿里没讲到这个穴（或没提到它的刺法），我不代倪师说话。</p></div>`;
+    const rows = arr.map((h) => `<div class="aq-row"><b>${h['书'] === '人纪01·针灸视频同步文稿' ? '文稿' : '教程'} p${h['页']}</b><span>${h['句']}${h['深度'] ? `<em class="aq-num">倪师这里说：针 ${h['深度']}</em>` : ''}</span></div>`).join('');
+    return `<div class="aq-src"><div class="aq-src-h">倪海厦《人纪·针灸篇》<i>原文逐字摘录，带页码</i></div>${rows}
+      <p class="aq-note">倪师讲课多讲定位、手法、禁忌；没写具体寸分的地方，我不替他补。</p></div>`;
+  }
+
   function card(name, p) {
     const hasDa = !!p['da'], hasJia = !!p['jia'];
     const ban = [].concat(hasDa ? (p['da']['禁'] || []) : [], hasJia ? (p['jia']['禁'] || []) : []);
     return `<article class="aq-card">
       <header><h3>${name}</h3>
         <span class="aq-tag">${hasDa ? '大成 ✓' : '大成 —'}</span>
-        <span class="aq-tag">${hasJia ? '甲乙经 ✓' : '甲乙经 —'}</span>
+        <span class="aq-tag">${hasJia ? '甲乙经 ✓' : '甲乙经 缺'}</span>
+        <span class="aq-tag">${(p['nj']||[]).length ? '人纪 ✓' : '人纪 —'}</span>
         ${ban.length ? '<span class="aq-tag aq-tag-warn">有禁忌</span>' : ''}
       </header>
       ${sourceBlock('da', p['da'])}
-      ${sourceBlock('jia', p['jia'])}
+      ${p['jia'] ? sourceBlock('jia', p['jia']) : `<div class="aq-src aq-miss"><div class="aq-src-h">《针灸甲乙经》</div><p class="aq-note">本电子本残缺：卷三缺手太阴、手阳明等臂部诸篇，这一穴的甲乙经原文没有，我不编。</p></div>`}
+      ${njBlock(name, p)}
       ${layerBlock(name)}
     </article>`;
   }
