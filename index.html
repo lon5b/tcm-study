@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="ink">
 <head>
 <meta charset="UTF-8" />
-<meta name="build-id" content="d9bc06e511" />
+<meta name="build-id" content="f08c973faa" />
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#f5eddd" />
@@ -3739,50 +3739,65 @@ section{content-visibility:visible !important;contain-intrinsic-size:auto !impor
 .m3-views button[data-step]{min-width:22px;padding:4px 7px;font-size:12px;line-height:1}
 @media(max-width:600px){.m3-views{left:8px;top:8px;gap:4px}.m3-views button{font-size:10px;padding:3px 7px}}
 
-/* ---- 查穴 · 深度与禁忌 ---- */
-.acuq{padding:56px 18px 40px;background:linear-gradient(180deg,rgba(20,22,26,.96),rgba(14,16,20,.99));color:#e9ede8}
-.acuq-wrap{max-width:1000px;margin:0 auto}
-.acuq h2{font-size:26px;margin:0 0 8px;letter-spacing:.04em}
-.acuq-sub{margin:0 0 18px;color:#9aa69e;font-size:13.5px;line-height:1.7}
+/* ---- 查穴 · 四家对照（浅色高对比，跟站内米纸风格一致） ---- */
+.acuq{padding:56px 18px 44px;background:#f6efe0;color:#241f18}
+.acuq *{box-sizing:border-box}
+.acuq-wrap{max-width:1040px;margin:0 auto}
+.acuq h2{font-size:27px;margin:0 0 10px;color:#241f18;letter-spacing:.05em}
+.acuq-sub{margin:0 0 18px;color:#6a5c46;font-size:14px;line-height:1.8}
 .acuq-bar{display:flex;gap:10px;margin-bottom:12px}
-#aq-q{flex:1;padding:13px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#eef2ee;font-size:16px;outline:none}
-#aq-q:focus{border-color:rgba(120,200,160,.65);box-shadow:0 0 0 3px rgba(120,200,160,.12)}
-#aq-go{padding:0 26px;border-radius:12px;border:0;background:#3ddc84;color:#06210f;font-weight:700;font-size:15px;cursor:pointer}
-.acuq-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.aq-chip{padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#b9c6bd;font-size:13px;cursor:pointer}
-.aq-chip:hover{border-color:rgba(120,200,160,.6);color:#eafff2}
-.aq-card{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:18px 20px;margin:0 0 16px}
-.aq-card h3{margin:0;font-size:21px;letter-spacing:.06em}
-.aq-card header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
-.aq-tag{font-size:11.5px;padding:2px 9px;border-radius:999px;background:rgba(120,200,160,.14);color:#8fe0b4}
-.aq-tag-warn{background:rgba(230,120,90,.16);color:#f2a58c}
-.aq-src{border-top:1px dashed rgba(255,255,255,.12);padding-top:10px;margin-top:8px}
-.aq-src-h{font-size:14px;color:#cfe3d6;margin-bottom:8px;font-weight:600}
-.aq-src-h i{font-style:normal;color:#7d8a84;font-weight:400;font-size:11.5px;margin-left:8px}
-.aq-row{display:flex;gap:10px;padding:5px 0;font-size:14.5px;line-height:1.75;align-items:flex-start}
-.aq-row b{flex:0 0 46px;color:#8fa79b;font-weight:600;font-size:13px;padding-top:2px}
-.aq-row span{flex:1;color:#e6ece6}
-.aq-num{color:#ffe9a8;font-weight:600}
-.aq-row em{display:block;font-style:normal;color:#7fd6a6;font-size:13px;margin-top:2px}
-.aq-warn span{color:#ffb39a}
-.aq-warn b{color:#f08a6a}
-.aq-bai{color:#ffcf9e !important}
-.aq-zhu{color:#c9d6cc;font-size:13.5px}
-.aq-mini{font-style:normal;color:#8fe0b4;margin-right:6px}
+#aq-q{flex:1;padding:14px 16px;border-radius:12px;border:1px solid #c9b795;background:#fffdf7;color:#241f18;font-size:16.5px;outline:none}
+#aq-q::placeholder{color:#a4957c}
+#aq-q:focus{border-color:#8a6a34;box-shadow:0 0 0 3px rgba(138,106,52,.15)}
+#aq-go{padding:0 30px;border-radius:12px;border:0;background:#1f6b45;color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+#aq-go:hover{background:#175536}
+.acuq-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.aq-chip{padding:6px 14px;border-radius:999px;border:1px solid #c9b795;background:#fffdf7;color:#4a3f30;font-size:14px;cursor:pointer}
+.aq-chip:hover{background:#f0e4cc;color:#241f18}
+.aq-card{background:#fffdf7;border:1px solid #d8c7a6;border-radius:16px;padding:20px 22px;margin:0 0 18px;box-shadow:0 2px 10px rgba(90,70,40,.06)}
+.aq-card header{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.aq-card h3{margin:0;font-size:24px;color:#241f18;letter-spacing:.06em}
+.aq-code{font-size:13px;color:#8a6a34;border:1px solid #d8c7a6;border-radius:6px;padding:2px 8px;font-weight:600}
+.aq-tag{font-size:12px;padding:3px 10px;border-radius:999px;background:#e4f1e7;color:#1f6b45;font-weight:600}
+.aq-tag-warn{background:#fbe7e3;color:#a02a1e}
+/* 四家对照条 */
+.aq-cmpbar{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:0 0 16px;padding:12px;border-radius:12px;background:#f4ead6;border:1px solid #ddcbaa}
+.aq-cmp{display:flex;flex-direction:column;gap:4px}
+.aq-cmp i{font-style:normal;font-size:12px;color:#7a6a52}
+.aq-cmp b{font-size:14.5px;color:#241f18;font-weight:700;line-height:1.35;word-break:break-word}
+.aq-c-nj b{color:#1f6b45}
+.aq-c-at b{color:#8a3b12}
+.aq-c-md b{color:#1b4f7a}
+/* 正文行 */
+.aq-src{border-top:1px dashed #d8c7a6;padding-top:12px;margin-top:10px}
+.aq-src-h{font-size:15.5px;color:#241f18;margin-bottom:8px;font-weight:700}
+.aq-src-h i{font-style:normal;color:#8a7a62;font-weight:400;font-size:12px;margin-left:8px}
+.aq-row{display:flex;gap:12px;padding:6px 0;font-size:15.5px;line-height:1.85;align-items:flex-start}
+.aq-row b{flex:0 0 52px;color:#7a6a52;font-weight:700;font-size:13.5px;padding-top:3px}
+.aq-row span{flex:1;color:#241f18}
+.aq-num{color:#a3541c;font-weight:700}
+.aq-row em{display:block;font-style:normal;color:#1c6b45;font-size:14px;margin-top:3px}
+.aq-warn span{color:#a02a1e}
+.aq-warn b{color:#a02a1e}
+.aq-bai{color:#1c6b45 !important}
+.aq-zhu{color:#3a332a;font-size:14.5px}
+.aq-mini{font-style:normal;color:#1f6b45;font-weight:700;margin-right:6px}
+.aq-srclist{margin:4px 0 0 16px;padding:0;font-size:13px;line-height:1.7;color:#5a4f3e}
 .aq-src details{margin-top:8px}
-.aq-src summary{cursor:pointer;color:#7d8a84;font-size:12.5px}
-.aq-yuan{font-size:12.5px;line-height:1.9;color:#9aa69e;background:rgba(0,0,0,.28);padding:10px 12px;border-radius:10px;margin:8px 0 0}
-.aq-layer{margin-top:14px;border-top:1px solid rgba(120,200,160,.22);padding-top:12px}
-.aq-tab{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 10px}
-.aq-tab th,.aq-tab td{text-align:left;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.08)}
-.aq-tab th{color:#8fa79b;font-weight:600;font-size:12px}
-.aq-img{width:100%;max-width:760px;border-radius:12px;display:block;margin-top:10px;border:1px solid rgba(255,255,255,.08)}
-.aq-note{color:#8d9992;font-size:12.5px;line-height:1.8;margin:8px 0 0}
-.aq-combo{background:rgba(120,200,160,.06);border:1px solid rgba(120,200,160,.22);border-radius:16px;padding:18px 20px;margin-bottom:16px}
-.aq-combo h3{margin:0 0 6px;font-size:19px}
-@media(max-width:600px){.acuq{padding:40px 14px 30px}.aq-card{padding:14px}.aq-img{max-width:100%}}
-
-.aq-miss{opacity:.85}.aq-miss .aq-src-h{color:#c9a86a}
+.aq-src summary{cursor:pointer;color:#8a6a34;font-size:13.5px}
+.aq-yuan{font-size:13.5px;line-height:2;color:#3a332a;background:#f4ead6;padding:12px 14px;border-radius:10px;margin:8px 0 0;border-left:3px solid #c9b795}
+.aq-miss{opacity:1}
+.aq-miss .aq-src-h{color:#8a6a34}
+.aq-layer{margin-top:16px;border-top:2px solid #dfe9df;padding-top:14px}
+.aq-tab{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0 10px}
+.aq-tab th,.aq-tab td{text-align:left;padding:8px 10px;border-bottom:1px solid #e6dcc6;color:#241f18}
+.aq-tab th{color:#7a6a52;font-weight:700;font-size:13px;background:#f7f0df}
+.aq-img{width:100%;max-width:780px;border-radius:12px;display:block;margin-top:12px;border:1px solid #d8c7a6}
+.aq-note{color:#6a5c46;font-size:13.5px;line-height:1.9;margin:10px 0 0}
+.aq-combo{background:#eef4ee;border:1px solid #b9d3bf;border-radius:16px;padding:20px 22px;margin-bottom:18px}
+.aq-combo h3{margin:0 0 6px;font-size:20px;color:#1f4f36}
+@media(max-width:820px){.aq-cmpbar{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.acuq{padding:40px 14px 30px}.aq-card{padding:16px}.aq-row b{flex:0 0 44px}.aq-img{max-width:100%}}
 </style>
 </head>
 <body>
@@ -15856,13 +15871,16 @@ new MutationObserver(() => {
   else setTimeout(ensure, 900);
 })();
 </script>
-<script>/* 穴位查询 · 深度与禁忌（数据全部来自原文抽取，带出处）
-   数据：assets/acu_depth.json（《针灸大成》《针灸甲乙经》逐穴原文）
-        assets/acu_layer_pilot.json（3D 解剖分层实测，目前仅试点穴） */
+<script>/* 查穴 · 四家对照（原文 + 现代标准 + 3D 实测）
+   数据：assets/acu_depth.json
+     .points[穴].da    《针灸大成·考正穴法》原文
+     .points[穴].jia   《针灸甲乙经·卷三》原文（缺篇则 null）
+     .points[穴].nj    倪海厦《人纪·针灸篇》讲稿（小节 + 页码）
+     .points[穴].atlas AcuAtlas 361 穴（CC BY 4.0，深度/禁忌引 WHO 原文页码）
+   assets/acu_layer_pilot.json  3D 解剖分层实测（目前仅合谷） */
 (function () {
   const S = { data: null, layer: null, err: '' };
-
-  const norm = (s) => (s || '').replace(/\s+/g, '');
+  const norm = (s) => (s || '').replace(/[\s·\-]/g, '');
 
   function el(tag, cls, html) {
     const e = document.createElement(tag);
@@ -15875,11 +15893,7 @@ new MutationObserver(() => {
     return Promise.all([
       fetch('assets/acu_depth.json').then((r) => r.json()).catch(() => null),
       fetch('assets/acu_layer_pilot.json').then((r) => r.json()).catch(() => null),
-    ]).then(([a, b]) => {
-      S.data = a;
-      S.layer = b;
-      if (!a) S.err = '深度数据没加载到';
-    });
+    ]).then(([a, b]) => { S.data = a; S.layer = b; if (!a) S.err = '数据没加载到'; });
   }
 
   function findPoint(q) {
@@ -15888,99 +15902,129 @@ new MutationObserver(() => {
     if (!k) return null;
     const P = S.data.points;
     if (P[k]) return [k, P[k]];
-    // 支持「合谷」以外的写法：去掉拼音/代号
-    const m = k.match(/^([\u4e00-\u9fff]{2,4})/);
-    if (m && P[m[1]]) return [m[1], P[m[1]]];
-    const hit = Object.keys(P).find((n) => n.includes(k) || k.includes(n));
+    const exact = Object.keys(P).find((n) => norm(n) === k);
+    if (exact) return [exact, P[exact]];
+    const end = Object.keys(P).find((n) => norm(n).endsWith(k));
+    if (end) return [end, P[end]];
+    const hit = Object.keys(P).find((n) => norm(n).includes(k) || k.includes(norm(n)));
     return hit ? [hit, P[hit]] : null;
   }
 
+  const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+  /* 四家深度对照表（页首横幅） */
+  function compareBar(name, p) {
+    const da = (p.da || {}).针 || '';
+    const jia = (p.jia || {}).针 || '';
+    const nj = (p.nj || []).find((x) => x.深度);
+    const at = p.atlas || {};
+    const L = S.layer && S.layer['穴'] && S.layer['穴'].indexOf(name) === 0 ? S.layer : null;
+    let model = '—';
+    if (L && L['层次_显示']) {
+      const m = L['层次_显示'].find((r) => /肌/.test(r['层']) && r['起'] > 2);
+      if (m) model = m['起'] + ' mm 到' + m['层'];
+    }
+    const cell = (k, v, cls) => `<div class="aq-cmp ${cls || ''}"><i>${k}</i><b>${v || '—'}</b></div>`;
+    return `<div class="aq-cmpbar">
+      ${cell('大成', da ? '针' + da : (p.da ? '未写' : '缺'), 'aq-c-da')}
+      ${cell('甲乙经', jia ? '刺入' + jia : '缺', 'aq-c-jia')}
+      ${cell('人纪', nj ? '针' + nj.深度 : ((p.nj || []).length ? '讲手法·未给寸分' : '未讲'), 'aq-c-nj')}
+      ${cell('现代标准', at.depth ? esc(at.depth) : '缺', 'aq-c-at')}
+      ${cell('3D 实测', model, 'aq-c-md')}
+    </div>`;
+  }
+
   function sourceBlock(sk, e) {
-    if (!e) return '';
-    const b = e['白话'] || {};
+    const b = (e || {})['白话'] || {};
     const rows = [];
-    if (e['定位']) rows.push(`<div class="aq-row"><b>定位</b><span>${e['定位']}</span></div>`);
+    if (e['定位']) rows.push(`<div class="aq-row"><b>定位</b><span>${esc(e['定位'])}</span></div>`);
     if (e['针']) rows.push(`<div class="aq-row"><b>进针</b><span class="aq-num">${e['针']}</span><em>${b['深度'] || ''}</em></div>`);
     if (e['留']) rows.push(`<div class="aq-row"><b>留针</b><span class="aq-num">${e['留']}</span><em>${b['留针'] || ''}</em></div>`);
     if (e['灸']) rows.push(`<div class="aq-row"><b>灸</b><span class="aq-num">${e['灸']}</span><em>${b['灸'] || ''}</em></div>`);
     if ((e['禁'] || []).length) {
-      rows.push(`<div class="aq-row aq-warn"><b>禁忌</b><span>${e['禁'].join('；')}</span>${(b['禁忌'] || []).map((x) => `<em class="aq-bai">${x}</em>`).join('')}</div>`);
+      rows.push(`<div class="aq-row aq-warn"><b>禁忌</b><span>${esc(e['禁'].join('；'))}</span>${(b['禁忌'] || []).map((x) => `<em class="aq-bai">${x}</em>`).join('')}</div>`);
     }
-    if (e['主']) rows.push(`<div class="aq-row"><b>主治</b><span class="aq-zhu">${e['主']}</span></div>`);
+    if (e['主']) rows.push(`<div class="aq-row"><b>主治</b><span class="aq-zhu">${esc(e['主'])}</span></div>`);
     return `<div class="aq-src">
-      <div class="aq-src-h">${sk === 'da' ? '《针灸大成》' : '《针灸甲乙经》'}<i>${e['篇'] || ''}</i></div>
+      <div class="aq-src-h">${sk === 'da' ? '一、《针灸大成·考正穴法》' : '二、《针灸甲乙经·卷三》'}<i>${esc(e['篇'] || '')}</i></div>
       ${rows.join('')}
-      <details><summary>原文（逐字照录）</summary><p class="aq-yuan">${e['段'] || ''}</p></details>
-    </div>`;
+      <details><summary>原文（逐字照录，未改动）</summary><p class="aq-yuan">${esc(e['段'] || '')}</p></details></div>`;
+  }
+
+  function njBlock(p) {
+    const arr = p['nj'] || [];
+    if (!arr.length) return `<div class="aq-src aq-miss"><div class="aq-src-h">三、倪海厦《人纪·针灸篇》</div><p class="aq-note">两本文稿里没有这一穴的讲课小节（或没讲到刺法）。不代倪师说话。</p></div>`;
+    const rows = arr.map((h) => `<div class="aq-row"><b>p${h['页']}</b><span>${esc(h['段'])}${h['深度'] ? `<em class="aq-num">倪师这里说：针 ${h['深度']}</em>` : ''}${h['手法'] ? `<em class="aq-bai">手法：${h['手法']}</em>` : ''}</span></div>`).join('');
+    return `<div class="aq-src"><div class="aq-src-h">三、倪海厦《人纪·针灸篇》<i>按讲课小节摘录·带页码</i></div>${rows}
+      <p class="aq-note">倪师讲得最多的是定位、手法、禁忌；他给了寸分的穴，上面对照栏会显示；没给的，我不替他补。</p></div>`;
+  }
+
+  function atlasBlock(p) {
+    const a = p['atlas'];
+    if (!a) return `<div class="aq-src aq-miss"><div class="aq-src-h">四、现代标准（AcuAtlas / WHO）</div><p class="aq-note">这一穴没匹配到 AcuAtlas 数据集（多为经外奇穴或别名）。</p></div>`;
+    const srcs = (a.sources || []).slice(0, 3).map((s) => `<li>${esc(s.document)} — ${esc(s.reference || '')}</li>`).join('');
+    return `<div class="aq-src"><div class="aq-src-h">四、现代标准 <i>AcuAtlas 361 穴数据集（CC BY 4.0），深度/禁忌引自 WHO 标准等原文</i></div>
+      <div class="aq-row"><b>代号</b><span class="aq-num">${esc(a.id)}　${esc(a.english)}</span></div>
+      <div class="aq-row"><b>定位</b><span>${esc(a.location)}</span></div>
+      <div class="aq-row"><b>深度</b><span class="aq-num">${esc(a.depth)}</span></div>
+      <div class="aq-row"><b>灸</b><span>${esc(a.moxibustion)}</span></div>
+      ${a.isCaution ? `<div class="aq-row aq-warn"><b>注意</b><span>${esc(a.cautionNote)}</span></div>` : ''}
+      <div class="aq-row"><b>主治</b><span class="aq-zhu">${esc(a.indications)}</span></div>
+      ${srcs ? `<div class="aq-row"><b>出处</b><span class="aq-zhu"><ul class="aq-srclist">${srcs}</ul></span></div>` : ''}
+      <p class="aq-note">原文为英文，未改写。</p></div>`;
   }
 
   function layerBlock(name) {
     const L = S.layer;
-    if (!L || L['穴'].indexOf(name) !== 0) return '';
-    const disp = L['层次_显示'] || [];
-    const rows = disp.map((r) => `<tr><td>${r['起']} – ${r['止']}</td><td>${(r['止'] - r['起']).toFixed(1)}</td><td>${r['层']}</td></tr>`).join('');
+    if (!L || !L['穴'] || L['穴'].indexOf(name) !== 0) {
+      return `<div class="aq-src aq-miss"><div class="aq-src-h">五、3D 解剖实测</div><p class="aq-note">分层实测目前只做了合谷一个（BodyParts3D 同一具人体：皮肤+肌+骨）。其余 360 穴要把同一套算法跑完才放上来，不放估算值。</p></div>`;
+    }
+    const rows = (L['层次_显示'] || []).map((r) => `<tr><td>${r['起']} – ${r['止']}</td><td>${(r['止'] - r['起']).toFixed(1)}</td><td>${r['层']}</td></tr>`).join('');
     return `<div class="aq-layer">
-      <div class="aq-src-h">3D 解剖实测 <i>${L['模型']}</i></div>
+      <div class="aq-src-h">五、3D 解剖实测 <i>${esc(L['模型'])}</i></div>
       <table class="aq-tab"><thead><tr><th>深度(mm)</th><th>厚度</th><th>组织</th></tr></thead><tbody>${rows}</tbody></table>
-      <p class="aq-note">取穴依据：${L['取穴依据']}<br>书上深度：${L['书上深度']}，白话 ${L['书上白话']}。<br>${L['说明']}</p>
-      <img class="aq-img" src="assets/acu_layer_li4.png" alt="合谷分层示意" loading="lazy">
-    </div>`;
-  }
-
-
-  function njBlock(name, p) {
-    const arr = p['nj'] || [];
-    if (!arr.length) return `<div class="aq-src aq-miss"><div class="aq-src-h">倪海厦《人纪·针灸篇》</div><p class="aq-note">这两本文稿里没讲到这个穴（或没提到它的刺法），我不代倪师说话。</p></div>`;
-    const rows = arr.map((h) => `<div class="aq-row"><b>${h['书'] === '人纪01·针灸视频同步文稿' ? '文稿' : '教程'} p${h['页']}</b><span>${h['句']}${h['深度'] ? `<em class="aq-num">倪师这里说：针 ${h['深度']}</em>` : ''}</span></div>`).join('');
-    return `<div class="aq-src"><div class="aq-src-h">倪海厦《人纪·针灸篇》<i>原文逐字摘录，带页码</i></div>${rows}
-      <p class="aq-note">倪师讲课多讲定位、手法、禁忌；没写具体寸分的地方，我不替他补。</p></div>`;
+      <p class="aq-note">取穴依据：${esc(L['取穴依据'])}<br>${esc(L['说明'])}</p>
+      <img class="aq-img" src="assets/acu_layer_li4.png" alt="合谷分层示意" loading="lazy"></div>`;
   }
 
   function card(name, p) {
-    const hasDa = !!p['da'], hasJia = !!p['jia'];
-    const ban = [].concat(hasDa ? (p['da']['禁'] || []) : [], hasJia ? (p['jia']['禁'] || []) : []);
+    const ban = [].concat((p.da || {}).禁 || [], (p.jia || {}).禁 || []);
+    const at = p.atlas || {};
     return `<article class="aq-card">
-      <header><h3>${name}</h3>
-        <span class="aq-tag">${hasDa ? '大成 ✓' : '大成 —'}</span>
-        <span class="aq-tag">${hasJia ? '甲乙经 ✓' : '甲乙经 缺'}</span>
-        <span class="aq-tag">${(p['nj']||[]).length ? '人纪 ✓' : '人纪 —'}</span>
-        ${ban.length ? '<span class="aq-tag aq-tag-warn">有禁忌</span>' : ''}
+      <header><h3>${name}</h3>${at.id ? `<span class="aq-code">${esc(at.id)}</span>` : ''}
+        ${ban.length || at.isCaution ? '<span class="aq-tag aq-tag-warn">有禁忌/注意</span>' : ''}
       </header>
-      ${sourceBlock('da', p['da'])}
-      ${p['jia'] ? sourceBlock('jia', p['jia']) : `<div class="aq-src aq-miss"><div class="aq-src-h">《针灸甲乙经》</div><p class="aq-note">本电子本残缺：卷三缺手太阴、手阳明等臂部诸篇，这一穴的甲乙经原文没有，我不编。</p></div>`}
-      ${njBlock(name, p)}
+      ${compareBar(name, p)}
+      ${sourceBlock('da', p.da)}
+      ${p.jia ? sourceBlock('jia', p.jia) : `<div class="aq-src aq-miss"><div class="aq-src-h">二、《针灸甲乙经·卷三》</div><p class="aq-note">本电子本残缺：卷三缺手太阴、手阳明等臂部诸篇，这一穴的甲乙经原文没有。缺就是缺，我不编。</p></div>`}
+      ${njBlock(p)}
+      ${atlasBlock(p)}
       ${layerBlock(name)}
     </article>`;
   }
 
   function combo(names) {
     const uniq = [...new Set(names)];
-    const zhu = [];
+    const zhu = [], bans = [];
     uniq.forEach((n) => {
-      const p = findPoint(n);
-      if (!p) return;
-      const e = p[1]['da'] || p[1]['jia'];
-      if (e && e['主']) zhu.push({ n: p[0], z: e['主'] });
-    });
-    const bans = [];
-    uniq.forEach((n) => {
-      const p = findPoint(n);
-      if (!p) return;
-      const e = p[1]['da'] || p[1]['jia'];
-      (e && e['禁'] ? e['禁'] : []).forEach((x) => bans.push(`【${p[0]}】${x}`));
+      const f = findPoint(n);
+      if (!f) return;
+      const p = f[1], e = p.da || p.jia || {};
+      if (e['主']) zhu.push({ n: f[0], z: e['主'] });
+      (e['禁'] || []).forEach((x) => bans.push(`【${f[0]}】${x}`));
+      if (p.atlas && p.atlas.isCaution) bans.push(`【${f[0]}】${p.atlas.cautionNote}`);
     });
     const words = {};
     zhu.forEach((x) => x.z.replace(/^主/, '').split(/[，、]/).forEach((w) => {
-      const k = w.trim();
-      if (k.length >= 2) words[k] = (words[k] || 0) + 1;
+      const k = w.trim(); if (k.length >= 2) words[k] = (words[k] || 0) + 1;
     }));
     const shared = Object.entries(words).filter(([, c]) => c >= 2).sort((a, b) => b[1] - a[1]).slice(0, 12);
     return `<div class="aq-combo">
       <h3>${uniq.length} 穴合用</h3>
-      <p class="aq-note">下面是这几穴各自原文主治的交集与合并，供你对照思路；不是处方，也不代替面诊。</p>
+      <p class="aq-note">下面是这几穴原文主治的交集与合并，帮你对照思路；不是处方，也不代替面诊。</p>
       ${shared.length ? `<div class="aq-row"><b>共同主治</b><span>${shared.map(([w, c]) => `${w}×${c}`).join('、')}</span></div>` : ''}
-      ${bans.length ? `<div class="aq-row aq-warn"><b>合并禁忌</b><span>${bans.join('；')}</span></div>` : '<div class="aq-row"><b>合并禁忌</b><span>这几穴原文里都没写禁忌（不等于没有风险）。</span></div>'}
-      <div class="aq-row"><b>各穴主治</b><span>${zhu.map((x) => `<i class="aq-mini">${x.n}</i>${x.z.replace(/^主/, '')}`).join('<br>')}</span></div>
+      <div class="aq-row ${bans.length ? 'aq-warn' : ''}"><b>合并禁忌</b><span>${bans.length ? bans.join('；') : '这几穴原文与数据集里都没写禁忌（不等于没风险）。'}</span></div>
+      <div class="aq-row"><b>各穴主治</b><span>${zhu.map((x) => `<i class="aq-mini">${x.n}</i>${esc(x.z.replace(/^主/, ''))}`).join('<br>')}</span></div>
     </div>`;
   }
 
@@ -15988,19 +16032,13 @@ new MutationObserver(() => {
     const box = document.getElementById('aq-out');
     if (!box) return;
     if (S.err) { box.innerHTML = `<p class="aq-note">${S.err}</p>`; return; }
-    const parts = q.split(/[\s,，、+＋;；]+/).filter(Boolean);
+    const parts = String(q || '').split(/[\s,，、+＋;；]+/).filter(Boolean);
     if (!parts.length) { box.innerHTML = '<p class="aq-note">输入一个穴名，比如「合谷」；多个穴用空格分开。</p>'; return; }
-    const ok = parts.filter((x) => findPoint(x));
-    const miss = parts.filter((x) => !findPoint(x));
+    const ok = parts.filter((x) => findPoint(x)), miss = parts.filter((x) => !findPoint(x));
     let html = '';
-    if (ok.length === 1) {
-      const [n, p] = findPoint(ok[0]);
-      html = card(n, p);
-    } else if (ok.length > 1) {
-      html = ok.map((x) => { const [n, p] = findPoint(x); return card(n, p); }).join('');
-      html = combo(ok) + html;
-    }
-    if (miss.length) html += `<p class="aq-note">没找到：${miss.join('、')}（库里是 379 个标准穴名，别名要写正名）</p>`;
+    if (ok.length === 1) { const f = findPoint(ok[0]); html = card(f[0], f[1]); }
+    else if (ok.length > 1) { html = combo(ok) + ok.map((x) => { const f = findPoint(x); return card(f[0], f[1]); }).join(''); }
+    if (miss.length) html += `<p class="aq-note">没找到：${miss.join('、')}（库里 379 个标准穴名，别名请写正名）</p>`;
     box.innerHTML = html;
   }
 
@@ -16010,8 +16048,8 @@ new MutationObserver(() => {
     sec.id = 'acuq';
     sec.innerHTML = `
       <div class="acuq-wrap">
-        <h2>查穴 · 深度与禁忌</h2>
-        <p class="acuq-sub">原文逐字取自《针灸大成·考正穴法》《针灸甲乙经·卷三》，每穴带篇号可回查；白话是我把原文翻成人话，不改数字。</p>
+        <h2>查穴 · 四家对照</h2>
+        <p class="acuq-sub">《针灸大成》《针灸甲乙经》原文 + 倪海厦《人纪·针灸篇》讲稿 + 现代标准（AcuAtlas / WHO），四家并排，逐条带出处；白话是把原文翻成人话，数字不改。</p>
         <div class="acuq-bar">
           <input id="aq-q" type="search" placeholder="合谷　或　合谷 太冲 足三里" autocomplete="off">
           <button id="aq-go">查</button>
@@ -16022,7 +16060,6 @@ new MutationObserver(() => {
     const anchor = document.getElementById('acu');
     if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(sec, anchor.nextSibling);
     else document.body.insertBefore(sec, document.querySelector('footer') || null);
-
     ['合谷', '太溪', '足三里', '内关', '曲池', '三阴交'].forEach((n) => {
       const b = el('button', 'aq-chip', n);
       b.onclick = () => { document.getElementById('aq-q').value = n; render(n); };
@@ -16030,14 +16067,8 @@ new MutationObserver(() => {
     });
     document.getElementById('aq-go').onclick = () => render(document.getElementById('aq-q').value);
     document.getElementById('aq-q').addEventListener('keydown', (e) => { if (e.key === 'Enter') render(e.target.value); });
-
-    // 导航加一项
     const nav = document.querySelector('nav, .nav, .topnav');
-    if (nav) {
-      const a = el('a', null, '查穴');
-      a.href = '#acuq';
-      nav.appendChild(a);
-    }
+    if (nav) { const a = el('a', null, '查穴'); a.href = '#acuq'; nav.appendChild(a); }
     load().then(() => render(document.getElementById('aq-q').value || '合谷'));
   }
 
